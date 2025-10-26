@@ -4,7 +4,7 @@ go 1.25.3
 
 require pure-game-kit v0.0.0
 
-replace pure-game-kit => ../../pure-game-kit
+replace pure-game-kit => ../pure-game-kit
 
 require (
 	github.com/ebitengine/purego v0.9.0 // indirect

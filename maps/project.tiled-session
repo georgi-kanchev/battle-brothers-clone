@@ -1,0 +1,68 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "world1.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "ground.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "world.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 386.66666666666663,
+                "y": 302
+            }
+        },
+        "world1.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 331.3333333333333,
+                "y": 292.6666666666667
+            }
+        },
+        "world2.tmx": {
+            "scale": 0.25,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": -78,
+                "y": 974
+            }
+        }
+    },
+    "last.imagePath": "/home/gojur/code/battle-brothers-clone/data/maps",
+    "last.worldFilePath": "/home/gojur/code/battle-brothers-clone/data/maps",
+    "loadedWorlds": [
+        "/home/gojur/code/battle-brothers-clone/data/maps/maps.world"
+    ],
+    "map.lastUsedFormat": "tmx",
+    "map.width": 20,
+    "openFiles": [
+        "world1.tmx",
+        "world2.tmx",
+        "ground.tsx",
+        "ground.tsx"
+    ],
+    "project": "project.tiled-project",
+    "recentFiles": [
+        "ground.tsx",
+        "world2.tmx",
+        "world1.tmx",
+        "world.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 128,
+        "width": 128
+    },
+    "tileset.type": 0
+}
