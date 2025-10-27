@@ -6,7 +6,6 @@ import (
 	"pure-game-kit/input/keyboard"
 	"pure-game-kit/input/keyboard/key"
 	"pure-game-kit/tiled/tilemap"
-	"pure-game-kit/utility/collection"
 	"pure-game-kit/utility/color"
 	"pure-game-kit/window"
 )
@@ -31,11 +30,6 @@ func main() {
 }
 
 func reload() []*graphics.Sprite {
-	assets.LoadTextures("maps/ground.png")
-	assets.LoadTiledTileset("maps/ground.tsx")
-	assets.LoadTiledWorld("maps/maps.world")
-
-	var map1 = tilemap.LayerSprites("maps/world1", "Tile Layer 1", "")
-	var map2 = tilemap.LayerSprites("maps/world2", "Tile Layer 1", "")
-	return collection.Join(map1, map2)
+	assets.LoadTiledMap("maps/world.tmx")
+	return tilemap.LayerSprites("maps/world", "Tile Layer 1", "")
 }
