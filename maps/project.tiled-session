@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "world2.tmx",
+    "activeFile": "world.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -20,11 +20,11 @@
             "scaleInEditor": 1
         },
         "world.tmx": {
-            "scale": 0.0625,
+            "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 128,
-                "y": 184
+                "x": 124,
+                "y": -19.25
             }
         },
         "world1.tmx": {
@@ -53,17 +53,16 @@
     "map.lastUsedFormat": "tmx",
     "map.width": 1000,
     "openFiles": [
-        "world1.tmx",
-        "world2.tmx",
-        "battle-tiles.tsx"
+        "battle-tiles.tsx",
+        "world.tmx"
     ],
     "project": "project.tiled-project",
     "recentFiles": [
+        "battle-tiles.tsx",
+        "world.tmx",
         "world1.tmx",
         "world2.tmx",
-        "battle-tiles.tsx",
-        "ground.tsx",
-        "world.tmx"
+        "ground.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

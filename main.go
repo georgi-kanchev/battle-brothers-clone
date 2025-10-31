@@ -21,8 +21,8 @@ func main() {
 		camera.DrawSprites(maps...)
 
 		camera.DrawGrid(2, 128, 128, color.Darken(color.Gray, 0.5))
-		camera.DragAndZoom()
 
+		camera.DragAndZoom()
 		if keyboard.IsKeyPressedOnce(key.F5) {
 			maps = reload()
 		}
@@ -31,5 +31,6 @@ func main() {
 
 func reload() []*graphics.Sprite {
 	assets.LoadTiledMap("maps/world.tmx")
-	return tilemap.LayerSprites("maps/world", "Tile Layer 1", "")
+	var layer = tilemap.LayerSprites("maps/world", "Tile Layer 1", "")
+	return layer
 }
