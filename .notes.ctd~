@@ -26,9 +26,9 @@ No art at this point in time.</rich_text>
 2. notes &amp; roadmap outline
 3. git repository</rich_text>
       </node>
-      <node unique_id="4" master_id="0" name="0.0.2 - World Map" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761075383" ts_lastsave="1761076680">
+      <node unique_id="4" master_id="0" name="0.0.2 - World Map" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761075383" ts_lastsave="1761515863">
         <rich_text>1. loading &amp; displaying Tiled maps
-2. moving around by clicking, camera follows player
+2. character moving around by clicking, camera follows player
 3. user interface outline, no functionality</rich_text>
       </node>
       <node unique_id="16" master_id="0" name="0.0.3 - Inventory" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761076995" ts_lastsave="1761077224">
