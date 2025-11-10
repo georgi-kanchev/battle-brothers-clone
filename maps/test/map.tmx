@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="4" height="4" tilewidth="1024" tileheight="1024" infinite="0" nextlayerid="3" nextobjectid="4">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="4" height="4" tilewidth="1023" tileheight="1023" infinite="0" nextlayerid="4" nextobjectid="19">
  <tileset firstgid="1" source="tileset.tsx"/>
  <layer id="1" name="Background" width="4" height="4">
   <data encoding="csv">
@@ -9,6 +9,14 @@
 29,30,31,32
 </data>
  </layer>
+ <objectgroup color="#00ff00" id="3" name="Roads">
+  <object id="13" x="2394" y="1396">
+   <polyline points="0,0 -24,36 -21,80 0,145 -6,187 -47,218 -148,209 -248,228 -299,220 -437,272 -452,304 -404,380 -416,426 -443,469 -458,605 -507,676 -522,786"/>
+  </object>
+  <object id="17" x="1807" y="2133">
+   <polyline points="0,0 65,49 106,160 143,189 228,176 379,144 512,166 671,130 764,88 822,100 901,132 954,121 1021,74 1062,62 1143,11 1226,17 1252,-12 1242,-63 1187,-125"/>
+  </object>
+ </objectgroup>
  <objectgroup color="#ff0000" id="2" name="Zones">
   <object id="2" x="2239" y="1354" width="75" height="64"/>
   <object id="3" x="2626" y="1089">
