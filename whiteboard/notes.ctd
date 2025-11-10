@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cherrytree>
+  <bookmarks list=""/>
+  <node unique_id="1" master_id="0" name="Roadmap" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761072156" ts_lastsave="1761082382">
+    <rich_text>The idea of the roadmap version layout is to strip down development into small chunks.
+
+Versions number meanings:
+├0.X.X = Dev
+│  │ └Version, highlighting the implementations
+│  └Development phase, going from outline to the finest details, then preparations for release
+├1.X.X = Release
+│  │ └Version, highlighting the features and changes
+│  └Update, a bundle of new features &amp; bug fixes
+├2.X.X = Expansion/DLC
+│  │ └Version, highlighting the features and changes
+│  └Update, a bundle of new features &amp; bug fixes
+├3.X.X = Expansion/DLC
+└4.X.X = ...</rich_text>
+    <node unique_id="2" master_id="0" name="0.0 - Outline" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="1" foreground="#f9f06b" ts_creation="1761074507" ts_lastsave="1761083777">
+      <rich_text>This phase marks where things will be, both on screen and in code.
+No in-game texts or images, just simple one-color boxes (unless loading a map for example).
+The only functionality in that phase is navigation between menus &amp; screens.
+No art at this point in time.</rich_text>
+      <node unique_id="5" master_id="0" name="0.0.1 - Setup" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="1" foreground="#8ff0a4" ts_creation="1761075893" ts_lastsave="1761076660">
+        <rich_text>1. project
+2. notes &amp; roadmap outline
+3. git repository</rich_text>
+      </node>
+      <node unique_id="4" master_id="0" name="0.0.2 - World Map" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761075383" ts_lastsave="1761985817">
+        <rich_text>1. loading &amp; displaying the map image
+2. character moving around by clicking, camera follows player
+3. user interface outline, no functionality</rich_text>
+      </node>
+      <node unique_id="16" master_id="0" name="0.0.3 - Inventory" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761076995" ts_lastsave="1761077224">
+        <rich_text>1. stash outline, no functionality
+2. unit bench outline, no functionality
+3. unit equipment outline, no functionality
+4. unit stats outline, no functionality
+5. perks outline, no functionality</rich_text>
+      </node>
+      <node unique_id="18" master_id="0" name="0.0.4 - Battle" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761077428" ts_lastsave="1761159594">
+        <rich_text>1. loading &amp; displaying Tiled maps
+2. scene management, entering &amp; leaving
+3. user interface outline, no functionality other than leaving</rich_text>
+      </node>
+      <node unique_id="19" master_id="0" name="0.0.5 - Main Menu" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761077758" ts_lastsave="1761078061">
+        <rich_text>1. buttons outline, only "New Campaign" &amp; “Options” should work
+2. options screen outline, only back button should work</rich_text>
+      </node>
+    </node>
+    <node unique_id="7" master_id="0" name="0.1 - Broad" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761076797" ts_lastsave="1761083771">
+      <rich_text>This phase starts introducing concepts, classes, objects, terminology and ideas on how to shape the oncoming phases.
+Implementation begins as well but in a simplified fashion.
+The simple features are implemented and the complex ones are mentioned and prepared for.
+Some art is starting to get introduced.</rich_text>
+      <node unique_id="21" master_id="0" name="0.1.1 - World Map" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761082193" ts_lastsave="1761082221"/>
+      <node unique_id="39" master_id="0" name="0.1.2 - Village" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761387732" ts_lastsave="1761388394"/>
+      <node unique_id="22" master_id="0" name="0.1.3 - Inventory" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761082224" ts_lastsave="1761082224"/>
+      <node unique_id="23" master_id="0" name="0.1.4 - Battle" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761082236" ts_lastsave="1761082236"/>
+      <node unique_id="24" master_id="0" name="0.1.5 - Main Menu" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761082246" ts_lastsave="1761082246"/>
+    </node>
+    <node unique_id="20" master_id="0" name="0.2 - Rough" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761078323" ts_lastsave="1761083784">
+      <rich_text>This phase finishes all simple features and starts all complex features.
+The game looks functional but super boring to play, lacking any gameplay depth.
+The gameplay loop is close to being complete.
+Art is an essential part of the game.</rich_text>
+      <node unique_id="35" master_id="0" name="0.2.1 - World Map" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761159753" ts_lastsave="1761159753"/>
+      <node unique_id="36" master_id="0" name="0.2.2 - Inventory" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761159762" ts_lastsave="1761159762"/>
+      <node unique_id="40" master_id="0" name="0.2.3 - Village" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761387769" ts_lastsave="1761387769"/>
+      <node unique_id="37" master_id="0" name="0.2.4 - Battle" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761159768" ts_lastsave="1761159768"/>
+      <node unique_id="38" master_id="0" name="0.2.5 - Main Menu" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761159773" ts_lastsave="1761159773"/>
+    </node>
+    <node unique_id="8" master_id="0" name="0.3 - Gameplay Loop" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761076853" ts_lastsave="1761083941">
+      <rich_text>This phase completes the simple gameplay loop.
+There is officially a game, although quite a boring one.
+Most features are close to completion.
+Art is close to covering everything that requires it.</rich_text>
+      <node unique_id="41" master_id="0" name="0.3.1 - World Map" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761387876" ts_lastsave="1761387876"/>
+      <node unique_id="42" master_id="0" name="0.3.2 - Inventory" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761387884" ts_lastsave="1761387884"/>
+      <node unique_id="43" master_id="0" name="0.3.3 - Village" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761387890" ts_lastsave="1761387890"/>
+      <node unique_id="44" master_id="0" name="0.3.4 - Battle" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761387897" ts_lastsave="1761387897"/>
+      <node unique_id="45" master_id="0" name="0.3.5 - Main Menu" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761387904" ts_lastsave="1761387904"/>
+    </node>
+    <node unique_id="9" master_id="0" name="0.4 - Full Feature Set" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761076870" ts_lastsave="1761083956">
+      <rich_text>This phase completes all features at a basic depth.
+The game is ready to receive content and expand on those features.
+Art is entirely meeting the gameplay that requires it.</rich_text>
+      <node unique_id="47" master_id="0" name="0.4.1 - World Map" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761387925" ts_lastsave="1761387925"/>
+      <node unique_id="48" master_id="0" name="0.4.2 - Inventory" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761387929" ts_lastsave="1761387929"/>
+      <node unique_id="49" master_id="0" name="0.4.3 - Village" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761387939" ts_lastsave="1761387939"/>
+      <node unique_id="50" master_id="0" name="0.4.4 - Battle" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761387945" ts_lastsave="1761387945"/>
+      <node unique_id="51" master_id="0" name="0.4.5 - Main Menu" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761387951" ts_lastsave="1761387951"/>
+    </node>
+    <node unique_id="10" master_id="0" name="0.5 - Content" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761076872" ts_lastsave="1761084175">
+      <rich_text>This phase expands the features with tons of content.
+It adds to the playtime of the gameplay loop.
+Art follows closely any new additions.
+Sounds and music start getting introduced.</rich_text>
+      <node unique_id="52" master_id="0" name="0.5.1 - World Map" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761387965" ts_lastsave="1761388029"/>
+      <node unique_id="53" master_id="0" name="0.5.2 - Inventory" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761387975" ts_lastsave="1761388031"/>
+      <node unique_id="54" master_id="0" name="0.5.3 - Village" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761387985" ts_lastsave="1761388033"/>
+      <node unique_id="55" master_id="0" name="0.5.4 - Battle" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761387992" ts_lastsave="1761388035"/>
+    </node>
+    <node unique_id="11" master_id="0" name="0.6 - Details" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761076872" ts_lastsave="1761084651">
+      <rich_text>This phase introduces the "Oomph" for the game.
+It ties up the loose ends and adds a lot of small details, sounds, ambience, particles, atmosphere etc.
+It contributes with soul and character, easter eggs and original cool additions.
+Art, sounds and music are pretty much the finished product, receiving any last moment changes and additions, while getting reused in creative ways for the aforementioned cool stuff.</rich_text>
+      <node unique_id="56" master_id="0" name="0.6.1 - World Map" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761388010" ts_lastsave="1761388038"/>
+      <node unique_id="57" master_id="0" name="0.6.2 - Inventory" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761388040" ts_lastsave="1761388040"/>
+      <node unique_id="58" master_id="0" name="0.6.3 - Village" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761388049" ts_lastsave="1761388049"/>
+      <node unique_id="59" master_id="0" name="0.6.4 - Battle" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761388053" ts_lastsave="1761388053"/>
+      <node unique_id="60" master_id="0" name="0.6.5 - Main Menu" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761388064" ts_lastsave="1761388064"/>
+    </node>
+    <node unique_id="12" master_id="0" name="0.7 - Polish" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761076872" ts_lastsave="1761084908">
+      <rich_text>This phase considers the game done at this point, approaching it as a packaged product.
+Some more details are added here and there.
+It looks for any small missed things, any last moment additions and improvements before the package is sent for testing.
+The game is one whole unit.
+</rich_text>
+      <node unique_id="61" master_id="0" name="0.7.1 - World Map" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761388089" ts_lastsave="1761388089"/>
+      <node unique_id="62" master_id="0" name="0.7.2 - Inventory" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761388096" ts_lastsave="1761388096"/>
+      <node unique_id="63" master_id="0" name="0.7.3 - Village" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761388102" ts_lastsave="1761388102"/>
+      <node unique_id="64" master_id="0" name="0.7.4 - Battle" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761388108" ts_lastsave="1761388108"/>
+      <node unique_id="65" master_id="0" name="0.7.5 - Main Menu" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761388113" ts_lastsave="1761388113"/>
+    </node>
+    <node unique_id="13" master_id="0" name="0.8 - Playtesting" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761076873" ts_lastsave="1761084983">
+      <rich_text>This phase tries to shred the packaged game to pieces.
+It seeks any potential problems in design that lack fun or just logical bugs.</rich_text>
+      <node unique_id="66" master_id="0" name="0.8.1 - World Map" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761388154" ts_lastsave="1761388154"/>
+      <node unique_id="67" master_id="0" name="0.8.2 - Inventory" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761388160" ts_lastsave="1761388160"/>
+      <node unique_id="68" master_id="0" name="0.8.3 - Village" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761388166" ts_lastsave="1761388166"/>
+      <node unique_id="69" master_id="0" name="0.8.4 - Battle" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761388170" ts_lastsave="1761388170"/>
+      <node unique_id="70" master_id="0" name="0.8.5 - Main Menu" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761388174" ts_lastsave="1761388174"/>
+    </node>
+    <node unique_id="14" master_id="0" name="0.9 - Bug Fixing" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761076873" ts_lastsave="1761388195">
+      <rich_text>This phases fixes any regular-sized issues there are to be fixed.
+This is not the time for any big rewrites or changes if something was found - that should happen after release, unless it is very gamebreaking.
+Implementations are also entirely out of the question at this point.</rich_text>
+      <node unique_id="71" master_id="0" name="0.9.1 - World Map" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761388198" ts_lastsave="1761388198"/>
+      <node unique_id="72" master_id="0" name="0.9.2 - Inventory" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761388204" ts_lastsave="1761388204"/>
+      <node unique_id="73" master_id="0" name="0.9.3 - Village" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761388210" ts_lastsave="1761388210"/>
+      <node unique_id="74" master_id="0" name="0.9.4 - Battle" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761388211" ts_lastsave="1761388211"/>
+      <node unique_id="75" master_id="0" name="0.9.5 - Main Menu" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761388212" ts_lastsave="1761388212"/>
+    </node>
+    <node unique_id="15" master_id="0" name="0.10 - Preparation" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761076924" ts_lastsave="1761085830">
+      <rich_text>This phase prepares the game for release.
+It collects materials that showcase the game in a good light - vertical slices, screenshots, trailers etc on its store pages.
+The market is throughly analyzed, copying other games is a must.
+It is time for any possible publicity the game can get.</rich_text>
+      <node unique_id="25" master_id="0" name="0.10.1 - Materials" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761085066" ts_lastsave="1761085205">
+        <rich_text>1. screenshots
+2. trailer
+3. descriptions &amp; hooks</rich_text>
+      </node>
+      <node unique_id="26" master_id="0" name="0.10.2 - Store Pages" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761085124" ts_lastsave="1761085181">
+        <rich_text>1. steam page
+2. itch.io page
+3. other pages?</rich_text>
+      </node>
+      <node unique_id="27" master_id="0" name="0.10.3 - Marketing" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761085142" ts_lastsave="1761085366">
+        <rich_text>1. email youtubers &amp; streamers
+2. social medias such as facebook groups, reddit, discord
+3. ads
+4. publisher?</rich_text>
+      </node>
+      <node unique_id="28" master_id="0" name="0.10.4 - Strategies" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761085395" ts_lastsave="1761085422">
+        <rich_text>1. release date
+2. pricing
+3. tags
+4. other strategies</rich_text>
+      </node>
+    </node>
+    <node unique_id="3" master_id="0" name="1.0 - Release" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761075014" ts_lastsave="1761086040">
+      <rich_text>This phase releases the game and everybody hope for the best.
+Any found bugs are hotfixed immediately with frequent updates.
+Getting the game to a stable state quickly is essential.</rich_text>
+      <node unique_id="29" master_id="0" name="1.0.1 - Hotfixes" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761085919" ts_lastsave="1761085919"/>
+      <node unique_id="30" master_id="0" name="1.0.2 - More Hotfixes" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761085980" ts_lastsave="1761085980"/>
+    </node>
+    <node unique_id="6" master_id="0" name="1.1 - Update" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761076745" ts_lastsave="1761086864">
+      <rich_text>This and the following phases accept new ideas and feedback, then materialize them.
+The long grind of keeping the game alive begins.
+New features happen in those phases, fixes continue as usual.
+This cycle repeats until a new bigger idea is accepted where a DLC or an expansion is considered.
+Unless it is decided to keep developing the game idnefinetely with smaller updates and no additional huge bundles of content.</rich_text>
+    </node>
+    <node unique_id="31" master_id="0" name="1.2 - Update" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761086354" ts_lastsave="1761086973">
+      <rich_text>This phase is the same as the previous one.</rich_text>
+    </node>
+    <node unique_id="32" master_id="0" name="2.0 - Expansion/DLC" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761086405" ts_lastsave="1761086962">
+      <rich_text>This phase materializes a brand new idea, in case the game goes down this path.
+It may be a huge new feature, a new game mode, a bundle of many themed features or anything of that matter.
+The phase mimics the 1.X.X stage of the game but reimagined with a new spin.
+Though, it usually receives less updates and features, mainly fixes.
+Aims to package a one-of deal, usually for a small price.
+The cycle of extensions/DLCs continues until it doesn't.</rich_text>
+    </node>
+    <node unique_id="33" master_id="0" name="3.0 - Expansion/DLC" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761086756" ts_lastsave="1761086969">
+      <rich_text>This phase is the same as the previous one.</rich_text>
+    </node>
+  </node>
+</cherrytree>
