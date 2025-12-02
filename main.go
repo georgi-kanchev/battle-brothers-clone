@@ -11,8 +11,8 @@ import (
 
 func main() {
 	var camera = graphics.NewCamera(1)
-	var assetId = assets.LoadTiledMap("maps/test/map.tmx")
-	var projectId = assets.LoadTiledProject("maps/map.tiled-project")
+	var assetId = assets.LoadTiledMap("worlds/test/map.tmx")
+	var projectId = assets.LoadTiledProject("project.tiled-project")
 	var project = tiled.NewProject(projectId)
 	var mapp = tiled.NewMap(assetId, project)
 
