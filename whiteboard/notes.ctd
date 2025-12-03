@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cherrytree>
   <bookmarks list=""/>
-  <node unique_id="1" master_id="0" name="Roadmap" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761072156" ts_lastsave="1761082382">
+  <node unique_id="1" master_id="0" name="Roadmap" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761072156" ts_lastsave="1764715175">
     <rich_text>The idea of the roadmap version layout is to strip down development into small chunks.
 
 Versions number meanings:
 ├0.X.X = Dev
 │  │ └Version, highlighting the implementations
-│  └Development phase, going from outline to the finest details, then preparations for release
+│  └Development phase in sweeps, going from outline to the finest details, then preparations for release
 ├1.X.X = Release
 │  │ └Version, highlighting the features and changes
 │  └Update, a bundle of new features &amp; bug fixes
@@ -16,20 +16,20 @@ Versions number meanings:
 │  └Update, a bundle of new features &amp; bug fixes
 ├3.X.X = Expansion/DLC
 └4.X.X = ...</rich_text>
-    <node unique_id="2" master_id="0" name="0.0 - Outline" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="1" foreground="#f9f06b" ts_creation="1761074507" ts_lastsave="1761083777">
+    <node unique_id="2" master_id="0" name="0.0 - Outline" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="#f9f06b" ts_creation="1761074507" ts_lastsave="1761083777">
       <rich_text>This phase marks where things will be, both on screen and in code.
 No in-game texts or images, just simple one-color boxes (unless loading a map for example).
 The only functionality in that phase is navigation between menus &amp; screens.
 No art at this point in time.</rich_text>
-      <node unique_id="5" master_id="0" name="0.0.1 - Setup" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="1" foreground="#8ff0a4" ts_creation="1761075893" ts_lastsave="1764715020">
+      <node unique_id="5" master_id="0" name="0.0.1 - Setup" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="#8ff0a4" ts_creation="1761075893" ts_lastsave="1764715020">
         <rich_text>//1. project
 //2. notes &amp; roadmap outline
 //3. git repository</rich_text>
       </node>
-      <node unique_id="4" master_id="0" name="0.0.2 - World Map" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761075383" ts_lastsave="1764715032">
+      <node unique_id="4" master_id="0" name="0.0.2 - World Map" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="#8ff0a4" ts_creation="1761075383" ts_lastsave="1764732324">
         <rich_text>//1. loading &amp; displaying the map image
-2. character moving around by clicking, camera follows player
-3. user interface outline, no functionality</rich_text>
+//2. character moving around by clicking, camera follows player
+//3. user interface outline, no functionality</rich_text>
       </node>
       <node unique_id="16" master_id="0" name="0.0.3 - Inventory" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761076995" ts_lastsave="1761077224">
         <rich_text>1. stash outline, no functionality
@@ -53,22 +53,31 @@ No art at this point in time.</rich_text>
 Implementation begins as well but in a simplified fashion.
 The simple features are implemented and the complex ones are mentioned and prepared for.
 Some art is starting to get introduced.</rich_text>
-      <node unique_id="21" master_id="0" name="0.1.1 - World Map" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761082193" ts_lastsave="1761082221"/>
+      <node unique_id="21" master_id="0" name="0.1.1 - World Map" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761082193" ts_lastsave="1764715732">
+        <rich_text>1. player as a tiled map object
+2. player moving on roads
+3. map bounderies for player
+4. functional ui
+5. settlements opening popup
+6. time + speedup</rich_text>
+      </node>
       <node unique_id="39" master_id="0" name="0.1.2 - Village" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761387732" ts_lastsave="1761388394"/>
       <node unique_id="22" master_id="0" name="0.1.3 - Inventory" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761082224" ts_lastsave="1761082224"/>
       <node unique_id="23" master_id="0" name="0.1.4 - Battle" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761082236" ts_lastsave="1761082236"/>
-      <node unique_id="24" master_id="0" name="0.1.5 - Main Menu" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761082246" ts_lastsave="1761082246"/>
+      <node unique_id="24" master_id="0" name="0.1.5 - Main Menu" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761082246" ts_lastsave="1764716460"/>
     </node>
     <node unique_id="20" master_id="0" name="0.2 - Rough" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761078323" ts_lastsave="1761083784">
       <rich_text>This phase finishes all simple features and starts all complex features.
 The game looks functional but super boring to play, lacking any gameplay depth.
 The gameplay loop is close to being complete.
 Art is an essential part of the game.</rich_text>
-      <node unique_id="35" master_id="0" name="0.2.1 - World Map" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761159753" ts_lastsave="1761159753"/>
+      <node unique_id="35" master_id="0" name="0.2.1 - World Map" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761159753" ts_lastsave="1764715717"/>
       <node unique_id="36" master_id="0" name="0.2.2 - Inventory" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761159762" ts_lastsave="1761159762"/>
       <node unique_id="40" master_id="0" name="0.2.3 - Village" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761387769" ts_lastsave="1761387769"/>
       <node unique_id="37" master_id="0" name="0.2.4 - Battle" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761159768" ts_lastsave="1761159768"/>
-      <node unique_id="38" master_id="0" name="0.2.5 - Main Menu" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761159773" ts_lastsave="1761159773"/>
+      <node unique_id="38" master_id="0" name="0.2.5 - Main Menu" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761159773" ts_lastsave="1764716473">
+        <rich_text>1. world selection screen</rich_text>
+      </node>
     </node>
     <node unique_id="8" master_id="0" name="0.3 - Gameplay Loop" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761076853" ts_lastsave="1761083941">
       <rich_text>This phase completes the simple gameplay loop.
