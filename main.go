@@ -59,6 +59,7 @@ func main() {
 	worldHud.Scale = 2
 
 	assets.LoadDefaultFont()
+	assets.LoadDefaultTexture()
 
 	var x, y, moveTargetX, moveTargetY float32
 
@@ -82,8 +83,7 @@ func main() {
 		x, y = point.MoveToPoint(x, y, moveTargetX, moveTargetY, 50*time.FrameDelta())
 		camera.X, camera.Y = x, y
 
-		camera.DrawCircle(x, y, 20, color.Black)
-		camera.DrawCircle(x, y, 16, color.Cyan)
+		camera.DrawTexture("", x-15, y-15, 30, 30, 0, color.Cyan)
 
 		if !worldHud.IsAnyHovered(camera) {
 			if mouse.IsButtonPressed(button.Left) {
