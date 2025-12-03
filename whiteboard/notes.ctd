@@ -31,17 +31,17 @@ No art at this point in time.</rich_text>
 //2. character moving around by clicking, camera follows player
 //3. user interface outline, no functionality</rich_text>
       </node>
-      <node unique_id="16" master_id="0" name="0.0.3 - Inventory" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761076995" ts_lastsave="1761077224">
-        <rich_text>1. stash outline, no functionality
-2. unit bench outline, no functionality
-3. unit equipment outline, no functionality
-4. unit stats outline, no functionality
-5. perks outline, no functionality</rich_text>
+      <node unique_id="16" master_id="0" name="0.0.3 - Inventory" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="#8ff0a4" ts_creation="1761076995" ts_lastsave="1764800490">
+        <rich_text>//1. stash outline, no functionality
+//2. bench outline, no functionality
+//3. equipment outline, no functionality
+//4. perks outline, no functionality
+//5. opening + closing hotkey</rich_text>
       </node>
-      <node unique_id="18" master_id="0" name="0.0.4 - Battle" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761077428" ts_lastsave="1761159594">
-        <rich_text>1. loading &amp; displaying Tiled maps
-2. scene management, entering &amp; leaving
-3. user interface outline, no functionality other than leaving</rich_text>
+      <node unique_id="18" master_id="0" name="0.0.4 - Battle" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="#f9f06b" ts_creation="1761077428" ts_lastsave="1764800552">
+        <rich_text>1. handle screens
+2. load tiled map
+3. outline ui</rich_text>
       </node>
       <node unique_id="19" master_id="0" name="0.0.5 - Main Menu" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761077758" ts_lastsave="1761078061">
         <rich_text>1. buttons outline, only "New Campaign" &amp; “Options” should work

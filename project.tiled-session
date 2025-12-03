@@ -1,10 +1,10 @@
 {
     "activeFile": "",
     "expandedProjectPaths": [
+        ".",
         "worlds/test",
         "test",
-        "worlds",
-        "."
+        "worlds"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
