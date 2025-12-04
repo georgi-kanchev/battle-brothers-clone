@@ -1,0 +1,45 @@
+package world
+
+import (
+	"game/source-code/screens"
+	"pure-game-kit/input/mouse"
+	"pure-game-kit/input/mouse/button"
+	"pure-game-kit/utility/color"
+	"pure-game-kit/utility/number"
+	"pure-game-kit/utility/point"
+	"pure-game-kit/utility/time"
+)
+
+type Party struct {
+	x, y, moveTargetX, moveTargetY float32
+	isPlayer                       bool
+}
+
+func NewParty(x, y float32, isPlayer bool) *Party {
+	return &Party{x: x, y: y, moveTargetX: x, moveTargetY: y, isPlayer: isPlayer}
+}
+
+func (party *Party) Update() {
+	var world = screens.Current().(*World)
+
+	var px, py, tx, ty = party.x, party.y, party.moveTargetX, party.moveTargetY
+	party.x, party.y = point.MoveToPoint(px, py, tx, ty, 50*time.FrameDelta())
+
+	world.Camera.DrawTexture("", party.x-15, party.y-15, 30, 30, 0, color.Cyan)
+
+	if !party.isPlayer || world.HUD.IsAnyHovered(world.Camera) {
+		return
+	}
+
+	world.Camera.Zoom *= 1 + 0.001*mouse.ScrollSmooth()
+	world.Camera.Zoom = number.Limit(world.Camera.Zoom, 0.1, 8)
+	world.Camera.X, world.Camera.Y = party.x, party.y
+
+	if mouse.IsButtonPressed(button.Left) {
+		party.moveTargetX, party.moveTargetY = world.Camera.MousePosition()
+	}
+	if mouse.IsButtonJustPressed(button.Right) {
+		party.x, party.y = world.Camera.MousePosition()
+		party.moveTargetX, party.moveTargetY = party.x, party.y
+	}
+}
