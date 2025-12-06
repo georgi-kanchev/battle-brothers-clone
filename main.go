@@ -1,15 +1,16 @@
 package main
 
 import (
-	"game/source-code/screens"
+	"game/source-code/global"
+	"game/source-code/screens/battle"
 	"game/source-code/screens/world"
 	"pure-game-kit/data/assets"
+	"pure-game-kit/execution/screens"
 	"pure-game-kit/input/keyboard"
 	"pure-game-kit/input/keyboard/key"
+	"pure-game-kit/tiled"
 	"pure-game-kit/window"
 )
-
-const Version = "v0.0.3"
 
 func main() {
 	window.Title = "Battle Brothers Clone"
@@ -18,15 +19,16 @@ func main() {
 	assets.LoadDefaultFont()
 	assets.LoadDefaultTexture()
 
-	screens.New(nil, world.New(), nil)
-	screens.LoadAll()
+	global.Project = tiled.NewProject(assets.LoadTiledProject("project.tiled-project"))
+	// global.ScreenMenu = screens.Add(nil, false)
+	global.ScreenWorld = screens.Add(world.New("data/worlds/test/map.tmx", "data/gui/world.xml"), true)
+	global.ScreenBattle = screens.Add(battle.New("data/battlegrounds/test/map.tmx", "data/gui/battle.xml"), true)
 
 	for window.KeepOpen() {
-		screens.UpdateCurrent()
-
 		if keyboard.IsKeyJustPressed(key.F5) {
 			assets.ReloadAll()
-			screens.LoadAll()
+			global.Project = tiled.NewProject(assets.LoadTiledProject("project.tiled-project"))
+			screens.Reload()
 		}
 	}
 }

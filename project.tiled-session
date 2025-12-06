@@ -1,15 +1,54 @@
 {
-    "activeFile": "",
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "data/battlegrounds/test/map.tmx",
     "expandedProjectPaths": [
+        "data/worlds",
         ".",
+        "data/battlegrounds",
+        "data/battlegrounds/test",
+        "data",
+        "data/worlds/test",
         "worlds/test",
         "test",
         "worlds"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "data/battlegrounds/battleground.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "data/battlegrounds/test.tmx": {
+            "scale": 0.7728645833333333,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 479.3854033290653,
+                "y": 479.3854033290653
+            }
+        },
+        "data/battlegrounds/test/map.tmx": {
+            "scale": 0.33,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1034.848484848485,
+                "y": 943.9393939393939
+            }
+        },
+        "data/worlds/test/map.tmx": {
+            "scale": 0.18154936461388074,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 2046.275407188047,
+                "y": 2040.7672634271098
+            }
+        },
         "data/worlds/test/tileset.tsx": {
-            "dynamicWrapping": true
+            "dynamicWrapping": true,
+            "scaleInDock": 1
         },
         "test/map.tmx": {
             "scale": 1,
@@ -41,13 +80,25 @@
             "scaleInEditor": 0.33
         }
     },
+    "last.imagePath": "/home/gojur/code/battle-brothers-clone/art/Battlegrounds",
+    "map.height": 30,
+    "map.lastUsedFormat": "tmx",
     "openFiles": [
+        "data/worlds/test/map.tmx",
+        "data/battlegrounds/test/map.tmx",
+        "data/battlegrounds/battleground.tsx"
     ],
     "project": "project.tiled-project",
     "recentFiles": [
+        "data/worlds/test/map.tmx",
+        "data/battlegrounds/battleground.tsx",
+        "data/battlegrounds/test/map.tmx",
+        "data/battlegrounds/test.tmx",
         "worlds/test/map.tmx",
         "worlds/test/tileset.tsx",
         "test/tileset.tsx",
         "test/map.tmx"
-    ]
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.type": 1
 }
