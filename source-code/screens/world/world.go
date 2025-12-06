@@ -36,7 +36,8 @@ func (world *World) OnLoad() {
 	world.tmap = tiled.NewMap(assets.LoadTiledMap(world.worldPath), global.Project)
 	world.hud = gui.NewFromXML(file.LoadText(world.guiPath))
 }
-func (world *World) OnEnter() {}
+func (world *World) OnEnter() {
+}
 func (world *World) OnUpdate() {
 	world.camera.SetScreenAreaToWindow()
 	world.tmap.Draw(world.camera)
@@ -60,7 +61,8 @@ func (world *World) OnUpdate() {
 
 	world.hud.UpdateAndDraw(world.camera)
 }
-func (world *World) OnExit() {}
+func (world *World) OnExit() {
+}
 
 //=================================================================
 // private

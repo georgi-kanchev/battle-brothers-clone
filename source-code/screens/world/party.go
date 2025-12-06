@@ -12,14 +12,14 @@ import (
 )
 
 type Party struct {
-	x, y,
+	x, y, speed,
 	moveTargetX, moveTargetY float32
 	isPlayer bool
 	units    []*unit.Unit
 }
 
 func NewParty(units []*unit.Unit, x, y float32, isPlayer bool) *Party {
-	return &Party{x: x, y: y, moveTargetX: x, moveTargetY: y, isPlayer: isPlayer, units: units}
+	return &Party{x: x, y: y, moveTargetX: x, moveTargetY: y, isPlayer: isPlayer, units: units, speed: 50}
 }
 
 //=================================================================
@@ -28,7 +28,7 @@ func (party *Party) Update() {
 	var world = screens.Current().(*World)
 
 	var px, py, tx, ty = party.x, party.y, party.moveTargetX, party.moveTargetY
-	party.x, party.y = point.MoveToPoint(px, py, tx, ty, 50*time.FrameDelta())
+	party.x, party.y = point.MoveToPoint(px, py, tx, ty, party.speed*time.FrameDelta())
 
 	world.camera.DrawTexture("", party.x-15, party.y-15, 30, 30, 0, color.Cyan)
 

@@ -1,10 +1,28 @@
 <GUI scale="2" volume="1">
 	<Container id="themes">
-		<Theme id="panel" color="43 33 23 255" frameColor="86 66 46 255" frameSize="-5" textLineHeight="25" textAlignmentX="0.5" textAlignmentY="0.5" textLineGap="-0.5" />
+		<Theme id="panel" color="43 33 23" frameColor="86 66 46" frameSize="-5" textLineHeight="25" textAlignmentX="0.5" textAlignmentY="0.5" textLineGap="-0.5" />
 	</Container>
 	
+	<Container id="turn-order" x="CameraLeftX+5" y="CameraTopY+5" width="180" height="250">
+		<Widget class="visual" id="turn-order-bgr" themeId="panel" fillContainer="" text=" Turn order:
+		 Looter
+		 Wolf
+		 Looter
+		 Bear
+		 Looter
+		 Stone
+		 -= End of Round =-
+		 Mustache
+		 Looter
+		 Wolf
+		 Looter
+		 Bear" textAlignmentY="0" textAlignmentX="0" textLineGap="-1" />
+	</Container>
+
 	<Container id="score" x="CameraCenterX-75" y="CameraTopY+5" width="150" height="60">
-		<Widget class="visual" id="score-bgr" themeId="panel" fillContainer="" text="9 vs 6
+		<Widget class="visual" id="score-bgr" themeId="panel" fillContainer="" textColor="0 255 0"
+		textEmbeddedColor1="200 200 200" textEmbeddedColor2="255 0 0" textEmbeddedColor3="200 200 200"
+		text="9` vs `6`
 Round 3" />
 	</Container>
 	
@@ -13,7 +31,7 @@ Round 3" />
 	</Container>
 
 	<Container id="popup-dim" x="CameraLeftX" y="CameraTopY" width="CameraWidth" height="CameraHeight" hidden="1">
-		<Widget class="visual" id="popup-dim-bgr" fillContainer="" color="0 0 0 150" />
+		<Widget class="visual" id="popup-dim-bgr" fillContainer="" color="0 0 0" />
 	</Container>
 
 	<Container id="loot" x="CameraCenterX-500" y="CameraCenterY-320" width="1000" height="700" hidden="1">

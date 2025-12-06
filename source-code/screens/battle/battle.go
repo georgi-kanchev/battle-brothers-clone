@@ -43,7 +43,8 @@ func (battle *Battle) OnLoad() {
 	var tileH = battle.tmap.Properties[property.MapTileHeight].(int)
 	battle.camera.X, battle.camera.Y = float32(cols)/2*float32(tileW), float32(rows)/2*float32(tileH)
 }
-func (battle *Battle) OnEnter() {}
+func (battle *Battle) OnEnter() {
+}
 func (battle *Battle) OnUpdate() {
 	battle.camera.SetScreenAreaToWindow()
 	battle.camera.MouseDragAndZoomSmooth()
@@ -69,7 +70,8 @@ func (battle *Battle) OnUpdate() {
 		battle.hud.SetField("loot", field.Hidden, hidden)
 	}
 }
-func (battle *Battle) OnExit() {}
+func (battle *Battle) OnExit() {
+}
 
 //=================================================================
 // private
