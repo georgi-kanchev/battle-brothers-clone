@@ -1,0 +1,48 @@
+<GUI scale="2" volume="1">
+	<Container id="themes">
+		<Theme id="panel" color="43 33 23 255" frameColor="86 66 46 255" frameSize="-5" textLineHeight="25" textAlignmentX="0.5" textAlignmentY="0.5" />
+		<Theme id="resource" textLineHeight="20" width="80" height="40" textAlignmentX="0.5" textAlignmentY="0.5" textLineGap="-1" />
+	</Container>
+
+	<Container id="resources" x="CameraLeftX+5" y="CameraTopY+5" width="400" height="40">
+		<Widget class="visual" id="resources-bgr" themeId="panel" fillContainer="" />
+		<Widget class="visual" id="gold" themeId="resource" text="^^ 90 523" textEmbeddedAssetId1="@coins3" />
+		<Widget class="visual" id="food" themeId="resource" text="^^ 188" textEmbeddedAssetId1="@apple" />
+		<Widget class="visual" id="tools" themeId="resource" text="^^ 77" textEmbeddedAssetId1="@ingot" />
+		<Widget class="visual" id="ammo" themeId="resource" text="^^ 68" textEmbeddedAssetId1="@bow" />
+		<Widget class="visual" id="medicine" themeId="resource" text="^^ 29" textEmbeddedAssetId1="@heart" />
+	</Container>
+	<Container id="goal" x="TargetLeftX" y="TargetBottomY" width="TargetWidth" height="40" targetId="resources">
+		<Widget class="visual" id="goal-bgr" themeId="panel" fillContainer="" text="goal" />
+	</Container>
+	
+	<Container id="time" x="CameraCenterX-40" y="CameraTopY+5" width="80" height="80">
+		<Widget class="visual" id="time-bgr" themeId="panel" fillContainer="" text="day 16" textAlignmentY="0" />
+	</Container>
+	
+	<Container id="menus" x="CameraRightX-405" y="CameraTopY+5" width="400" height="40">
+		<Widget class="visual" id="menus-bgr" themeId="panel" fillContainer="" />
+	</Container>
+	<Container id="quest" x="TargetLeftX" y="TargetBottomY" width="TargetWidth" height="40" targetId="menus">
+		<Widget class="visual" id="quest-bgr" themeId="panel" fillContainer="" text="quest" />
+	</Container>
+	
+	<Container id="popup-dim" x="CameraLeftX" y="CameraTopY" width="CameraWidth" height="CameraHeight" hidden="1">
+		<Widget class="visual" id="popup-dim-bgr" fillContainer="" color="0 0 0 150" />
+	</Container>
+	
+	<Container id="inventory" x="CameraCenterX-500" y="CameraCenterY-320" width="1000" height="700" hidden="1">
+	</Container>
+	<Container id="equipment" x="TargetLeftX" y="TargetTopY" width="280" height="450" targetId="inventory" hidden="TargetHidden">
+		<Widget class="visual" id="equipment-bgr" themeId="panel" fillContainer="" />
+	</Container>
+	<Container id="stash" x="TargetLeftX+280" y="TargetTopY+100" width="440" height="350" targetId="inventory" hidden="TargetHidden">
+		<Widget class="visual" id="stash-bgr" themeId="panel" fillContainer="" />
+	</Container>
+	<Container id="perks" x="TargetRightX-280" y="TargetTopY" width="280" height="450" targetId="inventory" hidden="TargetHidden">
+		<Widget class="visual" id="perks-bgr" themeId="panel" fillContainer="" />
+	</Container>
+	<Container id="units" x="TargetLeftX" y="TargetBottomY-250" width="1000" height="250" targetId="inventory" hidden="TargetHidden">
+		<Widget class="visual" id="units-bgr" themeId="panel" fillContainer="" />
+	</Container>
+</GUI>

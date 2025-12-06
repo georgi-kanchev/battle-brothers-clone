@@ -1,0 +1,24 @@
+<GUI scale="2" volume="1">
+	<Container id="themes">
+		<Theme id="panel" color="43 33 23 255" frameColor="86 66 46 255" frameSize="-5" textLineHeight="25" textAlignmentX="0.5" textAlignmentY="0.5" textLineGap="-0.5" />
+	</Container>
+	
+	<Container id="score" x="CameraCenterX-75" y="CameraTopY+5" width="150" height="60">
+		<Widget class="visual" id="score-bgr" themeId="panel" fillContainer="" text="9 vs 6
+Round 3" />
+	</Container>
+	
+	<Container id="settings" x="CameraRightX-405" y="CameraTopY+5" width="400" height="40">
+		<Widget class="visual" id="settings-bgr" themeId="panel" fillContainer="" />
+	</Container>
+
+	<Container id="popup-dim" x="CameraLeftX" y="CameraTopY" width="CameraWidth" height="CameraHeight" hidden="1">
+		<Widget class="visual" id="popup-dim-bgr" fillContainer="" color="0 0 0 150" />
+	</Container>
+
+	<Container id="loot" x="CameraCenterX-500" y="CameraCenterY-320" width="1000" height="700" hidden="1">
+	</Container>
+	<Container id="items" x="TargetLeftX" y="TargetTopY" width="280" height="450" targetId="loot" hidden="TargetHidden">
+		<Widget class="visual" id="items-bgr" themeId="panel" fillContainer="" />
+	</Container>
+</GUI>
