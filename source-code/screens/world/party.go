@@ -1,7 +1,8 @@
 package world
 
 import (
-	"game/source-code/screens"
+	"game/source-code/unit"
+	"pure-game-kit/execution/screens"
 	"pure-game-kit/input/mouse"
 	"pure-game-kit/input/mouse/button"
 	"pure-game-kit/utility/color"
@@ -11,13 +12,17 @@ import (
 )
 
 type Party struct {
-	x, y, moveTargetX, moveTargetY float32
-	isPlayer                       bool
+	x, y,
+	moveTargetX, moveTargetY float32
+	isPlayer bool
+	units    []*unit.Unit
 }
 
-func NewParty(x, y float32, isPlayer bool) *Party {
-	return &Party{x: x, y: y, moveTargetX: x, moveTargetY: y, isPlayer: isPlayer}
+func NewParty(units []*unit.Unit, x, y float32, isPlayer bool) *Party {
+	return &Party{x: x, y: y, moveTargetX: x, moveTargetY: y, isPlayer: isPlayer, units: units}
 }
+
+//=================================================================
 
 func (party *Party) Update() {
 	var world = screens.Current().(*World)
@@ -25,21 +30,21 @@ func (party *Party) Update() {
 	var px, py, tx, ty = party.x, party.y, party.moveTargetX, party.moveTargetY
 	party.x, party.y = point.MoveToPoint(px, py, tx, ty, 50*time.FrameDelta())
 
-	world.Camera.DrawTexture("", party.x-15, party.y-15, 30, 30, 0, color.Cyan)
+	world.camera.DrawTexture("", party.x-15, party.y-15, 30, 30, 0, color.Cyan)
 
-	if !party.isPlayer || world.HUD.IsAnyHovered(world.Camera) {
+	if !party.isPlayer || world.hud.IsAnyHovered(world.camera) {
 		return
 	}
 
-	world.Camera.Zoom *= 1 + 0.001*mouse.ScrollSmooth()
-	world.Camera.Zoom = number.Limit(world.Camera.Zoom, 0.1, 8)
-	world.Camera.X, world.Camera.Y = party.x, party.y
+	world.camera.Zoom *= 1 + 0.001*mouse.ScrollSmooth()
+	world.camera.Zoom = number.Limit(world.camera.Zoom, 0.1, 8)
+	world.camera.X, world.camera.Y = party.x, party.y
 
 	if mouse.IsButtonPressed(button.Left) {
-		party.moveTargetX, party.moveTargetY = world.Camera.MousePosition()
+		party.moveTargetX, party.moveTargetY = world.camera.MousePosition()
 	}
 	if mouse.IsButtonJustPressed(button.Right) {
-		party.x, party.y = world.Camera.MousePosition()
+		party.x, party.y = world.camera.MousePosition()
 		party.moveTargetX, party.moveTargetY = party.x, party.y
 	}
 }
