@@ -63,7 +63,7 @@ func (world *World) OnUpdate() {
 		world.currentPopup = global.TogglePopup(world.hud, world.currentPopup, world.settlement)
 	}
 
-	// world.hud.UpdateAndDraw(world.camera)
+	world.hud.UpdateAndDraw(world.camera)
 
 	if world.currentPopup != nil {
 		world.currentPopup.UpdateAndDraw(world.camera)
