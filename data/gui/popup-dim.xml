@@ -1,0 +1,5 @@
+<GUI>
+	<Container id="popup-dim" x="CameraLeftX" y="CameraTopY" width="CameraWidth" height="CameraHeight" hidden="1">
+		<Widget class="visual" id="popup-dim-bgr" fillContainer="" color="0 0 0 200" />
+	</Container>
+</GUI>

@@ -1,0 +1,16 @@
+<GUI scale="2" volume="1">
+	<Container id="inventory" x="CameraCenterX-500" y="CameraCenterY-320" width="1000" height="700">
+	</Container>
+	<Container id="equipment" x="TargetLeftX" y="TargetTopY" width="280" height="450" targetId="inventory">
+		<Widget class="visual" id="equipment-bgr" themeId="panel" fillContainer="" />
+	</Container>
+	<Container id="stash" x="TargetLeftX+280" y="TargetTopY+100" width="440" height="350" targetId="inventory">
+		<Widget class="visual" id="stash-bgr" themeId="panel" fillContainer="" />
+	</Container>
+	<Container id="perks" x="TargetRightX-280" y="TargetTopY" width="280" height="450" targetId="inventory">
+		<Widget class="visual" id="perks-bgr" themeId="panel" fillContainer="" />
+	</Container>
+	<Container id="units" x="TargetLeftX" y="TargetBottomY-250" width="1000" height="250" targetId="inventory">
+		<Widget class="visual" id="units-bgr" themeId="panel" fillContainer="" />
+	</Container>
+</GUI>

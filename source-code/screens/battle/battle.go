@@ -9,7 +9,6 @@ import (
 	"pure-game-kit/execution/screens"
 	gfx "pure-game-kit/graphics"
 	"pure-game-kit/gui"
-	"pure-game-kit/gui/field"
 	"pure-game-kit/input/keyboard"
 	"pure-game-kit/input/keyboard/key"
 	"pure-game-kit/tiled"
@@ -18,24 +17,26 @@ import (
 )
 
 type Battle struct {
-	mapPath, guiPath string
-	tmap             *tiled.Map
-	hud              *gui.GUI
-	camera           *gfx.Camera
+	path   string
+	tmap   *tiled.Map
+	camera *gfx.Camera
+
+	hud, currentPopup, loot *gui.GUI
 
 	attackers, defenders []*unit.Unit
 }
 
-func New(mapPath, guiPath string) *Battle {
-	var battle = &Battle{mapPath: mapPath, guiPath: guiPath, camera: gfx.NewCamera(1)}
+func New(mapPath string) *Battle {
+	var battle = &Battle{path: mapPath, camera: gfx.NewCamera(1)}
 	return battle
 }
 
 //=================================================================
 
 func (battle *Battle) OnLoad() {
-	battle.tmap = tiled.NewMap(assets.LoadTiledMap(battle.mapPath), global.Project)
-	battle.hud = gui.NewFromXML(file.LoadText(battle.guiPath))
+	battle.tmap = tiled.NewMap(assets.LoadTiledMap(battle.path), global.Project)
+	battle.hud = gui.NewFromXMLs(file.LoadText("data/gui/battle.xml"), global.PopupDimGUI, global.ThemesGUI)
+	battle.loot = gui.NewFromXMLs(file.LoadText("data/gui/battle-loot.xml"), global.ThemesGUI)
 
 	var cols = battle.tmap.Properties[property.MapColumns].(int)
 	var rows = battle.tmap.Properties[property.MapRows].(int)
@@ -47,7 +48,7 @@ func (battle *Battle) OnEnter() {
 }
 func (battle *Battle) OnUpdate() {
 	battle.camera.SetScreenAreaToWindow()
-	battle.camera.MouseDragAndZoomSmooth()
+	condition.CallIf(battle.currentPopup == nil, battle.camera.MouseDragAndZoomSmooth)
 	battle.tmap.Draw(battle.camera)
 
 	//=================================================================
@@ -58,16 +59,19 @@ func (battle *Battle) OnUpdate() {
 
 	//=================================================================
 	// gui
-	battle.hud.UpdateAndDraw(battle.camera)
 
 	if keyboard.IsKeyJustPressed(key.W) {
 		screens.Enter(global.ScreenWorld, false)
 	}
 
 	if keyboard.IsKeyJustPressed(key.L) {
-		var hidden = condition.If(battle.hud.Field("loot", field.Hidden) == "", "1", "")
-		battle.hud.SetField("popup-dim", field.Hidden, hidden)
-		battle.hud.SetField("loot", field.Hidden, hidden)
+		battle.currentPopup = global.TogglePopup(battle.hud, battle.currentPopup, battle.loot)
+	}
+
+	battle.hud.UpdateAndDraw(battle.camera)
+
+	if battle.currentPopup != nil {
+		battle.currentPopup.UpdateAndDraw(battle.camera)
 	}
 }
 func (battle *Battle) OnExit() {

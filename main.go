@@ -5,6 +5,7 @@ import (
 	"game/source-code/screens/battle"
 	"game/source-code/screens/world"
 	"pure-game-kit/data/assets"
+	"pure-game-kit/data/file"
 	"pure-game-kit/execution/screens"
 	"pure-game-kit/input/keyboard"
 	"pure-game-kit/input/keyboard/key"
@@ -19,10 +20,12 @@ func main() {
 	assets.LoadDefaultFont()
 	assets.LoadDefaultTexture()
 
+	global.ThemesGUI = file.LoadText("data/gui/themes.xml")
+	global.PopupDimGUI = file.LoadText("data/gui/popup-dim.xml")
 	global.Project = tiled.NewProject(assets.LoadTiledProject("data/project.tiled-project"))
 	// global.ScreenMenu = screens.Add(nil, false)
-	global.ScreenWorld = screens.Add(world.New("data/worlds/test/map.tmx", "data/gui/world.xml"), true)
-	global.ScreenBattle = screens.Add(battle.New("data/battlegrounds/test/map.tmx", "data/gui/battle.xml"), true)
+	global.ScreenWorld = screens.Add(world.New("data/worlds/test/map.tmx"), true)
+	global.ScreenBattle = screens.Add(battle.New("data/battlegrounds/test/map.tmx"), true)
 
 	for window.KeepOpen() {
 		if keyboard.IsKeyJustPressed(key.F5) {

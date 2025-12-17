@@ -5,7 +5,7 @@ import (
 	"pure-game-kit/execution/screens"
 	"pure-game-kit/input/mouse"
 	"pure-game-kit/input/mouse/button"
-	"pure-game-kit/utility/color"
+	"pure-game-kit/utility/color/palette"
 	"pure-game-kit/utility/number"
 	"pure-game-kit/utility/point"
 	"pure-game-kit/utility/time"
@@ -30,7 +30,7 @@ func (party *Party) Update() {
 	var px, py, tx, ty = party.x, party.y, party.moveTargetX, party.moveTargetY
 	party.x, party.y = point.MoveToPoint(px, py, tx, ty, party.speed*time.FrameDelta())
 
-	world.camera.DrawTexture("", party.x-15, party.y-15, 30, 30, 0, color.Cyan)
+	world.camera.DrawTexture("", party.x-15, party.y-15, 30, 30, 0, palette.Cyan)
 
 	if !party.isPlayer || world.hud.IsAnyHovered(world.camera) {
 		return
