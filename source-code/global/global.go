@@ -10,7 +10,7 @@ import (
 
 const Version = "v0.0.3"
 
-var ScreenMenu, ScreenWorld, ScreenBattle int
+var ScreenMainMenu, ScreenWorld, ScreenBattle int
 var Project *tiled.Project
 var ThemesGUI, PopupDimGUI string
 

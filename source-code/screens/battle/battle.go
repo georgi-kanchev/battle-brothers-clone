@@ -35,7 +35,7 @@ func New(mapPath string) *Battle {
 
 func (battle *Battle) OnLoad() {
 	battle.tmap = tiled.NewMap(assets.LoadTiledMap(battle.path), global.Project)
-	battle.hud = gui.NewFromXMLs(file.LoadText("data/gui/battle.xml"), global.PopupDimGUI, global.ThemesGUI)
+	battle.hud = gui.NewFromXMLs(file.LoadText("data/gui/battle-hud.xml"), global.PopupDimGUI, global.ThemesGUI)
 	battle.loot = gui.NewFromXMLs(file.LoadText("data/gui/battle-loot.xml"), global.ThemesGUI)
 
 	var cols = battle.tmap.Properties[property.MapColumns].(int)

@@ -32,7 +32,7 @@ func New(path string) *World {
 
 func (world *World) OnLoad() {
 	world.tmap = tiled.NewMap(assets.LoadTiledMap(world.path), global.Project)
-	world.hud = gui.NewFromXMLs(file.LoadText("data/gui/world.xml"), global.PopupDimGUI, global.ThemesGUI)
+	world.hud = gui.NewFromXMLs(file.LoadText("data/gui/world-hud.xml"), global.PopupDimGUI, global.ThemesGUI)
 	world.inventory = gui.NewFromXMLs(file.LoadText("data/gui/world-inventory.xml"), global.ThemesGUI)
 	world.settlement = gui.NewFromXMLs(file.LoadText("data/gui/world-settlement.xml"), global.ThemesGUI)
 }
