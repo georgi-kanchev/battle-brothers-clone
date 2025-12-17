@@ -35,6 +35,7 @@ func (world *World) OnLoad() {
 	world.hud = gui.NewFromXMLs(file.LoadText("data/gui/world-hud.xml"), global.PopupDimGUI, global.ThemesGUI)
 	world.inventory = gui.NewFromXMLs(file.LoadText("data/gui/world-inventory.xml"), global.ThemesGUI)
 	world.settlement = gui.NewFromXMLs(file.LoadText("data/gui/world-settlement.xml"), global.ThemesGUI)
+	world.currentPopup = nil
 }
 func (world *World) OnEnter() {
 }
@@ -58,11 +59,16 @@ func (world *World) OnUpdate() {
 		screens.Enter(global.ScreenBattle, false)
 	}
 
-	world.hud.UpdateAndDraw(world.camera)
+	if world.settlement.IsButtonJustClicked("settlement-exit", world.camera) {
+		world.currentPopup = global.TogglePopup(world.hud, world.currentPopup, world.settlement)
+	}
+
+	// world.hud.UpdateAndDraw(world.camera)
 
 	if world.currentPopup != nil {
 		world.currentPopup.UpdateAndDraw(world.camera)
 	}
+
 }
 func (world *World) OnExit() {
 }
