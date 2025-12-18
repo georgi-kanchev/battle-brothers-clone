@@ -59,16 +59,24 @@ func (world *World) OnUpdate() {
 		screens.Enter(global.ScreenBattle, false)
 	}
 
-	if world.settlement.IsButtonJustClicked("settlement-exit", world.camera) {
-		world.currentPopup = global.TogglePopup(world.hud, world.currentPopup, world.settlement)
-	}
-
+	// if gui.WHovered != nil {
+	// 	fmt.Printf("1: %v\n", gui.WHovered.Id)
+	// }
 	world.hud.UpdateAndDraw(world.camera)
+	// if gui.WHovered != nil {
+	// 	fmt.Printf("2: %v\n", gui.WHovered.Id)
+	// }
 
 	if world.currentPopup != nil {
 		world.currentPopup.UpdateAndDraw(world.camera)
 	}
+	// if gui.WHovered != nil {
+	// 	fmt.Printf("3: %v\n", gui.WHovered.Id)
+	// }
 
+	if world.settlement.IsButtonJustClicked("settlement-exit", world.camera) {
+		world.currentPopup = global.TogglePopup(world.hud, world.currentPopup, world.settlement)
+	}
 }
 func (world *World) OnExit() {
 }
