@@ -8,17 +8,16 @@
 		<Widget class="visual" id="settlement-title-label" width="OwnerWidth" height= "OwnerHeight" textAlignmentX="0.5" textAlignmentY="0.5" text="Settlement Name" />
 	</Container>
 
-	<Container id="settlement-btns" x="TargetCenterX-275" y="TargetCenterY-25" width="550" height="TargetHeight/2" targetId="settlement" gapY="5">
-		<Widget class="button" id="settlement-rest" themeId="panel" width="OwnerWidth" height="50" text="Rest at the local Inn" />
-		<Widget class="button" id="settlement-work" themeId="panel" width="OwnerWidth" height="50" text="Look for Work" newRow="" />
-		<Widget class="button" id="settlement-hire" themeId="panel" width="OwnerWidth" height="50" text="Hire Mercenaries" newRow="" />
-		<Widget class="button" id="settlement-shop" themeId="panel" width="OwnerWidth" height="50" text="Trade at the Marketplace" newRow="" />
-		<Widget class="button" id="settlement-armors" themeId="panel" width="OwnerWidth" height="50" text="Visit the Armorer" newRow="" />
-		<Widget class="button" id="settlement-weapons" themeId="panel" width="OwnerWidth" height="50" text="Visit the Weaponsmith" newRow="" />
+	<Container id="settlement-btns" x="TargetCenterX-275" y="TargetCenterY-25" width="550" height="TargetHeight/2" targetId="settlement" gapY="5"  themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
+		<Widget class="button" id="settlement-rest" text="Rest at the local Inn" />
+		<Widget class="button" id="settlement-work" text="Look for Work" newRow="" />
+		<Widget class="button" id="settlement-hire" text="Hire Mercenaries" newRow="" />
+		<Widget class="button" id="settlement-shop" text="Trade at the Marketplace" newRow="" />
+		<Widget class="button" id="settlement-armors" text="Visit the Armorer" newRow="" />
+		<Widget class="button" id="settlement-weapons" text="Visit the Weaponsmith" newRow="" />
 	</Container>
 
-	<Container id="settlement-exit" x="TargetCenterX-100" y="TargetBottomY-25" width="200" height="50" targetId="settlement">
-		<Widget class="visual" id="settlement-exit-bgr" themeId="panel" fillContainer="" />
-		<Widget class="button" id="settlement-exit-btn" width="OwnerWidth" height= "OwnerHeight" textAlignmentX="0.5" textAlignmentY="0.5" text="Leave" />
+	<Container id="settlement-exit" x="TargetCenterX-100" y="TargetBottomY-25" width="200" height="50" targetId="settlement" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
+		<Widget class="button" id="settlement-exit-btn" text="Leave" />
 	</Container>
 </GUI>

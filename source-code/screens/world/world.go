@@ -42,7 +42,6 @@ func (world *World) OnEnter() {
 func (world *World) OnUpdate() {
 	world.camera.SetScreenAreaToWindow()
 	world.tmap.Draw(world.camera)
-
 	//=================================================================
 	// parties
 	for _, party := range world.parties {
@@ -59,22 +58,13 @@ func (world *World) OnUpdate() {
 		screens.Enter(global.ScreenBattle, false)
 	}
 
-	// if gui.WHovered != nil {
-	// 	fmt.Printf("1: %v\n", gui.WHovered.Id)
-	// }
 	world.hud.UpdateAndDraw(world.camera)
-	// if gui.WHovered != nil {
-	// 	fmt.Printf("2: %v\n", gui.WHovered.Id)
-	// }
 
 	if world.currentPopup != nil {
 		world.currentPopup.UpdateAndDraw(world.camera)
 	}
-	// if gui.WHovered != nil {
-	// 	fmt.Printf("3: %v\n", gui.WHovered.Id)
-	// }
 
-	if world.settlement.IsButtonJustClicked("settlement-exit", world.camera) {
+	if world.settlement.IsButtonJustClicked("settlement-exit-btn", world.camera) {
 		world.currentPopup = global.TogglePopup(world.hud, world.currentPopup, world.settlement)
 	}
 }
