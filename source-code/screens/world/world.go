@@ -56,6 +56,12 @@ func (world *World) OnUpdate() {
 		world.currentPopup = global.TogglePopup(world.hud, world.currentPopup, world.settlement)
 	} else if keyboard.IsKeyJustPressed(key.B) {
 		screens.Enter(global.ScreenBattle, false)
+	} else if keyboard.IsKeyJustPressed(key.Escape) {
+		if world.currentPopup == nil {
+			screens.Enter(global.ScreenMainMenu, false)
+		} else {
+			world.currentPopup = global.TogglePopup(world.hud, world.currentPopup, world.currentPopup)
+		}
 	}
 
 	world.hud.UpdateAndDraw(world.camera)

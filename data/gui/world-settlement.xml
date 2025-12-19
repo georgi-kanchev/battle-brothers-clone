@@ -8,7 +8,7 @@
 		<Widget class="visual" id="settlement-title-label" width="OwnerWidth" height= "OwnerHeight" textAlignmentX="0.5" textAlignmentY="0.5" text="Settlement Name" />
 	</Container>
 
-	<Container id="settlement-btns" x="TargetCenterX-275" y="TargetCenterY-25" width="550" height="TargetHeight/2" targetId="settlement" gapY="5"  themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
+	<Container id="settlement-btns" x="TargetCenterX-275" y="TargetCenterY-25" width="550" height="TargetHeight/2" targetId="settlement" gapY="5" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
 		<Widget class="button" id="settlement-rest" text="Rest at the local Inn" />
 		<Widget class="button" id="settlement-work" text="Look for Work" newRow="" />
 		<Widget class="button" id="settlement-hire" text="Hire Mercenaries" newRow="" />
