@@ -1,5 +1,15 @@
 <GUI scale="2" volume="1">
-	<Container id="panel" x="CameraCenterX-500" y="CameraCenterY-350" width="1000" height="700">
+	<Container id="panel" x="CameraLeftX+(CameraWidth-CameraWidth/2)/2" y="CameraTopY+(CameraHeight-CameraHeight/1.3)/2" width="CameraWidth/2" height="CameraHeight/1.3" gapX="10" gapY="40" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
 		<Widget class="visual" id="panel-bgr" themeId="panel" fillContainer="" />
+		<Widget class="checkbox" id="graphics" text="Graphics" width="OwnerWidth/5-8" gapX="5" />
+		<Widget class="checkbox" id="audio" text="Audio" width="OwnerWidth/5-8" gapX="5" />
+		<Widget class="checkbox" id="controls" text="Controls" width="OwnerWidth/5-8" gapX="5" />
+		<Widget class="checkbox" id="gameplay" text="Gameplay" width="OwnerWidth/5-8" gapX="5" />
+		<Widget class="checkbox" id="gui" text="User Interface" width="OwnerWidth/5-8" gapX="5" />
+	</Container>
+	
+	<Container id="options-title" x="TargetCenterX-100" y="TargetTopY-25" width="200" height="50" targetId="panel">
+		<Widget class="visual" id="options-title-bgr" themeId="panel" fillContainer="" />
+		<Widget class="visual" id="options-title-label" width="OwnerWidth" height= "OwnerHeight" textAlignmentX="0.5" textAlignmentY="0.5" text="Options" />
 	</Container>
 </GUI>

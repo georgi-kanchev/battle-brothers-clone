@@ -7,7 +7,7 @@ import (
 	"pure-game-kit/data/file"
 	"pure-game-kit/execution/condition"
 	"pure-game-kit/execution/screens"
-	gfx "pure-game-kit/graphics"
+	"pure-game-kit/graphics"
 	"pure-game-kit/gui"
 	"pure-game-kit/input/keyboard"
 	"pure-game-kit/input/keyboard/key"
@@ -19,7 +19,7 @@ import (
 type Battle struct {
 	path   string
 	tmap   *tiled.Map
-	camera *gfx.Camera
+	camera *graphics.Camera
 
 	hud, currentPopup, loot *gui.GUI
 
@@ -27,7 +27,7 @@ type Battle struct {
 }
 
 func New(mapPath string) *Battle {
-	var battle = &Battle{path: mapPath, camera: gfx.NewCamera(1)}
+	var battle = &Battle{path: mapPath, camera: graphics.NewCamera(1)}
 	return battle
 }
 
@@ -52,35 +52,31 @@ func (battle *Battle) OnUpdate() {
 	condition.CallIf(battle.currentPopup == nil, battle.camera.MouseDragAndZoomSmooth)
 	battle.tmap.Draw(battle.camera)
 
-	//=================================================================
-	// units
 	for _, unit := range battle.ySortUnits() {
 		unit.Draw(battle.camera)
 	}
 
-	//=================================================================
-	// gui
-
-	if keyboard.IsKeyJustPressed(key.W) {
-		screens.Enter(global.ScreenWorld, false)
-	}
-
-	if keyboard.IsKeyJustPressed(key.L) {
-		battle.currentPopup = global.TogglePopup(battle.hud, battle.currentPopup, battle.loot)
-	}
-
 	battle.hud.UpdateAndDraw(battle.camera)
-
 	if battle.currentPopup != nil {
 		battle.currentPopup.UpdateAndDraw(battle.camera)
 	}
+
+	battle.handleInput()
 }
+
 func (battle *Battle) OnExit() {
 }
 
 //=================================================================
 // private
 
+func (battle *Battle) handleInput() {
+	if keyboard.IsKeyJustPressed(key.W) {
+		screens.Enter(global.ScreenWorld, false)
+	} else if keyboard.IsKeyJustPressed(key.L) {
+		battle.currentPopup = global.TogglePopup(battle.hud, battle.currentPopup, battle.loot)
+	}
+}
 func (battle *Battle) ySortUnits() []*unit.Unit {
 	var ySorted = make(map[float32][]*unit.Unit, len(battle.attackers)+len(battle.defenders))
 

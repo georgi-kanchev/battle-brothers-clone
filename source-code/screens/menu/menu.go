@@ -5,7 +5,7 @@ import (
 	"pure-game-kit/data/assets"
 	"pure-game-kit/data/file"
 	"pure-game-kit/execution/screens"
-	gfx "pure-game-kit/graphics"
+	"pure-game-kit/graphics"
 	"pure-game-kit/gui"
 	"pure-game-kit/input/keyboard"
 	"pure-game-kit/input/keyboard/key"
@@ -13,15 +13,15 @@ import (
 )
 
 type Menu struct {
-	camera *gfx.Camera
+	camera *graphics.Camera
 
-	bgr, knight, logo *gfx.Sprite
+	bgr, knight, logo *graphics.Sprite
 
 	hud, play, load, options, currentPopup *gui.GUI
 }
 
 func New() *Menu {
-	var menu = &Menu{camera: gfx.NewCamera(1)}
+	var menu = &Menu{camera: graphics.NewCamera(1)}
 	return menu
 }
 
@@ -37,9 +37,9 @@ func (menu *Menu) OnLoad() {
 	var bgr = assets.LoadTexture("art/UI/Titlescreen/background.PNG")
 	var knight = assets.LoadTexture("art/UI/Titlescreen/knight.PNG")
 	var logo = assets.LoadTexture("art/UI/Titlescreen/logo.PNG")
-	menu.bgr = gfx.NewSprite(bgr, 0, 0)
-	menu.knight = gfx.NewSprite(knight, -500, 0)
-	menu.logo = gfx.NewSprite(logo, 0, 0)
+	menu.bgr = graphics.NewSprite(bgr, 0, 0)
+	menu.knight = graphics.NewSprite(knight, -500, 0)
+	menu.logo = graphics.NewSprite(logo, 0, 0)
 	assets.SetTextureSmoothness(bgr, true)
 	assets.SetTextureSmoothness(knight, true)
 	assets.SetTextureSmoothness(logo, true)
@@ -52,20 +52,29 @@ func (menu *Menu) OnEnter() {
 func (menu *Menu) OnUpdate() {
 	menu.camera.SetScreenAreaToWindow()
 
-	var rx, ry = menu.camera.PointFromEdge(1, 0.5)
-	menu.logo.X, menu.logo.Y = rx-menu.logo.Width/2-250, ry-menu.logo.Height/2-150
-	menu.bgr.CameraFill(menu.camera)
-	menu.camera.DrawSprites(menu.bgr, menu.knight, menu.logo)
-
-	//=================================================================
-	// gui
+	positionElements(menu)
 
 	menu.hud.UpdateAndDraw(menu.camera)
-
 	if menu.currentPopup != nil {
 		menu.currentPopup.UpdateAndDraw(menu.camera)
 	}
 
+	menu.handleInput()
+}
+
+func (menu *Menu) OnExit() {
+}
+
+//=================================================================
+// private
+
+func positionElements(menu *Menu) {
+	var rx, ry = menu.camera.PointFromEdge(1, 0.5)
+	menu.logo.X, menu.logo.Y = rx-menu.logo.Width/2-250, ry-menu.logo.Height/2-150
+	menu.bgr.CameraFill(menu.camera)
+	menu.camera.DrawSprites(menu.bgr, menu.knight, menu.logo)
+}
+func (menu *Menu) handleInput() {
 	if menu.hud.IsButtonJustClicked("new", menu.camera) {
 		screens.Enter(global.ScreenWorld, false)
 	} else if menu.hud.IsButtonJustClicked("options", menu.camera) {
@@ -76,8 +85,3 @@ func (menu *Menu) OnUpdate() {
 		menu.currentPopup = global.TogglePopup(menu.hud, menu.currentPopup, menu.currentPopup)
 	}
 }
-func (menu *Menu) OnExit() {
-}
-
-//=================================================================
-// private
