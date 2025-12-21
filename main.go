@@ -31,7 +31,7 @@ func main() {
 	for window.KeepOpen() {
 		if keyboard.IsKeyJustPressed(key.F5) {
 			assets.ReloadAll()
-			global.Project = tiled.NewProject(assets.LoadTiledProject("project.tiled-project"))
+			global.Project = tiled.NewProject(assets.LoadTiledProject("data/project.tiled-project"))
 			screens.Reload()
 		}
 	}

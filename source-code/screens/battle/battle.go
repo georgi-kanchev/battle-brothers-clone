@@ -71,7 +71,7 @@ func (battle *Battle) OnExit() {
 // private
 
 func (battle *Battle) handleInput() {
-	if keyboard.IsKeyJustPressed(key.W) {
+	if keyboard.IsKeyJustPressed(key.Escape) {
 		screens.Enter(global.ScreenWorld, false)
 	} else if keyboard.IsKeyJustPressed(key.L) {
 		battle.currentPopup = global.TogglePopup(battle.hud, battle.currentPopup, battle.loot)

@@ -5,7 +5,6 @@ import (
 	"pure-game-kit/gui"
 	"pure-game-kit/gui/field"
 	"pure-game-kit/tiled"
-	"pure-game-kit/utility/time"
 )
 
 const Version = "v0.0.3"
@@ -13,10 +12,10 @@ const Version = "v0.0.3"
 var ScreenMainMenu, ScreenWorld, ScreenBattle int
 var Project *tiled.Project
 var ThemesGUI, PopupDimGUI string
+var TimeScale float32 = 1
 
 func TogglePopup(hud, currentPopup, popup *gui.GUI) *gui.GUI {
 	currentPopup = condition.If(currentPopup == popup, nil, popup)
 	hud.SetField("popup-dim", field.Hidden, condition.If(currentPopup != popup, "1", ""))
-	time.SetScale(condition.If(currentPopup != popup, float32(1), 0))
 	return currentPopup
 }

@@ -1,4 +1,4 @@
-<GUI scale="2" volume="1">
+<GUI scale="2.5" volume="1">
 	<Container id="resources" x="CameraLeftX+5" y="CameraTopY+5" width="400" height="40">
 		<Widget class="visual" id="resources-bgr" themeId="panel" fillContainer="" />
 		<Widget class="visual" id="gold" themeId="resource" text="^^ 90 523" textEmbeddedAssetId1="@coins3" />
@@ -11,10 +11,22 @@
 		<Widget class="visual" id="goal-bgr" themeId="panel" fillContainer="" text="goal" />
 	</Container>
 	
-	<Container id="time" x="CameraCenterX-40" y="CameraTopY+5" width="80" height="80">
-		<Widget class="visual" id="time-bgr" themeId="panel" fillContainer="" text="day 16" textAlignmentY="0" />
+	<Container id="time" x="CameraCenterX-75" y="CameraTopY+5" width="150" height="141">
+		<Widget class="visual" id="time-bgr" assetId="art/UI/Time/time_top.PNG" fillContainer="" color="255 255 255"/>
+		<Widget class="visual" id="time-word" text="Morning" textColor="255 255 255" textAlignmentX="0.5" textLineHeight="22"/>
 	</Container>
-	
+	<Container id="time-btns" x="TargetLeftX" y="TargetBottomY-1" width="150" height="40" targetId = "time">
+		<Widget class="visual" id="time-btns-bgr" assetId="art/UI/Buttons/btn.PNG" fillContainer="" color="255 255 255"/>
+		<Widget class="checkbox" id="x0" offsetY="4" assetId="art/UI/Buttons/btn_pause.PNG" themeId="time-btn-off" checkboxThemeId="time-btn" />
+		<Widget class="checkbox" id="x1" offsetY="4" assetId="art/UI/Buttons/btn_play.PNG" themeId="time-btn-off" checkboxThemeId="time-btn" value="1" />
+		<Widget class="checkbox" id="x2" offsetY="4" assetId="art/UI/Buttons/btn_playx2.PNG" themeId="time-btn-off" checkboxThemeId="time-btn" />
+		<Widget class="checkbox" id="x3" offsetY="4" assetId="art/UI/Buttons/btn_playx3.PNG" themeId="time-btn-off" checkboxThemeId="time-btn" />
+		<Theme id="time-btn" color="220 220 220" width="150/4-1" height="32" checkboxGroup="time-btns" buttonThemeIdHover="time-btn-hover" buttonThemeIdPress="time-btn-press" />
+		<Theme id="time-btn-press" color="200 200 200" width="150/4-1" height="32" checkboxGroup="time-btns" />
+		<Theme id="time-btn-hover" color="255 255 255" width="150/4-1" height="32" checkboxGroup="time-btns" />
+		<Theme id="time-btn-off" color="255 255 255 70" width="150/4-1" height="32" checkboxGroup="time-btns" buttonThemeIdHover="time-btn-hover" buttonThemeIdPress="time-btn-press" />
+	</Container>
+
 	<Container id="menus" x="CameraRightX-405" y="CameraTopY+5" width="400" height="40">
 		<Widget class="visual" id="menus-bgr" themeId="panel" fillContainer="" />
 	</Container>

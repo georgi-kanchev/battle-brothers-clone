@@ -81,7 +81,7 @@ func (menu *Menu) handleInput() {
 		menu.currentPopup = global.TogglePopup(menu.hud, menu.currentPopup, menu.options)
 	} else if menu.hud.IsButtonJustClicked("quit", menu.camera) {
 		window.Close()
-	} else if keyboard.IsKeyJustPressed(key.Escape) {
+	} else if menu.currentPopup != nil && keyboard.IsKeyJustPressed(key.Escape) {
 		menu.currentPopup = global.TogglePopup(menu.hud, menu.currentPopup, menu.currentPopup)
 	}
 }

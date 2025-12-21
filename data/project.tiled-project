@@ -10,5 +10,19 @@
     "properties": [
     ],
     "propertyTypes": [
+        {
+            "color": "#ff00ff00",
+            "drawFill": true,
+            "id": 1,
+            "members": [
+            ],
+            "name": "RoadLayer",
+            "type": "class",
+            "useAs": [
+                "property",
+                "layer",
+                "project"
+            ]
+        }
     ]
 }

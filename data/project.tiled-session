@@ -1,19 +1,15 @@
 {
-    "Map/SizeTest": {
-        "height": 4300,
-        "width": 2
-    },
-    "activeFile": "data/battlegrounds/test/map.tmx",
+    "activeFile": "worlds/test/map.tmx",
     "expandedProjectPaths": [
-        "data/worlds",
-        ".",
+        "worlds/test",
         "data/battlegrounds",
-        "data/battlegrounds/test",
         "data",
         "data/worlds/test",
-        "worlds/test",
-        "test",
-        "worlds"
+        "data/battlegrounds/test",
+        "data/worlds",
+        "worlds",
+        ".",
+        "test"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -67,11 +63,11 @@
             "scaleInEditor": 0.12
         },
         "worlds/test/map.tmx": {
-            "scale": 0.33,
-            "selectedLayer": 0,
+            "scale": 1,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 2684.848484848485,
-                "y": 1713.6363636363635
+                "x": 2493.5,
+                "y": 1344.5
             }
         },
         "worlds/test/tileset.tsx": {
@@ -80,25 +76,19 @@
             "scaleInEditor": 0.33
         }
     },
-    "last.imagePath": "/home/gojur/code/battle-brothers-clone/art/Battlegrounds",
-    "map.height": 30,
-    "map.lastUsedFormat": "tmx",
     "openFiles": [
-        "data/worlds/test/map.tmx",
-        "data/battlegrounds/test/map.tmx",
-        "data/battlegrounds/battleground.tsx"
+        "worlds/test/map.tmx",
+        "worlds/test/tileset.tsx"
     ],
-    "project": "data/project.tiled-project",
+    "project": "project.tiled-project",
     "recentFiles": [
+        "worlds/test/tileset.tsx",
+        "worlds/test/map.tmx",
         "data/worlds/test/map.tmx",
         "data/battlegrounds/battleground.tsx",
         "data/battlegrounds/test/map.tmx",
         "data/battlegrounds/test.tmx",
-        "worlds/test/map.tmx",
-        "worlds/test/tileset.tsx",
         "test/tileset.tsx",
         "test/map.tmx"
-    ],
-    "tileset.lastUsedFormat": "tsx",
-    "tileset.type": 1
+    ]
 }

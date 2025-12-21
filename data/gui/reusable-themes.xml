@@ -1,7 +1,7 @@
 <GUI>
 	<Container id="themes">
 		<Theme id="panel" color="43 33 23" frameColor="86 66 46" frameSize="-5" textLineHeight="25" textAlignmentX="0.5" textAlignmentY="0.5"  textLineGap="-0.5" />
-		<Theme id="resource" textLineHeight="20" width="80" height="40" textAlignmentX="0.5" textAlignmentY="0.5"textLineGap="-1" />
+		<Theme id="resource" textLineHeight="20" width="80" height="40" textAlignmentX="0.5" textAlignmentY="0.5" textLineGap="-1" />
 		<Theme id="btn-normal" color="43 33 23" frameColor="86 66 46" frameSize="-5" textLineHeight="25" textAlignmentX="0.5" textAlignmentY="0.5" width="OwnerWidth" height="50" />
 		<Theme id="btn-hover" color="55 42 30" frameColor="92 75 55" frameSize="-5" textLineHeight="25" textAlignmentX="0.5" textAlignmentY="0.5"  width="OwnerWidth" height="50" />
 		<Theme id="btn-press" color="35 27 19" frameColor="60 47 34" frameSize="-5" textLineHeight="25" textAlignmentX="0.5" textAlignmentY="0.5"  width="OwnerWidth" height="50" />

@@ -4,6 +4,7 @@ import (
 	"game/source-code/global"
 	"pure-game-kit/data/assets"
 	"pure-game-kit/data/file"
+	"pure-game-kit/debug"
 	"pure-game-kit/execution/screens"
 	"pure-game-kit/graphics"
 	"pure-game-kit/gui"
@@ -19,11 +20,14 @@ type World struct {
 
 	hud, inventory, settlement, currentPopup *gui.GUI
 
+	time       float32
+	timeCircle *graphics.Sprite
+
 	parties []*Party
 }
 
 func New(path string) *World {
-	var world = &World{path: path, camera: graphics.NewCamera(1)}
+	var world = &World{path: path, camera: graphics.NewCamera(1), time: 60 * 3}
 	world.parties = []*Party{NewParty(nil, 2250, 1530, true)}
 	return world
 }
@@ -36,6 +40,17 @@ func (world *World) OnLoad() {
 	world.inventory = gui.NewFromXMLs(file.LoadText("data/gui/world-inventory.xml"), global.ThemesGUI)
 	world.settlement = gui.NewFromXMLs(file.LoadText("data/gui/world-settlement.xml"), global.ThemesGUI)
 	world.currentPopup = nil
+
+	var timeCircle = assets.LoadTexture("art/UI/Time/time_circle.PNG")
+	world.timeCircle = graphics.NewSprite(timeCircle, 0, 0)
+	assets.SetTextureSmoothness(timeCircle, true)
+
+	assets.LoadTexture("art/UI/Time/time_top.PNG")
+	assets.LoadTexture("art/UI/Buttons/btn.PNG")
+	assets.LoadTexture("art/UI/Buttons/btn_pause.PNG")
+	assets.LoadTexture("art/UI/Buttons/btn_play.PNG")
+	assets.LoadTexture("art/UI/Buttons/btn_playx2.PNG")
+	assets.LoadTexture("art/UI/Buttons/btn_playx3.PNG")
 }
 func (world *World) OnEnter() {
 }
@@ -47,12 +62,18 @@ func (world *World) OnUpdate() {
 		party.Update()
 	}
 
+	world.handleDayNightCycle()
+
 	world.hud.UpdateAndDraw(world.camera)
 	if world.currentPopup != nil {
 		world.currentPopup.UpdateAndDraw(world.camera)
 	}
 
 	world.handleInput()
+
+	if world.hud.IsButtonJustClicked("time-pause", world.camera) {
+		debug.Print("hi")
+	}
 }
 
 func (world *World) OnExit() {
