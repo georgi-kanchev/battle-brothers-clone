@@ -88,7 +88,7 @@
         "data/battlegrounds/test/map.tmx",
         "data/battlegrounds/battleground.tsx"
     ],
-    "project": "project.tiled-project",
+    "project": "data/project.tiled-project",
     "recentFiles": [
         "data/worlds/test/map.tmx",
         "data/battlegrounds/battleground.tsx",

@@ -1,8 +1,11 @@
 <GUI scale="2" volume="1">
 	<Container id="buttons" x="CameraRightX-CameraWidth/4" y="CameraCenterY" width="200" height="800" gapY="5" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
-		<Widget class="button" id="new" themeId="btn-normal" text="New Game" />
-		<Widget class="button" id="load" themeId="btn-normal" text="Load Game" newRow="" />
-		<Widget class="button" id="options" themeId="btn-normal" text="Options" newRow="" />
-		<Widget class="button" id="quit" themeId="btn-normal" text="Quit" newRow="" />
+		<Widget class="button" id="new" text="New Game" textLineHeight="35" />
+		<Widget class="button" id="load" text="Load Game" textLineHeight="35" newRow="" />
+		<Widget class="button" id="options" text="Options" textLineHeight="35" newRow="" />
+		<Widget class="button" id="quit" text="Quit" textLineHeight="35" newRow="" />
+	</Container>
+	<Container id="version" x="CameraLeftX-10" y="CameraBottomY-45" width="CameraWidth" height="35">
+		<Widget class="visual" id="version-label" text="v0.1" textLineHeight="25" textAlignmentX="1" textAlignmentY="1" />
 	</Container>
 </GUI>
