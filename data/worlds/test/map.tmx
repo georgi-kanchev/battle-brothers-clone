@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="4" height="4" tilewidth="1023" tileheight="1023" infinite="0" nextlayerid="4" nextobjectid="19">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="4" height="4" tilewidth="1023" tileheight="1023" infinite="0" nextlayerid="5" nextobjectid="32">
  <tileset firstgid="1" source="tileset.tsx"/>
  <layer id="1" name="Background" width="4" height="4">
   <data encoding="csv">
@@ -9,6 +9,21 @@
 29,30,31,32
 </data>
  </layer>
+ <objectgroup color="#ff0000" id="4" name="Solids" class="SolidLayer">
+  <object id="20" x="2371.75" y="1184.04" width="46.7542" height="166.636" rotation="347.591"/>
+  <object id="21" x="2408" y="1346" width="46.7542" height="166.636" rotation="339.366"/>
+  <object id="22" x="2464" y="1490" width="46.7542" height="330.798" rotation="354.647"/>
+  <object id="23" x="2495" y="1819" width="46.7542" height="104.553" rotation="313.678"/>
+  <object id="24" x="2571" y="1891" width="40.1099" height="136.167" rotation="284.688"/>
+  <object id="25" x="2689.77" y="1921.86" width="42.4318" height="221.415" rotation="303.444"/>
+  <object id="26" x="2879.04" y="2051.86" width="40.7281" height="221.415" rotation="242.81"/>
+  <object id="27" x="3044.49" y="1964.83" width="51.496" height="124.162" rotation="284.184"/>
+  <object id="28" x="3165" y="1996" width="51.496" height="124.162" rotation="267.042"/>
+  <object id="29" x="2473.61" y="1316.72" width="36.3561" height="107.877" rotation="56.6942"/>
+  <object id="31" x="2942" y="1956">
+   <polygon points="4,-6 -36,15 42,58 76,41"/>
+  </object>
+ </objectgroup>
  <objectgroup color="#00ff00" id="3" name="Roads" class="RoadLayer">
   <object id="13" x="2394" y="1396">
    <polyline points="1299,-470 1287,-450 1208,-424 1117,-351 1070,-332 980,-277 889,-259 860,-229 866,-151 848,-78 857,30 813,120 772,288 734,315 682,283 645,273 577,268 568,241 609,166 602,70 582,36 488,18 374,-30 166,-53 112,-75 0,0 -24,36 -21,80 0,145 -6,187 -47,218 -148,209 -248,228 -299,220 -437,272 -452,304 -404,380 -416,426 -443,469 -458,605 -507,676 -522,786"/>

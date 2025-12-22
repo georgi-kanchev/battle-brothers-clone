@@ -23,6 +23,20 @@
                 "layer",
                 "project"
             ]
+        },
+        {
+            "color": "#ffff0000",
+            "drawFill": true,
+            "id": 2,
+            "members": [
+            ],
+            "name": "SolidLayer",
+            "type": "class",
+            "useAs": [
+                "property",
+                "layer",
+                "project"
+            ]
         }
     ]
 }

@@ -4,13 +4,14 @@ import (
 	"game/source-code/global"
 	"pure-game-kit/data/assets"
 	"pure-game-kit/data/file"
-	"pure-game-kit/debug"
 	"pure-game-kit/execution/screens"
+	"pure-game-kit/geometry"
 	"pure-game-kit/graphics"
 	"pure-game-kit/gui"
 	"pure-game-kit/input/keyboard"
 	"pure-game-kit/input/keyboard/key"
 	"pure-game-kit/tiled"
+	"pure-game-kit/tiled/property"
 )
 
 type World struct {
@@ -24,6 +25,8 @@ type World struct {
 	timeCircle *graphics.Sprite
 
 	parties []*Party
+
+	solids []*geometry.Shape
 }
 
 func New(path string) *World {
@@ -51,6 +54,11 @@ func (world *World) OnLoad() {
 	assets.LoadTexture("art/UI/Buttons/btn_play.PNG")
 	assets.LoadTexture("art/UI/Buttons/btn_playx2.PNG")
 	assets.LoadTexture("art/UI/Buttons/btn_playx3.PNG")
+
+	var solidLayers = world.tmap.FindLayersBy(property.LayerClass, "SolidLayer")
+	if len(solidLayers) > 0 {
+		world.solids = solidLayers[0].ExtractShapes()
+	}
 }
 func (world *World) OnEnter() {
 }
@@ -70,10 +78,6 @@ func (world *World) OnUpdate() {
 	}
 
 	world.handleInput()
-
-	if world.hud.IsButtonJustClicked("time-pause", world.camera) {
-		debug.Print("hi")
-	}
 }
 
 func (world *World) OnExit() {

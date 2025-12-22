@@ -2,14 +2,14 @@
     "activeFile": "worlds/test/map.tmx",
     "expandedProjectPaths": [
         "worlds/test",
-        "data/battlegrounds",
-        "data",
-        "data/worlds/test",
-        "data/battlegrounds/test",
-        "data/worlds",
         "worlds",
-        ".",
-        "test"
+        "data",
+        "test",
+        "data/worlds",
+        "data/worlds/test",
+        "data/battlegrounds",
+        "data/battlegrounds/test",
+        "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -63,11 +63,11 @@
             "scaleInEditor": 0.12
         },
         "worlds/test/map.tmx": {
-            "scale": 1,
+            "scale": 3,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 2493.5,
-                "y": 1344.5
+                "x": 2444.5,
+                "y": 1411.8333333333333
             }
         },
         "worlds/test/tileset.tsx": {

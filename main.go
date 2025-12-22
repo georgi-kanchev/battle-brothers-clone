@@ -19,7 +19,6 @@ func main() {
 
 	assets.LoadDefaultAtlasIcons()
 	assets.LoadDefaultFont()
-	assets.LoadDefaultTexture()
 
 	global.ThemesGUI = file.LoadText("data/gui/reusable-themes.xml")
 	global.PopupDimGUI = file.LoadText("data/gui/reusable-popup-dim.xml")

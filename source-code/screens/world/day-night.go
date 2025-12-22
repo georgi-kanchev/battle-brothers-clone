@@ -40,9 +40,9 @@ func (world *World) handleDayNightCycle() {
 	} else if x1 != "" {
 		global.TimeScale = 1
 	} else if x2 != "" {
-		global.TimeScale = 5
+		global.TimeScale = 2
 	} else if x3 != "" {
-		global.TimeScale = 20
+		global.TimeScale = 4
 	}
 
 	world.time += time.FrameDelta() * global.TimeScale

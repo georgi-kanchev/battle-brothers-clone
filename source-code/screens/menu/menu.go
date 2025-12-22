@@ -71,7 +71,7 @@ func (menu *Menu) OnExit() {
 func positionElements(menu *Menu) {
 	var rx, ry = menu.camera.PointFromEdge(1, 0.5)
 	menu.logo.X, menu.logo.Y = rx-menu.logo.Width/2-250, ry-menu.logo.Height/2-150
-	menu.bgr.CameraFill(menu.camera)
+	menu.bgr.CameraFit(menu.camera)
 	menu.camera.DrawSprites(menu.bgr, menu.knight, menu.logo)
 }
 func (menu *Menu) handleInput() {
