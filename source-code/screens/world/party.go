@@ -5,9 +5,12 @@ import (
 	"game/source-code/unit"
 	"pure-game-kit/execution/screens"
 	"pure-game-kit/geometry"
+	"pure-game-kit/input/keyboard"
+	"pure-game-kit/input/keyboard/key"
 	"pure-game-kit/input/mouse"
 	"pure-game-kit/input/mouse/button"
 	"pure-game-kit/utility/angle"
+	"pure-game-kit/utility/collection"
 	"pure-game-kit/utility/color/palette"
 	"pure-game-kit/utility/number"
 	"pure-game-kit/utility/point"
@@ -15,10 +18,13 @@ import (
 )
 
 type Party struct {
-	x, y, speed, moveTargetX, moveTargetY        float32
-	isPlayer, isGoingToSettlement, isGoingToRoad bool
-	units                                        []*unit.Unit
-	shape                                        *geometry.Shape
+	x, y, speed, moveTargetX, moveTargetY float32
+	isPlayer, isOnRoad                    bool
+
+	units []*unit.Unit
+	shape *geometry.Shape
+
+	path [][2]float32
 }
 
 func NewParty(units []*unit.Unit, x, y float32, isPlayer bool) *Party {
@@ -30,40 +36,62 @@ func NewParty(units []*unit.Unit, x, y float32, isPlayer bool) *Party {
 
 func (party *Party) Update() {
 	var world = screens.Current().(*World)
-	party.handleMovement()
+	var isInRoadRange = party.isInRoadRange()
+	party.handleMovement(isInRoadRange)
 	world.camera.DrawShapes(palette.Red, party.shape.CornerPoints()...)
 
+	if len(party.path) > 0 {
+		world.camera.DrawLine(party.x, party.y, party.path[0][0], party.path[0][1], 5, palette.Green)
+	}
+	world.camera.DrawLinesPath(5, palette.Green, party.path...)
+
 	if party.isPlayer {
-		party.handlePlayer()
+		party.handlePlayer(isInRoadRange)
 	}
 }
 
 //=================================================================
 // private
 
-func (party *Party) handleMovement() {
+func (party *Party) handleMovement(isInRoadRange bool) {
+	if party.isOnRoad && len(party.path) > 0 {
+		party.moveTargetX, party.moveTargetY = party.path[0][0], party.path[0][1]
+	}
+
 	var px, py, tx, ty = party.x, party.y, party.moveTargetX, party.moveTargetY
 	var angle = angle.BetweenPoints(px, py, tx, ty)
 	var speed = party.speed * time.FrameDelta() * global.TimeScale
-	var velX, velY = point.MoveAtAngle(0, 0, angle, speed)
 
+	if isInRoadRange {
+		speed *= 2
+	} else {
+		party.isOnRoad = false
+		party.path = nil
+	}
+
+	var velX, velY = point.MoveAtAngle(0, 0, angle, speed)
 	party.shape.X, party.shape.Y = party.x, party.y
-	var newVelX, newVelY = party.collideWithBarrier(velX, velY)
+	var newVelX, newVelY = party.collideWithSolid(velX, velY)
 	var newSpeed = point.DistanceToPoint(0, 0, velX, velY)
 	party.x, party.y = party.x+newVelX, party.y+newVelY
+	var dist = point.DistanceToPoint(party.x, party.y, tx, ty)
 
-	if point.DistanceToPoint(party.x, party.y, tx, ty) < newSpeed*3 {
+	if dist < newSpeed*3 {
 		party.x, party.y = tx, ty
+
+		if party.isOnRoad {
+			party.path = collection.RemoveAt(party.path, 0)
+		}
 	}
 }
-func (party *Party) collideWithBarrier(velX, velY float32) (newVelX, newVelY float32) {
+func (party *Party) collideWithSolid(velX, velY float32) (newVelX, newVelY float32) {
 	var world = screens.Current().(*World)
 	newVelX, newVelY = velX, velY
 	var x, y = party.shape.Collide(velX, velY, world.solids...)
 	newVelX, newVelY = newVelX+x, newVelY+y
 	return newVelX, newVelY
 }
-func (party *Party) handlePlayer() {
+func (party *Party) handlePlayer(isInRoadRange bool) {
 	var world = screens.Current().(*World)
 	world.camera.X, world.camera.Y = party.x, party.y
 
@@ -78,5 +106,33 @@ func (party *Party) handlePlayer() {
 	var dist = point.DistanceToPoint(party.x, party.y, cx, cy)
 	if mouse.IsButtonPressed(button.Left) && dist > 10 {
 		party.moveTargetX, party.moveTargetY = cx, cy
+
+		if party.isOnRoad && mouse.IsButtonJustPressed(button.Left) {
+			party.path = geometry.FollowPaths(party.x, party.y, party.moveTargetX, party.moveTargetY, world.roads...)
+		}
 	}
+	if keyboard.IsKeyJustPressed(key.Enter) && isInRoadRange {
+		party.isOnRoad = !party.isOnRoad
+
+		if party.isOnRoad {
+			party.path = geometry.FollowPaths(party.x, party.y, party.moveTargetX, party.moveTargetY, world.roads...)
+		} else if !party.isOnRoad && len(party.path) > 0 {
+			party.moveTargetX, party.moveTargetY = party.path[len(party.path)-1][0], party.path[len(party.path)-1][1]
+			party.path = nil
+		}
+	}
+}
+func (party *Party) isInRoadRange() bool {
+	var world = screens.Current().(*World)
+	for i := 1; i < len(world.roads); i++ {
+		var ax, ay = world.roads[i-1][0], world.roads[i-1][1]
+		var bx, by = world.roads[i][0], world.roads[i][1]
+		var line = geometry.NewLine(ax, ay, bx, by)
+		var closestX, closestY = line.ClosestToPoint(party.x, party.y)
+		var distance = point.DistanceToPoint(party.x, party.y, closestX, closestY)
+		if distance < 15 {
+			return true
+		}
+	}
+	return false
 }

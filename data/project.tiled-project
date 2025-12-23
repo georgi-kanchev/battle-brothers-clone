@@ -25,6 +25,20 @@
             ]
         },
         {
+            "color": "#ff00aaff",
+            "drawFill": true,
+            "id": 3,
+            "members": [
+            ],
+            "name": "SettlementLayer",
+            "type": "class",
+            "useAs": [
+                "property",
+                "layer",
+                "project"
+            ]
+        },
+        {
             "color": "#ffff0000",
             "drawFill": true,
             "id": 2,
@@ -35,6 +49,26 @@
             "useAs": [
                 "property",
                 "layer",
+                "project"
+            ]
+        },
+        {
+            "color": "#ffa0a0a4",
+            "drawFill": true,
+            "id": 4,
+            "members": [
+            ],
+            "name": "MapLayer",
+            "type": "class",
+            "useAs": [
+                "property",
+                "map",
+                "layer",
+                "object",
+                "tile",
+                "tileset",
+                "wangcolor",
+                "wangset",
                 "project"
             ]
         }

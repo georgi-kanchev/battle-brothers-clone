@@ -16,7 +16,6 @@ import (
 
 type World struct {
 	path   string
-	tmap   *tiled.Map
 	camera *graphics.Camera
 
 	hud, inventory, settlement, currentPopup *gui.GUI
@@ -26,7 +25,10 @@ type World struct {
 
 	parties []*Party
 
-	solids []*geometry.Shape
+	tmap                *tiled.Map
+	mapLayers           []*tiled.Layer
+	solids, settlements []*geometry.Shape
+	roads               [][2]float32
 }
 
 func New(path string) *World {
@@ -55,16 +57,26 @@ func (world *World) OnLoad() {
 	assets.LoadTexture("art/UI/Buttons/btn_playx2.PNG")
 	assets.LoadTexture("art/UI/Buttons/btn_playx3.PNG")
 
+	var mapLayers = world.tmap.FindLayersBy(property.LayerClass, "MapLayer")
 	var solidLayers = world.tmap.FindLayersBy(property.LayerClass, "SolidLayer")
-	if len(solidLayers) > 0 {
-		world.solids = solidLayers[0].ExtractShapes()
+	var roadLayers = world.tmap.FindLayersBy(property.LayerClass, "RoadLayer")
+	world.mapLayers = mapLayers
+	for _, s := range solidLayers {
+		world.solids = append(world.solids, s.ExtractShapes()...)
+	}
+	for _, r := range roadLayers {
+		world.roads = append(world.roads, r.ExtractLines()...)
 	}
 }
 func (world *World) OnEnter() {
 }
 func (world *World) OnUpdate() {
 	world.camera.SetScreenAreaToWindow()
-	world.tmap.Draw(world.camera)
+
+	//world.tmap.Draw(world.camera)
+	for _, m := range world.mapLayers {
+		m.Draw(world.camera)
+	}
 
 	for _, party := range world.parties {
 		party.Update()
