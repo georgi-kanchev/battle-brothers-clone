@@ -155,8 +155,9 @@ func (party *Party) handlePlayer() {
 	}
 	if keyboard.IsKeyJustPressed(key.Enter) {
 		party.isUsingRoads = !party.isUsingRoads
+		var standingStill = party.x == party.moveTargetX && party.y == party.moveTargetY
 
-		if party.isUsingRoads {
+		if party.isUsingRoads && !standingStill {
 			party.path = geometry.FollowPaths(party.x, party.y, party.moveTargetX, party.moveTargetY, world.roads...)
 		} else if !party.isUsingRoads && len(party.path) > 0 {
 			party.moveTargetX, party.moveTargetY = party.path[len(party.path)-1][0], party.path[len(party.path)-1][1]
