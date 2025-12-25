@@ -11,7 +11,6 @@ import (
 	"pure-game-kit/input/keyboard"
 	"pure-game-kit/input/keyboard/key"
 	"pure-game-kit/input/mouse"
-	"pure-game-kit/input/mouse/cursor"
 	"pure-game-kit/tiled"
 	"pure-game-kit/tiled/property"
 )
@@ -26,12 +25,13 @@ type World struct {
 	time       float32
 	timeCircle *graphics.Sprite
 
-	parties []*Party
+	parties     []*Party
+	settlements *tiled.Layer
 
-	tmap                *tiled.Map
-	mapLayers           []*tiled.Layer
-	solids, settlements []*geometry.Shape
-	roads               [][2]float32
+	tmap      *tiled.Map
+	mapLayers []*tiled.Layer
+	solids    []*geometry.Shape
+	roads     [][2]float32
 }
 
 func New(path string) *World {
@@ -60,19 +60,18 @@ func (world *World) OnLoad() {
 	assets.LoadTexture("art/UI/Buttons/btn_playx2.PNG")
 	assets.LoadTexture("art/UI/Buttons/btn_playx3.PNG")
 
-	var mapLayers = world.tmap.FindLayersBy(property.LayerClass, "MapLayer")
-	var solidLayers = world.tmap.FindLayersBy(property.LayerClass, "SolidLayer")
-	var roadLayers = world.tmap.FindLayersBy(property.LayerClass, "RoadLayer")
-	var settlementLayer = world.tmap.FindLayersBy(property.LayerClass, "SettlementLayer")
-	world.mapLayers = mapLayers
+	var solidLayers = world.tmap.FindLayersBy(property.LayerClass, "Solids")
+	var roadLayers = world.tmap.FindLayersBy(property.LayerClass, "Roads")
+	var settlements = world.tmap.FindLayersBy(property.LayerClass, "Settlements")
+	world.mapLayers = world.tmap.FindLayersBy(property.LayerClass, "Map")
 	for _, s := range solidLayers {
 		world.solids = append(world.solids, s.ExtractShapes()...)
 	}
 	for _, r := range roadLayers {
 		world.roads = append(world.roads, r.ExtractLines()...)
 	}
-	for _, s := range settlementLayer {
-		world.settlements = append(world.settlements, s.ExtractShapes()...)
+	if len(settlements) > 0 {
+		world.settlements = settlements[0]
 	}
 }
 func (world *World) OnEnter() {
@@ -96,11 +95,15 @@ func (world *World) OnUpdate() {
 		world.currentPopup.UpdateAndDraw(world.camera)
 	}
 
-	if world.resultingCursorNonGUI != cursor.Default {
+	if world.resultingCursorNonGUI != -1 {
 		mouse.SetCursor(world.resultingCursorNonGUI)
 	}
 
 	world.handleInput()
+
+	if world.currentPopup == world.settlement {
+		world.handleSettlementPopup()
+	}
 }
 
 func (world *World) OnExit() {
@@ -120,7 +123,5 @@ func (world *World) handleInput() {
 		} else {
 			world.currentPopup = global.TogglePopup(world.hud, world.currentPopup, world.currentPopup)
 		}
-	} else if world.settlement.IsButtonJustClicked("settlement-exit-btn", world.camera) {
-		world.currentPopup = global.TogglePopup(world.hud, world.currentPopup, world.settlement)
 	}
 }

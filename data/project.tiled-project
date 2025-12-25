@@ -11,12 +11,32 @@
     ],
     "propertyTypes": [
         {
+            "color": "#ffa0a0a4",
+            "drawFill": true,
+            "id": 4,
+            "members": [
+            ],
+            "name": "Map",
+            "type": "class",
+            "useAs": [
+                "property",
+                "map",
+                "layer",
+                "object",
+                "tile",
+                "tileset",
+                "wangcolor",
+                "wangset",
+                "project"
+            ]
+        },
+        {
             "color": "#ff00ff00",
             "drawFill": true,
             "id": 1,
             "members": [
             ],
-            "name": "RoadLayer",
+            "name": "Roads",
             "type": "class",
             "useAs": [
                 "property",
@@ -30,7 +50,7 @@
             "id": 3,
             "members": [
             ],
-            "name": "SettlementLayer",
+            "name": "Settlements",
             "type": "class",
             "useAs": [
                 "property",
@@ -44,31 +64,11 @@
             "id": 2,
             "members": [
             ],
-            "name": "SolidLayer",
+            "name": "Solids",
             "type": "class",
             "useAs": [
                 "property",
                 "layer",
-                "project"
-            ]
-        },
-        {
-            "color": "#ffa0a0a4",
-            "drawFill": true,
-            "id": 4,
-            "members": [
-            ],
-            "name": "MapLayer",
-            "type": "class",
-            "useAs": [
-                "property",
-                "map",
-                "layer",
-                "object",
-                "tile",
-                "tileset",
-                "wangcolor",
-                "wangset",
                 "project"
             ]
         }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cherrytree>
   <bookmarks list=""/>
-  <node unique_id="1" master_id="0" name="Roadmap" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761072156" ts_lastsave="1765040810">
+  <node unique_id="1" master_id="0" name="Roadmap" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761072156" ts_lastsave="1766633025">
     <rich_text>The idea of the roadmap version layout is to strip down development into small chunks and develop everything at the same time in sweeps.
 It is not meant to dictate the exact runway but rather propose a direction to follow, depending on the scope of the game.
 
@@ -31,7 +31,7 @@ Main features to sweep:
 - Inventory
 - Settlements
 - Battle
-- Main Menu
+- Main Menu / Options / New / Load
 - Project/Code (restructure/refine/optimize etc)</rich_text>
   </node>
 </cherrytree>
