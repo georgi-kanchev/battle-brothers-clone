@@ -9,13 +9,14 @@ import (
 	"pure-game-kit/gui"
 	"pure-game-kit/input/keyboard"
 	"pure-game-kit/input/keyboard/key"
+	"pure-game-kit/utility/color"
 	"pure-game-kit/window"
 )
 
 type Menu struct {
 	camera *graphics.Camera
 
-	bgr, knight, logo *graphics.Sprite
+	bgr, logo *graphics.Sprite
 
 	hud, play, load, options, currentPopup *gui.GUI
 }
@@ -29,27 +30,23 @@ func New() *Menu {
 
 func (menu *Menu) OnLoad() {
 	menu.hud = gui.NewFromXMLs(file.LoadText("data/gui/menu-hud.xml"), global.PopupDimGUI, global.ThemesGUI)
-	// menu.play = gui.NewFromXMLs(file.LoadText("data/gui/menu-play.xml"), global.ThemesGUI)
-	// menu.load = gui.NewFromXMLs(file.LoadText("data/gui/menu-load.xml"), global.ThemesGUI)
 	menu.options = gui.NewFromXMLs(file.LoadText("data/gui/menu-options.xml"), global.ThemesGUI)
 	menu.currentPopup = nil
 
-	var bgr = assets.LoadTexture("art/UI/Titlescreen/background.PNG")
-	var knight = assets.LoadTexture("art/UI/Titlescreen/knight.PNG")
+	var bgr = assets.LoadTexture("art/UI/Titlescreen/bgr.png")
 	var logo = assets.LoadTexture("art/UI/Titlescreen/logo.PNG")
 	menu.bgr = graphics.NewSprite(bgr, 0, 0)
-	menu.knight = graphics.NewSprite(knight, -500, 0)
 	menu.logo = graphics.NewSprite(logo, 0, 0)
 	assets.SetTextureSmoothness(bgr, true)
-	assets.SetTextureSmoothness(knight, true)
 	assets.SetTextureSmoothness(logo, true)
 
-	menu.logo.ScaleX, menu.logo.ScaleY = 1.5, 1.5
-	menu.knight.ScaleX, menu.knight.ScaleY = 1.6, 1.6
+	menu.logo.ScaleX, menu.logo.ScaleY = 0.8, 0.8
+	menu.logo.PivotX, menu.logo.PivotY = 1, 1
 }
 func (menu *Menu) OnEnter() {
 }
 func (menu *Menu) OnUpdate() {
+	menu.camera.DrawColor(color.RGB(8, 3, 4))
 	menu.camera.SetScreenAreaToWindow()
 
 	positionElements(menu)
@@ -70,9 +67,15 @@ func (menu *Menu) OnExit() {
 
 func positionElements(menu *Menu) {
 	var rx, ry = menu.camera.PointFromEdge(1, 0.5)
-	menu.logo.X, menu.logo.Y = rx-menu.logo.Width/2-250, ry-menu.logo.Height/2-150
+	var sc = menu.bgr.ScaleX
+
 	menu.bgr.CameraFit(menu.camera)
-	menu.camera.DrawSprites(menu.bgr, menu.knight, menu.logo)
+	menu.bgr.X -= 100 * sc
+	menu.bgr.ScaleX, menu.bgr.ScaleY = menu.bgr.ScaleX*1.1, menu.bgr.ScaleY*1.1
+	menu.logo.X, menu.logo.Y = rx-80*sc, ry
+	menu.logo.ScaleX, menu.logo.ScaleY = sc, sc
+	menu.hud.Scale = sc * 1.5
+	menu.camera.DrawSprites(menu.bgr, menu.logo)
 }
 func (menu *Menu) handleInput() {
 	if menu.hud.IsButtonJustClicked("new", menu.camera) {
