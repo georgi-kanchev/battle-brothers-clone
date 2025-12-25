@@ -7,8 +7,8 @@
 		<Widget class="visual" id="ammo" themeId="resource" text="^^ 68" textEmbeddedAssetId1="@bow" />
 		<Widget class="visual" id="medicine" themeId="resource" text="^^ 29" textEmbeddedAssetId1="@heart" />
 	</Container>
-	<Container id="goal" x="TargetLeftX" y="TargetBottomY" width="TargetWidth" height="40" targetId="resources">
-		<Widget class="visual" id="goal-bgr" themeId="panel" fillContainer="" text="goal" />
+	<Container id="quest" x="TargetLeftX" y="TargetBottomY" width="TargetWidth" height="40" targetId="resources">
+		<Widget class="visual" id="quest-bgr" themeId="panel" fillContainer="" text="quest" />
 	</Container>
 	
 	<Container id="time" x="CameraCenterX-75" y="CameraTopY+5" width="150" height="141">
@@ -27,10 +27,9 @@
 		<Theme id="time-btn-off" color="255 255 255 70" width="150/4-1" height="32" checkboxGroup="time-btns" buttonThemeIdHover="time-btn-hover" buttonThemeIdPress="time-btn-press" />
 	</Container>
 
-	<Container id="menus" x="CameraRightX-405" y="CameraTopY+5" width="400" height="40">
-		<Widget class="visual" id="menus-bgr" themeId="panel" fillContainer="" />
-	</Container>
-	<Container id="quest" x="TargetLeftX" y="TargetBottomY" width="TargetWidth" height="40" targetId="menus">
-		<Widget class="visual" id="quest-bgr" themeId="panel" fillContainer="" text="quest" />
+	<Container id="controls" x="CameraRightX-155" y="CameraTopY+5" width="150" height="CameraHeight" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press" gapY="5">
+		<Widget class="button" id="main-menu" text="Main Menu" height="40" />
+		<Widget class="button" id="follow-roads" text="Follow Roads" height="40" newRow="100" />
+		<Widget class="button" id="lock-camera" text="Lock Camera" height="40" newRow="" />
 	</Container>
 </GUI>

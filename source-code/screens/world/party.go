@@ -130,15 +130,20 @@ func (party *Party) handlePlayer() {
 	var cx, cy = world.camera.MousePosition()
 	for _, s := range settlements {
 		var shape = s.ExtractShapes()[0]
-		if shape.IsContainingPoint(cx, cy) || shape.IsContainingPoint(party.moveTargetX, party.moveTargetY) {
+		var hovering = shape.IsContainingPoint(cx, cy)
+		if hovering || shape.IsContainingPoint(party.moveTargetX, party.moveTargetY) {
 			var pts = shape.CornerPoints()
 			world.camera.DrawShapes(color.FadeOut(palette.White, 0.8), pts...)
 			world.camera.DrawLinesPath(2, color.FadeOut(palette.White, 0.5), pts...)
-			world.resultingCursorNonGUI = cursor.Hand
+		}
 
-			if mouse.IsButtonJustPressed(button.Left) {
-				party.goingToSettlement = s
-			}
+		if !hovering {
+			continue
+		}
+
+		world.resultingCursorNonGUI = cursor.Hand
+		if mouse.IsButtonJustPressed(button.Left) {
+			party.goingToSettlement = s
 		}
 	}
 
