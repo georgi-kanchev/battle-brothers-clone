@@ -10,6 +10,8 @@ import (
 	"pure-game-kit/gui"
 	"pure-game-kit/input/keyboard"
 	"pure-game-kit/input/keyboard/key"
+	"pure-game-kit/input/mouse"
+	"pure-game-kit/input/mouse/cursor"
 	"pure-game-kit/tiled"
 	"pure-game-kit/tiled/property"
 )
@@ -19,6 +21,7 @@ type World struct {
 	camera *graphics.Camera
 
 	hud, inventory, settlement, currentPopup *gui.GUI
+	resultingCursorNonGUI                    int
 
 	time       float32
 	timeCircle *graphics.Sprite
@@ -60,12 +63,16 @@ func (world *World) OnLoad() {
 	var mapLayers = world.tmap.FindLayersBy(property.LayerClass, "MapLayer")
 	var solidLayers = world.tmap.FindLayersBy(property.LayerClass, "SolidLayer")
 	var roadLayers = world.tmap.FindLayersBy(property.LayerClass, "RoadLayer")
+	var settlementLayer = world.tmap.FindLayersBy(property.LayerClass, "SettlementLayer")
 	world.mapLayers = mapLayers
 	for _, s := range solidLayers {
 		world.solids = append(world.solids, s.ExtractShapes()...)
 	}
 	for _, r := range roadLayers {
 		world.roads = append(world.roads, r.ExtractLines()...)
+	}
+	for _, s := range settlementLayer {
+		world.settlements = append(world.settlements, s.ExtractShapes()...)
 	}
 }
 func (world *World) OnEnter() {
@@ -89,6 +96,10 @@ func (world *World) OnUpdate() {
 		world.currentPopup.UpdateAndDraw(world.camera)
 	}
 
+	if world.resultingCursorNonGUI != cursor.Default {
+		mouse.SetCursor(world.resultingCursorNonGUI)
+	}
+
 	world.handleInput()
 }
 
@@ -101,8 +112,6 @@ func (world *World) OnExit() {
 func (world *World) handleInput() {
 	if keyboard.IsKeyJustPressed(key.I) {
 		world.currentPopup = global.TogglePopup(world.hud, world.currentPopup, world.inventory)
-	} else if keyboard.IsKeyJustPressed(key.S) {
-		world.currentPopup = global.TogglePopup(world.hud, world.currentPopup, world.settlement)
 	} else if keyboard.IsKeyJustPressed(key.B) {
 		screens.Enter(global.ScreenBattle, false)
 	} else if keyboard.IsKeyJustPressed(key.Escape) {

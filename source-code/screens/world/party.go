@@ -9,6 +9,7 @@ import (
 	"pure-game-kit/input/keyboard/key"
 	"pure-game-kit/input/mouse"
 	"pure-game-kit/input/mouse/button"
+	"pure-game-kit/input/mouse/cursor"
 	"pure-game-kit/utility/angle"
 	"pure-game-kit/utility/collection"
 	"pure-game-kit/utility/color/palette"
@@ -18,18 +19,18 @@ import (
 )
 
 type Party struct {
-	x, y, speed, moveTargetX, moveTargetY float32
-	isPlayer, isOnRoad                    bool
+	x, y, speed, moveTargetX, moveTargetY   float32
+	isPlayer, isGoingToSettlement, isOnRoad bool
 
-	units []*unit.Unit
-	shape *geometry.Shape
+	units  []*unit.Unit
+	hitbox *geometry.Shape
 
 	path [][2]float32
 }
 
 func NewParty(units []*unit.Unit, x, y float32, isPlayer bool) *Party {
 	return &Party{x: x, y: y, moveTargetX: x, moveTargetY: y, isPlayer: isPlayer, units: units, speed: 20,
-		shape: geometry.NewShapeRectangle(10, 10, 0.5, 0.5)}
+		hitbox: geometry.NewShapeRectangle(10, 10, 0.5, 0.5)}
 }
 
 //=================================================================
@@ -38,7 +39,8 @@ func (party *Party) Update() {
 	var world = screens.Current().(*World)
 	var isInRoadRange = party.isInRoadRange()
 	party.handleMovement(isInRoadRange)
-	world.camera.DrawShapes(palette.Red, party.shape.CornerPoints()...)
+	party.tryEnterSettlement()
+	world.camera.DrawShapes(palette.Red, party.hitbox.CornerPoints()...)
 
 	if len(party.path) > 0 {
 		world.camera.DrawLine(party.x, party.y, party.path[0][0], party.path[0][1], 5, palette.Green)
@@ -70,7 +72,7 @@ func (party *Party) handleMovement(isInRoadRange bool) {
 	}
 
 	var velX, velY = point.MoveAtAngle(0, 0, angle, speed)
-	party.shape.X, party.shape.Y = party.x, party.y
+	party.hitbox.X, party.hitbox.Y = party.x, party.y
 	var newVelX, newVelY = party.collideWithSolid(velX, velY)
 	var newSpeed = point.DistanceToPoint(0, 0, velX, velY)
 	party.x, party.y = party.x+newVelX, party.y+newVelY
@@ -87,7 +89,7 @@ func (party *Party) handleMovement(isInRoadRange bool) {
 func (party *Party) collideWithSolid(velX, velY float32) (newVelX, newVelY float32) {
 	var world = screens.Current().(*World)
 	newVelX, newVelY = velX, velY
-	var x, y = party.shape.Collide(velX, velY, world.solids...)
+	var x, y = party.hitbox.Collide(velX, velY, world.solids...)
 	newVelX, newVelY = newVelX+x, newVelY+y
 	return newVelX, newVelY
 }
@@ -97,6 +99,19 @@ func (party *Party) handlePlayer(isInRoadRange bool) {
 
 	if world.hud.IsAnyHovered(world.camera) {
 		return
+	}
+
+	world.resultingCursorNonGUI = cursor.Default
+
+	for _, s := range world.settlements {
+		if s.IsContainingPoint(world.camera.MousePosition()) {
+			world.resultingCursorNonGUI = cursor.Hand
+
+			if mouse.IsButtonJustPressed(button.Left) {
+				party.isGoingToSettlement = true
+			}
+			break
+		}
 	}
 
 	world.camera.Zoom *= 1 + 0.001*mouse.ScrollSmooth()
@@ -112,16 +127,30 @@ func (party *Party) handlePlayer(isInRoadRange bool) {
 		}
 	}
 	if keyboard.IsKeyJustPressed(key.Enter) && isInRoadRange {
-		party.isOnRoad = !party.isOnRoad
-
-		if party.isOnRoad {
-			party.path = geometry.FollowPaths(party.x, party.y, party.moveTargetX, party.moveTargetY, world.roads...)
-		} else if !party.isOnRoad && len(party.path) > 0 {
-			party.moveTargetX, party.moveTargetY = party.path[len(party.path)-1][0], party.path[len(party.path)-1][1]
-			party.path = nil
-		}
+		party.followRoad()
 	}
 }
+
+func (party *Party) followRoad() {
+	var world = screens.Current().(*World)
+	party.isOnRoad = !party.isOnRoad
+
+	if party.isOnRoad {
+		party.path = geometry.FollowPaths(party.x, party.y, party.moveTargetX, party.moveTargetY, world.roads...)
+	} else if !party.isOnRoad && len(party.path) > 0 {
+		party.moveTargetX, party.moveTargetY = party.path[len(party.path)-1][0], party.path[len(party.path)-1][1]
+		party.path = nil
+	}
+}
+func (party *Party) tryEnterSettlement() {
+	var world = screens.Current().(*World)
+	if party.isGoingToSettlement && party.hitbox.IsOverlappingShapes(world.settlements...) {
+		party.isGoingToSettlement = false
+		party.moveTargetX, party.moveTargetY = party.x, party.y
+		world.currentPopup = global.TogglePopup(world.hud, world.currentPopup, world.settlement)
+	}
+}
+
 func (party *Party) isInRoadRange() bool {
 	var world = screens.Current().(*World)
 	for i := 1; i < len(world.roads); i++ {
