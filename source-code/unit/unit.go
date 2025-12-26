@@ -1,18 +1,46 @@
 package unit
 
-import gfx "pure-game-kit/graphics"
+import (
+	"pure-game-kit/data/assets"
+	"pure-game-kit/graphics"
+	gfx "pure-game-kit/graphics"
+)
 
 type Unit struct {
 	x, y float32
+
+	head, body, plate *graphics.Sprite
+
+	mapColumns, mapRows, tileWidth, tileHeight int
 }
 
-func New() *Unit {
-	return &Unit{}
+func New(mapColumns, mapRows, tileWidth, tileHeight int) *Unit {
+	return &Unit{x: 10, y: 10, mapColumns: mapColumns, mapRows: mapRows, tileWidth: tileWidth, tileHeight: tileHeight}
 }
 
 //=================================================================
 
+func (unit *Unit) Load() {
+	unit.head = graphics.NewSprite(assets.LoadTexture("art/Character/head.PNG"), 0, 0)
+	unit.body = graphics.NewSprite(assets.LoadTexture("art/Character/body.PNG"), 0, 0)
+	unit.plate = graphics.NewSprite(assets.LoadTexture("art/Character/plate.PNG"), 0, 0)
+	unit.head.PivotY = 0.85
+	unit.body.PivotY = 0.85
+	unit.plate.PivotY = 0.85
+
+	assets.SetTextureSmoothness(unit.head.AssetId, true)
+	assets.SetTextureSmoothness(unit.body.AssetId, true)
+	assets.SetTextureSmoothness(unit.plate.AssetId, true)
+}
+
 func (unit *Unit) Draw(camera *gfx.Camera) {
+	var tw, th = float32(unit.tileWidth), float32(unit.tileHeight)
+	var x, y = unit.x*tw + (tw / 2), unit.y*th + (th / 2)
+
+	unit.plate.X, unit.plate.Y = x, y
+	unit.body.X, unit.body.Y = x, y
+	unit.head.X, unit.head.Y = x, y
+	camera.DrawSprites(unit.plate, unit.body, unit.head)
 }
 
 //=================================================================

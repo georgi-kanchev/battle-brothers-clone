@@ -18,7 +18,7 @@ import (
 
 type Battle struct {
 	path   string
-	tmap   *tiled.Map
+	Tmap   *tiled.Map
 	camera *graphics.Camera
 
 	hud, currentPopup, loot *gui.GUI
@@ -34,23 +34,30 @@ func New(mapPath string) *Battle {
 //=================================================================
 
 func (battle *Battle) OnLoad() {
-	battle.tmap = tiled.NewMap(assets.LoadTiledMap(battle.path), global.Project)
+	battle.Tmap = tiled.NewMap(assets.LoadTiledMap(battle.path), global.Project)
 	battle.hud = gui.NewFromXMLs(file.LoadText("data/gui/battle-hud.xml"), global.PopupDimGUI, global.ThemesGUI)
 	battle.loot = gui.NewFromXMLs(file.LoadText("data/gui/battle-loot.xml"), global.ThemesGUI)
 	battle.currentPopup = nil
 
-	var cols = battle.tmap.Properties[property.MapColumns].(int)
-	var rows = battle.tmap.Properties[property.MapRows].(int)
-	var tileW = battle.tmap.Properties[property.MapTileWidth].(int)
-	var tileH = battle.tmap.Properties[property.MapTileHeight].(int)
+	var cols = battle.Tmap.Properties[property.MapColumns].(int)
+	var rows = battle.Tmap.Properties[property.MapRows].(int)
+	var tileW = battle.Tmap.Properties[property.MapTileWidth].(int)
+	var tileH = battle.Tmap.Properties[property.MapTileHeight].(int)
 	battle.camera.X, battle.camera.Y = float32(cols)/2*float32(tileW), float32(rows)/2*float32(tileH)
+
+	battle.attackers = append(battle.attackers, unit.New(cols, rows, tileW, tileH))
+
+	var all = collection.Join(battle.attackers, battle.defenders)
+	for _, v := range all {
+		v.Load()
+	}
 }
 func (battle *Battle) OnEnter() {
 }
 func (battle *Battle) OnUpdate() {
 	battle.camera.SetScreenAreaToWindow()
 	condition.CallIf(battle.currentPopup == nil, battle.camera.MouseDragAndZoomSmooth)
-	battle.tmap.Draw(battle.camera)
+	battle.Tmap.Draw(battle.camera)
 
 	for _, unit := range battle.ySortUnits() {
 		unit.Draw(battle.camera)
