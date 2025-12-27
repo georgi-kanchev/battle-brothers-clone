@@ -21,11 +21,11 @@
             "scaleInEditor": 1
         },
         "battlegrounds/test/map.tmx": {
-            "scale": 0.38643229166666665,
-            "selectedLayer": 0,
+            "scale": 0.33,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 958.7708066581306,
-                "y": 958.7708066581306
+                "x": 986.3636363636364,
+                "y": 1001.5151515151515
             }
         },
         "data/battlegrounds/battleground.tsx": {
@@ -79,7 +79,7 @@
         },
         "worlds/test/map.tmx": {
             "scale": 0.5,
-            "selectedLayer": 3,
+            "selectedLayer": 0,
             "viewCenter": {
                 "x": 2449,
                 "y": 1529

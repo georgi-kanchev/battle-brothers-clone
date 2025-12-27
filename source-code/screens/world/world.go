@@ -59,10 +59,10 @@ func (world *World) OnLoad() {
 	assets.LoadTexture("art/UI/Buttons/btn_playx2.PNG")
 	assets.LoadTexture("art/UI/Buttons/btn_playx3.PNG")
 
-	var solidLayers = world.tmap.FindLayersBy(property.LayerClass, "Solids")
-	var roadLayers = world.tmap.FindLayersBy(property.LayerClass, "Roads")
-	var settlements = world.tmap.FindLayersBy(property.LayerClass, "Settlements")
-	world.mapLayers = world.tmap.FindLayersBy(property.LayerClass, "Map")
+	var solidLayers = world.tmap.FindLayersBy(property.LayerClass, "WorldSolids")
+	var roadLayers = world.tmap.FindLayersBy(property.LayerClass, "WorldRoads")
+	var settlements = world.tmap.FindLayersBy(property.LayerClass, "WorldSettlements")
+	world.mapLayers = world.tmap.FindLayersBy(property.LayerClass, "WorldMap")
 	for _, s := range solidLayers {
 		world.solids = append(world.solids, s.ExtractShapes()...)
 	}

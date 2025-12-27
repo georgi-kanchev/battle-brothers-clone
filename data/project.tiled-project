@@ -13,10 +13,52 @@
         {
             "color": "#ffa0a0a4",
             "drawFill": true,
+            "id": 7,
+            "members": [
+            ],
+            "name": "BattleMap",
+            "type": "class",
+            "useAs": [
+                "property",
+                "layer",
+                "project"
+            ]
+        },
+        {
+            "color": "#ffff0000",
+            "drawFill": true,
+            "id": 5,
+            "members": [
+            ],
+            "name": "BattleSpawnsAttackers",
+            "type": "class",
+            "useAs": [
+                "property",
+                "layer",
+                "project"
+            ]
+        },
+        {
+            "color": "#ff0000ff",
+            "drawFill": true,
+            "id": 6,
+            "members": [
+            ],
+            "name": "BattleSpawnsDefenders",
+            "type": "class",
+            "useAs": [
+                "property",
+                "layer",
+                "project"
+            ]
+        },
+        {
+            "color": "#ffa0a0a4",
+            "drawFill": true,
             "id": 4,
             "members": [
             ],
-            "name": "Map",
+            "name": "WorldMap",
             "type": "class",
             "useAs": [
                 "property",
@@ -36,7 +78,7 @@
             "id": 1,
             "members": [
             ],
-            "name": "Roads",
+            "name": "WorldRoads",
             "type": "class",
             "useAs": [
                 "property",
@@ -50,7 +92,7 @@
             "id": 3,
             "members": [
             ],
-            "name": "Settlements",
+            "name": "WorldSettlements",
             "type": "class",
             "useAs": [
                 "property",
@@ -64,35 +106,7 @@
             "id": 2,
             "members": [
             ],
-            "name": "Solids",
-            "type": "class",
-            "useAs": [
-                "property",
-                "layer",
-                "project"
-            ]
-        },
-        {
-            "color": "#ffff0000",
-            "drawFill": true,
-            "id": 5,
-            "members": [
-            ],
-            "name": "SpawnsAttackers",
-            "type": "class",
-            "useAs": [
-                "property",
-                "layer",
-                "project"
-            ]
-        },
-        {
-            "color": "#ff0000ff",
-            "drawFill": true,
-            "id": 6,
-            "members": [
-            ],
-            "name": "SpawnsDefenders",
+            "name": "WorldSolids",
             "type": "class",
             "useAs": [
                 "property",

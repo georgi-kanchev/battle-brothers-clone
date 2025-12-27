@@ -23,6 +23,8 @@ type Battle struct {
 
 	hud, currentPopup, loot *gui.GUI
 
+	mapLayers []*tiled.Layer
+
 	attackers, defenders []*unit.Unit
 }
 
@@ -38,6 +40,7 @@ func (battle *Battle) OnLoad() {
 	battle.hud = gui.NewFromXMLs(file.LoadText("data/gui/battle-hud.xml"), global.PopupDimGUI, global.ThemesGUI)
 	battle.loot = gui.NewFromXMLs(file.LoadText("data/gui/battle-loot.xml"), global.ThemesGUI)
 	battle.currentPopup = nil
+	battle.mapLayers = battle.tmap.FindLayersBy(property.LayerClass, "BattleMap")
 }
 func (battle *Battle) OnEnter() {
 	var cols = battle.tmap.Properties[property.MapColumns].(int)
@@ -54,8 +57,8 @@ func (battle *Battle) OnEnter() {
 		battle.defenders = append(battle.defenders, unit.New(cols, rows, tileW, tileH))
 	}
 
-	battle.spawnUnits(battle.attackers, false, "SpawnsAttackers", tileW, tileH)
-	battle.spawnUnits(battle.defenders, true, "SpawnsDefenders", tileW, tileH)
+	battle.spawnUnits(battle.attackers, false, "BattleSpawnsAttackers", tileW, tileH)
+	battle.spawnUnits(battle.defenders, true, "BattleSpawnsDefenders", tileW, tileH)
 
 	for _, id := range assets.LoadedTextureIds() {
 		assets.SetTextureSmoothness(id, true)
@@ -80,7 +83,9 @@ func (battle *Battle) OnUpdate() {
 		battle.camera.MouseDragAndZoomSmooth()
 		battle.camera.Zoom = number.Limit(battle.camera.Zoom, 0.5, 10)
 	}
-	battle.tmap.Draw(battle.camera)
+	for _, l := range battle.mapLayers {
+		l.Draw(battle.camera)
+	}
 
 	for _, unit := range battle.ySortUnits() {
 		unit.Draw(battle.camera)
