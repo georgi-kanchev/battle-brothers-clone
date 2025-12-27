@@ -40,7 +40,7 @@ func NewParty(units []*unit.Unit, x, y float32, isPlayer bool) *Party {
 //=================================================================
 
 func (party *Party) Update() {
-	var world = screens.Current().(*World)
+	var world = screens.Current().(*WorldScreen)
 	var isInRoadRange = party.isInRoadRange()
 	party.handleMovement(isInRoadRange)
 	party.tryEnterSettlement()
@@ -84,14 +84,14 @@ func (party *Party) handleMovement(isInRoadRange bool) {
 	}
 }
 func (party *Party) collideWithSolid(velX, velY float32) (newVelX, newVelY float32) {
-	var world = screens.Current().(*World)
+	var world = screens.Current().(*WorldScreen)
 	newVelX, newVelY = velX, velY
 	var x, y = party.hitbox.Collide(velX, velY, world.solids...)
 	newVelX, newVelY = newVelX+x, newVelY+y
 	return newVelX, newVelY
 }
 func (party *Party) tryEnterSettlement() {
-	var world = screens.Current().(*World)
+	var world = screens.Current().(*WorldScreen)
 	if party.goingToSettlement == nil || world.currentPopup == world.settlement {
 		return
 	}
@@ -108,7 +108,7 @@ func (party *Party) tryEnterSettlement() {
 }
 
 func (party *Party) handlePlayer() {
-	var world = screens.Current().(*World)
+	var world = screens.Current().(*WorldScreen)
 	world.camera.X, world.camera.Y = party.x, party.y
 
 	var col = palette.White
@@ -172,7 +172,7 @@ func (party *Party) handlePlayer() {
 }
 
 func (party *Party) isInRoadRange() bool {
-	var world = screens.Current().(*World)
+	var world = screens.Current().(*WorldScreen)
 	for i := 1; i < len(world.roads); i++ {
 		var ax, ay = world.roads[i-1][0], world.roads[i-1][1]
 		var bx, by = world.roads[i][0], world.roads[i][1]

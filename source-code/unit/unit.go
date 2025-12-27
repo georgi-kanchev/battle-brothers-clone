@@ -9,12 +9,10 @@ type Unit struct {
 	x, y float32
 
 	head, body, plate *graphics.Sprite
-
-	mapColumns, mapRows, tileWidth, tileHeight int
 }
 
-func New(mapColumns, mapRows, tileWidth, tileHeight int) *Unit {
-	return &Unit{mapColumns: mapColumns, mapRows: mapRows, tileWidth: tileWidth, tileHeight: tileHeight}
+func New() *Unit {
+	return &Unit{}
 }
 
 //=================================================================
@@ -40,8 +38,8 @@ func (unit *Unit) Spawn(x, y float32, flip bool) {
 	}
 }
 
-func (unit *Unit) Draw(camera *graphics.Camera) {
-	var tw, th = float32(unit.tileWidth), float32(unit.tileHeight)
+func (unit *Unit) Draw(camera *graphics.Camera, tileWidth, tileHeight int) {
+	var tw, th = float32(tileWidth), float32(tileHeight)
 	var x, y = unit.x*tw + (tw / 2), unit.y*th + (th / 2)
 
 	unit.plate.X, unit.plate.Y = x, y
