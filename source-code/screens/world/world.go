@@ -51,7 +51,6 @@ func (world *World) OnLoad() {
 
 	var timeCircle = assets.LoadTexture("art/UI/Time/time_circle.PNG")
 	world.timeCircle = graphics.NewSprite(timeCircle, 0, 0)
-	assets.SetTextureSmoothness(timeCircle, true)
 
 	assets.LoadTexture("art/UI/Time/time_top.PNG")
 	assets.LoadTexture("art/UI/Buttons/btn.PNG")
@@ -72,6 +71,10 @@ func (world *World) OnLoad() {
 	}
 	if len(settlements) > 0 {
 		world.settlements = settlements[0]
+	}
+
+	for _, id := range assets.LoadedTextureIds() {
+		assets.SetTextureSmoothness(id, true)
 	}
 }
 func (world *World) OnEnter() {

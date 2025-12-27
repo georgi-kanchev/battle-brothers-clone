@@ -42,6 +42,10 @@ func (menu *Menu) OnLoad() {
 
 	menu.logo.ScaleX, menu.logo.ScaleY = 0.8, 0.8
 	menu.logo.PivotX, menu.logo.PivotY = 1, 1
+
+	for _, id := range assets.LoadedTextureIds() {
+		assets.SetTextureSmoothness(id, true)
+	}
 }
 func (menu *Menu) OnEnter() {
 }
