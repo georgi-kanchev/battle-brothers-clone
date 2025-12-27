@@ -1,17 +1,17 @@
 {
     "activeFile": "battlegrounds/test/map.tmx",
     "expandedProjectPaths": [
+        "worlds",
+        "data/worlds",
+        "worlds/test",
+        "data/worlds/test",
+        "data/battlegrounds",
+        "battlegrounds",
+        "data/battlegrounds/test",
         "data",
         ".",
-        "worlds",
         "battlegrounds/test",
-        "data/worlds",
-        "data/battlegrounds/test",
-        "battlegrounds",
-        "worlds/test",
-        "test",
-        "data/battlegrounds",
-        "data/worlds/test"
+        "test"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -22,19 +22,19 @@
         },
         "battlegrounds/placeholder-tiles.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 0.75,
+            "scaleInDock": 0.33,
             "scaleInEditor": 1
         },
         "battlegrounds/test/map.tmx": {
             "expandedObjectLayers": [
-                2,
-                3
+                3,
+                2
             ],
-            "scale": 0.33,
-            "selectedLayer": 1,
+            "scale": 0.5,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 893.939393939394,
-                "y": 856.060606060606
+                "x": 894,
+                "y": 511
             }
         },
         "data/battlegrounds/battleground.tsx": {
@@ -96,7 +96,7 @@
         },
         "worlds/test/tileset.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 1,
+            "scaleInDock": 0.125,
             "scaleInEditor": 0.33
         }
     },
