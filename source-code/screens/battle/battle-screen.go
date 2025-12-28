@@ -24,8 +24,8 @@ type BattleScreen struct {
 
 	hud, currentPopup, loot *gui.GUI
 
-	tmap      *tiled.Map
-	mapLayers []*tiled.Layer
+	tmap  *tiled.Map
+	tiles []*graphics.Sprite
 
 	units []*unit.Unit
 
@@ -44,7 +44,11 @@ func (b *BattleScreen) OnLoad() {
 	b.hud = gui.NewFromXMLs(file.LoadText("data/gui/battle-hud.xml"), global.PopupDimGUI, global.ThemesGUI)
 	b.loot = gui.NewFromXMLs(file.LoadText("data/gui/battle-loot.xml"), global.ThemesGUI)
 	b.currentPopup = nil
-	b.mapLayers = b.tmap.FindLayersBy(property.LayerClass, "BattleMap")
+
+	var layers = b.tmap.FindLayersBy(property.LayerClass, "BattleMap")
+	for _, l := range layers {
+		b.tiles = append(b.tiles, l.ExtractSprites()...)
+	}
 
 	// assets.SetTextureSmoothness("art/Battlegrounds/placeholder-tiles.png", false)
 }
@@ -70,14 +74,12 @@ func (b *BattleScreen) OnUpdate() {
 	b.camera.SetScreenAreaToWindow()
 
 	if b.currentPopup == nil {
-		b.camera.MouseDragAndZoomSmooth()
+		b.camera.MouseDragAndZoomSmoothly()
 		b.camera.Zoom = number.Limit(b.camera.Zoom, 0.5, 10)
 	}
 
-	b.tmap.Draw(b.camera)
-	// for _, l := range b.mapLayers {
-	// 	l.Draw(b.camera)
-	// }
+	// b.tmap.Draw(b.camera)
+	b.camera.DrawSprites(b.tiles...)
 
 	var x, y = b.turnManager.takingTurnUnit.Position()
 	x, y = x*float32(tileW)+float32(tileW/2), y*float32(tileH)+float32(tileH/2)

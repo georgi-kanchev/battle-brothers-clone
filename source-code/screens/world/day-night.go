@@ -47,7 +47,7 @@ func (w *WorldScreen) handleDayNightCycle() {
 
 	w.time += time.FrameDelta() * global.TimeScale
 	w.time = number.Wrap(w.time, 0, dayNightCycleDuration)
-	var timeOfDay = number.Round(w.time/60, 0)
+	var timeOfDay = number.Round(w.time / 60)
 	var timeOfDayIndex = int(timeOfDay) % len(clock)
 	w.hud.SetField("time-word", field.Text, clock[timeOfDayIndex])
 

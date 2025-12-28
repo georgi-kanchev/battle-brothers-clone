@@ -4,7 +4,6 @@ import (
 	"game/source-code/unit"
 	"pure-game-kit/execution/flow"
 	"pure-game-kit/geometry"
-	"pure-game-kit/utility/number"
 )
 
 type turnManager struct {
@@ -18,7 +17,11 @@ type turnManager struct {
 }
 
 func newTurnManager() *turnManager {
-	return &turnManager{}
+	var result = &turnManager{turns: flow.NewSequence()}
+	result.turns.SetSteps(false,
+		flow.NowDoAndKeepRepeating(result.waitForAction),
+	)
+	return result
 }
 
 //=================================================================
@@ -30,15 +33,9 @@ func (tm *turnManager) startBattle(teamA, teamB []*unit.Unit, playerAttacks bool
 	tm.takingTurnTeamA = true
 	tm.takingTurnUnit = teamA[0]
 
-	tm.turns = flow.NewSequence()
-	tm.turns.SetSteps(false,
-		flow.NowDoLoop(number.ValueMaximum[int](), func(i int) { tm.waitForAction() }),
-	)
+	tm.turns.Run()
 }
 func (tm *turnManager) waitForAction() {
-	if tm.isPlayerTurn() {
-		return
-	}
 }
 func (tm *turnManager) isPlayerTurn() bool {
 	return tm.playerIsTeamA && tm.takingTurnTeamA
