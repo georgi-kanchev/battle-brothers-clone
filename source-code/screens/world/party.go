@@ -39,68 +39,68 @@ func NewParty(units []*unit.Unit, x, y float32, isPlayer bool) *Party {
 
 //=================================================================
 
-func (party *Party) Update() {
+func (p *Party) Update() {
 	var world = screens.Current().(*WorldScreen)
-	var isInRoadRange = party.isInRoadRange()
-	party.handleMovement(isInRoadRange)
-	party.tryEnterSettlement()
+	var isInRoadRange = p.isInRoadRange()
+	p.handleMovement(isInRoadRange)
+	p.tryEnterSettlement()
 
-	if party.isPlayer {
-		party.handlePlayer()
+	if p.isPlayer {
+		p.handlePlayer()
 	}
 
-	world.camera.DrawShapes(palette.Red, party.hitbox.CornerPoints()...)
+	world.camera.DrawShapes(palette.Red, p.hitbox.CornerPoints()...)
 }
 
 //=================================================================
 // private
 
-func (party *Party) handleMovement(isInRoadRange bool) {
-	if party.isUsingRoads && len(party.path) > 0 {
-		party.moveTargetX, party.moveTargetY = party.path[0][0], party.path[0][1]
+func (p *Party) handleMovement(isInRoadRange bool) {
+	if p.isUsingRoads && len(p.path) > 0 {
+		p.moveTargetX, p.moveTargetY = p.path[0][0], p.path[0][1]
 	}
 
-	var px, py, tx, ty = party.x, party.y, party.moveTargetX, party.moveTargetY
+	var px, py, tx, ty = p.x, p.y, p.moveTargetX, p.moveTargetY
 	var angle = angle.BetweenPoints(px, py, tx, ty)
-	var speed = party.speed * time.FrameDelta() * global.TimeScale
+	var speed = p.speed * time.FrameDelta() * global.TimeScale
 
 	if isInRoadRange {
 		speed *= 2
 	}
 
 	var velX, velY = point.MoveAtAngle(0, 0, angle, speed)
-	party.hitbox.X, party.hitbox.Y = party.x, party.y
-	var newVelX, newVelY = party.collideWithSolid(velX, velY)
+	p.hitbox.X, p.hitbox.Y = p.x, p.y
+	var newVelX, newVelY = p.collideWithSolid(velX, velY)
 	var newSpeed = point.DistanceToPoint(0, 0, velX, velY)
-	party.x, party.y = party.x+newVelX, party.y+newVelY
-	var dist = point.DistanceToPoint(party.x, party.y, tx, ty)
+	p.x, p.y = p.x+newVelX, p.y+newVelY
+	var dist = point.DistanceToPoint(p.x, p.y, tx, ty)
 
 	if dist < newSpeed*3 {
-		party.x, party.y = tx, ty
+		p.x, p.y = tx, ty
 
-		if party.isUsingRoads {
-			party.path = collection.RemoveAt(party.path, 0)
+		if p.isUsingRoads {
+			p.path = collection.RemoveAt(p.path, 0)
 		}
 	}
 }
-func (party *Party) collideWithSolid(velX, velY float32) (newVelX, newVelY float32) {
+func (p *Party) collideWithSolid(velX, velY float32) (newVelX, newVelY float32) {
 	var world = screens.Current().(*WorldScreen)
 	newVelX, newVelY = velX, velY
-	var x, y = party.hitbox.Collide(velX, velY, world.solids...)
+	var x, y = p.hitbox.Collide(velX, velY, world.solids...)
 	newVelX, newVelY = newVelX+x, newVelY+y
 	return newVelX, newVelY
 }
-func (party *Party) tryEnterSettlement() {
+func (p *Party) tryEnterSettlement() {
 	var world = screens.Current().(*WorldScreen)
-	if party.goingToSettlement == nil || world.currentPopup == world.settlement {
+	if p.goingToSettlement == nil || world.currentPopup == world.settlement {
 		return
 	}
 
 	for _, s := range world.settlements.Objects {
-		if party.goingToSettlement == s && party.hitbox.IsOverlappingShapes(s.ExtractShapes()...) {
-			party.moveTargetX, party.moveTargetY = party.x, party.y
-			party.path = nil
-			party.goingToSettlement = s
+		if p.goingToSettlement == s && p.hitbox.IsOverlappingShapes(s.ExtractShapes()...) {
+			p.moveTargetX, p.moveTargetY = p.x, p.y
+			p.path = nil
+			p.goingToSettlement = s
 			world.resultingCursorNonGUI = -1
 			world.currentPopup = global.TogglePopup(world.hud, world.currentPopup, world.settlement)
 		}
@@ -171,23 +171,23 @@ func (party *Party) handlePlayer() {
 	}
 }
 
-func (party *Party) isInRoadRange() bool {
+func (p *Party) isInRoadRange() bool {
 	var world = screens.Current().(*WorldScreen)
 	for i := 1; i < len(world.roads); i++ {
 		var ax, ay = world.roads[i-1][0], world.roads[i-1][1]
 		var bx, by = world.roads[i][0], world.roads[i][1]
 		var line = geometry.NewLine(ax, ay, bx, by)
-		var closestX, closestY = line.ClosestToPoint(party.x, party.y)
-		var distance = point.DistanceToPoint(party.x, party.y, closestX, closestY)
+		var closestX, closestY = line.ClosestToPoint(p.x, p.y)
+		var distance = point.DistanceToPoint(p.x, p.y, closestX, closestY)
 		if distance < 15 {
 			return true
 		}
 	}
 	return false
 }
-func (party *Party) lastPathPoint() (x, y float32) {
-	if len(party.path) > 0 {
-		return party.path[len(party.path)-1][0], party.path[len(party.path)-1][1]
+func (p *Party) lastPathPoint() (x, y float32) {
+	if len(p.path) > 0 {
+		return p.path[len(p.path)-1][0], p.path[len(p.path)-1][1]
 	}
-	return party.moveTargetX, party.moveTargetY
+	return p.moveTargetX, p.moveTargetY
 }

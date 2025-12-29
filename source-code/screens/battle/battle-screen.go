@@ -14,7 +14,6 @@ import (
 	"pure-game-kit/tiled"
 	"pure-game-kit/tiled/property"
 	"pure-game-kit/utility/collection"
-	"pure-game-kit/utility/color/palette"
 	"pure-game-kit/utility/number"
 )
 
@@ -81,15 +80,11 @@ func (b *BattleScreen) OnUpdate() {
 	// b.tmap.Draw(b.camera)
 	b.camera.DrawSprites(b.tiles...)
 
-	var x, y = b.turnManager.takingTurnUnit.Position()
-	x, y = x*float32(tileW)+float32(tileW/2), y*float32(tileH)+float32(tileH/2)
-	b.camera.DrawCircle(x, y, 32, palette.White)
+	b.turnManager.update(b.camera, tileW, tileH)
 
 	for _, unit := range b.ySortUnits() {
 		unit.Draw(b.camera, tileW, tileH)
 	}
-
-	b.turnManager.update()
 
 	b.hud.UpdateAndDraw(b.camera)
 	if b.currentPopup != nil {
