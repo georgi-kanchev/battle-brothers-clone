@@ -89,6 +89,8 @@ func (b *BattleScreen) OnUpdate() {
 		unit.Draw(b.camera, tileW, tileH)
 	}
 
+	b.turnManager.update()
+
 	b.hud.UpdateAndDraw(b.camera)
 	if b.currentPopup != nil {
 		b.currentPopup.UpdateAndDraw(b.camera)

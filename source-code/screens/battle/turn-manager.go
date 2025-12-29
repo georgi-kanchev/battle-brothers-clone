@@ -18,7 +18,7 @@ type turnManager struct {
 
 func newTurnManager() *turnManager {
 	var result = &turnManager{turns: flow.NewSequence()}
-	result.turns.SetSteps(false,
+	result.turns.SetSteps(
 		flow.NowDoAndKeepRepeating(result.waitForAction),
 	)
 	return result
@@ -32,9 +32,11 @@ func (tm *turnManager) startBattle(teamA, teamB []*unit.Unit, playerAttacks bool
 	tm.pathMap = pathMap
 	tm.takingTurnTeamA = true
 	tm.takingTurnUnit = teamA[0]
-
-	tm.turns.Run()
 }
+func (tm *turnManager) update() {
+	tm.turns.Update()
+}
+
 func (tm *turnManager) waitForAction() {
 }
 func (tm *turnManager) isPlayerTurn() bool {
