@@ -2,22 +2,22 @@ package unit
 
 import (
 	"pure-game-kit/data/assets"
-	"pure-game-kit/geometry"
 	"pure-game-kit/graphics"
-	"pure-game-kit/utility/color"
 	"pure-game-kit/utility/color/palette"
+	"pure-game-kit/utility/random"
+	"pure-game-kit/utility/text"
 )
 
 type Unit struct {
-	x, y, maxMoveCells float32
+	x, y, MaxMoveCells float32
+
+	Initiative int
 
 	head, body, plate *graphics.Sprite
-
-	walkRangeCells [][2]int // relative to the unit cell position
 }
 
 func New() *Unit {
-	return &Unit{maxMoveCells: 5}
+	return &Unit{MaxMoveCells: 5, Initiative: random.Range(30, 100)}
 }
 
 //=================================================================
@@ -51,21 +51,12 @@ func (u *Unit) Draw(camera *graphics.Camera, tileWidth, tileHeight int) {
 	u.body.X, u.body.Y = x, y
 	u.head.X, u.head.Y = x, y
 
-	for _, cell := range u.walkRangeCells {
-		var x, y = float32(cell[0] * tileWidth), float32(cell[1] * tileHeight)
-		camera.DrawQuad(x, y, float32(tileWidth), float32(tileHeight), 0, color.FadeOut(palette.Red, 0.5))
-	}
-
 	camera.DrawSprites(u.plate, u.body, u.head)
+	camera.DrawText("", text.New(u.Initiative), x, y-96, 32, palette.White)
 }
 
 //=================================================================
 
 func (u *Unit) Position() (x, y float32) {
 	return u.x, u.y
-}
-
-func (u *Unit) RecalculateWalkRange(pathMap *geometry.ShapeGrid) {
-	u.x, u.y = 16, 23
-	u.walkRangeCells = pathMap.MovementRange(int(u.x), int(u.y), u.maxMoveCells)
 }

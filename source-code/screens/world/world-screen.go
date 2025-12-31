@@ -117,6 +117,9 @@ func (w *WorldScreen) OnExit() {
 //=================================================================
 // private
 
+var teamA = []*unit.Unit{unit.New(), unit.New(), unit.New(), unit.New(), unit.New()}
+var teamB = []*unit.Unit{unit.New(), unit.New(), unit.New()}
+
 func (w *WorldScreen) handleInput() {
 	if keyboard.IsKeyJustPressed(key.I) {
 		w.currentPopup = global.TogglePopup(w.hud, w.currentPopup, w.inventory)
@@ -124,8 +127,6 @@ func (w *WorldScreen) handleInput() {
 		screens.Enter(global.ScreenBattle, false)
 
 		var scr = screens.Current().(*battle.BattleScreen)
-		var teamA = []*unit.Unit{unit.New(), unit.New(), unit.New(), unit.New(), unit.New()}
-		var teamB = []*unit.Unit{unit.New(), unit.New(), unit.New()}
 		scr.Prepare(teamA, teamB, true)
 	} else if keyboard.IsKeyJustPressed(key.Escape) {
 		if w.currentPopup == nil {

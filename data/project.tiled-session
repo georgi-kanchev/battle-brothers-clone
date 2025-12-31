@@ -1,17 +1,17 @@
 {
     "activeFile": "battlegrounds/test/map.tmx",
     "expandedProjectPaths": [
-        "worlds",
-        "data/worlds",
-        "worlds/test",
-        "data/worlds/test",
-        "data/battlegrounds",
-        "battlegrounds",
-        "data/battlegrounds/test",
         "data",
+        "data/battlegrounds/test",
+        "worlds",
         ".",
-        "battlegrounds/test",
-        "test"
+        "worlds/test",
+        "test",
+        "data/worlds",
+        "data/worlds/test",
+        "battlegrounds",
+        "data/battlegrounds",
+        "battlegrounds/test"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -27,14 +27,14 @@
         },
         "battlegrounds/test/map.tmx": {
             "expandedObjectLayers": [
-                3,
-                2
+                2,
+                3
             ],
             "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 894,
-                "y": 511
+                "x": 1092,
+                "y": 1235
             }
         },
         "data/battlegrounds/battleground.tsx": {
