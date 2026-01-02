@@ -17,10 +17,10 @@
 	</Container>
 	<Container id="time-btns" x="TargetLeftX" y="TargetBottomY-1" width="150" height="40" targetId = "time">
 		<Widget class="visual" id="time-btns-bgr" assetId="art/UI/Buttons/btn.PNG" fillContainer="" color="255 255 255"/>
-		<Widget class="checkbox" id="x0" offsetY="4" assetId="art/UI/Buttons/btn_pause.PNG" themeId="time-btn-off" checkboxThemeId="time-btn" />
-		<Widget class="checkbox" id="x1" offsetY="4" assetId="art/UI/Buttons/btn_play.PNG" themeId="time-btn-off" checkboxThemeId="time-btn" value="1" />
-		<Widget class="checkbox" id="x2" offsetY="4" assetId="art/UI/Buttons/btn_playx2.PNG" themeId="time-btn-off" checkboxThemeId="time-btn" />
-		<Widget class="checkbox" id="x3" offsetY="4" assetId="art/UI/Buttons/btn_playx3.PNG" themeId="time-btn-off" checkboxThemeId="time-btn" />
+		<Widget class="checkbox" id="x0" offsetY="4" assetId="art/UI/Buttons/btn_pause.PNG" themeId="time-btn-off" checkboxThemeId="time-btn" buttonHotkey="Grave" />
+		<Widget class="checkbox" id="x1" offsetY="4" assetId="art/UI/Buttons/btn_play.PNG" themeId="time-btn-off" checkboxThemeId="time-btn" buttonHotkey="Number1" value="1" />
+		<Widget class="checkbox" id="x2" offsetY="4" assetId="art/UI/Buttons/btn_playx2.PNG" themeId="time-btn-off" checkboxThemeId="time-btn" buttonHotkey="Number2" />
+		<Widget class="checkbox" id="x3" offsetY="4" assetId="art/UI/Buttons/btn_playx3.PNG" themeId="time-btn-off" checkboxThemeId="time-btn" buttonHotkey="Number3" />
 		<Theme id="time-btn" color="220 220 220" width="150/4-1" height="32" checkboxGroup="time-btns" buttonThemeIdHover="time-btn-hover" buttonThemeIdPress="time-btn-press" />
 		<Theme id="time-btn-press" color="200 200 200" width="150/4-1" height="32" checkboxGroup="time-btns" />
 		<Theme id="time-btn-hover" color="255 255 255" width="150/4-1" height="32" checkboxGroup="time-btns" />
@@ -28,7 +28,7 @@
 	</Container>
 
 	<Container id="controls" x="CameraRightX-155" y="CameraTopY+5" width="150" height="CameraHeight" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press" gapY="5">
-		<Widget class="button" id="main-menu" text="Main Menu" height="40" />
+		<Widget class="button" id="main-menu" text="Main Menu" height="40" buttonHotkey="Escape" />
 		<Widget class="button" id="follow-roads" text="Follow Roads" height="40" newRow="100" />
 		<Widget class="button" id="lock-camera" text="Lock Camera" height="40" newRow="" />
 	</Container>

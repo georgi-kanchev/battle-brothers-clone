@@ -119,6 +119,10 @@ func (w *WorldScreen) OnUpdate() {
 	if w.currentPopup == w.settlement {
 		w.handleSettlementPopup()
 	}
+
+	if w.hud.IsButtonJustClicked("main-menu", w.camera) {
+		screens.Enter(global.ScreenMainMenu, false)
+	}
 }
 
 func (w *WorldScreen) OnExit() {
@@ -135,14 +139,10 @@ func (w *WorldScreen) handleInput() {
 		w.currentPopup = global.TogglePopup(w.hud, w.currentPopup, w.inventory)
 	} else if keyboard.IsKeyJustPressed(key.B) {
 		screens.Enter(global.ScreenBattle, false)
-
 		var scr = screens.Current().(*battle.BattleScreen)
 		scr.Prepare(teamA, teamB, true)
-	} else if keyboard.IsKeyJustPressed(key.Escape) {
-		if w.currentPopup == nil {
-			screens.Enter(global.ScreenMainMenu, false)
-		} else {
-			w.currentPopup = global.TogglePopup(w.hud, w.currentPopup, w.currentPopup)
-		}
+	} else if keyboard.IsKeyJustPressed(key.Escape) && w.currentPopup != nil {
+		w.currentPopup = global.TogglePopup(w.hud, w.currentPopup, w.currentPopup)
+		w.parties[0].goingToSettlement = nil
 	}
 }
