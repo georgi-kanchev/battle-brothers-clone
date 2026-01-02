@@ -2,6 +2,7 @@ package battle
 
 import (
 	"game/source-code/global"
+	"game/source-code/screens/loading"
 	"game/source-code/unit"
 	"pure-game-kit/data/assets"
 	"pure-game-kit/data/file"
@@ -39,11 +40,14 @@ func New(mapPath string) *BattleScreen {
 //=================================================================
 
 func (b *BattleScreen) OnLoad() {
+	loading.Show("Loading:\nBattle Map...")
 	b.tmap = tiled.NewMap(assets.LoadTiledMap(b.path), global.Project)
+	loading.Show("Loading:\nBattle GUI...")
 	b.hud = gui.NewFromXMLs(file.LoadText("data/gui/battle-hud.xml"), global.PopupDimGUI, global.ThemesGUI)
 	b.loot = gui.NewFromXMLs(file.LoadText("data/gui/battle-loot.xml"), global.ThemesGUI)
 	b.currentPopup = nil
 
+	loading.Show("Processing:\nBattle data...")
 	var layers = b.tmap.FindLayersBy(property.LayerClass, "BattleMap")
 	for _, l := range layers {
 		b.tiles = append(b.tiles, l.ExtractSprites()...)

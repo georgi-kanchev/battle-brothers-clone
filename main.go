@@ -3,6 +3,7 @@ package main
 import (
 	"game/source-code/global"
 	"game/source-code/screens/battle"
+	"game/source-code/screens/loading"
 	"game/source-code/screens/menu"
 	"game/source-code/screens/world"
 	"pure-game-kit/data/assets"
@@ -16,18 +17,23 @@ import (
 
 func main() {
 	window.Title = "Battle Brothers Clone"
+	window.KeepOpen()
+	global.ScreenLoading = screens.Add(loading.New(), true)
 
+	loading.Show("Loading:\nDefault icons...")
 	assets.LoadDefaultAtlasIcons()
-	assets.LoadDefaultFont()
 
+	loading.Show("Loading:\nReusable GUI...")
 	global.ThemesGUI = file.LoadText("data/gui/reusable-themes.xml")
 	global.PopupDimGUI = file.LoadText("data/gui/reusable-popup-dim.xml")
+	loading.Show("Loading:\nTiled project...")
 	global.Project = tiled.NewProject(assets.LoadTiledProject("data/project.tiled-project"))
 
 	global.ScreenMainMenu = screens.Add(menu.New(), true)
 	global.ScreenWorld = screens.Add(world.New("data/worlds/test/map.tmx"), true)
 	global.ScreenBattle = screens.Add(battle.New("data/battlegrounds/test/map.tmx"), true)
 
+	screens.Enter(global.ScreenMainMenu, false)
 	for window.KeepOpen() {
 		if keyboard.IsKeyJustPressed(key.F5) {
 			assets.ReloadAll()

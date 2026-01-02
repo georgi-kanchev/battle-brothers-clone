@@ -2,6 +2,7 @@ package menu
 
 import (
 	"game/source-code/global"
+	"game/source-code/screens/loading"
 	"pure-game-kit/data/assets"
 	"pure-game-kit/data/file"
 	"pure-game-kit/execution/screens"
@@ -29,10 +30,12 @@ func New() *MenuScreen {
 //=================================================================
 
 func (m *MenuScreen) OnLoad() {
+	loading.Show("Loading:\nMain Menu GUI...")
 	m.hud = gui.NewFromXMLs(file.LoadText("data/gui/menu-hud.xml"), global.PopupDimGUI, global.ThemesGUI)
 	m.options = gui.NewFromXMLs(file.LoadText("data/gui/menu-options.xml"), global.ThemesGUI)
 	m.currentPopup = nil
 
+	loading.Show("Loading:\nMain Menu images...")
 	var bgr = assets.LoadTexture("art/UI/Titlescreen/bgr.png")
 	var logo = assets.LoadTexture("art/UI/Titlescreen/logo.PNG")
 	m.bgr = graphics.NewSprite(bgr, 0, 0)

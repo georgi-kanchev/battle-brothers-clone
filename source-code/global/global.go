@@ -9,7 +9,7 @@ import (
 
 const Version = "v0.0.3"
 
-var ScreenMainMenu, ScreenWorld, ScreenBattle int
+var ScreenLoading, ScreenMainMenu, ScreenWorld, ScreenBattle int
 var Project *tiled.Project
 var ThemesGUI, PopupDimGUI string
 var TimeScale float32 = 1

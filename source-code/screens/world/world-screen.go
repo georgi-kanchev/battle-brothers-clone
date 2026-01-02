@@ -3,6 +3,7 @@ package world
 import (
 	"game/source-code/global"
 	"game/source-code/screens/battle"
+	"game/source-code/screens/loading"
 	"game/source-code/unit"
 	"pure-game-kit/data/assets"
 	"pure-game-kit/data/file"
@@ -45,12 +46,15 @@ func New(path string) *WorldScreen {
 //=================================================================
 
 func (w *WorldScreen) OnLoad() {
+	loading.Show("Loading:\nWorld Map...")
 	w.tmap = tiled.NewMap(assets.LoadTiledMap(w.path), global.Project)
+	loading.Show("Loading:\nWorld GUI...")
 	w.hud = gui.NewFromXMLs(file.LoadText("data/gui/world-hud.xml"), global.PopupDimGUI, global.ThemesGUI)
 	w.inventory = gui.NewFromXMLs(file.LoadText("data/gui/world-inventory.xml"), global.ThemesGUI)
 	w.settlement = gui.NewFromXMLs(file.LoadText("data/gui/world-settlement.xml"), global.ThemesGUI)
 	w.currentPopup = nil
 
+	loading.Show("Loading:\nWorld images...")
 	var timeCircle = assets.LoadTexture("art/UI/Time/time_circle.PNG")
 	w.timeCircle = graphics.NewSprite(timeCircle, 0, 0)
 
@@ -61,6 +65,7 @@ func (w *WorldScreen) OnLoad() {
 	assets.LoadTexture("art/UI/Buttons/btn_playx2.PNG")
 	assets.LoadTexture("art/UI/Buttons/btn_playx3.PNG")
 
+	loading.Show("Processing:\nWorld data...")
 	var solidLayers = w.tmap.FindLayersBy(property.LayerClass, "WorldSolids")
 	var roadLayers = w.tmap.FindLayersBy(property.LayerClass, "WorldRoads")
 	var settlements = w.tmap.FindLayersBy(property.LayerClass, "WorldSettlements")
