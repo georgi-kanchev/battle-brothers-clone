@@ -54,6 +54,11 @@ func (w *WorldScreen) OnLoad() {
 	w.settlement = gui.NewFromXMLs(file.LoadText("data/gui/world-settlement.xml"), global.ThemesGUI)
 	w.currentPopup = nil
 
+	var sc = global.Options.ScaleUI.Master
+	w.hud.Scale = global.Options.ScaleUI.World.HUD * sc
+	w.inventory.Scale = global.Options.ScaleUI.World.Inventory * sc
+	w.settlement.Scale = global.Options.ScaleUI.World.Settlement * sc
+
 	loading.Show("Loading:\nWorld images...")
 	var timeCircle = assets.LoadTexture("art/UI/Time/time_circle.PNG")
 	w.timeCircle = graphics.NewSprite(timeCircle, 0, 0)

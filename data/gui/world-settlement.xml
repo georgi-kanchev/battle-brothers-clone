@@ -1,4 +1,4 @@
-<GUI scale="2" volume="1">
+<GUI>
 	<Container id="settlement" x="CameraCenterX-300" y="CameraCenterY-320" width="600" height="700">
 		<Widget class="visual" id="settlement-bgr" themeId="panel" fillContainer="" />
 	</Container>

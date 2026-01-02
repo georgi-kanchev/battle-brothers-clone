@@ -1,0 +1,22 @@
+graphics:
+    window-state: 4
+    monitor: 0
+    vsync: false
+    target-fps: 60
+user-interface-scale:
+    master: 1.1
+    menu:
+        options: 1
+    world:
+        hud: 1
+        inventory: 1
+        settlement: 1
+    battle:
+        hud: 1
+        loot: 1
+audio-volume:
+    master: 1
+    music: 0.5
+    sound: 1
+controls: {}
+gameplay: {}

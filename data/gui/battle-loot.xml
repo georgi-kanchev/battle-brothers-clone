@@ -1,4 +1,4 @@
-<GUI scale="2" volume="1">
+<GUI>
 	<Container id="loot" x="CameraCenterX-500" y="CameraCenterY-320" width="1000" height="700">
 	</Container>
 	<Container id="items" x="TargetLeftX" y="TargetTopY" width="280" height="450" targetId="loot">

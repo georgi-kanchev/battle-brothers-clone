@@ -2,12 +2,14 @@ package main
 
 import (
 	"game/source-code/global"
+	"game/source-code/options"
 	"game/source-code/screens/battle"
 	"game/source-code/screens/loading"
 	"game/source-code/screens/menu"
 	"game/source-code/screens/world"
 	"pure-game-kit/data/assets"
 	"pure-game-kit/data/file"
+	"pure-game-kit/data/storage"
 	"pure-game-kit/execution/screens"
 	"pure-game-kit/input/keyboard"
 	"pure-game-kit/input/keyboard/key"
@@ -17,6 +19,8 @@ import (
 
 func main() {
 	window.Title = "Battle Brothers Clone"
+	loadAndApplyOptions()
+
 	window.KeepOpen()
 	global.ScreenLoading = screens.Add(loading.New(), true)
 
@@ -36,9 +40,23 @@ func main() {
 	screens.Enter(global.ScreenMainMenu, false)
 	for window.KeepOpen() {
 		if keyboard.IsKeyJustPressed(key.F5) {
+			var prevScreen = screens.CurrentId()
+			loadAndApplyOptions()
 			assets.ReloadAll()
 			global.Project = tiled.NewProject(assets.LoadTiledProject("data/project.tiled-project"))
 			screens.Reload()
+			screens.Enter(prevScreen, false)
 		}
 	}
+}
+
+func loadAndApplyOptions() {
+	var opts options.Options
+	storage.FromYAML(file.LoadText("data/options.yaml"), &opts)
+	global.Options = opts
+
+	window.IsVSynced = opts.Graphics.VSync
+	window.FrameRateLimit = byte(opts.Graphics.LimitFPS)
+	window.ApplyState(opts.Graphics.WindowState)
+	window.MoveToMonitor(opts.Graphics.Monitor)
 }

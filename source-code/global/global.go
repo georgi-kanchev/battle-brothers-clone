@@ -1,18 +1,19 @@
 package global
 
 import (
+	"game/source-code/options"
 	"pure-game-kit/execution/condition"
 	"pure-game-kit/gui"
 	"pure-game-kit/gui/field"
 	"pure-game-kit/tiled"
 )
 
-const Version = "v0.0.3"
-
 var ScreenLoading, ScreenMainMenu, ScreenWorld, ScreenBattle int
 var Project *tiled.Project
 var ThemesGUI, PopupDimGUI string
 var TimeScale float32 = 1
+
+var Options options.Options
 
 func TogglePopup(hud, currentPopup, popup *gui.GUI) *gui.GUI {
 	currentPopup = condition.If(currentPopup == popup, nil, popup)

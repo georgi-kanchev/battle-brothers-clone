@@ -1,4 +1,4 @@
-<GUI scale="2" volume="1">
+<GUI>
 	<Container id="turn-order" x="CameraLeftX+5" y="CameraTopY+5" width="180" height="250">
 		<Widget class="visual" id="turn-order-bgr" themeId="panel" fillContainer="" text=" Turn order:
 		 Looter

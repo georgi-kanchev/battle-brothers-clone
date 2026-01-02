@@ -1,4 +1,4 @@
-<GUI scale="2" volume="1">
+<GUI>
 	<Container id="buttons" x="CameraRightX-400" y="CameraCenterY" width="200" height="800" gapY="5" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
 		<Widget class="button" id="new" text="New Game" textLineHeight="35" />
 		<Widget class="button" id="load" text="Load Game" textLineHeight="35" newRow="" />
