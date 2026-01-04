@@ -11,7 +11,7 @@ import (
 )
 
 type turnManager struct {
-	turns          *flow.Sequence
+	turns          *flow.StateMachine
 	unitTakingTurn *unit.Unit
 
 	team1IsPlayer, team1Takingturn bool
@@ -24,12 +24,7 @@ type turnManager struct {
 }
 
 func newTurnManager() *turnManager {
-	var result = &turnManager{turns: flow.NewSequence()}
-	result.turns.SetSteps(
-		flow.NowDo(result.newTurnStart),
-		flow.NowDoAndKeepRepeating(result.waitForAction),
-	)
-	return result
+	return &turnManager{turns: flow.NewStateMachine()}
 }
 
 //=================================================================
@@ -41,7 +36,7 @@ func (tm *turnManager) startBattle(teamA, teamB []*unit.Unit, playerAttacks bool
 	tm.team1Takingturn = true
 	tm.currentTurnOrder = tm.calculateTurnOrder()
 	tm.unitTakingTurn = tm.currentTurnOrder[0]
-	tm.turns.GoToStep(0)
+	tm.turns.GoToState(tm.newTurn)
 }
 func (tm *turnManager) update(camera *graphics.Camera, tileW, tileH int) {
 	var x, y = tm.unitTakingTurn.Position()
@@ -58,26 +53,31 @@ func (tm *turnManager) update(camera *graphics.Camera, tileW, tileH int) {
 	camera.DrawLinesPath(10, palette.Azure, path...)
 	camera.DrawPoints(5, palette.Red, path...)
 
-	tm.turns.Update()
-}
-
-func (tm *turnManager) newTurnStart() {
-	var x, y = tm.unitTakingTurn.Position()
-	tm.walkRangeCells = tm.pathMap.MovementRange(int(x), int(y), tm.unitTakingTurn.MaxMoveCells)
-	tm.currentTurnOrder = tm.calculateTurnOrder()
-}
-func (tm *turnManager) waitForAction() {
-
-}
-func (tm *turnManager) isPlayerTurn() bool {
-	return tm.team1IsPlayer && tm.team1Takingturn
+	tm.turns.UpdateCurrentState()
 }
 
 //=================================================================
+
+func (tm *turnManager) isPlayerTurn() bool {
+	return tm.team1IsPlayer && tm.team1Takingturn
+}
 
 func (tm *turnManager) calculateTurnOrder() []*unit.Unit {
 	var allUnits = collection.Join(tm.team1, tm.team2)
 	collection.SortByField(allUnits, func(u *unit.Unit) int { return u.Initiative })
 	collection.Reverse(allUnits)
 	return allUnits
+}
+
+//=================================================================
+// states
+
+func (tm *turnManager) newTurn() {
+	var x, y = tm.unitTakingTurn.Position()
+	tm.walkRangeCells = tm.pathMap.MovementRange(int(x), int(y), tm.unitTakingTurn.MaxMoveCells)
+	tm.currentTurnOrder = tm.calculateTurnOrder()
+	tm.turns.GoToState(tm.waitForAction)
+}
+func (tm *turnManager) waitForAction() {
+
 }
