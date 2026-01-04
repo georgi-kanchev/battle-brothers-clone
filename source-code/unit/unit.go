@@ -3,21 +3,20 @@ package unit
 import (
 	"pure-game-kit/data/assets"
 	"pure-game-kit/graphics"
-	"pure-game-kit/utility/color/palette"
+	"pure-game-kit/utility/number"
 	"pure-game-kit/utility/random"
-	"pure-game-kit/utility/text"
 )
 
 type Unit struct {
-	x, y, MaxMoveCells float32
+	x, y float32
 
-	Initiative int
+	Initiative, Movement int
 
 	head, body, plate *graphics.Sprite
 }
 
 func New() *Unit {
-	return &Unit{MaxMoveCells: 5, Initiative: random.Range(30, 100)}
+	return &Unit{Movement: 50, Initiative: random.Range(30, 100)}
 }
 
 //=================================================================
@@ -45,18 +44,27 @@ func (u *Unit) Spawn(x, y float32, flip bool) {
 
 func (u *Unit) Draw(camera *graphics.Camera, tileWidth, tileHeight int) {
 	var tw, th = float32(tileWidth), float32(tileHeight)
-	var x, y = u.x*tw + (tw / 2), u.y*th + (th / 2)
+	var x, y = u.x*tw + (tw * 0.5), u.y*th + (th * 0.6)
 
 	u.plate.X, u.plate.Y = x, y
 	u.body.X, u.body.Y = x, y
 	u.head.X, u.head.Y = x, y
 
 	camera.DrawSprites(u.plate, u.body, u.head)
-	camera.DrawText("", text.New(u.Initiative), x, y-96, 32, palette.White)
 }
 
 //=================================================================
 
-func (u *Unit) Position() (x, y float32) {
+func (u *Unit) Cell() (x, y float32) {
 	return u.x, u.y
+}
+func (u *Unit) Position(tileW, tileH int) (x, y float32) {
+	var cx, cy = u.Cell()
+	return cx*float32(tileW) + float32(tileW/2), cy*float32(tileH) + float32(tileH/2)
+}
+
+func (u *Unit) IsHovered(camera *graphics.Camera, mouseCellX, mouseCellY float32) bool {
+	var hoversX = number.IsWithin(mouseCellX, u.x+0.5, 0.5)
+	var hoversY = number.IsWithin(mouseCellY, u.y+0.5, 0.5)
+	return hoversX && hoversY
 }

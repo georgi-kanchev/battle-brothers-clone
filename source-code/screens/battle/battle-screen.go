@@ -88,9 +88,10 @@ func (b *BattleScreen) OnUpdate() {
 	// b.tmap.Draw(b.camera)
 	b.camera.DrawSprites(b.tiles...)
 
-	b.turnManager.update(b.camera, tileW, tileH)
+	var ySortedUnits = b.ySortUnits()
+	b.turnManager.update(b.camera, ySortedUnits)
 
-	for _, unit := range b.ySortUnits() {
+	for _, unit := range ySortedUnits {
 		unit.Draw(b.camera, tileW, tileH)
 	}
 
@@ -145,7 +146,7 @@ func (b *BattleScreen) ySortUnits() []*unit.Unit {
 	var ySorted = make(map[float32][]*unit.Unit, len(b.units))
 
 	for _, unit := range b.units {
-		var _, y = unit.Position()
+		var _, y = unit.Cell()
 		ySorted[y] = append(ySorted[y], unit)
 	}
 
@@ -158,4 +159,10 @@ func (b *BattleScreen) ySortUnits() []*unit.Unit {
 	}
 
 	return result
+}
+func (b *BattleScreen) mouseCell() (x, y float32) {
+	var tileW = b.tmap.Properties[property.MapTileWidth].(int)
+	var tileH = b.tmap.Properties[property.MapTileHeight].(int)
+	var mx, my = b.camera.MousePosition()
+	return mx / float32(tileW), my / float32(tileH)
 }
