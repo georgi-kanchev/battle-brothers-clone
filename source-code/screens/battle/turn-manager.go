@@ -6,97 +6,61 @@ import (
 	"pure-game-kit/execution/condition"
 	"pure-game-kit/execution/flow"
 	"pure-game-kit/execution/screens"
-	"pure-game-kit/geometry"
-	"pure-game-kit/graphics"
-	"pure-game-kit/tiled/property"
 	"pure-game-kit/utility/collection"
-	"pure-game-kit/utility/color"
-	"pure-game-kit/utility/color/palette"
 	"pure-game-kit/utility/number"
 	"pure-game-kit/utility/random"
 )
 
 type turnManager struct {
-	pathMap       *geometry.ShapeGrid
 	team1, team2  []*unit.Unit
 	playerIsTeam1 bool
 
-	turnOrder       []*unit.Unit
-	turns           *flow.StateMachine
-	turnIndex       int
-	turnTakingTeam1 bool
+	order  []*unit.Unit
+	states *flow.StateMachine
+
+	curIndex int
+	curTeam1 bool
+
+	curWalkRangeCells [][2]int
 }
 
 func newTurnManager() *turnManager {
-	return &turnManager{turns: flow.NewStateMachine()}
+	return &turnManager{states: flow.NewStateMachine()}
 }
 
 //=================================================================
 
-func (tm *turnManager) startBattle(teamA, teamB []*unit.Unit, playerIsTeamA bool, pathMap *geometry.ShapeGrid) {
+func (tm *turnManager) startBattle(teamA, teamB []*unit.Unit, playerIsTeamA bool) {
 	tm.team1, tm.team2 = teamA, teamB
 	tm.playerIsTeam1 = playerIsTeamA
-	tm.pathMap = pathMap
-	tm.turnTakingTeam1 = tm.isFirstTeam1()
-	tm.turnOrder = tm.calculateTurnOrder()
-	tm.turnIndex = -1
+	tm.curTeam1 = tm.isFirstTeam1()
+	tm.order = tm.calculateTurnOrder()
+	tm.curIndex = -1
 
 	tm.nextTurn()
 }
-func (tm *turnManager) update(camera *graphics.Camera, ySortedUnits []*unit.Unit) {
-	tm.turns.UpdateCurrentState()
-
-	if tm.turnIndex == -1 {
-		return
-	}
-
-	var battle = screens.Current().(*BattleScreen)
-	var tileW = battle.tmap.Properties[property.MapTileWidth].(int)
-	var tileH = battle.tmap.Properties[property.MapTileHeight].(int)
-	var unitTakingTurn = tm.turnOrder[tm.turnIndex]
-	var x, y = unitTakingTurn.Position(tileW, tileH)
-	var mx, my = camera.MousePosition()
-
-	var cx, cy = unitTakingTurn.Cell()
-	var walkRangeCells = tm.pathMap.MovementRange(int(cx), int(cy), float32(unitTakingTurn.Movement)/10)
-	for _, cell := range walkRangeCells {
-		var x, y = float32(cell[0] * tileW), float32(cell[1] * tileH)
-		camera.DrawQuad(x, y, float32(tileW), float32(tileH), 0, color.FadeOut(palette.Red, 0.5))
-	}
-
-	var path = tm.pathMap.FindPathDiagonally(x, y, mx, my, false)
-	camera.DrawLinesPath(6, palette.Azure, path...)
-	camera.DrawPoints(3, palette.Red, path...)
-
-	var mcx, mcy = battle.mouseCell()
-	for i := len(ySortedUnits) - 1; i >= 0; i-- {
-		if ySortedUnits[i].IsHovered(camera, mcx, mcy) {
-			var ux, uy = ySortedUnits[i].Position(tileW, tileH)
-			camera.DrawQuad(ux-float32(tileW)/2, uy-float32(tileH)/2, 64, 64, 0, palette.White)
-			break
-		}
-	}
-
-	camera.DrawCircle(x, y, 32, palette.Azure)
-}
 
 func (tm *turnManager) nextTurn() {
-	tm.turnIndex++
+	tm.curIndex++
 
-	var newRound = tm.turnIndex >= len(tm.turnOrder)
+	var newRound = tm.curIndex >= len(tm.order)
 	if newRound {
-		tm.turnIndex = 0
+		tm.curIndex = 0
 		debug.Print("new round - - - - - - - - - - - - - - -")
 	}
 
-	tm.turnTakingTeam1 = collection.Contains(tm.team1, tm.turnOrder[tm.turnIndex])
-	tm.turns.GoToState(condition.If(tm.isPlayerTurn(), tm.playerTurn, tm.botTurn))
+	tm.curTeam1 = collection.Contains(tm.team1, tm.unit())
+	tm.states.GoToState(condition.If(tm.isPlayerTurn(), tm.playerTurn, tm.botTurn))
+	var cx, cy = tm.unit().Cell()
+	var battle = screens.Current().(*BattleScreen)
+	battle.recalculatePathMap()
+	tm.curWalkRangeCells = battle.pathMap.Range(int(cx), int(cy), float32(tm.unit().Movement)/10, true)
 }
 
 //=================================================================
 
 func (tm *turnManager) isPlayerTurn() bool {
-	return tm.playerIsTeam1 && tm.turnTakingTeam1
+	return tm.playerIsTeam1 && tm.curTeam1
 }
 func (tm *turnManager) isFirstTeam1() bool {
 	var initiativesTeam1, initiativesTeam2 []float32
@@ -114,6 +78,9 @@ func (tm *turnManager) isFirstTeam1() bool {
 	}
 
 	return avg1 > avg2
+}
+func (tm *turnManager) unit() *unit.Unit {
+	return tm.order[tm.curIndex]
 }
 
 func (tm *turnManager) calculateTurnOrder() []*unit.Unit {

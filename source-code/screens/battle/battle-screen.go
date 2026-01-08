@@ -15,7 +15,10 @@ import (
 	"pure-game-kit/tiled"
 	"pure-game-kit/tiled/property"
 	"pure-game-kit/utility/collection"
+	"pure-game-kit/utility/color"
+	"pure-game-kit/utility/color/palette"
 	"pure-game-kit/utility/number"
+	"pure-game-kit/utility/text"
 )
 
 type BattleScreen struct {
@@ -24,12 +27,17 @@ type BattleScreen struct {
 
 	hud, currentPopup, loot *gui.GUI
 
-	tmap  *tiled.Map
-	tiles []*graphics.Sprite
+	tmap    *tiled.Map
+	tiles   []*graphics.Sprite
+	pathMap *geometry.ShapeGrid
 
 	units []*unit.Unit
 
 	turnManager *turnManager
+
+	hoveredWalkRange bool
+	hoveredCell      [2]int
+	hoveredUnit      *unit.Unit
 }
 
 func New(mapPath string) *BattleScreen {
@@ -75,8 +83,7 @@ func (b *BattleScreen) OnEnter() {
 
 }
 func (b *BattleScreen) OnUpdate() {
-	var tileW = b.tmap.Properties[property.MapTileWidth].(int)
-	var tileH = b.tmap.Properties[property.MapTileHeight].(int)
+	var tileW, tileH = b.tileSize()
 
 	b.camera.SetScreenAreaToWindow()
 
@@ -88,12 +95,17 @@ func (b *BattleScreen) OnUpdate() {
 	// b.tmap.Draw(b.camera)
 	b.camera.DrawSprites(b.tiles...)
 
+	b.calculateHoverInfo()
+
 	var ySortedUnits = b.ySortUnits()
-	b.turnManager.update(b.camera, ySortedUnits)
+	b.turnManager.states.UpdateCurrentState()
+
+	b.drawBehindUnits()
 
 	for _, unit := range ySortedUnits {
 		unit.Draw(b.camera, tileW, tileH)
 	}
+	b.drawAboveUnits()
 
 	b.hud.UpdateAndDraw(b.camera)
 	if b.currentPopup != nil {
@@ -110,13 +122,7 @@ func (b *BattleScreen) Prepare(teamA, teamB []*unit.Unit, playerIsTeamA bool) {
 	b.spawnUnits(teamA, false, "BattleSpawnsTeamA")
 	b.spawnUnits(teamB, true, "BattleSpawnsTeamB")
 
-	var pathMapLayers = b.tmap.FindLayersBy(property.LayerClass, "BattlePathMap")
-	var pathMap *geometry.ShapeGrid
-	if len(pathMapLayers) > 0 {
-		pathMap = pathMapLayers[0].ExtractShapeGrid()
-	}
-
-	b.turnManager.startBattle(teamA, teamB, playerIsTeamA, pathMap)
+	b.turnManager.startBattle(teamA, teamB, playerIsTeamA)
 }
 
 //=================================================================
@@ -142,6 +148,90 @@ func (b *BattleScreen) handleInput() {
 		b.currentPopup = global.TogglePopup(b.hud, b.currentPopup, b.loot)
 	}
 }
+func (b *BattleScreen) calculateHoverInfo() {
+	var battle = screens.Current().(*BattleScreen)
+	var tileW, tileH = battle.tileSize()
+	var mx, my = battle.camera.MousePosition()
+
+	b.hoveredCell[0], b.hoveredCell[1] = int(mx/tileW), int(my/tileH)
+
+	b.hoveredUnit = nil
+	for _, unit := range b.units {
+		if unit.IsHovered(b.camera, mx/tileW, my/tileH) {
+			b.hoveredUnit = unit
+			break
+		}
+	}
+}
+func (b *BattleScreen) recalculatePathMap() {
+	var pathMapLayers = b.tmap.FindLayersBy(property.LayerClass, "BattlePathMap")
+	if len(pathMapLayers) > 0 {
+		b.pathMap = pathMapLayers[0].ExtractShapeGrid()
+	}
+
+	var tileW, tileH = b.tileSize()
+	for _, unit := range b.units {
+		if unit == b.turnManager.unit() {
+			continue
+		}
+		var ux, uy = unit.Position(tileW, tileH)
+		b.pathMap.SetAtCell(int(ux/tileW), int(uy/tileH), geometry.NewShapeRectangle(tileW/2, tileH/2, 0.5, 0.5))
+	}
+}
+
+func (b *BattleScreen) drawBehindUnits() {
+	var tileW, tileH = b.tileSize()
+
+	for _, cell := range b.turnManager.curWalkRangeCells {
+		var cx, cy = float32(cell[0]) * tileW, float32(cell[1]) * tileH
+		b.camera.DrawQuad(cx, cy, float32(tileW), float32(tileH), 0, color.FadeOut(palette.Red, 0.5))
+	}
+
+	if b.hoveredUnit != nil {
+		var ux, uy = b.hoveredUnit.Position(tileW, tileH)
+		b.camera.DrawQuad(ux-tileW/2, uy-tileH/2, 64, 64, 0, color.FadeOut(palette.White, 0.75))
+	}
+
+	var ux, uy = b.turnManager.unit().Position(tileW, tileH)
+	b.camera.DrawQuadFrame(ux-tileW/2, uy-tileH/2, tileW, tileH, 0, -2, palette.Azure)
+
+	var hx, hy = float32(b.hoveredCell[0]) * tileW, float32(b.hoveredCell[1]) * tileH
+	b.camera.DrawQuadFrame(hx, hy, tileW, tileH, 0, -1, palette.White)
+}
+func (b *BattleScreen) drawUnitStats(description string, unit *unit.Unit) {
+	var lineHeight = 80 / b.camera.Zoom
+	var txt = text.New(
+		description, "\n",
+		"Initiative: ", unit.Initiative, "\n",
+		"Movement: ", unit.Movement, "\n",
+	)
+	var lines = len(text.Split(txt, "\n"))
+	var blx, bly = b.camera.PointFromEdge(0, 1)
+	b.camera.DrawText("", txt, blx+50/b.camera.Zoom, bly-lineHeight*float32(lines), lineHeight, palette.White)
+}
+func (b *BattleScreen) drawAboveUnits() {
+	var tileW, tileH = b.tileSize()
+	var unit = b.turnManager.order[b.turnManager.curIndex]
+	var mx, my = b.camera.MousePosition()
+	var ux, uy = unit.Position(tileW, tileH)
+	var path = b.pathMap.FindPathDiagonally(ux, uy, mx, my, false)
+
+	if len(path) > 0 {
+		b.camera.DrawLinesPath(6, palette.Azure, path...)
+		b.camera.DrawPoints(3, palette.Red, path...)
+
+		var x, y = path[len(path)-1][0], path[len(path)-1][1]
+		var txt = text.New(unit.CalculateMovementPoints(path, tileW, tileH), "/", unit.Movement)
+		b.camera.DrawText("", txt, x, y, 50/b.camera.Zoom, palette.White)
+	}
+
+	if b.hoveredUnit != nil {
+		b.drawUnitStats("Hovered Unit", b.hoveredUnit)
+	} else {
+		b.drawUnitStats("Unit taking turn", b.turnManager.unit())
+	}
+}
+
 func (b *BattleScreen) ySortUnits() []*unit.Unit {
 	var ySorted = make(map[float32][]*unit.Unit, len(b.units))
 
@@ -160,9 +250,8 @@ func (b *BattleScreen) ySortUnits() []*unit.Unit {
 
 	return result
 }
-func (b *BattleScreen) mouseCell() (x, y float32) {
+func (b *BattleScreen) tileSize() (width, height float32) {
 	var tileW = b.tmap.Properties[property.MapTileWidth].(int)
 	var tileH = b.tmap.Properties[property.MapTileHeight].(int)
-	var mx, my = b.camera.MousePosition()
-	return mx / float32(tileW), my / float32(tileH)
+	return float32(tileW), float32(tileH)
 }
