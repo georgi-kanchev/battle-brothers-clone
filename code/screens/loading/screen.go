@@ -1,7 +1,7 @@
 package loading
 
 import (
-	"game/source-code/global"
+	"game/code/global"
 	"pure-game-kit/data/assets"
 	"pure-game-kit/execution/screens"
 	"pure-game-kit/graphics"

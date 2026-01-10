@@ -1,15 +1,17 @@
 package unit
 
 import (
+	"game/code/global"
 	"pure-game-kit/data/assets"
-	"pure-game-kit/execution/condition"
 	"pure-game-kit/graphics"
 	"pure-game-kit/utility/number"
 	"pure-game-kit/utility/random"
 )
 
 type Unit struct {
-	Initiative, Movement int
+	Initiative int
+
+	ActionMove *ActionMove
 
 	x, y float32
 
@@ -17,7 +19,7 @@ type Unit struct {
 }
 
 func New() *Unit {
-	return &Unit{Movement: 50, Initiative: random.Range(30, 100)}
+	return &Unit{ActionMove: NewActionMove(), Initiative: random.Range(30, 100)}
 }
 
 //=================================================================
@@ -43,8 +45,9 @@ func (u *Unit) Spawn(x, y float32, flip bool) {
 	}
 }
 
-func (u *Unit) Draw(camera *graphics.Camera, tileW, tileH float32) {
-	var x, y = u.x*tileW + (tileW * 0.5), u.y*tileH + (tileH * 0.6)
+func (u *Unit) Draw(camera *graphics.Camera) {
+	var tw, th = global.BattleTileWidth, global.BattleTileHeight
+	var x, y = u.x*tw + (tw * 0.5), u.y*th + (th * 0.6)
 
 	u.plate.X, u.plate.Y = x, y
 	u.body.X, u.body.Y = x, y
@@ -58,31 +61,14 @@ func (u *Unit) Draw(camera *graphics.Camera, tileW, tileH float32) {
 func (u *Unit) Cell() (x, y float32) {
 	return u.x, u.y
 }
-func (u *Unit) Position(tileW, tileH float32) (x, y float32) {
+func (u *Unit) Position() (x, y float32) {
+	var tw, th = global.BattleTileWidth, global.BattleTileHeight
 	var cx, cy = u.Cell()
-	return cx*tileW + tileW/2, cy*tileH + tileH/2
+	return cx*tw + tw/2, cy*th + th/2
 }
 
 func (u *Unit) IsHovered(camera *graphics.Camera, mouseCellX, mouseCellY float32) bool {
 	var hoversX = number.IsWithin(mouseCellX, u.x+0.5, 0.5)
 	var hoversY = number.IsWithin(mouseCellY, u.y+0.5, 0.5)
 	return hoversX && hoversY
-}
-
-func (u *Unit) CalculateMovementPoints(path [][2]float32, tileW, tileH float32) int {
-	if len(path) < 2 {
-		return 0
-	}
-
-	var totalPoints = 0
-	for i := 1; i < len(path); i++ {
-		var currX, currY = int(path[i][0] / tileW), int(path[i][1] / tileH)
-		var prevX, prevY = int(path[i-1][0] / tileW), int(path[i-1][1] / tileH)
-		var dx, dy = number.Absolute(currX - prevX), number.Absolute(currY - prevY)
-		var diagonal = dx > 0 && dy > 0
-
-		totalPoints += condition.If(diagonal, 15, 10)
-	}
-
-	return totalPoints
 }

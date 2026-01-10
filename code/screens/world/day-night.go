@@ -1,7 +1,7 @@
 package world
 
 import (
-	"game/source-code/global"
+	"game/code/global"
 	"pure-game-kit/gui/field"
 	"pure-game-kit/utility/color"
 	"pure-game-kit/utility/number"

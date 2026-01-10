@@ -1,7 +1,7 @@
 package battle
 
 import (
-	"game/source-code/unit"
+	"game/code/unit"
 	"pure-game-kit/debug"
 	"pure-game-kit/execution/condition"
 	"pure-game-kit/execution/flow"
@@ -49,12 +49,14 @@ func (tm *turnManager) nextTurn() {
 		debug.Print("new round - - - - - - - - - - - - - - -")
 	}
 
-	tm.curTeam1 = collection.Contains(tm.team1, tm.unit())
+	tm.curTeam1 = collection.Contains(tm.team1, tm.unitActing())
 	tm.states.GoToState(condition.If(tm.isPlayerTurn(), tm.playerTurn, tm.botTurn))
-	var cx, cy = tm.unit().Cell()
+	var cx, cy = tm.unitActing().Cell()
 	var battle = screens.Current().(*BattleScreen)
+	var cells = float32(tm.unitActing().ActionMove.Points) / 10
+
 	battle.recalculatePathMap()
-	tm.curWalkRangeCells = battle.pathMap.Range(int(cx), int(cy), float32(tm.unit().Movement)/10, true)
+	tm.curWalkRangeCells = battle.pathMap.Range(int(cx), int(cy), cells, true)
 }
 
 //=================================================================
@@ -79,7 +81,7 @@ func (tm *turnManager) isFirstTeam1() bool {
 
 	return avg1 > avg2
 }
-func (tm *turnManager) unit() *unit.Unit {
+func (tm *turnManager) unitActing() *unit.Unit {
 	return tm.order[tm.curIndex]
 }
 

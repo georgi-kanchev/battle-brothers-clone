@@ -1,9 +1,9 @@
 package battle
 
 import (
-	"game/source-code/global"
-	"game/source-code/screens/loading"
-	"game/source-code/unit"
+	"game/code/global"
+	"game/code/screens/loading"
+	"game/code/unit"
 	"pure-game-kit/data/assets"
 	"pure-game-kit/data/file"
 	"pure-game-kit/execution/screens"
@@ -35,9 +35,8 @@ type BattleScreen struct {
 
 	turnManager *turnManager
 
-	hoveredWalkRange bool
-	hoveredCell      [2]int
-	hoveredUnit      *unit.Unit
+	hoveredCell [2]int
+	hoveredUnit *unit.Unit
 }
 
 func New(mapPath string) *BattleScreen {
@@ -65,6 +64,8 @@ func (b *BattleScreen) OnLoad() {
 		b.tiles = append(b.tiles, l.ExtractSprites()...)
 	}
 
+	global.BattleTileWidth = float32(b.tmap.Properties[property.MapTileWidth].(int))
+	global.BattleTileHeight = float32(b.tmap.Properties[property.MapTileHeight].(int))
 	// assets.SetTextureSmoothness("art/Battlegrounds/placeholder-tiles.png", false)
 }
 func (b *BattleScreen) OnEnter() {
@@ -83,8 +84,6 @@ func (b *BattleScreen) OnEnter() {
 
 }
 func (b *BattleScreen) OnUpdate() {
-	var tileW, tileH = b.tileSize()
-
 	b.camera.SetScreenAreaToWindow()
 
 	if b.currentPopup == nil {
@@ -103,7 +102,7 @@ func (b *BattleScreen) OnUpdate() {
 	b.drawBehindUnits()
 
 	for _, unit := range ySortedUnits {
-		unit.Draw(b.camera, tileW, tileH)
+		unit.Draw(b.camera)
 	}
 	b.drawAboveUnits()
 
@@ -150,14 +149,14 @@ func (b *BattleScreen) handleInput() {
 }
 func (b *BattleScreen) calculateHoverInfo() {
 	var battle = screens.Current().(*BattleScreen)
-	var tileW, tileH = battle.tileSize()
 	var mx, my = battle.camera.MousePosition()
+	var tw, th = global.BattleTileWidth, global.BattleTileHeight
 
-	b.hoveredCell[0], b.hoveredCell[1] = int(mx/tileW), int(my/tileH)
+	b.hoveredCell[0], b.hoveredCell[1] = int(mx/tw), int(my/th)
 
 	b.hoveredUnit = nil
 	for _, unit := range b.units {
-		if unit.IsHovered(b.camera, mx/tileW, my/tileH) {
+		if unit.IsHovered(b.camera, mx/tw, my/th) {
 			b.hoveredUnit = unit
 			break
 		}
@@ -169,68 +168,60 @@ func (b *BattleScreen) recalculatePathMap() {
 		b.pathMap = pathMapLayers[0].ExtractShapeGrid()
 	}
 
-	var tileW, tileH = b.tileSize()
+	var tw, th = global.BattleTileWidth, global.BattleTileHeight
 	for _, unit := range b.units {
-		if unit == b.turnManager.unit() {
+		if unit == b.turnManager.unitActing() {
 			continue
 		}
-		var ux, uy = unit.Position(tileW, tileH)
-		b.pathMap.SetAtCell(int(ux/tileW), int(uy/tileH), geometry.NewShapeRectangle(tileW/2, tileH/2, 0.5, 0.5))
+		var ux, uy = unit.Position()
+		b.pathMap.SetAtCell(int(ux/tw), int(uy/th), geometry.NewShapeRectangle(tw/2, th/2, 0.5, 0.5))
 	}
 }
 
 func (b *BattleScreen) drawBehindUnits() {
-	var tileW, tileH = b.tileSize()
+	var tw, th = global.BattleTileWidth, global.BattleTileHeight
 
 	for _, cell := range b.turnManager.curWalkRangeCells {
-		var cx, cy = float32(cell[0]) * tileW, float32(cell[1]) * tileH
-		b.camera.DrawQuad(cx, cy, float32(tileW), float32(tileH), 0, color.FadeOut(palette.Red, 0.5))
+		var cx, cy = float32(cell[0]) * tw, float32(cell[1]) * th
+		b.camera.DrawQuad(cx, cy, float32(tw), float32(th), 0, color.FadeOut(palette.Red, 0.5))
 	}
 
 	if b.hoveredUnit != nil {
-		var ux, uy = b.hoveredUnit.Position(tileW, tileH)
-		b.camera.DrawQuad(ux-tileW/2, uy-tileH/2, 64, 64, 0, color.FadeOut(palette.White, 0.75))
+		var ux, uy = b.hoveredUnit.Position()
+		b.camera.DrawQuad(ux-tw/2, uy-th/2, 64, 64, 0, color.FadeOut(palette.White, 0.75))
 	}
 
-	var ux, uy = b.turnManager.unit().Position(tileW, tileH)
-	b.camera.DrawQuadFrame(ux-tileW/2, uy-tileH/2, tileW, tileH, 0, -2, palette.Azure)
+	var ux, uy = b.turnManager.unitActing().Position()
+	b.camera.DrawQuadFrame(ux-tw/2, uy-th/2, tw, th, 0, -2, palette.Azure)
 
-	var hx, hy = float32(b.hoveredCell[0]) * tileW, float32(b.hoveredCell[1]) * tileH
-	b.camera.DrawQuadFrame(hx, hy, tileW, tileH, 0, -1, palette.White)
+	var hx, hy = float32(b.hoveredCell[0]) * tw, float32(b.hoveredCell[1]) * th
+	b.camera.DrawQuadFrame(hx, hy, tw, th, 0, -1, palette.White)
+}
+func (b *BattleScreen) drawAboveUnits() {
+	var unit = b.turnManager.unitActing()
+	unit.ActionMove.DrawPathToMouse(b.camera, unit, b.pathMap)
+
+	if b.hoveredUnit != nil {
+		b.drawUnitStats("Hovered Unit", b.hoveredUnit)
+	} else {
+		b.drawUnitStats("Unit taking turn", b.turnManager.unitActing())
+	}
 }
 func (b *BattleScreen) drawUnitStats(description string, unit *unit.Unit) {
 	var lineHeight = 80 / b.camera.Zoom
 	var txt = text.New(
 		description, "\n",
 		"Initiative: ", unit.Initiative, "\n",
-		"Movement: ", unit.Movement, "\n",
+		"Movement: ", unit.ActionMove.Points, "/", unit.ActionMove.BasePoints, "\n",
 	)
 	var lines = len(text.Split(txt, "\n"))
 	var blx, bly = b.camera.PointFromEdge(0, 1)
-	b.camera.DrawText("", txt, blx+50/b.camera.Zoom, bly-lineHeight*float32(lines), lineHeight, palette.White)
+	var x, y = blx + 50/b.camera.Zoom, bly - lineHeight*float32(lines)
+	b.camera.DrawText("", txt, x, y, lineHeight, 0.95, palette.Black)
+	b.camera.DrawText("", txt, x, y, lineHeight, 0.45, palette.White)
 }
-func (b *BattleScreen) drawAboveUnits() {
-	var tileW, tileH = b.tileSize()
-	var unit = b.turnManager.order[b.turnManager.curIndex]
-	var mx, my = b.camera.MousePosition()
-	var ux, uy = unit.Position(tileW, tileH)
-	var path = b.pathMap.FindPathDiagonally(ux, uy, mx, my, false)
 
-	if len(path) > 0 {
-		b.camera.DrawLinesPath(6, palette.Azure, path...)
-		b.camera.DrawPoints(3, palette.Red, path...)
-
-		var x, y = path[len(path)-1][0], path[len(path)-1][1]
-		var txt = text.New(unit.CalculateMovementPoints(path, tileW, tileH), "/", unit.Movement)
-		b.camera.DrawText("", txt, x, y, 50/b.camera.Zoom, palette.White)
-	}
-
-	if b.hoveredUnit != nil {
-		b.drawUnitStats("Hovered Unit", b.hoveredUnit)
-	} else {
-		b.drawUnitStats("Unit taking turn", b.turnManager.unit())
-	}
-}
+//=================================================================
 
 func (b *BattleScreen) ySortUnits() []*unit.Unit {
 	var ySorted = make(map[float32][]*unit.Unit, len(b.units))
@@ -249,9 +240,4 @@ func (b *BattleScreen) ySortUnits() []*unit.Unit {
 	}
 
 	return result
-}
-func (b *BattleScreen) tileSize() (width, height float32) {
-	var tileW = b.tmap.Properties[property.MapTileWidth].(int)
-	var tileH = b.tmap.Properties[property.MapTileHeight].(int)
-	return float32(tileW), float32(tileH)
 }

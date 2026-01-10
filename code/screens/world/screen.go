@@ -1,10 +1,10 @@
 package world
 
 import (
-	"game/source-code/global"
-	"game/source-code/screens/battle"
-	"game/source-code/screens/loading"
-	"game/source-code/unit"
+	"game/code/global"
+	"game/code/screens/battle"
+	"game/code/screens/loading"
+	"game/code/unit"
 	"pure-game-kit/data/assets"
 	"pure-game-kit/data/file"
 	"pure-game-kit/execution/screens"

@@ -1,8 +1,8 @@
 package menu
 
 import (
-	"game/source-code/global"
-	"game/source-code/screens/loading"
+	"game/code/global"
+	"game/code/screens/loading"
 	"pure-game-kit/data/assets"
 	"pure-game-kit/data/file"
 	"pure-game-kit/execution/screens"

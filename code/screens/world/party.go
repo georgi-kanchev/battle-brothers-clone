@@ -1,8 +1,8 @@
 package world
 
 import (
-	"game/source-code/global"
-	"game/source-code/unit"
+	"game/code/global"
+	"game/code/unit"
 	"pure-game-kit/execution/screens"
 	"pure-game-kit/geometry"
 	"pure-game-kit/input/keyboard"

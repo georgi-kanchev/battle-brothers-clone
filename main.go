@@ -1,12 +1,12 @@
 package main
 
 import (
-	"game/source-code/global"
-	"game/source-code/options"
-	"game/source-code/screens/battle"
-	"game/source-code/screens/loading"
-	"game/source-code/screens/menu"
-	"game/source-code/screens/world"
+	"game/code/global"
+	"game/code/options"
+	"game/code/screens/battle"
+	"game/code/screens/loading"
+	"game/code/screens/menu"
+	"game/code/screens/world"
 	"pure-game-kit/data/assets"
 	"pure-game-kit/data/file"
 	"pure-game-kit/data/storage"
@@ -53,7 +53,7 @@ func main() {
 func loadAndApplyOptions() {
 	var opts options.Options
 	storage.FromYAML(file.LoadText("data/options.yaml"), &opts)
-	global.Options = opts
+	global.Options = &opts
 
 	window.IsVSynced = opts.Graphics.VSync
 	window.FrameRateLimit = byte(opts.Graphics.LimitFPS)
