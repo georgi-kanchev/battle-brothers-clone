@@ -15,7 +15,7 @@ var TimeScale float32 = 1
 
 var Options *options.Options
 
-var BattleTileWidth, BattleTileHeight float32 = 0, 0
+var BattleTileWidth, BattleTileHeight, BattleTileColumns, BattleTileRows float32 = 0, 0, 0, 0
 
 func TogglePopup(hud, currentPopup, popup *gui.GUI) *gui.GUI {
 	currentPopup = condition.If(currentPopup == popup, nil, popup)

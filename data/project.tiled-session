@@ -2,15 +2,15 @@
     "activeFile": "battlegrounds/test/map.tmx",
     "expandedProjectPaths": [
         "battlegrounds/test",
-        ".",
-        "worlds",
         "data",
+        "worlds/test",
+        "worlds",
+        "test",
         "data/battlegrounds",
+        "data/worlds/test",
+        ".",
         "data/battlegrounds/test",
         "data/worlds",
-        "test",
-        "worlds/test",
-        "data/worlds/test",
         "battlegrounds"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -27,14 +27,14 @@
         },
         "battlegrounds/test/map.tmx": {
             "expandedObjectLayers": [
-                3,
-                2
+                2,
+                3
             ],
-            "scale": 1.5,
+            "scale": 0.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 450.66666666666663,
-                "y": 1033.6666666666665
+                "x": 718,
+                "y": 1215
             }
         },
         "data/battlegrounds/battleground.tsx": {
@@ -91,7 +91,7 @@
             "selectedLayer": 3,
             "viewCenter": {
                 "x": 2360.5675146771036,
-                "y": 1321.3470319634703
+                "y": 1320.5316373124592
             }
         },
         "worlds/test/tileset.tsx": {

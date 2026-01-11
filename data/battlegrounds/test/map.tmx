@@ -132,7 +132,7 @@
   </object>
  </objectgroup>
  <objectgroup color="#ff0000" id="2" name="SpawnsTeamA" class="BattleSpawnsTeamA">
-  <object id="44" x="416" y="928">
+  <object id="44" x="288" y="1440">
    <point/>
   </object>
   <object id="45" x="352" y="992">
