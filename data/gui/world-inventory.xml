@@ -1,16 +1,92 @@
 <GUI>
-	<Container id="inventory" x="CameraCenterX-500" y="CameraCenterY-320" width="1000" height="700">
+	<Container id="inventory" x="CameraCenterX-505" y="CameraCenterY-300" width="1010" height="680">
 	</Container>
-	<Container id="equipment" x="TargetLeftX" y="TargetTopY" width="280" height="450" targetId="inventory">
-		<Widget class="visual" id="equipment-bgr" themeId="panel" fillContainer="" />
-	</Container>
-	<Container id="stash" x="TargetLeftX+280" y="TargetTopY+100" width="440" height="350" targetId="inventory">
-		<Widget class="visual" id="stash-bgr" themeId="panel" fillContainer="" />
-	</Container>
-	<Container id="perks" x="TargetRightX-280" y="TargetTopY" width="280" height="450" targetId="inventory">
-		<Widget class="visual" id="perks-bgr" themeId="panel" fillContainer="" />
-	</Container>
-	<Container id="units" x="TargetLeftX" y="TargetBottomY-250" width="1000" height="250" targetId="inventory">
+	<Container id="units" x="TargetLeftX" y="TargetTopY" width="300" height="440" targetId="inventory" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
 		<Widget class="visual" id="units-bgr" themeId="panel" fillContainer="" />
+		<Widget class="visual" id="frontline" text=" Frontline" textLineHeight="35" />
+		<Widget class="button" id="unit1" text=" Tosho" textLineHeight="35" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="unit2" text=" Pesho" textLineHeight="35" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="unit3" text=" Gosho" textLineHeight="35" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="unit4" text=" Rosho" textLineHeight="35" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="unit5" text=" Alex" textLineHeight="35" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="unit6" text=" Vankata" textLineHeight="35" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="unit7" text=" Sladurcho" textLineHeight="35" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="unit8" text=" Grozniya" textLineHeight="35" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="unit9" text=" Hubaviya" textLineHeight="35" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="unit10" text=" Pisho" textLineHeight="35" textAlignmentX="0" newRow="" />
+		<Widget class="visual" id="backline" text=" Backline" textLineHeight="35" newRow="" />
+		<Widget class="button" id="unit11" text=" Guzyo" textLineHeight="35" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="unit12" text=" Trohan" textLineHeight="35" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="unit13" text=" Farkan" textLineHeight="35" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="unit14" text=" Trohan" textLineHeight="35" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="unit15" text=" Myuhmyun" textLineHeight="35" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="unit16" text=" Ali" textLineHeight="35" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="unit17" text=" Banicata" textLineHeight="35" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="unit18" text=" Restoto" textLineHeight="35" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="unit19" text=" Prosyaka" textLineHeight="35" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="unit20" text=" Huligana" textLineHeight="35" textAlignmentX="0" newRow="" />
+	</Container>
+	<Container id="stash" x="TargetLeftX+300" y="TargetTopY" width="410" height="440" targetId="inventory" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
+		<Widget class="visual" id="stash-bgr" themeId="panel" fillContainer="" />
+		<Widget class="button" id="item1" width="80" height="80" />
+		<Widget class="button" id="item2" width="80" height="80" />
+		<Widget class="button" id="item3" width="80" height="80" />
+		<Widget class="button" id="item4" width="80" height="80" />
+		<Widget class="button" id="item5" width="80" height="80" />
+		<Widget class="button" id="item6" width="80" height="80" newRow="" />
+		<Widget class="button" id="item7" width="80" height="80" />
+		<Widget class="button" id="item8" width="80" height="80" />
+		<Widget class="button" id="item9" width="80" height="80" />
+		<Widget class="button" id="item10" width="80" height="80" />
+		<Widget class="button" id="item11" width="80" height="80" newRow="" />
+		<Widget class="button" id="item12" width="80" height="80" />
+		<Widget class="button" id="item13" width="80" height="80" />
+		<Widget class="button" id="item14" width="80" height="80" />
+		<Widget class="button" id="item15" width="80" height="80" />
+		<Widget class="button" id="item16" width="80" height="80" newRow="" />
+		<Widget class="button" id="item17" width="80" height="80" />
+		<Widget class="button" id="item18" width="80" height="80" />
+		<Widget class="button" id="item19" width="80" height="80" />
+		<Widget class="button" id="item20" width="80" height="80" />
+		<Widget class="button" id="item21" width="80" height="80" newRow="" />
+		<Widget class="button" id="item22" width="80" height="80" />
+		<Widget class="button" id="item23" width="80" height="80" />
+		<Widget class="button" id="item24" width="80" height="80" />
+		<Widget class="button" id="item25" width="80" height="80" />
+		<Widget class="button" id="item26" width="80" height="80" newRow="" />
+		<Widget class="button" id="item27" width="80" height="80" />
+		<Widget class="button" id="item28" width="80" height="80" />
+		<Widget class="button" id="item29" width="80" height="80" />
+		<Widget class="button" id="item30" width="80" height="80" />
+		<Widget class="button" id="item41" width="80" height="80" newRow="" />
+		<Widget class="button" id="item42" width="80" height="80" />
+		<Widget class="button" id="item43" width="80" height="80" />
+		<Widget class="button" id="item44" width="80" height="80" />
+		<Widget class="button" id="item45" width="80" height="80" />
+		<Widget class="button" id="item46" width="80" height="80" newRow="" />
+		<Widget class="button" id="item47" width="80" height="80" />
+		<Widget class="button" id="item48" width="80" height="80" />
+		<Widget class="button" id="item49" width="80" height="80" />
+		<Widget class="button" id="item50" width="80" height="80" />
+	</Container>
+	<Container id="name" x="TargetRightX-300" y="TargetTopY" width="300" height="50" targetId="inventory">
+		<Widget class="visual" id="name-bgr" themeId="panel" fillContainer="" />
+		<Widget class="visual" id="name" text="Unit Name" textLineHeight="40" textAlignmentX="0.5" textAlignmentY="0.5" height="50" />
+	</Container>
+	<Container id="equipment" x="TargetRightX-300" y="TargetTopY+50" width="300" height="160" targetId="inventory" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
+		<Widget class="visual" id="equipment-bgr" themeId="panel" fillContainer="" />
+		<Widget class="button" id="main" text="main" width="80" height="80" />
+		<Widget class="button" id="helmet" text="helmet" width="80" height="80" />
+		<Widget class="button" id="secondary" text="2nd" width="80" height="80" newRow="" />
+		<Widget class="button" id="armor" text="armor" width="80" height="80" />
+	</Container>
+	<Container id="stats" x="TargetRightX-300" y="TargetTopY+210" width="300" height="230" targetId="inventory">
+		<Widget class="visual" id="stats-bgr" themeId="panel" fillContainer="" />
+		<Widget class="visual" id="movement" text=" Movement = 50" textLineHeight="30" textAlignmentX="0" height="30" newRow="" />
+		<Widget class="visual" id="initiative" text=" Initiative = 65" textLineHeight="30" textAlignmentX="0" height="30" newRow="" />
+	</Container>
+	<Container id="perks" x="TargetLeftX" y="TargetBottomY-250" width="1010" height="250" targetId="inventory">
+		<Widget class="visual" id="perks-bgr" themeId="panel" fillContainer="" />
+		<Widget class="visual" id="perk-info" text="PERKS" textLineHeight="60" textAlignmentX="0.5" textAlignmentY="0.5" />
 	</Container>
 </GUI>

@@ -15,6 +15,7 @@ import (
 	"pure-game-kit/tiled"
 	"pure-game-kit/tiled/property"
 	"pure-game-kit/utility/number"
+	"pure-game-kit/utility/text"
 )
 
 type BattleScreen struct {
@@ -57,8 +58,15 @@ func (b *BattleScreen) OnLoad() {
 
 	loading.Show("Processing:\nBattle data...")
 	var layers = b.tmap.FindLayersBy(property.LayerClass, "BattleMap")
+	layers = append(layers, b.tmap.FindLayersBy(property.LayerClass, "BattlePathMap")...)
 	for _, l := range layers {
 		b.tiles = append(b.tiles, l.ExtractSprites()...)
+	}
+
+	var atlasId = b.tmap.Tilesets[0].Properties["atlasId"].(string)
+	for i := range 31 {
+		var tileId = text.New(atlasId, "/", i)
+		assets.SetTextureAtlasTile(atlasId, tileId, float32(i), 1, 1, 1, 0, false)
 	}
 }
 func (b *BattleScreen) OnEnter() {

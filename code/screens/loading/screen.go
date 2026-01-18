@@ -16,8 +16,7 @@ type LoadingScreen struct {
 }
 
 func New() *LoadingScreen {
-	var menu = &LoadingScreen{camera: graphics.NewCamera(1)}
-	return menu
+	return &LoadingScreen{camera: graphics.NewCamera(1)}
 }
 
 func Show(message string) {
@@ -49,4 +48,5 @@ func (l *LoadingScreen) OnExit()   {}
 
 // =================================================================
 // private
+
 var msg = ""
