@@ -45,23 +45,23 @@ func New(path string) *WorldScreen {
 
 //=================================================================
 
-func (w *WorldScreen) OnLoad() {
+func (ws *WorldScreen) OnLoad() {
 	loading.Show("Loading:\nWorld Map...")
-	w.tmap = tiled.NewMap(assets.LoadTiledMap(w.path), global.Project)
+	ws.tmap = tiled.NewMap(assets.LoadTiledMap(ws.path), global.Project)
 	loading.Show("Loading:\nWorld GUI...")
-	w.hud = gui.NewFromXMLs(file.LoadText("data/gui/world-hud.xml"), global.PopupDimGUI, global.ThemesGUI)
-	w.inventory = gui.NewFromXMLs(file.LoadText("data/gui/world-inventory.xml"), global.ThemesGUI)
-	w.settlement = gui.NewFromXMLs(file.LoadText("data/gui/world-settlement.xml"), global.ThemesGUI)
-	w.currentPopup = nil
+	ws.hud = gui.NewFromXMLs(file.LoadText("data/gui/world-hud.xml"), global.PopupDimGUI, global.ThemesGUI)
+	ws.inventory = gui.NewFromXMLs(file.LoadText("data/gui/world-inventory.xml"), global.ThemesGUI)
+	ws.settlement = gui.NewFromXMLs(file.LoadText("data/gui/world-settlement.xml"), global.ThemesGUI)
+	ws.currentPopup = nil
 
 	var sc = global.Options.ScaleUI.Master
-	w.hud.Scale = global.Options.ScaleUI.World.HUD * sc
-	w.inventory.Scale = global.Options.ScaleUI.World.Inventory * sc
-	w.settlement.Scale = global.Options.ScaleUI.World.Settlement * sc
+	ws.hud.Scale = global.Options.ScaleUI.World.HUD * sc
+	ws.inventory.Scale = global.Options.ScaleUI.World.Inventory * sc
+	ws.settlement.Scale = global.Options.ScaleUI.World.Settlement * sc
 
 	loading.Show("Loading:\nWorld images...")
 	var timeCircle = assets.LoadTexture("art/UI/Time/time_circle.PNG")
-	w.timeCircle = graphics.NewSprite(timeCircle, 0, 0)
+	ws.timeCircle = graphics.NewSprite(timeCircle, 0, 0)
 
 	assets.LoadTexture("art/UI/Time/time_top.PNG")
 	assets.LoadTexture("art/UI/Buttons/btn.PNG")
@@ -70,62 +70,69 @@ func (w *WorldScreen) OnLoad() {
 	assets.LoadTexture("art/UI/Buttons/btn_playx2.PNG")
 	assets.LoadTexture("art/UI/Buttons/btn_playx3.PNG")
 
+	assets.LoadTexture("art/Character/head.PNG")
+	assets.LoadTexture("art/Character/body.PNG")
+	assets.LoadTexture("art/Character/plate.PNG")
+
 	loading.Show("Processing:\nWorld data...")
-	var solidLayers = w.tmap.FindLayersBy(property.LayerClass, "WorldSolids")
-	var roadLayers = w.tmap.FindLayersBy(property.LayerClass, "WorldRoads")
-	var settlements = w.tmap.FindLayersBy(property.LayerClass, "WorldSettlements")
-	w.mapLayers = w.tmap.FindLayersBy(property.LayerClass, "WorldMap")
+	var solidLayers = ws.tmap.FindLayersBy(property.LayerClass, "WorldSolids")
+	var roadLayers = ws.tmap.FindLayersBy(property.LayerClass, "WorldRoads")
+	var settlements = ws.tmap.FindLayersBy(property.LayerClass, "WorldSettlements")
+	ws.mapLayers = ws.tmap.FindLayersBy(property.LayerClass, "WorldMap")
 	for _, s := range solidLayers {
-		w.solids = append(w.solids, s.ExtractShapes()...)
+		ws.solids = append(ws.solids, s.ExtractShapes()...)
 	}
 	for _, r := range roadLayers {
-		w.roads = append(w.roads, r.ExtractLines()...)
+		ws.roads = append(ws.roads, r.ExtractLines()...)
 	}
 	if len(settlements) > 0 {
-		w.settlements = settlements[0]
+		ws.settlements = settlements[0]
 	}
 
 	for _, id := range assets.LoadedTextureIds() {
 		assets.SetTextureSmoothness(id, true)
 	}
 }
-func (w *WorldScreen) OnEnter() {
+func (ws *WorldScreen) OnEnter() {
 }
-func (w *WorldScreen) OnUpdate() {
-	w.camera.SetScreenAreaToWindow()
+func (ws *WorldScreen) OnUpdate() {
+	ws.camera.SetScreenAreaToWindow()
 
 	//world.tmap.Draw(world.camera)
-	for _, m := range w.mapLayers {
-		m.Draw(w.camera)
+	for _, m := range ws.mapLayers {
+		m.Draw(ws.camera)
 	}
 
-	for _, party := range w.parties {
+	for _, party := range ws.parties {
 		party.Update()
 	}
 
-	w.handleDayNightCycle()
+	ws.handleDayNightCycle()
 
-	w.hud.UpdateAndDraw(w.camera)
-	if w.currentPopup != nil {
-		w.currentPopup.UpdateAndDraw(w.camera)
+	ws.hud.UpdateAndDraw(ws.camera)
+	if ws.currentPopup != nil {
+		ws.currentPopup.UpdateAndDraw(ws.camera)
 	}
 
-	if w.resultingCursorNonGUI != -1 {
-		mouse.SetCursor(w.resultingCursorNonGUI)
+	if ws.resultingCursorNonGUI != -1 {
+		mouse.SetCursor(ws.resultingCursorNonGUI)
 	}
 
-	w.handleInput()
+	ws.handleInput()
 
-	if w.currentPopup == w.settlement {
-		w.handleSettlementPopup()
+	switch ws.currentPopup {
+	case ws.settlement:
+		ws.handleSettlementPopup()
+	case ws.inventory:
+		ws.handleInventoryPopup()
 	}
 
-	if w.hud.IsButtonJustClicked("main-menu", w.camera) {
+	if ws.hud.IsButtonJustClicked("main-menu", ws.camera) {
 		screens.Enter(global.ScreenMainMenu, false)
 	}
 }
 
-func (w *WorldScreen) OnExit() {
+func (ws *WorldScreen) OnExit() {
 }
 
 //=================================================================
@@ -134,15 +141,15 @@ func (w *WorldScreen) OnExit() {
 var teamA = []*unit.Unit{unit.New(), unit.New(), unit.New(), unit.New(), unit.New()}
 var teamB = []*unit.Unit{unit.New(), unit.New(), unit.New()}
 
-func (w *WorldScreen) handleInput() {
+func (ws *WorldScreen) handleInput() {
 	if keyboard.IsKeyJustPressed(key.I) {
-		w.currentPopup = global.TogglePopup(w.hud, w.currentPopup, w.inventory)
+		ws.currentPopup = global.TogglePopup(ws.hud, ws.currentPopup, ws.inventory)
 	} else if keyboard.IsKeyJustPressed(key.B) {
 		screens.Enter(global.ScreenBattle, false)
 		var scr = screens.Current().(*battle.BattleScreen)
 		scr.Prepare(teamA, teamB, true)
-	} else if keyboard.IsKeyJustPressed(key.Escape) && w.currentPopup != nil {
-		w.currentPopup = global.TogglePopup(w.hud, w.currentPopup, w.currentPopup)
-		w.parties[0].goingToSettlement = nil
+	} else if keyboard.IsKeyJustPressed(key.Escape) && ws.currentPopup != nil {
+		ws.currentPopup = global.TogglePopup(ws.hud, ws.currentPopup, ws.currentPopup)
+		ws.parties[0].goingToSettlement = nil
 	}
 }

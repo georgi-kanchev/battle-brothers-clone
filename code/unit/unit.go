@@ -32,9 +32,9 @@ func New() *Unit {
 //=================================================================
 
 func (u *Unit) Spawn(x, y float32, flip bool) {
-	u.head = graphics.NewSprite(assets.LoadTexture("art/Character/head.PNG"), 0, 0)
-	u.body = graphics.NewSprite(assets.LoadTexture("art/Character/body.PNG"), 0, 0)
-	u.plate = graphics.NewSprite(assets.LoadTexture("art/Character/plate.PNG"), 0, 0)
+	u.head = graphics.NewSprite("art/Character/head.PNG", 0, 0)
+	u.body = graphics.NewSprite("art/Character/body.PNG", 0, 0)
+	u.plate = graphics.NewSprite("art/Character/plate.PNG", 0, 0)
 	u.head.PivotY = 0.85
 	u.body.PivotY = 0.85
 	u.plate.PivotY = 0.85

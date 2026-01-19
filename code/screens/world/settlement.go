@@ -6,13 +6,13 @@ import (
 	"pure-game-kit/tiled/property"
 )
 
-func (w *WorldScreen) handleSettlementPopup() {
-	var player = w.parties[0]
+func (ws *WorldScreen) handleSettlementPopup() {
+	var player = ws.parties[0]
 	var name = player.goingToSettlement.Properties[property.ObjectName].(string)
-	w.settlement.SetField("settlement-title-label", field.Text, name)
+	ws.settlement.SetField("settlement-title-label", field.Text, name)
 
-	if w.settlement.IsButtonJustClicked("settlement-exit-btn", w.camera) {
-		w.currentPopup = global.TogglePopup(w.hud, w.currentPopup, w.settlement)
+	if ws.settlement.IsButtonJustClicked("settlement-exit-btn", ws.camera) {
+		ws.currentPopup = global.TogglePopup(ws.hud, ws.currentPopup, ws.settlement)
 		player.goingToSettlement = nil
 	}
 }

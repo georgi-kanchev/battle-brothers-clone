@@ -80,6 +80,8 @@
 		<Widget class="button" id="secondary" text="2nd" width="80" height="80" newRow="" />
 		<Widget class="button" id="armor" text="armor" width="80" height="80" />
 	</Container>
+	<Container id="display" x="TargetRightX-85" y="TargetTopY+50" width="80" height="160" targetId="inventory">
+	</Container>
 	<Container id="stats" x="TargetRightX-300" y="TargetTopY+210" width="300" height="230" targetId="inventory">
 		<Widget class="visual" id="stats-bgr" themeId="panel" fillContainer="" />
 		<Widget class="visual" id="movement" text=" Movement = 50" textLineHeight="30" textAlignmentX="0" height="30" newRow="" />

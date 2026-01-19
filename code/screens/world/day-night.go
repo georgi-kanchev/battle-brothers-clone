@@ -18,24 +18,24 @@ var overlayColors = []uint{
 }
 var clock = []string{"Midnight", "Night", "Dawn", "Morning", "Noon", "Afternoon", "Dusk", "Evening"}
 
-func (w *WorldScreen) handleDayNightCycle() {
+func (ws *WorldScreen) handleDayNightCycle() {
 	var dayNightCycleDuration = time.FromMinutes(float32(len(clock)))
-	var topX, topY = w.camera.PointFromEdge(0.5, 0)
-	w.timeCircle.X, w.timeCircle.Y = topX, topY+(185*w.hud.Scale/w.camera.Zoom)
-	w.timeCircle.ScaleX = -1 / w.camera.Zoom * 0.5 * w.hud.Scale
-	w.timeCircle.ScaleY = 1 / w.camera.Zoom * 0.5 * w.hud.Scale
+	var topX, topY = ws.camera.PointFromEdge(0.5, 0)
+	ws.timeCircle.X, ws.timeCircle.Y = topX, topY+(185*ws.hud.Scale/ws.camera.Zoom)
+	ws.timeCircle.ScaleX = -1 / ws.camera.Zoom * 0.5 * ws.hud.Scale
+	ws.timeCircle.ScaleY = 1 / ws.camera.Zoom * 0.5 * ws.hud.Scale
 
-	var scrX, scrY = w.camera.PointToScreen(topX, topY)
-	var scrW, scrH = 100 * w.hud.Scale, 150 * w.hud.Scale
-	w.camera.Mask(int(float32(scrX)-50*w.hud.Scale), int(scrY), int(scrW), int(scrH))
-	w.timeCircle.Angle = number.Map(w.time, 0, dayNightCycleDuration, 0, 360)
+	var scrX, scrY = ws.camera.PointToScreen(topX, topY)
+	var scrW, scrH = 100 * ws.hud.Scale, 150 * ws.hud.Scale
+	ws.camera.Mask(int(float32(scrX)-50*ws.hud.Scale), int(scrY), int(scrW), int(scrH))
+	ws.timeCircle.Angle = number.Map(ws.time, 0, dayNightCycleDuration, 0, 360)
 
-	w.camera.DrawSprites(w.timeCircle)
-	w.camera.SetScreenAreaToWindow()
+	ws.camera.DrawSprites(ws.timeCircle)
+	ws.camera.SetScreenAreaToWindow()
 
-	var x0, x1 = w.hud.Field("x0", field.Value), w.hud.Field("x1", field.Value)
-	var x2, x3 = w.hud.Field("x2", field.Value), w.hud.Field("x3", field.Value)
-	if w.currentPopup != nil || x0 != "" {
+	var x0, x1 = ws.hud.Field("x0", field.Value, ws.camera), ws.hud.Field("x1", field.Value, ws.camera)
+	var x2, x3 = ws.hud.Field("x2", field.Value, ws.camera), ws.hud.Field("x3", field.Value, ws.camera)
+	if ws.currentPopup != nil || x0 != "" {
 		global.TimeScale = 0
 	} else if x1 != "" {
 		global.TimeScale = 1
@@ -45,15 +45,15 @@ func (w *WorldScreen) handleDayNightCycle() {
 		global.TimeScale = 4
 	}
 
-	w.time += time.FrameDelta() * global.TimeScale
-	w.time = number.Wrap(w.time, 0, dayNightCycleDuration)
-	var timeOfDay = number.Round(w.time / 60)
+	ws.time += time.FrameDelta() * global.TimeScale
+	ws.time = number.Wrap(ws.time, 0, dayNightCycleDuration)
+	var timeOfDay = number.Round(ws.time / 60)
 	var timeOfDayIndex = int(timeOfDay) % len(clock)
-	w.hud.SetField("time-word", field.Text, clock[timeOfDayIndex])
+	ws.hud.SetField("time-word", field.Text, clock[timeOfDayIndex])
 
 	var curColor, nextColor = overlayColors[timeOfDayIndex], overlayColors[int(timeOfDay+1)%len(clock)]
-	var progress = number.Map(float32(timeOfDayIndex)-w.time/60, -0.5, 0.5, 1, 0)
+	var progress = number.Map(float32(timeOfDayIndex)-ws.time/60, -0.5, 0.5, 1, 0)
 	var col = color.Fade(curColor, nextColor, progress)
 
-	w.camera.DrawColor(col)
+	ws.camera.DrawColor(col)
 }
