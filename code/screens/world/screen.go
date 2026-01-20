@@ -7,6 +7,8 @@ import (
 	"game/code/unit"
 	"pure-game-kit/data/assets"
 	"pure-game-kit/data/file"
+	"pure-game-kit/data/folder"
+	"pure-game-kit/data/path"
 	"pure-game-kit/execution/screens"
 	"pure-game-kit/geometry"
 	"pure-game-kit/graphics"
@@ -16,6 +18,7 @@ import (
 	"pure-game-kit/input/mouse"
 	"pure-game-kit/tiled"
 	"pure-game-kit/tiled/property"
+	"pure-game-kit/utility/text"
 )
 
 type WorldScreen struct {
@@ -38,9 +41,7 @@ type WorldScreen struct {
 }
 
 func New(path string) *WorldScreen {
-	var world = &WorldScreen{path: path, camera: graphics.NewCamera(1), time: 60 * 3}
-	world.parties = []*Party{NewParty(nil, 2250, 1530, true)}
-	return world
+	return &WorldScreen{path: path, camera: graphics.NewCamera(1), time: 60 * 3}
 }
 
 //=================================================================
@@ -70,9 +71,19 @@ func (ws *WorldScreen) OnLoad() {
 	assets.LoadTexture("art/UI/Buttons/btn_playx2.PNG")
 	assets.LoadTexture("art/UI/Buttons/btn_playx3.PNG")
 
-	assets.LoadTexture("art/Character/head.PNG")
-	assets.LoadTexture("art/Character/body.PNG")
-	assets.LoadTexture("art/Character/plate.PNG")
+	var allAssets []string
+	allAssets = append(allAssets, folder.Content("art/Character", true)...)
+	allAssets = append(allAssets, folder.Content("art/Character/hair", true)...)
+	allAssets = append(allAssets, folder.Content("art/Character/body_armor", true)...)
+	allAssets = append(allAssets, folder.Content("art/Character/head_armor", true)...)
+	for _, filePath := range allAssets {
+		if path.IsFile(filePath) {
+			assets.LoadTexture(filePath)
+		}
+	}
+
+	unit.Names = text.Split(file.LoadText("data/names.txt"), " ")
+	unit.Nicknames = text.Split(file.LoadText("data/nicknames.txt"), " ")
 
 	loading.Show("Processing:\nWorld data...")
 	var solidLayers = ws.tmap.FindLayersBy(property.LayerClass, "WorldSolids")
@@ -92,6 +103,9 @@ func (ws *WorldScreen) OnLoad() {
 	for _, id := range assets.LoadedTextureIds() {
 		assets.SetTextureSmoothness(id, true)
 	}
+
+	var units = []*unit.Unit{unit.New(), unit.New(), unit.New(), unit.New(), unit.New(), unit.New()}
+	ws.parties = []*Party{NewParty(units, 2250, 1530, true)}
 }
 func (ws *WorldScreen) OnEnter() {
 }
@@ -112,9 +126,7 @@ func (ws *WorldScreen) OnUpdate() {
 	ws.hud.UpdateAndDraw(ws.camera)
 	if ws.currentPopup != nil {
 		ws.currentPopup.UpdateAndDraw(ws.camera)
-	}
-
-	if ws.resultingCursorNonGUI != -1 {
+	} else if ws.resultingCursorNonGUI != -1 {
 		mouse.SetCursor(ws.resultingCursorNonGUI)
 	}
 
@@ -138,8 +150,8 @@ func (ws *WorldScreen) OnExit() {
 //=================================================================
 // private
 
-var teamA = []*unit.Unit{unit.New(), unit.New(), unit.New(), unit.New(), unit.New()}
-var teamB = []*unit.Unit{unit.New(), unit.New(), unit.New()}
+var teamA = []*unit.Unit{}
+var teamB = []*unit.Unit{}
 
 func (ws *WorldScreen) handleInput() {
 	if keyboard.IsKeyJustPressed(key.I) {

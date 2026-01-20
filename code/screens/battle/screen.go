@@ -39,8 +39,8 @@ func New(mapPath string) *BattleScreen {
 
 func (b *BattleScreen) Prepare(teamA, teamB []*unit.Unit, playerIsTeamA bool) {
 	b.unitManager = newUnitManager(teamA, teamB)
-	b.unitManager.spawnAll(b.tmap, teamA, false, "BattleSpawnsTeamA")
-	b.unitManager.spawnAll(b.tmap, teamB, true, "BattleSpawnsTeamB")
+	b.unitManager.spawnAll(b.tmap, teamA, "BattleSpawnsTeamA")
+	b.unitManager.spawnAll(b.tmap, teamB, "BattleSpawnsTeamB")
 	b.unitManager.turnManager.startBattle(teamA, teamB, playerIsTeamA)
 }
 

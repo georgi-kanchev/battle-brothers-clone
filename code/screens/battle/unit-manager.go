@@ -29,13 +29,13 @@ func newUnitManager(teamA, teamB []*unit.Unit) *unitManager {
 
 //=================================================================
 
-func (um *unitManager) spawnAll(tmap *tiled.Map, units []*unit.Unit, flip bool, layerClass string) {
+func (um *unitManager) spawnAll(tmap *tiled.Map, units []*unit.Unit, layerClass string) {
 	var spawns = tmap.FindLayersBy(property.LayerClass, layerClass)[0].ExtractPoints()
 	if len(units) > len(spawns) {
 		return
 	}
 	for i, u := range units {
-		u.Spawn(spawns[i][0], spawns[i][1], flip)
+		u.Spawn(spawns[i][0], spawns[i][1])
 	}
 }
 func (um *unitManager) update() {
@@ -55,7 +55,9 @@ func (um *unitManager) update() {
 	um.drawIndicators()
 
 	for _, unit := range ySortedUnits {
-		unit.UpdateAndDraw(battle.camera)
+		var x, y = unit.Position()
+		var scX = condition.If[float32](um.turnManager.isBot(unit), -1, 1)
+		unit.UpdateAndDraw(x, y, scX, 1, battle.camera)
 	}
 
 	if um.hoveredUnit != nil {
