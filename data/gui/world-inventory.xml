@@ -1,7 +1,7 @@
 <GUI>
-	<Container id="inventory" x="CameraCenterX-505" y="CameraCenterY-300" width="1010" height="680">
+	<Container id="inventory" x="CameraCenterX-505" y="CameraCenterY-350" width="1010" height="700">
 	</Container>
-	<Container id="units" x="TargetLeftX" y="TargetTopY" width="300" height="440" targetId="inventory" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
+	<Container id="units" x="TargetLeftX" y="TargetTopY" width="300" height="430" targetId="inventory" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
 		<Widget class="visual" id="units-bgr" themeId="panel" fillContainer="" />
 		<Widget class="visual" id="frontline" text=" Frontline" textLineHeight="35" />
 		<Widget class="checkbox" id="unit0" checkboxGroup="unit" textLineHeight="35" textAlignmentX="0" newRow="" />
@@ -26,7 +26,7 @@
 		<Widget class="checkbox" id="unit18" checkboxGroup="unit" textLineHeight="35" textAlignmentX="0" newRow="" />
 		<Widget class="checkbox" id="unit19" checkboxGroup="unit" textLineHeight="35" textAlignmentX="0" newRow="" />
 	</Container>
-	<Container id="stash" x="TargetLeftX+300" y="TargetTopY" width="410" height="440" targetId="inventory" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
+	<Container id="stash" x="TargetLeftX+300" y="TargetTopY" width="410" height="430" targetId="inventory" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
 		<Widget class="visual" id="stash-bgr" themeId="panel" fillContainer="" />
 		<Widget class="button" id="item1" width="80" height="80" />
 		<Widget class="button" id="item2" width="80" height="80" />
@@ -82,12 +82,12 @@
 	</Container>
 	<Container id="display" x="TargetRightX-85" y="TargetTopY+50" width="80" height="160" targetId="inventory">
 	</Container>
-	<Container id="stats" x="TargetRightX-300" y="TargetTopY+210" width="300" height="230" targetId="inventory">
+	<Container id="stats" x="TargetRightX-300" y="TargetTopY+210" width="300" height="220" targetId="inventory">
 		<Widget class="visual" id="stats-bgr" themeId="panel" fillContainer="" />
 		<Widget class="visual" id="movement" text=" Movement = 50" textLineHeight="30" textAlignmentX="0" height="30" newRow="" />
 		<Widget class="visual" id="initiative" text=" Initiative = 65" textLineHeight="30" textAlignmentX="0" height="30" newRow="" />
 	</Container>
-	<Container id="perks" x="TargetLeftX" y="TargetBottomY-250" width="1010" height="250" targetId="inventory">
+	<Container id="perks" x="TargetLeftX" y="TargetBottomY-270" width="1010" height="270" targetId="inventory">
 		<Widget class="visual" id="perks-bgr" themeId="panel" fillContainer="" />
 		<Widget class="visual" id="perk-info" text="PERKS" textLineHeight="60" textAlignmentX="0.5" textAlignmentY="0.5" />
 	</Container>

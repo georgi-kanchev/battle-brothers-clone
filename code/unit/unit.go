@@ -42,8 +42,8 @@ func New() *Unit {
 	if random.HasChance(5) {
 		unit.Name, unit.Nickname = unit.Nickname, unit.Name
 	}
-	collection.Remove(Names, unit.Name)
-	collection.Remove(Nicknames, unit.Nickname)
+	Names = collection.Remove(Names, unit.Name)
+	Nicknames = collection.Remove(Nicknames, unit.Nickname)
 
 	unit.sprites = make([]*graphics.Sprite, 9)
 	unit.sprites[main] = graphics.NewSprite("none", 0, 0)

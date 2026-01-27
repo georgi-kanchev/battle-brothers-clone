@@ -7,12 +7,11 @@ import (
 )
 
 func (ws *WorldScreen) handleSettlementPopup() {
-	var player = ws.parties[0]
-	var name = player.goingToSettlement.Properties[property.ObjectName].(string)
+	var name = ws.playerParty.goingToSettlement.Properties[property.ObjectName].(string)
 	ws.settlement.SetField("settlement-title-label", field.Text, name)
 
 	if ws.settlement.IsButtonJustClicked("settlement-exit-btn", ws.camera) {
 		ws.currentPopup = global.TogglePopup(ws.hud, ws.currentPopup, ws.settlement)
-		player.goingToSettlement = nil
+		ws.playerParty.goingToSettlement = nil
 	}
 }

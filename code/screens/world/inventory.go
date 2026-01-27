@@ -13,8 +13,8 @@ func (ws *WorldScreen) handleInventoryPopup() {
 	var x, y, _, _, _ = ws.inventory.Area("display", ws.camera)
 	var sc = 1 / ws.camera.Zoom * ws.inventory.Scale
 	var cx, cy = x + 35*sc, y + 125*sc
-	var units = ws.parties[0].units
-	var selectedUnit = ws.parties[0].units[inventorySelectedUnitIndex]
+	var units = ws.playerParty.units
+	var selectedUnit = ws.playerParty.units[inventorySelectedUnitIndex]
 	var r, g, b, _ = color.Channels(selectedUnit.NameColor)
 
 	ws.inventory.SetField("name-label", field.Text, selectedUnit.NickAndName())

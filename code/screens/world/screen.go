@@ -31,8 +31,9 @@ type WorldScreen struct {
 	time       float32
 	timeCircle *graphics.Sprite
 
-	parties     []*Party
-	settlements *tiled.Layer
+	playerParty  *Party
+	otherParties []*Party
+	settlements  *tiled.Layer
 
 	tmap      *tiled.Map
 	mapLayers []*tiled.Layer
@@ -105,7 +106,7 @@ func (ws *WorldScreen) OnLoad() {
 	}
 
 	var units = []*unit.Unit{unit.New(), unit.New(), unit.New(), unit.New(), unit.New(), unit.New()}
-	ws.parties = []*Party{NewParty(units, 2250, 1530, true)}
+	ws.playerParty = NewParty(units, 2250, 1530, true)
 }
 func (ws *WorldScreen) OnEnter() {
 }
@@ -117,7 +118,8 @@ func (ws *WorldScreen) OnUpdate() {
 		m.Draw(ws.camera)
 	}
 
-	for _, party := range ws.parties {
+	ws.playerParty.Update()
+	for _, party := range ws.otherParties {
 		party.Update()
 	}
 
@@ -162,6 +164,6 @@ func (ws *WorldScreen) handleInput() {
 		scr.Prepare(teamA, teamB, true)
 	} else if keyboard.IsKeyJustPressed(key.Escape) && ws.currentPopup != nil {
 		ws.currentPopup = global.TogglePopup(ws.hud, ws.currentPopup, ws.currentPopup)
-		ws.parties[0].goingToSettlement = nil
+		ws.playerParty.goingToSettlement = nil
 	}
 }
