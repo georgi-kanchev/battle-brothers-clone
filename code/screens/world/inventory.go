@@ -25,11 +25,21 @@ func (ws *WorldScreen) handleInventoryPopup() {
 	for i := range 20 {
 		var hidden = condition.If(i < len(units), "", "1")
 		var unitId = text.New("unit", i)
+		var ux, uy, _, _, _ = ws.inventory.Area(unitId, ws.camera)
 		ws.inventory.SetField(unitId, field.Hidden, hidden)
+
+		if hidden == "" {
+			var cx, cy, cw, ch, _ = ws.inventory.Area("units", ws.camera)
+			var tlx, tly = ws.camera.PointToScreen(cx, cy)
+			var brx, bry = ws.camera.PointToScreen(cx+cw, cy+ch)
+			ws.camera.Mask(tlx, tly, brx-tlx, bry-tly)
+			selectedUnit.UpdateAndDraw(ux+50*sc, uy+75*sc, sc*0.85, sc*0.85, ws.camera)
+			ws.camera.SetScreenAreaToWindow()
+		}
 
 		if i < len(units) {
 			var r, g, b, _ = color.Channels(units[i].NameColor)
-			ws.inventory.SetField(unitId, field.Text, " "+units[i].NickAndName())
+			ws.inventory.SetField(unitId, field.Text, units[i].NickAndName()+"   \n@@@  ")
 			ws.inventory.SetField(unitId, field.TextColor, text.New(r, " ", g, " ", b))
 		}
 

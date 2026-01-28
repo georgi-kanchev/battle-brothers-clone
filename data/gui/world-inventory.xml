@@ -4,27 +4,27 @@
 	<Container id="units" x="TargetLeftX" y="TargetTopY" width="300" height="430" targetId="inventory" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
 		<Widget class="visual" id="units-bgr" themeId="panel" fillContainer="" />
 		<Widget class="visual" id="frontline" text=" Frontline" textLineHeight="35" />
-		<Widget class="checkbox" id="unit0" checkboxGroup="unit" textLineHeight="35" textAlignmentX="0" newRow="" />
-		<Widget class="checkbox" id="unit1" checkboxGroup="unit" textLineHeight="35" textAlignmentX="0" newRow="" />
-		<Widget class="checkbox" id="unit2" checkboxGroup="unit" textLineHeight="35" textAlignmentX="0" newRow="" />
-		<Widget class="checkbox" id="unit3" checkboxGroup="unit" textLineHeight="35" textAlignmentX="0" newRow="" />
-		<Widget class="checkbox" id="unit4" checkboxGroup="unit" textLineHeight="35" textAlignmentX="0" newRow="" />
-		<Widget class="checkbox" id="unit5" checkboxGroup="unit" textLineHeight="35" textAlignmentX="0" newRow="" />
-		<Widget class="checkbox" id="unit6" checkboxGroup="unit" textLineHeight="35" textAlignmentX="0" newRow="" />
-		<Widget class="checkbox" id="unit7" checkboxGroup="unit" textLineHeight="35" textAlignmentX="0" newRow="" />
-		<Widget class="checkbox" id="unit8" checkboxGroup="unit" textLineHeight="35" textAlignmentX="0" newRow="" />
-		<Widget class="checkbox" id="unit9" checkboxGroup="unit" textLineHeight="35" textAlignmentX="0" newRow="" />
-		<Widget class="checkbox" id="unit10" checkboxGroup="unit" textLineHeight="35" textAlignmentX="0" newRow="" />
+		<Widget class="checkbox" id="unit0" checkboxGroup="unit" height="100" textLineHeight="35" textAlignmentX="1" newRow="" />
+		<Widget class="checkbox" id="unit1" checkboxGroup="unit" height="100" textLineHeight="35" textAlignmentX="1" newRow="" />
+		<Widget class="checkbox" id="unit2" checkboxGroup="unit" height="100" textLineHeight="35" textAlignmentX="1" newRow="" />
+		<Widget class="checkbox" id="unit3" checkboxGroup="unit" height="100" textLineHeight="35" textAlignmentX="1" newRow="" />
+		<Widget class="checkbox" id="unit4" checkboxGroup="unit" height="100" textLineHeight="35" textAlignmentX="1" newRow="" />
+		<Widget class="checkbox" id="unit5" checkboxGroup="unit" height="100" textLineHeight="35" textAlignmentX="1" newRow="" />
+		<Widget class="checkbox" id="unit6" checkboxGroup="unit" height="100" textLineHeight="35" textAlignmentX="1" newRow="" />
+		<Widget class="checkbox" id="unit7" checkboxGroup="unit" height="100" textLineHeight="35" textAlignmentX="1" newRow="" />
+		<Widget class="checkbox" id="unit8" checkboxGroup="unit" height="100" textLineHeight="35" textAlignmentX="1" newRow="" />
+		<Widget class="checkbox" id="unit9" checkboxGroup="unit" height="100" textLineHeight="35" textAlignmentX="1" newRow="" />
+		<Widget class="checkbox" id="unit10" checkboxGroup="unit" height="100" textLineHeight="35" textAlignmentX="1" newRow="" />
 		<Widget class="visual" id="backline" text=" Backline" textLineHeight="35" newRow="" />
-		<Widget class="checkbox" id="unit11" checkboxGroup="unit" textLineHeight="35" textAlignmentX="0" newRow="" />
-		<Widget class="checkbox" id="unit12" checkboxGroup="unit" textLineHeight="35" textAlignmentX="0" newRow="" />
-		<Widget class="checkbox" id="unit13" checkboxGroup="unit" textLineHeight="35" textAlignmentX="0" newRow="" />
-		<Widget class="checkbox" id="unit14" checkboxGroup="unit" textLineHeight="35" textAlignmentX="0" newRow="" />
-		<Widget class="checkbox" id="unit15" checkboxGroup="unit" textLineHeight="35" textAlignmentX="0" newRow="" />
-		<Widget class="checkbox" id="unit16" checkboxGroup="unit" textLineHeight="35" textAlignmentX="0" newRow="" />
-		<Widget class="checkbox" id="unit17" checkboxGroup="unit" textLineHeight="35" textAlignmentX="0" newRow="" />
-		<Widget class="checkbox" id="unit18" checkboxGroup="unit" textLineHeight="35" textAlignmentX="0" newRow="" />
-		<Widget class="checkbox" id="unit19" checkboxGroup="unit" textLineHeight="35" textAlignmentX="0" newRow="" />
+		<Widget class="checkbox" id="unit11" checkboxGroup="unit" height="100" textLineHeight="35" textAlignmentX="1" newRow="" />
+		<Widget class="checkbox" id="unit12" checkboxGroup="unit" height="100" textLineHeight="35" textAlignmentX="1" newRow="" />
+		<Widget class="checkbox" id="unit13" checkboxGroup="unit" height="100" textLineHeight="35" textAlignmentX="1" newRow="" />
+		<Widget class="checkbox" id="unit14" checkboxGroup="unit" height="100" textLineHeight="35" textAlignmentX="1" newRow="" />
+		<Widget class="checkbox" id="unit15" checkboxGroup="unit" height="100" textLineHeight="35" textAlignmentX="1" newRow="" />
+		<Widget class="checkbox" id="unit16" checkboxGroup="unit" height="100" textLineHeight="35" textAlignmentX="1" newRow="" />
+		<Widget class="checkbox" id="unit17" checkboxGroup="unit" height="100" textLineHeight="35" textAlignmentX="1" newRow="" />
+		<Widget class="checkbox" id="unit18" checkboxGroup="unit" height="100" textLineHeight="35" textAlignmentX="1" newRow="" />
+		<Widget class="checkbox" id="unit19" checkboxGroup="unit" height="100" textLineHeight="35" textAlignmentX="1" newRow="" />
 	</Container>
 	<Container id="stash" x="TargetLeftX+300" y="TargetTopY" width="410" height="430" targetId="inventory" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
 		<Widget class="visual" id="stash-bgr" themeId="panel" fillContainer="" />

@@ -48,7 +48,7 @@ func New() *Unit {
 	unit.sprites = make([]*graphics.Sprite, 9)
 	unit.sprites[main] = graphics.NewSprite("none", 0, 0)
 	unit.sprites[secondary] = graphics.NewSprite("none", 0, 0)
-	unit.sprites[helmet] = graphics.NewSprite("none", 0, 0)
+	unit.sprites[helmet] = graphics.NewSprite("art/Character/head_armor/greathelm_03.PNG", 0, 0)
 	unit.sprites[hair] = graphics.NewSprite("art/Character/hair/hair_01.PNG", 0, 0)
 	unit.sprites[beard] = graphics.NewSprite("art/Character/hair/beard_03.PNG", 0, 0)
 	unit.sprites[head] = graphics.NewSprite("art/Character/head.PNG", 0, 0)
