@@ -104,11 +104,10 @@ func (ws *WorldScreen) OnLoad() {
 	for _, id := range assets.LoadedTextureIds() {
 		assets.SetTextureSmoothness(id, true)
 	}
-
-	var units = []*unit.Unit{unit.New(), unit.New(), unit.New(), unit.New(), unit.New(), unit.New()}
-	ws.playerParty = NewParty(units, 2250, 1530, true)
 }
 func (ws *WorldScreen) OnEnter() {
+	var units = []*unit.Unit{unit.New(), unit.New(), unit.New(), unit.New(), unit.New(), unit.New()}
+	ws.playerParty = NewParty(units, 2250, 1530, true)
 }
 func (ws *WorldScreen) OnUpdate() {
 	ws.camera.SetScreenAreaToWindow()
@@ -117,6 +116,8 @@ func (ws *WorldScreen) OnUpdate() {
 	for _, m := range ws.mapLayers {
 		m.Draw(ws.camera)
 	}
+
+	ws.handleResting()
 
 	ws.playerParty.Update()
 	for _, party := range ws.otherParties {
@@ -140,10 +141,6 @@ func (ws *WorldScreen) OnUpdate() {
 	case ws.inventory:
 		ws.handleInventoryPopup()
 	}
-
-	if ws.hud.IsButtonJustClicked("main-menu", ws.camera) {
-		screens.Enter(global.ScreenMainMenu, false)
-	}
 }
 
 func (ws *WorldScreen) OnExit() {
@@ -156,14 +153,16 @@ var teamA = []*unit.Unit{}
 var teamB = []*unit.Unit{}
 
 func (ws *WorldScreen) handleInput() {
-	if keyboard.IsKeyJustPressed(key.I) {
+	if (ws.currentPopup == nil || ws.currentPopup == ws.inventory) && keyboard.IsKeyJustPressed(key.I) {
 		ws.currentPopup = global.TogglePopup(ws.hud, ws.currentPopup, ws.inventory)
-	} else if keyboard.IsKeyJustPressed(key.B) {
+	}
+
+	if keyboard.IsKeyJustPressed(key.B) {
 		screens.Enter(global.ScreenBattle, false)
 		var scr = screens.Current().(*battle.BattleScreen)
 		scr.Prepare(teamA, teamB, true)
-	} else if keyboard.IsKeyJustPressed(key.Escape) && ws.currentPopup != nil {
-		ws.currentPopup = global.TogglePopup(ws.hud, ws.currentPopup, ws.currentPopup)
-		ws.playerParty.goingToSettlement = nil
+	}
+	if ws.hud.IsButtonJustClicked("main-menu", ws.camera) {
+		screens.Enter(global.ScreenMainMenu, false)
 	}
 }

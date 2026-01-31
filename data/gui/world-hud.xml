@@ -32,4 +32,18 @@
 		<Widget class="button" id="follow-roads" text="Follow Roads" height="40" newRow="100" />
 		<Widget class="button" id="lock-camera" text="Lock Camera" height="40" newRow="" />
 	</Container>
+
+	<Container id="rest" x="CameraCenterX-400" y="CameraBottomY-150" width="800" height="140" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press" gapY="5">
+		<Widget class="visual" id="rest-bgr" themeId="panel" fillContainer="" />
+	</Container>
+	<Container id="rest-labels" x="TargetLeftX" y="TargetTopY" width="550" height="TargetHeight" targetId="rest" hidden="TargetHidden" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press" gapY="5">
+		<Widget class="visual" id="resting" text="Resting at the Local Inn..." color="" frameSize="" height="40" textLineHeight="40" />
+		<Widget class="visual" id="units" text="Party Health: 95%" color="" frameSize="" height="40" textLineHeight="40" newRow="" />
+		<Widget class="visual" id="paid" text="Paid: 23" color="" frameSize="" height="40" textLineHeight="40" newRow="" />
+	</Container>
+	<Container id="rest-btns" x="TargetLeftX+550" y="TargetTopY" width="250" height="TargetHeight" targetId="rest" hidden="TargetHidden" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press" gapY="5">
+		<Widget class="checkbox" id="until-full" text="Leave when rested" width="250" height="40" />
+		<Widget class="checkbox" id="until-dawn" text="Leave at Dawn" width="250" height="40" newRow="" />
+		<Widget class="checkbox" id="until-dusk" text="Leave at Dusk" width="250" height="40" newRow="" />
+	</Container>
 </GUI>

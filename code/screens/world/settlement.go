@@ -8,10 +8,15 @@ import (
 
 func (ws *WorldScreen) handleSettlementPopup() {
 	var name = ws.playerParty.goingToSettlement.Properties[property.ObjectName].(string)
-	ws.settlement.SetField("settlement-title-label", field.Text, name)
+	ws.settlement.SetField("title-label", field.Text, name)
 
-	if ws.settlement.IsButtonJustClicked("settlement-exit-btn", ws.camera) {
+	if ws.settlement.IsButtonJustClicked("exit-btn", ws.camera) {
 		ws.currentPopup = global.TogglePopup(ws.hud, ws.currentPopup, ws.settlement)
 		ws.playerParty.goingToSettlement = nil
+	}
+
+	if ws.settlement.IsButtonJustClicked("rest", ws.camera) {
+		ws.playerParty.isResting = true
+		ws.currentPopup = global.TogglePopup(ws.hud, ws.currentPopup, ws.settlement)
 	}
 }

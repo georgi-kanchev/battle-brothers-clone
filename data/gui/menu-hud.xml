@@ -5,6 +5,7 @@
 		<Widget class="button" id="options" text="Options" textLineHeight="35" newRow="" />
 		<Widget class="button" id="quit" text="Quit" textLineHeight="35" newRow="" />
 	</Container>
+	
 	<Container id="version" x="CameraLeftX-10" y="CameraBottomY-45" width="CameraWidth" height="35">
 		<Widget class="visual" id="version-label" text="v0.1.3" textLineHeight="25" textAlignmentX="1" textAlignmentY="1" />
 	</Container>

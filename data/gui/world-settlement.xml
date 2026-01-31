@@ -3,21 +3,19 @@
 		<Widget class="visual" id="settlement-bgr" themeId="panel" fillContainer="" />
 	</Container>
 
-	<Container id="settlement-title" x="TargetCenterX-200" y="TargetTopY-25" width="400" height="50" targetId="settlement">
-		<Widget class="visual" id="settlement-title-bgr" themeId="panel" fillContainer="" />
-		<Widget class="visual" id="settlement-title-label" width="OwnerWidth" height= "OwnerHeight" textAlignmentX="0.5" textAlignmentY="0.5" text="Settlement Name" />
+	<Container id="title" x="TargetCenterX-200" y="TargetTopY-15" width="400" height="50" targetId="settlement">
+		<Widget class="visual" id="title-bgr" themeId="panel" fillContainer="" />
+		<Widget class="visual" id="title-label" width="OwnerWidth" height= "OwnerHeight" textAlignmentX="0.5" textAlignmentY="0.5" />
 	</Container>
 
-	<Container id="settlement-btns" x="TargetCenterX-275" y="TargetCenterY-25" width="550" height="TargetHeight/2" targetId="settlement" gapY="5" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
-		<Widget class="button" id="settlement-rest" text="Rest at the local Inn" />
-		<Widget class="button" id="settlement-work" text="Look for Work" newRow="" />
-		<Widget class="button" id="settlement-hire" text="Hire Mercenaries" newRow="" />
-		<Widget class="button" id="settlement-shop" text="Trade at the Marketplace" newRow="" />
-		<Widget class="button" id="settlement-armors" text="Visit the Armorer" newRow="" />
-		<Widget class="button" id="settlement-weapons" text="Visit the Weaponsmith" newRow="" />
+	<Container id="btns" x="TargetCenterX-275" y="TargetBottomY-250" width="550" height="250" targetId="settlement" gapY="5" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
+		<Widget class="button" id="rest" text="Rest at the Local Inn" />
+		<Widget class="button" id="work" text="Look for Work" newRow="" />
+		<Widget class="button" id="hire" text="Hire Mercenaries" newRow="" />
+		<Widget class="button" id="shop" text="Trade at the Marketplace" newRow="" />
 	</Container>
 
-	<Container id="settlement-exit" x="TargetCenterX-100" y="TargetBottomY-25" width="200" height="50" targetId="settlement" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
-		<Widget class="button" id="settlement-exit-btn" text="Leave" />
+	<Container id="exit" x="TargetRightX-35" y="TargetTopY-15" width="50" height="50" targetId="settlement" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
+		<Widget class="button" id="exit-btn" text="X" buttonHotkey="Escape" />
 	</Container>
 </GUI>

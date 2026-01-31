@@ -126,7 +126,7 @@ func (b *BattleScreen) recalculatePathMap() {
 	for _, unit := range b.unitManager.units {
 		if unit != b.unitManager.turnManager.unitActing() {
 			var ux, uy = unit.Position()
-			b.pathMap.SetAtCell(int(ux/tw), int(uy/th), geometry.NewShapeRectangle(tw/2, th/2, 0.5, 0.5))
+			b.pathMap.SetAtCell(int(ux/tw), int(uy/th), geometry.NewShapeQuad(tw/2, th/2, 0.5, 0.5))
 		}
 	}
 }

@@ -1,6 +1,7 @@
 package world
 
 import (
+	"game/code/global"
 	"pure-game-kit/execution/condition"
 	"pure-game-kit/gui/field"
 	"pure-game-kit/utility/color"
@@ -10,6 +11,10 @@ import (
 var inventorySelectedUnitIndex int
 
 func (ws *WorldScreen) handleInventoryPopup() {
+	if ws.inventory.IsButtonJustClicked("exit-btn", ws.camera) {
+		ws.currentPopup = global.TogglePopup(ws.hud, ws.currentPopup, ws.inventory)
+	}
+
 	var x, y, _, _, _ = ws.inventory.Area("display", ws.camera)
 	var sc = 1 / ws.camera.Zoom * ws.inventory.Scale
 	var cx, cy = x + 35*sc, y + 125*sc

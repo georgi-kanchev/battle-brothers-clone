@@ -48,7 +48,7 @@ func New() *Unit {
 	unit.sprites = make([]*graphics.Sprite, 9)
 	unit.sprites[main] = graphics.NewSprite("none", 0, 0)
 	unit.sprites[secondary] = graphics.NewSprite("none", 0, 0)
-	unit.sprites[helmet] = graphics.NewSprite("art/Character/head_armor/greathelm_03.PNG", 0, 0)
+	unit.sprites[helmet] = graphics.NewSprite( /*"art/Character/head_armor/greathelm_03.PNG"*/ "", 0, 0)
 	unit.sprites[hair] = graphics.NewSprite("art/Character/hair/hair_01.PNG", 0, 0)
 	unit.sprites[beard] = graphics.NewSprite("art/Character/hair/beard_03.PNG", 0, 0)
 	unit.sprites[head] = graphics.NewSprite("art/Character/head.PNG", 0, 0)
@@ -72,7 +72,9 @@ func (u *Unit) UpdateAndDraw(x, y, scaleX, scaleY float32, camera *graphics.Came
 	for i := len(u.sprites) - 1; i >= 0; i-- {
 		u.sprites[i].X, u.sprites[i].Y = x, y
 		u.sprites[i].ScaleX, u.sprites[i].ScaleY = scaleX, scaleY
-		camera.DrawSprites(u.sprites[i])
+		if u.sprites[i].AssetId != "" {
+			camera.DrawSprites(u.sprites[i])
+		}
 	}
 }
 
