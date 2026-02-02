@@ -1,22 +1,17 @@
-graphics:
-    window-state: 4
-    monitor: 0
-    vsync: false
-    target-fps: 60
-user-interface-scale:
-    master: 2
-    menu:
-        options: 1
-    world:
-        hud: 1
-        inventory: 1
-        settlement: 1
-    battle:
-        hud: 1
-        loot: 1
-audio-volume:
-    master: 1
-    music: 0.5
-    sound: 1
+graphics-window-state: 4 # 0=Floating 1=FloatingBorderless 2=Fullscreen 3=FullscreenBorderless 4=Maximized 5=Minimized
+graphics-monitor: 0
+graphics-vsync: false
+graphics-target-fps: 60
+ui-scale: 2
+ui-scale-menu-options: 1
+ui-scale-world-hud: 1
+ui-scale-world-inventory: 1
+ui-scale-world-settlement: 1
+ui-scale-world-settlement-market: 1
+ui-scale-battle-hud: 1
+ui-scale-battle-loot: 1
+audio-volume: 1
+audio-volume-music: 0.5
+audio-volume-sound: 1
 controls: {}
 gameplay: {}

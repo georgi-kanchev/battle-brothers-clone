@@ -18,5 +18,7 @@ func (ws *WorldScreen) handleSettlementPopup() {
 	if ws.settlement.IsButtonJustClicked("rest", ws.camera) {
 		ws.playerParty.isResting = true
 		ws.currentPopup = global.TogglePopup(ws.hud, ws.currentPopup, ws.settlement)
+	} else if ws.settlement.IsButtonJustClicked("market", ws.camera) {
+		ws.currentPopup = global.TogglePopup(ws.hud, ws.currentPopup, ws.market)
 	}
 }

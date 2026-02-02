@@ -99,7 +99,7 @@ func (p *Party) collideWithSolid(velX, velY float32) (newVelX, newVelY float32) 
 }
 func (p *Party) tryEnterSettlement() {
 	var world = screens.Current().(*WorldScreen)
-	if p.isResting || p.goingToSettlement == nil || world.currentPopup == world.settlement {
+	if p.isResting || p.goingToSettlement == nil || world.currentPopup != nil {
 		return
 	}
 
@@ -107,7 +107,6 @@ func (p *Party) tryEnterSettlement() {
 		if p.goingToSettlement == s && p.hitbox.IsOverlappingShapes(s.ExtractShapes()...) {
 			p.moveTargetX, p.moveTargetY = p.x, p.y
 			p.path = nil
-			//p.goingToSettlement = s
 			world.resultingCursorNonGUI = -1
 			world.currentPopup = global.TogglePopup(world.hud, world.currentPopup, world.settlement)
 		}

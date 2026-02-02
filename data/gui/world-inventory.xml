@@ -28,8 +28,7 @@
 		<Widget class="checkbox" id="unit19" checkboxGroup="unit" height="100" textLineHeight="35" textAlignmentX="1" newRow="" />
 	</Container>
 
-	<Container id="stash" x="TargetLeftX+300" y="TargetTopY" width="410" height="430" targetId="inventory" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
-		<Widget class="visual" id="stash-bgr" themeId="panel" fillContainer="" />
+	<Container id="items" x="TargetLeftX+300" y="TargetTopY" width="410" height="430" targetId="inventory" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
 		<Widget class="button" id="item1" width="80" height="80" />
 		<Widget class="button" id="item2" width="80" height="80" />
 		<Widget class="button" id="item3" width="80" height="80" />
@@ -60,6 +59,16 @@
 		<Widget class="button" id="item28" width="80" height="80" />
 		<Widget class="button" id="item29" width="80" height="80" />
 		<Widget class="button" id="item30" width="80" height="80" />
+		<Widget class="button" id="item31" width="80" height="80" newRow="" />
+		<Widget class="button" id="item32" width="80" height="80" />
+		<Widget class="button" id="item33" width="80" height="80" />
+		<Widget class="button" id="item34" width="80" height="80" />
+		<Widget class="button" id="item35" width="80" height="80" />
+		<Widget class="button" id="item36" width="80" height="80" newRow="" />
+		<Widget class="button" id="item37" width="80" height="80" />
+		<Widget class="button" id="item38" width="80" height="80" />
+		<Widget class="button" id="item39" width="80" height="80" />
+		<Widget class="button" id="item40" width="80" height="80" />
 		<Widget class="button" id="item41" width="80" height="80" newRow="" />
 		<Widget class="button" id="item42" width="80" height="80" />
 		<Widget class="button" id="item43" width="80" height="80" />

@@ -36,7 +36,7 @@ func main() {
 	global.ScreenMainMenu = screens.Add(menu.New(), true)
 	global.ScreenWorld = screens.Add(world.New("data/worlds/test/map.tmx"), true)
 	global.ScreenBattle = screens.Add(battle.New("data/battlegrounds/test/map.tmx"), true)
-
+	
 	screens.Enter(global.ScreenMainMenu, false)
 	for window.KeepOpen() {
 		if keyboard.IsKeyJustPressed(key.F5) {
@@ -55,8 +55,8 @@ func loadAndApplyOptions() {
 	storage.FromYAML(file.LoadText("data/options.yaml"), &opts)
 	global.Options = &opts
 
-	window.IsVSynced = opts.Graphics.VSync
-	window.FrameRateLimit = byte(opts.Graphics.LimitFPS)
-	window.ApplyState(opts.Graphics.WindowState)
-	window.MoveToMonitor(opts.Graphics.Monitor)
+	window.IsVSynced = opts.VSync
+	window.FrameRateLimit = byte(opts.LimitFPS)
+	window.ApplyState(opts.WindowState)
+	window.MoveToMonitor(opts.Monitor)
 }

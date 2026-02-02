@@ -25,8 +25,9 @@ type WorldScreen struct {
 	path   string
 	camera *graphics.Camera
 
-	hud, inventory, settlement, currentPopup *gui.GUI
-	resultingCursorNonGUI                    int
+	hud, inventory, settlement, market, currentPopup *gui.GUI
+
+	resultingCursorNonGUI int
 
 	time       float32
 	timeCircle *graphics.Sprite
@@ -54,12 +55,14 @@ func (ws *WorldScreen) OnLoad() {
 	ws.hud = gui.NewFromXMLs(file.LoadText("data/gui/world-hud.xml"), global.PopupDimGUI, global.ThemesGUI)
 	ws.inventory = gui.NewFromXMLs(file.LoadText("data/gui/world-inventory.xml"), global.ThemesGUI)
 	ws.settlement = gui.NewFromXMLs(file.LoadText("data/gui/world-settlement.xml"), global.ThemesGUI)
+	ws.market = gui.NewFromXMLs(file.LoadText("data/gui/world-settlement-market.xml"), global.ThemesGUI)
 	ws.currentPopup = nil
 
-	var sc = global.Options.ScaleUI.Master
-	ws.hud.Scale = global.Options.ScaleUI.World.HUD * sc
-	ws.inventory.Scale = global.Options.ScaleUI.World.Inventory * sc
-	ws.settlement.Scale = global.Options.ScaleUI.World.Settlement * sc
+	var sc = global.Options.ScaleUI
+	ws.hud.Scale = global.Options.ScaleWorldHUD * sc
+	ws.inventory.Scale = global.Options.ScaleWorldInventory * sc
+	ws.settlement.Scale = global.Options.ScaleWorldSettlement * sc
+	ws.market.Scale = global.Options.ScaleWorldSettlementMarket * sc
 
 	loading.Show("Loading:\nWorld images...")
 	var timeCircle = assets.LoadTexture("art/UI/Time/time_circle.PNG")
@@ -136,10 +139,12 @@ func (ws *WorldScreen) OnUpdate() {
 	ws.handleInput()
 
 	switch ws.currentPopup {
-	case ws.settlement:
-		ws.handleSettlementPopup()
 	case ws.inventory:
 		ws.handleInventoryPopup()
+	case ws.settlement:
+		ws.handleSettlementPopup()
+	case ws.market:
+		ws.handleMarket()
 	}
 }
 

@@ -46,8 +46,8 @@ func (m *MenuScreen) OnLoad() {
 	m.logo.ScaleX, m.logo.ScaleY = 0.8, 0.8
 	m.logo.PivotX, m.logo.PivotY = 1, 1
 
-	var sc = global.Options.ScaleUI.Master
-	m.options.Scale = global.Options.ScaleUI.Menu.Options * sc
+	var sc = global.Options.ScaleUI
+	m.options.Scale = global.Options.ScaleMenuOptions * sc
 
 	for _, id := range assets.LoadedTextureIds() {
 		assets.SetTextureSmoothness(id, true)
