@@ -5,78 +5,19 @@
 
 	<Container id="title" x="TargetCenterX-200" y="TargetTopY-15" width="400" height="50" targetId="market">
 		<Widget class="visual" id="title-bgr" themeId="panel" fillContainer="" />
-		<Widget class="visual" id="title-label" width="OwnerWidth" height= "OwnerHeight" textAlignmentX="0.5" textAlignmentY="0.5" text="Market" />
+		<Widget class="visual" id="title-label" width="OwnerWidth" height= "OwnerHeight" textAlignmentX="0.5" textAlignmentY="0.5" text="Marketplace" />
 	</Container>
 	
-	<Container id="inv" x="TargetLeftX+10" y="TargetTopY+50" width="410" height="40" targetId="market">
-		<Widget class="visual" id="inv-bgr" themeId="panel" fillContainer="" />
-		<Widget class="visual" id="inv-label" width="410" height= "OwnerHeight" textAlignmentX="0.5" textAlignmentY="0.5" text="Inventory" />
+	<Container id="inv" x="TargetRightX-420" y="TargetTopY+40" width="410" height="40" targetId="market">
+		<Widget class="visual" id="inv-label" height= "OwnerHeight" textAlignmentX="0.5" textAlignmentY="0.5" text="Inventory" />
 	</Container>
 
-	<Container id="shop-tabs" x="TargetRightX-420" y="TargetTopY+50" width="410" height="45" targetId="market" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
-		<Widget class="visual" id="shop-bgr" themeId="panel" fillContainer="" />
-		<Widget class="button" id="armorer" width="120" height="35" text="Armorer" />
-		<Widget class="button" id="weaponsmith" width="125" height="35" text="Weaponsmith" />
-		<Widget class="button" id="fletcher" width="120" height="35" text="Fletcher" />
-		<Widget class="button" id="bowyer" width="120" height="35" text="Bowyer" />
-		<Widget class="button" id="tanner" width="120" height="35" text="Tanner" />
-		<Widget class="button" id="herbalist" width="120" height="35" text="Herbalist" />
+	<Container id="shop-menu" x="TargetLeftX+10" y="TargetTopY+40" width="410" height="40" targetId="market" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
+		<Widget class="visual" id="shop-menu-label" assetId="" frameColor="0 0 0 0" width="200" height= "OwnerHeight" textAlignmentX="0.5" textAlignmentY="0.5" text="Trade with the:" />
+		<Widget class="menu" id="shop-menu-dropdown" width="200" height= "OwnerHeight" textAlignmentX="0.5" textAlignmentY="0.5" text="Black Market" menuContainerId="shops" offsetX="10" />
 	</Container>
 	
-	<Container id="items" x="TargetLeftX+10" y="TargetTopY+100" width="410" height="TargetHeight-110" targetId="market" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
-		<Widget class="button" id="item1" width="80" height="80" />
-		<Widget class="button" id="item2" width="80" height="80" />
-		<Widget class="button" id="item3" width="80" height="80" />
-		<Widget class="button" id="item4" width="80" height="80" />
-		<Widget class="button" id="item5" width="80" height="80" />
-		<Widget class="button" id="item6" width="80" height="80" newRow="" />
-		<Widget class="button" id="item7" width="80" height="80" />
-		<Widget class="button" id="item8" width="80" height="80" />
-		<Widget class="button" id="item9" width="80" height="80" />
-		<Widget class="button" id="item10" width="80" height="80" />
-		<Widget class="button" id="item11" width="80" height="80" newRow="" />
-		<Widget class="button" id="item12" width="80" height="80" />
-		<Widget class="button" id="item13" width="80" height="80" />
-		<Widget class="button" id="item14" width="80" height="80" />
-		<Widget class="button" id="item15" width="80" height="80" />
-		<Widget class="button" id="item16" width="80" height="80" newRow="" />
-		<Widget class="button" id="item17" width="80" height="80" />
-		<Widget class="button" id="item18" width="80" height="80" />
-		<Widget class="button" id="item19" width="80" height="80" />
-		<Widget class="button" id="item20" width="80" height="80" />
-		<Widget class="button" id="item21" width="80" height="80" newRow="" />
-		<Widget class="button" id="item22" width="80" height="80" />
-		<Widget class="button" id="item23" width="80" height="80" />
-		<Widget class="button" id="item24" width="80" height="80" />
-		<Widget class="button" id="item25" width="80" height="80" />
-		<Widget class="button" id="item26" width="80" height="80" newRow="" />
-		<Widget class="button" id="item27" width="80" height="80" />
-		<Widget class="button" id="item28" width="80" height="80" />
-		<Widget class="button" id="item29" width="80" height="80" />
-		<Widget class="button" id="item30" width="80" height="80" />
-		<Widget class="button" id="item31" width="80" height="80" newRow="" />
-		<Widget class="button" id="item32" width="80" height="80" />
-		<Widget class="button" id="item33" width="80" height="80" />
-		<Widget class="button" id="item34" width="80" height="80" />
-		<Widget class="button" id="item35" width="80" height="80" />
-		<Widget class="button" id="item36" width="80" height="80" newRow="" />
-		<Widget class="button" id="item37" width="80" height="80" />
-		<Widget class="button" id="item38" width="80" height="80" />
-		<Widget class="button" id="item39" width="80" height="80" />
-		<Widget class="button" id="item40" width="80" height="80" />
-		<Widget class="button" id="item41" width="80" height="80" newRow="" />
-		<Widget class="button" id="item42" width="80" height="80" />
-		<Widget class="button" id="item43" width="80" height="80" />
-		<Widget class="button" id="item44" width="80" height="80" />
-		<Widget class="button" id="item45" width="80" height="80" />
-		<Widget class="button" id="item46" width="80" height="80" newRow="" />
-		<Widget class="button" id="item47" width="80" height="80" />
-		<Widget class="button" id="item48" width="80" height="80" />
-		<Widget class="button" id="item49" width="80" height="80" />
-		<Widget class="button" id="item50" width="80" height="80" />
-	</Container>
-	
-	<Container id="shop" x="TargetRightX-420" y="TargetTopY+100" width="410" height="TargetHeight-110" targetId="market" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
+	<Container id="shop" x="TargetLeftX+10" y="TargetTopY+85" width="410" height="TargetHeight-95" targetId="market" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
 		<Widget class="button" id="shop1" width="80" height="80" />
 		<Widget class="button" id="shop2" width="80" height="80" />
 		<Widget class="button" id="shop3" width="80" height="80" />
@@ -127,6 +68,74 @@
 		<Widget class="button" id="shop48" width="80" height="80" />
 		<Widget class="button" id="shop49" width="80" height="80" />
 		<Widget class="button" id="shop50" width="80" height="80" />
+	</Container>
+	
+	<Container id="shops" x="TargetLeftX+220" y="TargetTopY+100" width="200" height="325" targetId="market" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press" hidden="1">
+		<Widget class="visual" id="shops-bgr" themeId="panel" fillContainer="" />
+		<Widget class="button" id="armorer" width="OwnerWidth-10" text="Armorer" />
+		<Widget class="button" id="weaponsmith" width="OwnerWidth-10" text="Weaponsmith" newRow="" />
+		<Widget class="button" id="fletcher" width="OwnerWidth-10" text="Fletcher" newRow="" />
+		<Widget class="button" id="bowyer" width="OwnerWidth-10" text="Bowyer" newRow="" />
+		<Widget class="button" id="tanner" width="OwnerWidth-10" text="Tanner" newRow="" />
+		<Widget class="button" id="herbalist" width="OwnerWidth-10" text="Herbalist" newRow="" />
+		<Widget class="button" id="young-boy" width="OwnerWidth-10" text="Young Boy" newRow="" />
+		<Widget class="button" id="young-girl" width="OwnerWidth-10" text="Young Girl" newRow="" />
+		<Widget class="button" id="old-lady" width="OwnerWidth-10" text="Old Lady" newRow="" />
+		<Widget class="button" id="black-market" width="OwnerWidth-10" text="Black Market" newRow="" />
+		<Widget class="button" id="beggar" width="OwnerWidth-10" text="Beggar" newRow="" />
+	</Container>
+
+	<Container id="items" x="TargetRightX-420" y="TargetTopY+85" width="410" height="TargetHeight-95" targetId="market" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
+		<Widget class="button" id="item1" width="80" height="80" />
+		<Widget class="button" id="item2" width="80" height="80" />
+		<Widget class="button" id="item3" width="80" height="80" />
+		<Widget class="button" id="item4" width="80" height="80" />
+		<Widget class="button" id="item5" width="80" height="80" />
+		<Widget class="button" id="item6" width="80" height="80" newRow="" />
+		<Widget class="button" id="item7" width="80" height="80" />
+		<Widget class="button" id="item8" width="80" height="80" />
+		<Widget class="button" id="item9" width="80" height="80" />
+		<Widget class="button" id="item10" width="80" height="80" />
+		<Widget class="button" id="item11" width="80" height="80" newRow="" />
+		<Widget class="button" id="item12" width="80" height="80" />
+		<Widget class="button" id="item13" width="80" height="80" />
+		<Widget class="button" id="item14" width="80" height="80" />
+		<Widget class="button" id="item15" width="80" height="80" />
+		<Widget class="button" id="item16" width="80" height="80" newRow="" />
+		<Widget class="button" id="item17" width="80" height="80" />
+		<Widget class="button" id="item18" width="80" height="80" />
+		<Widget class="button" id="item19" width="80" height="80" />
+		<Widget class="button" id="item20" width="80" height="80" />
+		<Widget class="button" id="item21" width="80" height="80" newRow="" />
+		<Widget class="button" id="item22" width="80" height="80" />
+		<Widget class="button" id="item23" width="80" height="80" />
+		<Widget class="button" id="item24" width="80" height="80" />
+		<Widget class="button" id="item25" width="80" height="80" />
+		<Widget class="button" id="item26" width="80" height="80" newRow="" />
+		<Widget class="button" id="item27" width="80" height="80" />
+		<Widget class="button" id="item28" width="80" height="80" />
+		<Widget class="button" id="item29" width="80" height="80" />
+		<Widget class="button" id="item30" width="80" height="80" />
+		<Widget class="button" id="item31" width="80" height="80" newRow="" />
+		<Widget class="button" id="item32" width="80" height="80" />
+		<Widget class="button" id="item33" width="80" height="80" />
+		<Widget class="button" id="item34" width="80" height="80" />
+		<Widget class="button" id="item35" width="80" height="80" />
+		<Widget class="button" id="item36" width="80" height="80" newRow="" />
+		<Widget class="button" id="item37" width="80" height="80" />
+		<Widget class="button" id="item38" width="80" height="80" />
+		<Widget class="button" id="item39" width="80" height="80" />
+		<Widget class="button" id="item40" width="80" height="80" />
+		<Widget class="button" id="item41" width="80" height="80" newRow="" />
+		<Widget class="button" id="item42" width="80" height="80" />
+		<Widget class="button" id="item43" width="80" height="80" />
+		<Widget class="button" id="item44" width="80" height="80" />
+		<Widget class="button" id="item45" width="80" height="80" />
+		<Widget class="button" id="item46" width="80" height="80" newRow="" />
+		<Widget class="button" id="item47" width="80" height="80" />
+		<Widget class="button" id="item48" width="80" height="80" />
+		<Widget class="button" id="item49" width="80" height="80" />
+		<Widget class="button" id="item50" width="80" height="80" />
 	</Container>
 
 	<Container id="exit" x="TargetRightX-35" y="TargetTopY-15" width="50" height="50" targetId="market" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">

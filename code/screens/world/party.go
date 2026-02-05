@@ -44,7 +44,7 @@ func (p *Party) Update() {
 	var isInRoadRange = p.isInRoadRange()
 	p.handleMovement(isInRoadRange)
 
-	if p.isPlayer {
+	if p.isPlayer && world.currentPopup == nil {
 		p.handlePlayer()
 	}
 
@@ -108,7 +108,7 @@ func (p *Party) tryEnterSettlement() {
 			p.moveTargetX, p.moveTargetY = p.x, p.y
 			p.path = nil
 			world.resultingCursorNonGUI = -1
-			world.currentPopup = global.TogglePopup(world.hud, world.currentPopup, world.settlement)
+			world.currentPopup = world.settlement
 		}
 	}
 }

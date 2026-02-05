@@ -52,10 +52,13 @@ func (ws *WorldScreen) OnLoad() {
 	loading.Show("Loading:\nWorld Map...")
 	ws.tmap = tiled.NewMap(assets.LoadTiledMap(ws.path), global.Project)
 	loading.Show("Loading:\nWorld GUI...")
-	ws.hud = gui.NewFromXMLs(file.LoadText("data/gui/world-hud.xml"), global.PopupDimGUI, global.ThemesGUI)
-	ws.inventory = gui.NewFromXMLs(file.LoadText("data/gui/world-inventory.xml"), global.ThemesGUI)
-	ws.settlement = gui.NewFromXMLs(file.LoadText("data/gui/world-settlement.xml"), global.ThemesGUI)
-	ws.market = gui.NewFromXMLs(file.LoadText("data/gui/world-settlement-market.xml"), global.ThemesGUI)
+	ws.hud = gui.NewFromXMLs(file.LoadText("data/gui/world-hud.xml"), global.ThemesGUI)
+	ws.inventory = gui.NewFromXMLs(
+		global.PopupDimGUI, file.LoadText("data/gui/world-inventory.xml"), global.ThemesGUI)
+	ws.settlement = gui.NewFromXMLs(
+		global.PopupDimGUI, file.LoadText("data/gui/world-settlement.xml"), global.ThemesGUI)
+	ws.market = gui.NewFromXMLs(
+		global.PopupDimGUI, file.LoadText("data/gui/world-settlement-market.xml"), global.ThemesGUI)
 	ws.currentPopup = nil
 
 	var sc = global.Options.ScaleUI
@@ -121,15 +124,14 @@ func (ws *WorldScreen) OnUpdate() {
 	}
 
 	ws.handleResting()
-
 	ws.playerParty.Update()
 	for _, party := range ws.otherParties {
 		party.Update()
 	}
-
 	ws.handleDayNightCycle()
 
 	ws.hud.UpdateAndDraw(ws.camera)
+
 	if ws.currentPopup != nil {
 		ws.currentPopup.UpdateAndDraw(ws.camera)
 	} else if ws.resultingCursorNonGUI != -1 {
@@ -159,7 +161,7 @@ var teamB = []*unit.Unit{}
 
 func (ws *WorldScreen) handleInput() {
 	if (ws.currentPopup == nil || ws.currentPopup == ws.inventory) && keyboard.IsKeyJustPressed(key.I) {
-		ws.currentPopup = global.TogglePopup(ws.hud, ws.currentPopup, ws.inventory)
+		ws.currentPopup = ws.inventory
 	}
 
 	if keyboard.IsKeyJustPressed(key.B) {
@@ -167,7 +169,15 @@ func (ws *WorldScreen) handleInput() {
 		var scr = screens.Current().(*battle.BattleScreen)
 		scr.Prepare(teamA, teamB, true)
 	}
+
 	if ws.hud.IsButtonJustClicked("main-menu", ws.camera) {
-		screens.Enter(global.ScreenMainMenu, false)
+		var escape = keyboard.IsKeyJustPressed(key.Escape)
+		var resting = ws.playerParty.isResting
+
+		if (resting && !escape) || !resting {
+			screens.Enter(global.ScreenMainMenu, false)
+		} else if resting && escape {
+			ws.stopResting(true)
+		}
 	}
 }

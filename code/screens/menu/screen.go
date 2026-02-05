@@ -31,8 +31,8 @@ func New() *MenuScreen {
 
 func (m *MenuScreen) OnLoad() {
 	loading.Show("Loading:\nMain Menu GUI...")
-	m.hud = gui.NewFromXMLs(file.LoadText("data/gui/menu-hud.xml"), global.PopupDimGUI, global.ThemesGUI)
-	m.options = gui.NewFromXMLs(file.LoadText("data/gui/menu-options.xml"), global.ThemesGUI)
+	m.hud = gui.NewFromXMLs(file.LoadText("data/gui/menu-hud.xml"), global.ThemesGUI)
+	m.options = gui.NewFromXMLs(global.PopupDimGUI, file.LoadText("data/gui/menu-options.xml"), global.ThemesGUI)
 	m.currentPopup = nil
 
 	loading.Show("Loading:\nMain Menu images...")
@@ -91,10 +91,10 @@ func (m *MenuScreen) handleInput() {
 	if m.hud.IsButtonJustClicked("new", m.camera) {
 		screens.Enter(global.ScreenWorld, false)
 	} else if m.hud.IsButtonJustClicked("options", m.camera) {
-		m.currentPopup = global.TogglePopup(m.hud, m.currentPopup, m.options)
+		m.currentPopup = m.options
 	} else if m.hud.IsButtonJustClicked("quit", m.camera) {
 		window.Close()
-	} else if m.currentPopup != nil && keyboard.IsKeyJustPressed(key.Escape) {
-		m.currentPopup = global.TogglePopup(m.hud, m.currentPopup, m.currentPopup)
+	} else if keyboard.IsKeyJustPressed(key.Escape) {
+		m.currentPopup = nil
 	}
 }

@@ -10,7 +10,7 @@
 	
 	<Container id="btns" x="TargetCenterX-275" y="TargetBottomY-250" width="550" height="250" targetId="settlement" gapY="5" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
 		<Widget class="button" id="rest" text="Rest at the Local Inn" />
-		<Widget class="button" id="market" text="Trade at the Marketplace" newRow="" />
+		<Widget class="button" id="market" text="Visit the Marketplace" newRow="" />
 		<Widget class="button" id="work" text="Look for Work" newRow="" />
 		<Widget class="button" id="recruit" text="Recruit Adventurers" newRow="" />
 	</Container>

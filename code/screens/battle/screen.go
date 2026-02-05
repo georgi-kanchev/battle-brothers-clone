@@ -6,6 +6,7 @@ import (
 	"game/code/unit"
 	"pure-game-kit/data/assets"
 	"pure-game-kit/data/file"
+	"pure-game-kit/execution/condition"
 	"pure-game-kit/execution/screens"
 	"pure-game-kit/geometry"
 	"pure-game-kit/graphics"
@@ -113,7 +114,7 @@ func (b *BattleScreen) handleInput() {
 	if keyboard.IsKeyJustPressed(key.Escape) {
 		screens.Enter(global.ScreenWorld, false)
 	} else if keyboard.IsKeyJustPressed(key.L) {
-		b.currentPopup = global.TogglePopup(b.hud, b.currentPopup, b.loot)
+		b.currentPopup = condition.If(b.currentPopup == b.loot, nil, b.loot)
 	}
 }
 func (b *BattleScreen) recalculatePathMap() {

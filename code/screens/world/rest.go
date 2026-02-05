@@ -14,9 +14,13 @@ func (ws *WorldScreen) handleResting() {
 	}
 
 	var moveCancel = mouse.IsAnyButtonJustPressed() && !ws.hud.IsAnyHovered(ws.camera)
-
 	if moveCancel {
-		ws.playerParty.isResting = false
+		ws.stopResting(false)
+	}
+}
+func (ws *WorldScreen) stopResting(backToSettlement bool) {
+	ws.playerParty.isResting = false
+	if !backToSettlement {
 		ws.playerParty.goingToSettlement = nil
 	}
 }
