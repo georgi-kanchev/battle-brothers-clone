@@ -8,6 +8,7 @@ ui-scale-world-hud: 1
 ui-scale-world-inventory: 1
 ui-scale-world-settlement: 1
 ui-scale-world-settlement-market: 1
+ui-scale-world-settlement-quests: 1
 ui-scale-battle-hud: 1
 ui-scale-battle-loot: 1
 audio-volume: 1

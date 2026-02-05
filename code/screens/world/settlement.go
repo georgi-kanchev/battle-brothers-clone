@@ -8,7 +8,7 @@ import (
 
 func (ws *WorldScreen) handleSettlementPopup() {
 	var name = ws.playerParty.goingToSettlement.Properties[property.ObjectName].(string)
-	ws.settlement.SetField("title-label", field.Text, name)
+	ws.settlement.SetField("title-label", field.Text, "Town of \""+name+"\"")
 
 	if ws.settlement.IsButtonJustClicked("exit-btn", ws.camera) ||
 		ws.settlement.IsButtonJustClicked("popup-dim-bgr", ws.camera) {
@@ -21,5 +21,7 @@ func (ws *WorldScreen) handleSettlementPopup() {
 		ws.currentPopup = ws.settlement
 	} else if ws.settlement.IsButtonJustClicked("market", ws.camera) {
 		ws.currentPopup = ws.market
+	} else if ws.settlement.IsButtonJustClicked("quests", ws.camera) {
+		ws.currentPopup = ws.quests
 	}
 }

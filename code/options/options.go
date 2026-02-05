@@ -12,6 +12,7 @@ type Options struct {
 	ScaleWorldInventory        float32 `yaml:"ui-scale-world-inventory"`
 	ScaleWorldSettlement       float32 `yaml:"ui-scale-world-settlement"`
 	ScaleWorldSettlementMarket float32 `yaml:"ui-scale-world-settlement-market"`
+	ScaleWorldSettlementQuests float32 `yaml:"ui-scale-world-settlement-quests"`
 	ScaleBattleHUD             float32 `yaml:"ui-scale-battle-hud"`
 	ScaleBattleLoot            float32 `yaml:"ui-scale-battle-loot"`
 

@@ -25,7 +25,7 @@ type WorldScreen struct {
 	path   string
 	camera *graphics.Camera
 
-	hud, inventory, settlement, market, currentPopup *gui.GUI
+	hud, inventory, settlement, market, quests, currentPopup *gui.GUI
 
 	resultingCursorNonGUI int
 
@@ -59,6 +59,8 @@ func (ws *WorldScreen) OnLoad() {
 		global.PopupDimGUI, file.LoadText("data/gui/world-settlement.xml"), global.ThemesGUI)
 	ws.market = gui.NewFromXMLs(
 		global.PopupDimGUI, file.LoadText("data/gui/world-settlement-market.xml"), global.ThemesGUI)
+	ws.quests = gui.NewFromXMLs(
+		global.PopupDimGUI, file.LoadText("data/gui/world-settlement-quests.xml"), global.ThemesGUI)
 	ws.currentPopup = nil
 
 	var sc = global.Options.ScaleUI
@@ -66,6 +68,7 @@ func (ws *WorldScreen) OnLoad() {
 	ws.inventory.Scale = global.Options.ScaleWorldInventory * sc
 	ws.settlement.Scale = global.Options.ScaleWorldSettlement * sc
 	ws.market.Scale = global.Options.ScaleWorldSettlementMarket * sc
+	ws.quests.Scale = global.Options.ScaleWorldSettlementMarket * sc
 
 	loading.Show("Loading:\nWorld images...")
 	var timeCircle = assets.LoadTexture("art/UI/Time/time_circle.PNG")
@@ -146,7 +149,9 @@ func (ws *WorldScreen) OnUpdate() {
 	case ws.settlement:
 		ws.handleSettlementPopup()
 	case ws.market:
-		ws.handleMarket()
+		ws.handleMarketPopup()
+	case ws.quests:
+		ws.handleQuestsPopup()
 	}
 }
 

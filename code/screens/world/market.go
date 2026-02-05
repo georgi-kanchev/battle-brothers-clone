@@ -2,7 +2,7 @@ package world
 
 import "pure-game-kit/gui/field"
 
-func (ws *WorldScreen) handleMarket() {
+func (ws *WorldScreen) handleMarketPopup() {
 	if ws.market.IsButtonJustClicked("exit-btn", ws.camera) ||
 		ws.market.IsButtonJustClicked("popup-dim-bgr", ws.camera) {
 		ws.currentPopup = ws.settlement
