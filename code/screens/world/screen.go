@@ -25,7 +25,7 @@ type WorldScreen struct {
 	path   string
 	camera *graphics.Camera
 
-	hud, inventory, settlement, market, quests, currentPopup *gui.GUI
+	hud, inventory, settlement, market, quests, events, currentPopup *gui.GUI
 
 	resultingCursorNonGUI int
 
@@ -61,6 +61,8 @@ func (ws *WorldScreen) OnLoad() {
 		global.PopupDimGUI, file.LoadText("data/gui/world-settlement-market.xml"), global.ThemesGUI)
 	ws.quests = gui.NewFromXMLs(
 		global.PopupDimGUI, file.LoadText("data/gui/world-settlement-quests.xml"), global.ThemesGUI)
+	ws.events = gui.NewFromXMLs(
+		file.LoadText("data/gui/world-events.xml"), global.ThemesGUI)
 	ws.currentPopup = nil
 
 	var sc = global.Options.ScaleUI
@@ -69,6 +71,7 @@ func (ws *WorldScreen) OnLoad() {
 	ws.settlement.Scale = global.Options.ScaleWorldSettlement * sc
 	ws.market.Scale = global.Options.ScaleWorldSettlementMarket * sc
 	ws.quests.Scale = global.Options.ScaleWorldSettlementMarket * sc
+	ws.events.Scale = global.Options.ScaleWorldEvents * sc
 
 	loading.Show("Loading:\nWorld images...")
 	var timeCircle = assets.LoadTexture("art/UI/Time/time_circle.PNG")
@@ -152,6 +155,8 @@ func (ws *WorldScreen) OnUpdate() {
 		ws.handleMarketPopup()
 	case ws.quests:
 		ws.handleQuestsPopup()
+	case ws.events:
+		ws.handleEventsPopup()
 	}
 }
 
@@ -165,14 +170,14 @@ var teamA = []*unit.Unit{}
 var teamB = []*unit.Unit{}
 
 func (ws *WorldScreen) handleInput() {
-	if (ws.currentPopup == nil || ws.currentPopup == ws.inventory) && keyboard.IsKeyJustPressed(key.I) {
+	if keyboard.IsKeyJustPressed(key.I) && (ws.currentPopup == nil || ws.currentPopup == ws.inventory) {
 		ws.currentPopup = ws.inventory
-	}
-
-	if keyboard.IsKeyJustPressed(key.B) {
+	} else if keyboard.IsKeyJustPressed(key.B) {
 		screens.Enter(global.ScreenBattle, false)
 		var scr = screens.Current().(*battle.BattleScreen)
 		scr.Prepare(teamA, teamB, true)
+	} else if keyboard.IsKeyJustPressed(key.E) {
+		ws.currentPopup = ws.events
 	}
 
 	if ws.hud.IsButtonJustClicked("main-menu", ws.camera) {

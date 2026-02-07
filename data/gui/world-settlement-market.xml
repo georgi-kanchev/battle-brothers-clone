@@ -1,23 +1,23 @@
 <GUI>
-	<Container id="market" x="CameraCenterX-500" y="CameraCenterY-350" width="900" height="700">
-		<Widget class="visual" id="settlement-bgr" themeId="panel" fillContainer="" />
+	<Container id="popup" x="CameraCenterX-500" y="CameraCenterY-350" width="900" height="700">
+		<Widget class="visual" id="popup-bgr" themeId="panel" fillContainer="" />
 	</Container>
 
-	<Container id="title" x="TargetCenterX-200" y="TargetTopY-15" width="400" height="50" targetId="market">
+	<Container id="title" x="TargetCenterX-200" y="TargetTopY-15" width="400" height="50" targetId="popup">
 		<Widget class="visual" id="title-bgr" themeId="panel" fillContainer="" />
 		<Widget class="visual" id="title-label" width="OwnerWidth" height= "OwnerHeight" textAlignmentX="0.5" textAlignmentY="0.5" text="Marketplace" />
 	</Container>
 	
-	<Container id="inv" x="TargetRightX-420" y="TargetTopY+40" width="410" height="40" targetId="market">
+	<Container id="inv" x="TargetRightX-420" y="TargetTopY+40" width="410" height="40" targetId="popup">
 		<Widget class="visual" id="inv-label" height= "OwnerHeight" textAlignmentX="0.5" textAlignmentY="0.5" text="Inventory" />
 	</Container>
 
-	<Container id="shop-menu" x="TargetLeftX+10" y="TargetTopY+40" width="410" height="40" targetId="market" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
+	<Container id="shop-menu" x="TargetLeftX+10" y="TargetTopY+40" width="410" height="40" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
 		<Widget class="visual" id="shop-menu-label" assetId="" frameColor="0 0 0 0" width="200" height= "OwnerHeight" textAlignmentX="0.5" textAlignmentY="0.5" text="Trade with the:" />
 		<Widget class="menu" id="shop-menu-dropdown" width="200" height= "OwnerHeight" textAlignmentX="0.5" textAlignmentY="0.5" text="Black Market" menuContainerId="shops" offsetX="10" />
 	</Container>
 	
-	<Container id="shop" x="TargetLeftX+10" y="TargetTopY+85" width="410" height="TargetHeight-95" targetId="market" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
+	<Container id="shop" x="TargetLeftX+10" y="TargetTopY+85" width="410" height="TargetHeight-95" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
 		<Widget class="button" id="shop1" width="80" height="80" />
 		<Widget class="button" id="shop2" width="80" height="80" />
 		<Widget class="button" id="shop3" width="80" height="80" />
@@ -70,7 +70,7 @@
 		<Widget class="button" id="shop50" width="80" height="80" />
 	</Container>
 	
-	<Container id="shops" x="TargetLeftX+220" y="TargetTopY+100" width="200" height="325" targetId="market" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press" hidden="1">
+	<Container id="shops" x="TargetLeftX+220" y="TargetTopY+100" width="200" height="325" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press" hidden="1">
 		<Widget class="visual" id="shops-bgr" themeId="panel" fillContainer="" />
 		<Widget class="button" id="armorer" width="OwnerWidth-10" text="Armorer" />
 		<Widget class="button" id="weaponsmith" width="OwnerWidth-10" text="Weaponsmith" newRow="" />
@@ -85,7 +85,7 @@
 		<Widget class="button" id="beggar" width="OwnerWidth-10" text="Beggar" newRow="" />
 	</Container>
 
-	<Container id="items" x="TargetRightX-420" y="TargetTopY+85" width="410" height="TargetHeight-95" targetId="market" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
+	<Container id="items" x="TargetRightX-420" y="TargetTopY+85" width="410" height="TargetHeight-95" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
 		<Widget class="button" id="item1" width="80" height="80" />
 		<Widget class="button" id="item2" width="80" height="80" />
 		<Widget class="button" id="item3" width="80" height="80" />
@@ -138,7 +138,7 @@
 		<Widget class="button" id="item50" width="80" height="80" />
 	</Container>
 
-	<Container id="exit" x="TargetRightX-35" y="TargetTopY-15" width="50" height="50" targetId="market" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
+	<Container id="exit" x="TargetRightX-35" y="TargetTopY-15" width="50" height="50" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
 		<Widget class="button" id="exit-btn" text="X" buttonHotkey="Escape" />
 	</Container>
 </GUI>

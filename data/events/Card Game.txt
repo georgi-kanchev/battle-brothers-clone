@@ -1,0 +1,31 @@
+The party is relaxing in a tavern after a long day. Suddenly, someone slams a table. When they turn around, they see a pair of men sitting on a table, playing cards. The angered man stands up and starts complaining loudly.
+
+“No! This just is not possible. You’re clearly not playing fair!”
+
+“Dear sir, I assure you, I have not cheated, lied or stolen in my whole life. Let us not make a big scene and…”
+
+“LIAR! I will call the guards!”
+
+“Kind sir, I beg you, calm down. If this is about the money, you can have them back. However, if you’re just planning on spending them on more alcohol, maybe it should be me who calls the guards and asks them to escort you back home?”
+
+The loser just stomps out, while the other player starts gathering the playing cards. The members, being used to spending their past time playing various games, decide to do a little investigation. As they approach, the man at the table looks up to them.
+
+“Hello there, strangers! I apologize for the ruckus, some people are just sore losers. But I assure you, I play fair. I wouldn’t be allowed here night after night if I didn’t. Perhaps you would do me the honor of playing you?”
+
+The party observes the way he shuffles the deck, deals the cards and inspects his own hand. They notice that a large part of the little finger and ring finger on his right hand are missing, so the way he handles the cards is a bit unusual.
+
+The cards the playing party member gets are very good. The chances of winning would be pretty high, under normal circumstances. But are those such?
+
+The stranger decides to raise the bet. The party decides to…
+
+… Call.
+((Lose the starting amount of the bet. Get a pack of cards from the stranger as a consolation prize, which grants a small buff maybe?))
+
+… Raise.
+((Lose twice the money.))
+
+… Fold.
+((Lose just the starting amount of the bet.))
+
+… Accuse him of cheating.
+((Get the money back, but get banned from this tavern.))

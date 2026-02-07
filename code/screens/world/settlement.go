@@ -18,7 +18,7 @@ func (ws *WorldScreen) handleSettlementPopup() {
 
 	if ws.settlement.IsButtonJustClicked("rest", ws.camera) {
 		ws.playerParty.isResting = true
-		ws.currentPopup = ws.settlement
+		ws.currentPopup = nil
 	} else if ws.settlement.IsButtonJustClicked("market", ws.camera) {
 		ws.currentPopup = ws.market
 	} else if ws.settlement.IsButtonJustClicked("quests", ws.camera) {

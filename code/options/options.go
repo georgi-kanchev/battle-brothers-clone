@@ -1,15 +1,15 @@
 package options
 
 type Options struct {
-	WindowState int  `yaml:"graphics-window-state"`
-	Monitor     int  `yaml:"graphics-monitor"`
-	VSync       bool `yaml:"graphics-vsync"`
-	LimitFPS    int  `yaml:"graphics-limit-fps"`
-
+	WindowState                int     `yaml:"graphics-window-state"`
+	Monitor                    int     `yaml:"graphics-monitor"`
+	VSync                      bool    `yaml:"graphics-vsync"`
+	LimitFPS                   int     `yaml:"graphics-limit-fps"`
 	ScaleUI                    float32 `yaml:"ui-scale"`
 	ScaleMenuOptions           float32 `yaml:"ui-scale-menu-options"`
 	ScaleWorldHUD              float32 `yaml:"ui-scale-world-hud"`
 	ScaleWorldInventory        float32 `yaml:"ui-scale-world-inventory"`
+	ScaleWorldEvents           float32 `yaml:"ui-scale-world-events"`
 	ScaleWorldSettlement       float32 `yaml:"ui-scale-world-settlement"`
 	ScaleWorldSettlementMarket float32 `yaml:"ui-scale-world-settlement-market"`
 	ScaleWorldSettlementQuests float32 `yaml:"ui-scale-world-settlement-quests"`

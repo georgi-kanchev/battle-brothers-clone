@@ -1,0 +1,31 @@
+<GUI>
+	<Container id="dim" x="CameraLeftX" y="CameraTopY" width="CameraWidth" height="CameraHeight">
+		<Widget class="visual" id="dim-bgr" fillContainer="" color="0 0 0 200" />
+	</Container>
+	
+	<Container id="popup" x="CameraCenterX-300" y="CameraCenterY-350" width="600" height="700">
+		<Widget class="visual" id="popup-bgr" themeId="panel" fillContainer="" />
+	</Container>
+	
+	<Container id="title" x="TargetCenterX-200" y="TargetTopY-15" width="400" height="50" targetId="popup">
+		<Widget class="visual" id="title-bgr" themeId="panel" fillContainer="" />
+		<Widget class="visual" id="title-label" width="OwnerWidth" height= "OwnerHeight" textAlignmentX="0.5" textAlignmentY="0.5" text="Event Title" />
+	</Container>
+
+	<Container id="btns" x="TargetLeftX+25" y="TargetTopY+125" width="TargetWidth-50" height="TargetHeight-150" targetId="popup" gapY="5" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press" anchorY="1">
+		<Widget class="button" id="choice1" height="40" text="... choice 1" />
+		<Widget class="button" id="choice2" height="40" text="... choice 2" newRow="" />
+		<Widget class="button" id="choice3" height="40" text="... choice 3" newRow="" />
+		<Widget class="button" id="choice4" height="40" text="... choice 4" newRow="" />
+		<Widget class="button" id="choice5" height="40" text="... choice 5" newRow="" />
+	</Container>
+	
+	<Container id="event" x="TargetLeftX+25" y="TargetTopY+50" width="TargetWidth-50" height="395" targetId="popup" gapX="10" gapY="10">
+		<Widget class="visual" id="event-bgr" themeId="panel" fillContainer="" />
+		<Widget class="visual" id="text" width="OwnerWidth-20" />
+	</Container>
+
+	<Container id="debug" x="TargetRightX+20" y="TargetTopY" width="300" height="50" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
+		<Widget class="inputField" id="file-name" inputFieldPlaceholder="File Name..." />
+	</Container>
+</GUI>

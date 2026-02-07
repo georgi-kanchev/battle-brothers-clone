@@ -1,16 +1,16 @@
 <GUI>
-	<Container id="quests" x="CameraCenterX-300" y="CameraCenterY-350" width="600" height="700">
-		<Widget class="visual" id="quests-bgr" themeId="panel" fillContainer="" />
+	<Container id="popup" x="CameraCenterX-300" y="CameraCenterY-350" width="600" height="700">
+		<Widget class="visual" id="popup-bgr" themeId="panel" fillContainer="" />
 	</Container>
 	
-	<Container id="title" x="TargetCenterX-200" y="TargetTopY-15" width="400" height="50" targetId="quests">
+	<Container id="title" x="TargetCenterX-200" y="TargetTopY-15" width="400" height="50" targetId="popup">
 		<Widget class="visual" id="title-bgr" themeId="panel" fillContainer="" />
 		<Widget class="visual" id="title-label" width="OwnerWidth" height= "OwnerHeight" textAlignmentX="0.5" textAlignmentY="0.5" text="Favors for Locals" />
 	</Container>
 	
 	
 
-	<Container id="exit" x="TargetRightX-35" y="TargetTopY-15" width="50" height="50" targetId="quests" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
+	<Container id="exit" x="TargetRightX-35" y="TargetTopY-15" width="50" height="50" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
 		<Widget class="button" id="exit-btn" text="X" buttonHotkey="Escape" />
 	</Container>
 </GUI>

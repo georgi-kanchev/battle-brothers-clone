@@ -1,0 +1,29 @@
+BUTTON CHOICES:
+A line starting with "..." is a button choice, example lines:
+	... take the offer.
+	... ignore the old guy.
+
+CHOICE RESULT:
+Any following lines (multiple) after a button choice starting with ">>>", make the button have a result.
+A line starting with ">>> event", results in opening another event popup file. Example lines:
+	>>> event lost-kid-choice1
+	>>> event drunk-guy-pt2
+A line starting with ">>> item", results in granting some amount of items. Example lines:
+	>>> item bread 10
+	>>> item golden-amulet 1
+A line starting with ">>> stat", results in editing a stat value of all units in the party. Example lines:
+	>>> stat max-health +5
+	>>> stat stamina -2
+If none of the lines following a button choice start with ">>> event", the button closes the popup.
+
+NOTES & COMMENTS:
+Any line starting with any other non-letter/non-digit symbol (~`!@#$%^&*.,;:|/\) is ignored. Example lines:
+	# this is a note
+	! this is also a note
+An exception to this is the double quote symbol ("), it is assumed to be part of the text.
+
+TEXT:
+Every other line is part of the text. Example lines:
+	The quick brown fox jumped over the lazy dog.
+	The lazy dog didn't notice at all.
+	"Some quoted text."
