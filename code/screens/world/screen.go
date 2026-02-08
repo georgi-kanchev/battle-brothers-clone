@@ -172,7 +172,13 @@ var teamB = []*unit.Unit{}
 func (ws *WorldScreen) handleInput() {
 	if keyboard.IsKeyJustPressed(key.I) && (ws.currentPopup == nil || ws.currentPopup == ws.inventory) {
 		ws.currentPopup = ws.inventory
-	} else if keyboard.IsKeyJustPressed(key.B) {
+	}
+
+	if ws.currentPopup != nil {
+		return
+	}
+
+	if keyboard.IsKeyJustPressed(key.B) {
 		screens.Enter(global.ScreenBattle, false)
 		var scr = screens.Current().(*battle.BattleScreen)
 		scr.Prepare(teamA, teamB, true)
