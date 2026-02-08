@@ -18,11 +18,10 @@ Upon taking a closer look, it’s very clear that one of the wheels is a bit dar
 
 The party discusses and comes to the conclusion that...
 
-... The lighter cheese is clearly superior and creamier. 
-((Get some cheese, very tasty.))
+... The lighter cheese is clearly superior and creamier. ((Get some cheese, very tasty.))
 
 ... The darker cheese’s taste is way deeper.
 ((Get a discount for the next vendor in town - his family has been here for a long time and works everywhere.))
 
-... Both taste awful. 
+... Both taste awful.
 ((One party member gets hit by an egg, getting a temporary debuff))

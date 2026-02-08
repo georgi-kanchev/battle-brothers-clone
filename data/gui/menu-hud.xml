@@ -7,6 +7,6 @@
 	</Container>
 	
 	<Container id="version" x="CameraLeftX-10" y="CameraBottomY-45" width="CameraWidth" height="35">
-		<Widget class="visual" id="version-label" text="v0.1.3" textLineHeight="25" textAlignmentX="1" textAlignmentY="1" />
+		<Widget class="visual" id="version-label" text="v0.1.4" textLineHeight="25" textAlignmentX="1" textAlignmentY="1" />
 	</Container>
 </GUI>

@@ -76,5 +76,5 @@ func (ws *WorldScreen) loadEventFile(fileName string) {
 		}
 	}
 	ws.events.SetField("text", field.Text, text.Trim(story))
-	ws.events.SetField("event", field.Height, text.New(395+(5-choiceAmount)*45))
+	ws.events.SetField("event", field.Height, text.New(345+(5-choiceAmount)*55))
 }
