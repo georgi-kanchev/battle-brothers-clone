@@ -1,4 +1,4 @@
-graphics-window-state: 4 # 0=Floating 1=FloatingBorderless 2=Fullscreen 3=FullscreenBorderless 4=Maximized 5=Minimized
+graphics-window-state: 4 #0=Floating 1=FloatingBorderless 2=Fullscreen 3=FullscreenBorderless 4=Maximized 5=Minimized
 graphics-monitor: 0
 graphics-vsync: false
 graphics-target-fps: 60

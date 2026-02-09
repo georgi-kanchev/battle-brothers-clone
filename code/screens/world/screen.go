@@ -9,10 +9,12 @@ import (
 	"pure-game-kit/data/file"
 	"pure-game-kit/data/folder"
 	"pure-game-kit/data/path"
+	"pure-game-kit/execution/condition"
 	"pure-game-kit/execution/screens"
 	"pure-game-kit/geometry"
 	"pure-game-kit/graphics"
 	"pure-game-kit/gui"
+	"pure-game-kit/gui/field"
 	"pure-game-kit/input/keyboard"
 	"pure-game-kit/input/keyboard/key"
 	"pure-game-kit/input/mouse"
@@ -137,6 +139,8 @@ func (ws *WorldScreen) OnUpdate() {
 	ws.handleDayNightCycle()
 
 	ws.hud.UpdateAndDraw(ws.camera)
+	ws.hud.SetField("popups-btns", field.Hidden, condition.If(ws.currentPopup != nil, "1", ""))
+	ws.hud.SetField("controls", field.Hidden, condition.If(ws.currentPopup != nil, "1", ""))
 
 	if ws.currentPopup != nil {
 		ws.currentPopup.UpdateAndDraw(ws.camera)
@@ -170,12 +174,12 @@ var teamA = []*unit.Unit{}
 var teamB = []*unit.Unit{}
 
 func (ws *WorldScreen) handleInput() {
-	if keyboard.IsKeyJustPressed(key.I) && (ws.currentPopup == nil || ws.currentPopup == ws.inventory) {
-		ws.currentPopup = ws.inventory
-	}
-
 	if ws.currentPopup != nil {
 		return
+	}
+
+	if ws.hud.IsButtonJustClicked("inventory", ws.camera) {
+		ws.currentPopup = ws.inventory
 	}
 
 	if keyboard.IsKeyJustPressed(key.B) {

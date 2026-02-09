@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cherrytree>
   <bookmarks list=""/>
-  <node unique_id="1" master_id="0" name="Roadmap" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761072156" ts_lastsave="1766633025">
+  <node unique_id="1" master_id="0" name="🗺️ Roadmap" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1761072156" ts_lastsave="1766633025">
     <rich_text>The idea of the roadmap version layout is to strip down development into small chunks and develop everything at the same time in sweeps.
 It is not meant to dictate the exact runway but rather propose a direction to follow, depending on the scope of the game.
 
@@ -33,5 +33,137 @@ Main features to sweep:
 - Battle
 - Main Menu / Options / New / Load
 - Project/Code (restructure/refine/optimize etc)</rich_text>
+  </node>
+  <node unique_id="10" master_id="0" name="🔗 Reference" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1770618940" ts_lastsave="1770618961">
+    <rich_text>• Marketing: https://youtu.be/xej_wsBB5tY
+• Code Paradigm: https://youtu.be/JxI3Eu5DPwE</rich_text>
+  </node>
+  <node unique_id="2" master_id="0" name="💡Ideas" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1770618437" ts_lastsave="1770618437">
+    <node unique_id="3" master_id="0" name="🪚 Professions" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1770618499" ts_lastsave="1770618571">
+      <node unique_id="4" master_id="0" name="👑 Noble" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1770618565" ts_lastsave="1770618572">
+        <rich_text>• King/Queen
+   ◇ Rules a kingdom/collects taxes
+   ◇ Positions/orders soldiers for an ongoing war (if any)
+• Commander
+    ◇ Leads a few mercenaries (2/3/4/5 up to 10) into battles for their kingdom
+    ◇ Determines their group's type:
+      ▪ Royal - obeying a king
+      ▪ Deserter - on their own (for whatever profit/loot they find)
+• Guard
+    ◇ Guards or patrols an area (scene) in order to protect it from threats
+    ◇ Reports to a commander
+    ◇ Might own small:
+      ▪ Watchposts
+      ▪ Towers
+      ▪ Walls
+• Mercenary
+    ◇ Fights for a commander
+• Servant
+    ◇ Doesn't join battles
+    ◇ Takes care of a commander and their men with whatever supplies they need
+      ▪ Weapons
+      ▪ Food
+      ▪ Armor
+      ▪ Medicine
+      ▪ etc
+   ◇ Seeks good prices in:
+      ▪ Villages/towns
+      ▪ Caravans/merchants
+      ▪ etc
+• Scout
+    ◇ Gathers information about the outskirts of the enemy and their surroundings by traveling
+    ◇ Doesn't join battles
+    ◇ Reports to commander
+• Spy
+    ◇ Gathers information about the enemy from the inside
+    ◇ Doesn't join battles
+    ◇ Reports to commander</rich_text>
+      </node>
+      <node unique_id="5" master_id="0" name="⚖️ Economy" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1770618633" ts_lastsave="1770618695">
+        <rich_text>• Traveling Merchant
+   ◇ Travels between towns/villages to buy/sell
+   ◇ Seeking buyers in order to make a profit
+   ◇ Not good at fighting
+   ◇ Tries to buy their way out of trouble
+   ◇ May lead a mercenary or two for protection
+• Local Sellsman
+   ◇ Stays in the local area (town/village)
+   ◇ Waits for travelling merchants/caravans in order to invest in stocks and sell them to the local folks
+   ◇ Seeks to buy production and sell it for a profit to other travelling merchants/caravans
+• Wild Sellsman
+   ◇ Sketchy, not to be trusted (all sorts of evil pirates/cultists/witches/bandits)
+   ◇ Selling weird items with random value that either works or doesn't (like a gamble)
+   ◇ Usually produces their items
+   ◇ More likely to rob you than sell to you (but in a convincing way)</rich_text>
+      </node>
+      <node unique_id="6" master_id="0" name="⚒️ Craft" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1770618644" ts_lastsave="1770618699">
+        <rich_text>• Cook/Baker - food
+• Brewer/Bartender - alcohol/drinks/etc
+• Smith - tools/armor/weapons
+• Bowyer/Fletcher - ranged weapons (slingshots/bows/arbalets/etc) and ammo (arrows/bolts)
+• Miner - metals/ores/minerals/etc
+• Butcher/Skinner - raw meat/bones/skins/furs/horns/teeth/etc
+• Hunter/Trapper
+• Forager - berries/herbs/mushrooms/flowers/etc
+• Fisherman - fish/frogs/crabs/shrimp/etc
+• Farmer - crops/vegetables/fruits/fruit trees/fruit bushes
+• Animal Breeder - animals
+• Shepherd/Shearman
+• Groom/Stable Hand/Saddler - responsible for management of horses, making saddles and the care of the stables themselves
+• Forester - trees, bushes
+• Herbalist - herbs, mushrooms
+• Woodcutter - wood
+• Priest - helps people mentally
+• Doctor/Leech - helps people physically
+• Builder - buildings
+• Carpenter - woodwork
+• Tailor/Hatter - clothes, hats, gloves
+• Dyer - A person who dyes Cloth
+• Shoemaker - shoes
+• Tavernkeeper/Brewer - food/drinks/alcohol and rooms for a night or two
+• Miller
+• Mason A builder that uses, brick, stone and mortar.
+• Architect
+• Barber
+• Librarian
+• Carrier/Messenger - A person who delivers goods around town or messages
+• Cartwright/Wheelwright - A builder of carts, wagons and caravans
+• Gardener
+• Glassblower/Glazier - A person who sets and cuts glass, makes stuff out of it
+• Hostler/Innkeeper
+• Locksmith/Key Maker
+• Navigator/Mapmaker
+• Sage/Scholar/Teacher
+• Shipwright/Boat Maker/Ship Maker
+• Sailor - travels on boat/ship to transport or deliver
+• Flower Picker/Bouquet Maker
+• Stargazer - observes the night sky &amp; documents it</rich_text>
+      </node>
+      <node unique_id="7" master_id="0" name="🎭️ Entertainment" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1770618650" ts_lastsave="1770618703">
+        <rich_text>• Clown/Juggler
+• Comedian/Storyteller
+• Actor/Playwright
+• Singer/Musician/Bard
+• Painter
+• Sculptor/Carver/Engraver
+• Street Performer</rich_text>
+      </node>
+      <node unique_id="8" master_id="0" name="🏴‍☠️️ Outlaw" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1770618660" ts_lastsave="1770618707">
+        <rich_text>• Bandit - hides, then ambushes and robs and raids people/caravans/villages
+• Thief - steals anything they can
+• Pirate - robs/loots other ships
+• Witch - potions/elixirs
+• Cultist - sacrifices other cultists/people/animals
+• Assassin - high pay for the right person if unspotted</rich_text>
+      </node>
+      <node unique_id="9" master_id="0" name="🩼 Scum" prog_lang="plain-text" tags="" readonly="0" nosearch_me="0" nosearch_ch="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1770618689" ts_lastsave="1770618711">
+        <rich_text>• Laundress - cleaning clothes
+• Rat Catcher
+• Undertaker - makes and guards graves and their surroundings
+• Executioner - executes people (mainly outlaws)
+• Beggar
+• Cripple - exists, sadly</rich_text>
+      </node>
+    </node>
   </node>
 </cherrytree>

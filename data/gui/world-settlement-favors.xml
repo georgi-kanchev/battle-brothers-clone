@@ -3,6 +3,29 @@
 		<Widget class="visual" id="popup-bgr" themeId="panel" fillContainer="" />
 	</Container>
 	
+	<Container id="favors" x="TargetLeftX+20" y="TargetTopY+40" width="560" height="TargetHeight-60" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
+		<Widget class="button" id="favor0-btn" width="50" height="50" text="+" textLineHeight="50" offsetY="75" />
+		<Widget class="visual" id="favor0" width="OwnerWidth-60" height="200" text="Someone asked such and such favor" />
+		<Widget class="button" id="favor1-btn" width="50" height="50" text="+" textLineHeight="50" offsetY="75" newRow="" />
+		<Widget class="visual" id="favor1" width="OwnerWidth-60" height="200" text="Someone asked such and such favor" />
+		<Widget class="button" id="favor2-btn" width="50" height="50" text="+" textLineHeight="50" offsetY="75" newRow="" />
+		<Widget class="visual" id="favor2" width="OwnerWidth-60" height="200" text="Someone asked such and such favor" />
+		<Widget class="button" id="favor3-btn" width="50" height="50" text="+" textLineHeight="50" offsetY="75" newRow="" />
+		<Widget class="visual" id="favor3" width="OwnerWidth-60" height="200" text="Someone asked such and such favor" />
+		<Widget class="button" id="favor4-btn" width="50" height="50" text="+" textLineHeight="50" offsetY="75" newRow="" />
+		<Widget class="visual" id="favor4" width="OwnerWidth-60" height="200" text="Someone asked such and such favor" />
+		<Widget class="button" id="favor5-btn" width="50" height="50" text="+" textLineHeight="50" offsetY="75" newRow="" />
+		<Widget class="visual" id="favor5" width="OwnerWidth-60" height="200" text="Someone asked such and such favor" />
+		<Widget class="button" id="favor6-btn" width="50" height="50" text="+" textLineHeight="50" offsetY="75" newRow="" />
+		<Widget class="visual" id="favor6" width="OwnerWidth-60" height="200" text="Someone asked such and such favor" />
+		<Widget class="button" id="favor7-btn" width="50" height="50" text="+" textLineHeight="50" offsetY="75" newRow="" />
+		<Widget class="visual" id="favor7" width="OwnerWidth-60" height="200" text="Someone asked such and such favor" />
+		<Widget class="button" id="favor8-btn" width="50" height="50" text="+" textLineHeight="50" offsetY="75" newRow="" />
+		<Widget class="visual" id="favor8" width="OwnerWidth-60" height="200" text="Someone asked such and such favor" />
+		<Widget class="button" id="favor9-btn" width="50" height="50" text="+" textLineHeight="50" offsetY="75" newRow="" />
+		<Widget class="visual" id="favor9" width="OwnerWidth-60" height="200" text="Someone asked such and such favor" />
+	</Container>
+
 	<Container id="title" x="TargetCenterX-200" y="TargetTopY-15" width="400" height="35" targetId="popup">
 		<Widget class="visual" id="title-bgr" themeId="panel" fillContainer="" text="Favors for Locals" />
 	</Container>

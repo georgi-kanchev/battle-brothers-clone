@@ -1,6 +1,7 @@
 <GUI>
-	<Container id="quest" x="CameraLeftX+5" y="CameraTopY+5" width="400" height="40">
-		<Widget class="visual" id="quest-bgr" themeId="panel" fillContainer="" text="quest" />
+	<Container id="popups-btns" x="CameraLeftX+5" y="CameraTopY+5" width="150" height="CameraHeight" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press" gapY="5">
+		<Widget class="button" id="inventory" height="40" text="Party" buttonHotkey="P" />
+		<Widget class="button" id="notebook" height="40" text="Notebook" newRow="" />
 	</Container>
 	
 	<Container id="time" x="CameraCenterX-75" y="CameraTopY+5" width="150" height="141">
