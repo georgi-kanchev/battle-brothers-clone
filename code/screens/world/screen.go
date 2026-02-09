@@ -60,7 +60,7 @@ func (ws *WorldScreen) OnLoad() {
 	ws.market = gui.NewFromXMLs(
 		global.PopupDimGUI, file.LoadText("data/gui/world-settlement-market.xml"), global.ThemesGUI)
 	ws.quests = gui.NewFromXMLs(
-		global.PopupDimGUI, file.LoadText("data/gui/world-settlement-quests.xml"), global.ThemesGUI)
+		global.PopupDimGUI, file.LoadText("data/gui/world-settlement-favors.xml"), global.ThemesGUI)
 	ws.events = gui.NewFromXMLs(
 		file.LoadText("data/gui/world-events.xml"), global.ThemesGUI)
 	ws.currentPopup = nil

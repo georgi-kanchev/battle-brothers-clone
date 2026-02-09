@@ -1,20 +1,13 @@
 <GUI>
-	<Container id="resources" x="CameraLeftX+5" y="CameraTopY+5" width="400" height="40">
-		<Widget class="visual" id="resources-bgr" themeId="panel" fillContainer="" />
-		<Widget class="visual" id="gold" themeId="resource" text="^^ 90 523" textEmbeddedAssetId1="@coins3" />
-		<Widget class="visual" id="food" themeId="resource" text="^^ 188" textEmbeddedAssetId1="@apple" />
-		<Widget class="visual" id="tools" themeId="resource" text="^^ 77" textEmbeddedAssetId1="@ingot" />
-		<Widget class="visual" id="ammo" themeId="resource" text="^^ 68" textEmbeddedAssetId1="@bow" />
-		<Widget class="visual" id="medicine" themeId="resource" text="^^ 29" textEmbeddedAssetId1="@heart" />
-	</Container>
-	<Container id="quest" x="TargetLeftX" y="TargetBottomY" width="TargetWidth" height="40" targetId="resources">
+	<Container id="quest" x="CameraLeftX+5" y="CameraTopY+5" width="400" height="40">
 		<Widget class="visual" id="quest-bgr" themeId="panel" fillContainer="" text="quest" />
 	</Container>
 	
 	<Container id="time" x="CameraCenterX-75" y="CameraTopY+5" width="150" height="141">
-		<Widget class="visual" id="time-bgr" assetId="art/UI/Time/time_top.PNG" fillContainer="" color="255 255 255"/>
-		<Widget class="visual" id="time-word" text="Morning" textColor="255 255 255" textAlignmentX="0.5" textLineHeight="22"/>
+		<Widget class="visual" id="time-bgr" assetId="art/UI/Time/time_top.PNG" fillContainer="" color="255 255 255" />
+		<Widget class="visual" id="time-word" text="Morning" textColor="255 255 255" textAlignmentX="0.5" textLineHeight="22" />
 	</Container>
+
 	<Container id="time-btns" x="TargetLeftX" y="TargetBottomY-1" width="150" height="40" targetId = "time">
 		<Widget class="visual" id="time-btns-bgr" assetId="art/UI/Buttons/btn.PNG" fillContainer="" color="255 255 255"/>
 		<Widget class="checkbox" id="x0" offsetY="4" assetId="art/UI/Buttons/btn_pause.PNG" themeId="time-btn-off" checkboxThemeId="time-btn" buttonHotkey="Space" />
@@ -26,6 +19,10 @@
 		<Theme id="time-btn-hover" color="255 255 255" width="150/4-1" height="32" checkboxGroup="time-btns" />
 		<Theme id="time-btn-off" color="255 255 255 70" width="150/4-1" height="32" checkboxGroup="time-btns" buttonThemeIdHover="time-btn-hover" buttonThemeIdPress="time-btn-press" />
 	</Container>
+	
+	<Container id="paused" x="CameraCenterX-100" y="TargetBottomY+60" width="200" height="50" targetId="time" themeId="panel">
+		<Widget class="visual" id="paused-bgr" fillContainer="" text="Paused" textLineHeight="40" />
+	</Container>
 
 	<Container id="controls" x="CameraRightX-155" y="CameraTopY+5" width="150" height="CameraHeight" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press" gapY="5">
 		<Widget class="button" id="main-menu" text="Main Menu" height="40" buttonHotkey="Escape" />
@@ -36,11 +33,13 @@
 	<Container id="rest" x="CameraCenterX-400" y="CameraBottomY-150" width="800" height="140" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press" gapY="5">
 		<Widget class="visual" id="rest-bgr" themeId="panel" fillContainer="" />
 	</Container>
+
 	<Container id="rest-labels" x="TargetLeftX" y="TargetTopY" width="550" height="TargetHeight" targetId="rest" hidden="TargetHidden" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press" gapY="5">
 		<Widget class="visual" id="resting" text="Resting at the Local Inn..." color="" frameSize="" height="40" textLineHeight="40" />
 		<Widget class="visual" id="units" text="Party Health: 95%" color="" frameSize="" height="40" textLineHeight="40" newRow="" />
 		<Widget class="visual" id="paid" text="Paid: 23" color="" frameSize="" height="40" textLineHeight="40" newRow="" />
 	</Container>
+
 	<Container id="rest-btns" x="TargetLeftX+550" y="TargetTopY" width="250" height="TargetHeight" targetId="rest" hidden="TargetHidden" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press" gapY="5">
 		<Widget class="checkbox" id="until-full" text="Leave when rested" width="250" height="40" />
 		<Widget class="checkbox" id="until-dawn" text="Leave at Dawn" width="250" height="40" newRow="" />

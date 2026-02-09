@@ -3,16 +3,16 @@
 		<Widget class="visual" id="popup-bgr" themeId="panel" fillContainer="" />
 	</Container>
 
-	<Container id="title" x="TargetCenterX-200" y="TargetTopY-15" width="400" height="50" targetId="popup">
+	<Container id="title" x="TargetCenterX-200" y="TargetTopY-15" width="400" height="35" targetId="popup">
 		<Widget class="visual" id="title-bgr" themeId="panel" fillContainer="" />
-		<Widget class="visual" id="title-label" width="OwnerWidth" height= "OwnerHeight" textAlignmentX="0.5" textAlignmentY="0.5" />
 	</Container>
 
 	<Container id="btns" x="TargetLeftX+25" y="TargetTopY+125" width="TargetWidth-50" height="TargetHeight-150" targetId="popup" gapY="5" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press" anchorY="1">
 		<Widget class="button" id="rest" text="Rest at the Local Inn" />
-		<Widget class="button" id="market" text="Visit the Marketplace" newRow="" />
-		<Widget class="button" id="quests" text="Grant a Favor" newRow="" />
+		<Widget class="button" id="market" text="Trade at the Marketplace" newRow="" />
+		<Widget class="button" id="tavern" text="Visit the Tavern" newRow="" />
 		<Widget class="button" id="recruit" text="Recruit Adventurers" newRow="" />
+		<Widget class="button" id="quests" text="Grant a Favor" newRow="" />
 	</Container>
 
 	<Container id="exit" x="TargetRightX-35" y="TargetTopY-15" width="50" height="50" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">

@@ -8,7 +8,7 @@ import (
 
 func (ws *WorldScreen) handleSettlementPopup() {
 	var name = ws.playerParty.goingToSettlement.Properties[property.ObjectName].(string)
-	ws.settlement.SetField("title-label", field.Text, "Town of \""+name+"\"")
+	ws.settlement.SetField("title-bgr", field.Text, "Town of \""+name+"\"")
 
 	if ws.settlement.IsButtonJustClicked("exit-btn", ws.camera) ||
 		ws.settlement.IsButtonJustClicked("popup-dim-bgr", ws.camera) {

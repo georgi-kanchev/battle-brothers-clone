@@ -49,7 +49,6 @@ func (ws *WorldScreen) loadEventFile(fileName string) {
 	referencedPopups = [5]string{}
 	ws.events.InputFieldStopTyping()
 	ws.events.SetField("file-name", field.Text, "")
-	ws.events.SetField("title-label", field.Text, fileName)
 
 	for i := range 5 {
 		ws.events.SetField(text.New("choice", i+1), field.Hidden, "1")
@@ -76,5 +75,5 @@ func (ws *WorldScreen) loadEventFile(fileName string) {
 		}
 	}
 	ws.events.SetField("text", field.Text, text.Trim(story))
-	ws.events.SetField("event", field.Height, text.New(345+(5-choiceAmount)*55))
+	ws.events.SetField("event", field.Height, text.New(370+(5-choiceAmount)*55))
 }

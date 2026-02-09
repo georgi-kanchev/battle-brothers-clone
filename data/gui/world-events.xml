@@ -7,11 +7,6 @@
 		<Widget class="visual" id="popup-bgr" themeId="panel" fillContainer="" />
 	</Container>
 	
-	<Container id="title" x="TargetCenterX-200" y="TargetTopY-15" width="400" height="50" targetId="popup">
-		<Widget class="visual" id="title-bgr" themeId="panel" fillContainer="" />
-		<Widget class="visual" id="title-label" width="OwnerWidth" height= "OwnerHeight" textAlignmentX="0.5" textAlignmentY="0.5" text="Event Title" />
-	</Container>
-
 	<Container id="btns" x="TargetLeftX+25" y="TargetTopY+125" width="TargetWidth-50" height="TargetHeight-150" targetId="popup" gapY="5" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press" anchorY="1">
 		<Widget class="button" id="choice1" text="... choice 1" textLineGap="-0.8" frameSize="-3" />
 		<Widget class="button" id="choice2" text="... choice 2" textLineGap="-0.8" frameSize="-3" newRow="" />
@@ -20,7 +15,7 @@
 		<Widget class="button" id="choice5" text="... choice 5" textLineGap="-0.8" frameSize="-3" newRow="" />
 	</Container>
 	
-	<Container id="event" x="TargetLeftX+25" y="TargetTopY+50" width="TargetWidth-50" height="345" targetId="popup" gapX="10" gapY="10">
+	<Container id="event" x="TargetLeftX+25" y="TargetTopY+25" width="TargetWidth-50" height="370" targetId="popup" gapX="10" gapY="10">
 		<Widget class="visual" id="event-bgr" themeId="panel" fillContainer="" />
 		<Widget class="visual" id="text" width="OwnerWidth-20" />
 	</Container>

@@ -2,6 +2,7 @@ package world
 
 import (
 	"game/code/global"
+	"pure-game-kit/execution/condition"
 	"pure-game-kit/gui/field"
 	"pure-game-kit/utility/color"
 	"pure-game-kit/utility/number"
@@ -50,6 +51,7 @@ func (ws *WorldScreen) handleDayNightCycle() {
 	var timeOfDay = number.Round(ws.time / 60)
 	var timeOfDayIndex = int(timeOfDay) % len(clock)
 	ws.hud.SetField("time-word", field.Text, clock[timeOfDayIndex])
+	ws.hud.SetField("paused", field.Hidden, condition.If(global.TimeScale == 0, "", "1"))
 
 	var curColor, nextColor = overlayColors[timeOfDayIndex], overlayColors[int(timeOfDay+1)%len(clock)]
 	var progress = number.Map(float32(timeOfDayIndex)-ws.time/60, -0.5, 0.5, 1, 0)

@@ -7,8 +7,7 @@
 		<Widget class="checkbox" id="gameplay" text="Gameplay" width="OwnerWidth/4-9" gapX="5" />
 	</Container>
 	
-	<Container id="options-title" x="TargetCenterX-100" y="TargetTopY-25" width="200" height="50" targetId="popup">
-		<Widget class="visual" id="options-title-bgr" themeId="popup" fillContainer="" />
-		<Widget class="visual" id="options-title-label" width="OwnerWidth" height= "OwnerHeight" textAlignmentX="0.5" textAlignmentY="0.5" text="Options" />
+	<Container id="options-title" x="TargetCenterX-100" y="TargetTopY-25" width="200" height="35" targetId="popup">
+		<Widget class="visual" id="options-title-bgr" themeId="panel" fillContainer="" text="Options" />
 	</Container>
 </GUI>
