@@ -27,7 +27,8 @@ type WorldScreen struct {
 	path   string
 	camera *graphics.Camera
 
-	hud, inventory, settlement, market, quests, events, currentPopup *gui.GUI
+	hud, inventory, events, currentPopup        *gui.GUI
+	settlement, market, favors, recruit, tavern *gui.GUI
 
 	resultingCursorNonGUI int
 
@@ -54,26 +55,37 @@ func (ws *WorldScreen) OnLoad() {
 	loading.Show("Loading:\nWorld Map...")
 	ws.tmap = tiled.NewMap(assets.LoadTiledMap(ws.path), global.Project)
 	loading.Show("Loading:\nWorld GUI...")
-	ws.hud = gui.NewFromXMLs(file.LoadText("data/gui/world-hud.xml"), global.ThemesGUI)
-	ws.inventory = gui.NewFromXMLs(
-		global.PopupDimGUI, file.LoadText("data/gui/world-inventory.xml"), global.ThemesGUI)
-	ws.settlement = gui.NewFromXMLs(
-		global.PopupDimGUI, file.LoadText("data/gui/world-settlement.xml"), global.ThemesGUI)
-	ws.market = gui.NewFromXMLs(
-		global.PopupDimGUI, file.LoadText("data/gui/world-settlement-market.xml"), global.ThemesGUI)
-	ws.quests = gui.NewFromXMLs(
-		global.PopupDimGUI, file.LoadText("data/gui/world-settlement-favors.xml"), global.ThemesGUI)
-	ws.events = gui.NewFromXMLs(
-		file.LoadText("data/gui/world-events.xml"), global.ThemesGUI)
+
+	var narrow, wide = global.PopupNarrowGUI, global.PopupWideGUI
+	var dim, x, title, themes = global.DimGUI, global.XBtnGUI, global.TitleGUI, global.ThemesGUI
+	var hud = file.LoadText("data/gui/world-hud.xml")
+	var events = file.LoadText("data/gui/world-events.xml")
+	var inventory = file.LoadText("data/gui/world-inventory.xml")
+	var settlement = file.LoadText("data/gui/world-settlement.xml")
+	var market = file.LoadText("data/gui/world-settlement-market.xml")
+	var favors = file.LoadText("data/gui/world-settlement-favors.xml")
+	var recruit = file.LoadText("data/gui/world-settlement-recruit.xml")
+	var tavern = file.LoadText("data/gui/world-settlement-tavern.xml")
+
+	ws.hud = gui.NewFromXMLs(hud, themes)
+	ws.events = gui.NewFromXMLs(events, themes)
+	ws.inventory = gui.NewFromXMLs(dim, wide, inventory, x, themes)
+	ws.settlement = gui.NewFromXMLs(dim, narrow, settlement, title, x, themes)
+	ws.market = gui.NewFromXMLs(dim, wide, market, title, x, themes)
+	ws.favors = gui.NewFromXMLs(dim, narrow, favors, title, x, themes)
+	ws.recruit = gui.NewFromXMLs(dim, narrow, recruit, title, x, themes)
+	ws.tavern = gui.NewFromXMLs(dim, narrow, tavern, title, x, themes)
 	ws.currentPopup = nil
 
 	var sc = global.Options.ScaleUI
 	ws.hud.Scale = global.Options.ScaleWorldHUD * sc
 	ws.inventory.Scale = global.Options.ScaleWorldInventory * sc
+	ws.events.Scale = global.Options.ScaleWorldEvents * sc
 	ws.settlement.Scale = global.Options.ScaleWorldSettlement * sc
 	ws.market.Scale = global.Options.ScaleWorldSettlementMarket * sc
-	ws.quests.Scale = global.Options.ScaleWorldSettlementMarket * sc
-	ws.events.Scale = global.Options.ScaleWorldEvents * sc
+	ws.favors.Scale = global.Options.ScaleWorldSettlementMarket * sc
+	ws.recruit.Scale = global.Options.ScaleWorldSettlementRecruit * sc
+	ws.tavern.Scale = global.Options.ScaleWorldSettlementTavern * sc
 
 	loading.Show("Loading:\nWorld images...")
 	var timeCircle = assets.LoadTexture("art/UI/Time/time_circle.PNG")
@@ -153,14 +165,18 @@ func (ws *WorldScreen) OnUpdate() {
 	switch ws.currentPopup {
 	case ws.inventory:
 		ws.handleInventoryPopup()
+	case ws.events:
+		ws.handleEventsPopup()
 	case ws.settlement:
 		ws.handleSettlementPopup()
 	case ws.market:
 		ws.handleMarketPopup()
-	case ws.quests:
-		ws.handleQuestsPopup()
-	case ws.events:
-		ws.handleEventsPopup()
+	case ws.favors:
+		ws.handleFavorsPopup()
+	case ws.recruit:
+		ws.handleRecruitPopup()
+	case ws.tavern:
+		ws.handleTavernPopup()
 	}
 }
 
@@ -198,6 +214,17 @@ func (ws *WorldScreen) handleInput() {
 			screens.Enter(global.ScreenMainMenu, false)
 		} else if resting && escape {
 			ws.stopResting(true)
+		}
+	}
+}
+
+func (ws *WorldScreen) tryExitPopup(from *gui.GUI, to *gui.GUI, andDo func()) {
+	if from.IsButtonJustClicked("exit-btn", ws.camera) ||
+		from.IsButtonJustClicked("popup-dim-bgr", ws.camera) {
+		ws.currentPopup = to
+
+		if andDo != nil {
+			andDo()
 		}
 	}
 }

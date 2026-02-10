@@ -49,7 +49,7 @@ func (b *BattleScreen) OnLoad() {
 	loading.Show("Loading:\nBattle Map...")
 	b.tmap = tiled.NewMap(assets.LoadTiledMap(b.path), global.Project)
 	loading.Show("Loading:\nBattle GUI...")
-	b.hud = gui.NewFromXMLs(file.LoadText("data/gui/battle-hud.xml"), global.PopupDimGUI, global.ThemesGUI)
+	b.hud = gui.NewFromXMLs(file.LoadText("data/gui/battle-hud.xml"), global.DimGUI, global.ThemesGUI)
 	b.loot = gui.NewFromXMLs(file.LoadText("data/gui/battle-loot.xml"), global.ThemesGUI)
 	b.currentPopup = nil
 

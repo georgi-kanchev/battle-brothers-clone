@@ -9,7 +9,9 @@ ui-scale-world-inventory: 1
 ui-scale-world-events: 1
 ui-scale-world-settlement: 1
 ui-scale-world-settlement-market: 1
-ui-scale-world-settlement-quests: 1
+ui-scale-world-settlement-favors: 1
+ui-scale-world-settlement-recruit: 1
+ui-scale-world-settlement-tavern: 1
 ui-scale-battle-hud: 1
 ui-scale-battle-loot: 1
 audio-volume: 1

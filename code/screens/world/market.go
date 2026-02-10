@@ -3,10 +3,8 @@ package world
 import "pure-game-kit/gui/field"
 
 func (ws *WorldScreen) handleMarketPopup() {
-	if ws.market.IsButtonJustClicked("exit-btn", ws.camera) ||
-		ws.market.IsButtonJustClicked("popup-dim-bgr", ws.camera) {
-		ws.currentPopup = ws.settlement
-	}
+	ws.market.SetField("title-bgr", field.Text, "Marketplace")
+	ws.tryExitPopup(ws.market, ws.settlement, nil)
 
 	var allShopIds = ws.market.WidgetIdsOfContainer("shops")
 	for _, id := range allShopIds {

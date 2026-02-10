@@ -29,14 +29,20 @@ func main() {
 
 	loading.Show("Loading:\nReusable GUI...")
 	global.ThemesGUI = file.LoadText("data/gui/reusable-themes.xml")
-	global.PopupDimGUI = file.LoadText("data/gui/reusable-popup-dim.xml")
+	global.PopupNarrowGUI = file.LoadText("data/gui/reusable-popup-narrow.xml")
+	global.PopupWideGUI = file.LoadText("data/gui/reusable-popup-wide.xml")
+	global.DimGUI = file.LoadText("data/gui/reusable-popup-dim.xml")
+	global.XBtnGUI = file.LoadText("data/gui/reusable-popup-x-button.xml")
+	global.TitleGUI = file.LoadText("data/gui/reusable-popup-title.xml")
+
 	loading.Show("Loading:\nTiled project...")
 	global.Project = tiled.NewProject(assets.LoadTiledProject("data/project.tiled-project"))
 
+	loading.Show("Loading:\nScreens...")
 	global.ScreenMainMenu = screens.Add(menu.New(), true)
 	global.ScreenWorld = screens.Add(world.New("data/worlds/test/map.tmx"), true)
 	global.ScreenBattle = screens.Add(battle.New("data/battlegrounds/test/map.tmx"), true)
-	
+
 	screens.Enter(global.ScreenMainMenu, false)
 	for window.KeepOpen() {
 		if keyboard.IsKeyJustPressed(key.F5) {

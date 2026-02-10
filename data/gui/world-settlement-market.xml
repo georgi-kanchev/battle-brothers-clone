@@ -1,22 +1,26 @@
 <GUI>
-	<Container id="popup" x="CameraCenterX-500" y="CameraCenterY-350" width="900" height="700">
-		<Widget class="visual" id="popup-bgr" themeId="panel" fillContainer="" />
-	</Container>
-
-	<Container id="title" x="TargetCenterX-200" y="TargetTopY-15" width="400" height="35" targetId="popup">
-		<Widget class="visual" id="title-bgr" themeId="panel" fillContainer="" text="Marketplace" />
+	<Container id="titles" x="TargetLeftX+20" y="TargetTopY+35" width="TargetWidth-40" height="30" targetId="popup">
+		<Widget class="visual" id="label-traders" width= "115" textAlignmentX="0.5" textAlignmentY="0.5" text="Traders" />
+		<Widget class="visual" id="label-shop" width= "410" textAlignmentX="0.5" textAlignmentY="0.5" text="Blacksmith" gapX="5" />
+		<Widget class="visual" id="label-inventory" width= "410" textAlignmentX="0.5" textAlignmentY="0.5" text="Inventory" gapX="20" />
 	</Container>
 	
-	<Container id="inv" x="TargetRightX-420" y="TargetTopY+25" width="410" height="40" targetId="popup">
-		<Widget class="visual" id="inv-label" height= "OwnerHeight" textAlignmentX="0.5" textAlignmentY="0.5" text="Inventory" />
+	<Container id="shop-menu" x="TargetLeftX+20" y="TargetTopY+70" width="125" height="TargetHeight-90" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
+		<Widget class="button" id="blacksmith" themeId="shop-menu-btn" text="^^ Blacksmith"  textLineHeight="20" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="bowyer" themeId="shop-menu-btn" text="^^ Bowyer" textLineHeight="20" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="fletcher" themeId="shop-menu-btn" text="^^ Fletcher" textLineHeight="20" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="armorer" themeId="shop-menu-btn" text="^^ Armorer" textLineHeight="20" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="tanner" themeId="shop-menu-btn" text="^^ Tanner" textLineHeight="20" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="herbalist" themeId="shop-menu-btn" text="^^ Herbalist" textLineHeight="20" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="young-boy" themeId="shop-menu-btn" text="^^ Young Boy" textLineHeight="20" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="young-girl" themeId="shop-menu-btn" text="^^ Young Girl" textLineHeight="20" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="old-lady" themeId="shop-menu-btn" text="^^ Old Lady" textLineHeight="20" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="shady-guy" themeId="shop-menu-btn" text="^^ Shady Guy" textLineHeight="20" textAlignmentX="0" newRow="" />
+		<Widget class="button" id="beggar" themeId="shop-menu-btn" text="^^ Beggar" textLineHeight="20" textAlignmentX="0" newRow="" />
+		<Theme id="shop-menu-btn" width="OwnerWidth-10" height="40" />
 	</Container>
 
-	<Container id="shop-menu" x="TargetLeftX+10" y="TargetTopY+25" width="410" height="40" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
-		<Widget class="visual" id="shop-menu-label" assetId="" frameColor="0 0 0 0" width="200" height= "OwnerHeight" textAlignmentX="0.5" textAlignmentY="0.5" text="Trade with the:" />
-		<Widget class="menu" id="shop-menu-dropdown" width="200" height= "OwnerHeight" textAlignmentX="0.5" textAlignmentY="0.5" text="Black Market" menuContainerId="shops" offsetX="10" />
-	</Container>
-	
-	<Container id="shop" x="TargetLeftX+10" y="TargetTopY+70" width="410" height="TargetHeight-80" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
+	<Container id="shop" x="TargetLeftX+140" y="TargetTopY+70" width="410" height="TargetHeight-90" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
 		<Widget class="button" id="shop1" width="80" height="80" />
 		<Widget class="button" id="shop2" width="80" height="80" />
 		<Widget class="button" id="shop3" width="80" height="80" />
@@ -70,21 +74,10 @@
 	</Container>
 	
 	<Container id="shops" x="TargetLeftX+220" y="TargetTopY+85" width="200" height="325" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press" hidden="1">
-		<Widget class="visual" id="shops-bgr" themeId="panel" fillContainer="" />
-		<Widget class="button" id="armorer" width="OwnerWidth-10" text="Armorer" />
-		<Widget class="button" id="weaponsmith" width="OwnerWidth-10" text="Weaponsmith" newRow="" />
-		<Widget class="button" id="fletcher" width="OwnerWidth-10" text="Fletcher" newRow="" />
-		<Widget class="button" id="bowyer" width="OwnerWidth-10" text="Bowyer" newRow="" />
-		<Widget class="button" id="tanner" width="OwnerWidth-10" text="Tanner" newRow="" />
-		<Widget class="button" id="herbalist" width="OwnerWidth-10" text="Herbalist" newRow="" />
-		<Widget class="button" id="young-boy" width="OwnerWidth-10" text="Young Boy" newRow="" />
-		<Widget class="button" id="young-girl" width="OwnerWidth-10" text="Young Girl" newRow="" />
-		<Widget class="button" id="old-lady" width="OwnerWidth-10" text="Old Lady" newRow="" />
-		<Widget class="button" id="black-market" width="OwnerWidth-10" text="Black Market" newRow="" />
-		<Widget class="button" id="beggar" width="OwnerWidth-10" text="Beggar" newRow="" />
+
 	</Container>
 
-	<Container id="items" x="TargetRightX-420" y="TargetTopY+70" width="410" height="TargetHeight-80" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
+	<Container id="items" x="TargetRightX-430" y="TargetTopY+70" width="410" height="TargetHeight-90" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
 		<Widget class="button" id="item1" width="80" height="80" />
 		<Widget class="button" id="item2" width="80" height="80" />
 		<Widget class="button" id="item3" width="80" height="80" />
@@ -135,9 +128,5 @@
 		<Widget class="button" id="item48" width="80" height="80" />
 		<Widget class="button" id="item49" width="80" height="80" />
 		<Widget class="button" id="item50" width="80" height="80" />
-	</Container>
-
-	<Container id="exit" x="TargetRightX-35" y="TargetTopY-15" width="50" height="50" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
-		<Widget class="button" id="exit-btn" text="X" buttonHotkey="Escape" />
 	</Container>
 </GUI>

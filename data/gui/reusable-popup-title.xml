@@ -1,0 +1,5 @@
+<GUI>
+	<Container id="title" x="TargetCenterX-200" y="TargetTopY-15" width="400" height="35" targetId="popup">
+		<Widget class="visual" id="title-bgr" themeId="panel" fillContainer="" text="Title" />
+	</Container>
+</GUI>

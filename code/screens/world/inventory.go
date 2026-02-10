@@ -10,10 +10,7 @@ import (
 var inventorySelectedUnitIndex int
 
 func (ws *WorldScreen) handleInventoryPopup() {
-	if ws.inventory.IsButtonJustClicked("exit-btn", ws.camera) ||
-		ws.inventory.IsButtonJustClicked("popup-dim-bgr", ws.camera) {
-		ws.currentPopup = nil
-	}
+	ws.tryExitPopup(ws.inventory, nil, nil)
 
 	var x, y, _, _, _ = ws.inventory.Area("display", ws.camera)
 	var sc = 1 / ws.camera.Zoom * ws.inventory.Scale

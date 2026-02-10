@@ -7,7 +7,7 @@ import (
 
 var ScreenLoading, ScreenMainMenu, ScreenWorld, ScreenBattle int
 var Project *tiled.Project
-var ThemesGUI, PopupDimGUI string
+var ThemesGUI, PopupNarrowGUI, PopupWideGUI, DimGUI, XBtnGUI, TitleGUI string
 var TimeScale float32 = 1
 
 var Options *options.Options

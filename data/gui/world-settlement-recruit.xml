@@ -1,0 +1,18 @@
+<GUI>
+	<Container id="controls" x="TargetLeftX+20" y="TargetTopY+25" width="TargetWidth-40" height="40" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press" anchorX="0.5">
+		<Widget class="button" id="add" width="OwnerWidth/3" height="40" text="Recruit" />
+	</Container>
+
+	<Container id="units" x="TargetLeftX+20" y="TargetTopY+70" width="TargetWidth-40" height="TargetHeight-90" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
+		<Widget class="checkbox" id="unit0" width="OwnerWidth-10" height="135" />
+		<Widget class="checkbox" id="unit1" width="OwnerWidth-10" height="135" newRow="" />
+		<Widget class="checkbox" id="unit2" width="OwnerWidth-10" height="135" newRow="" />
+		<Widget class="checkbox" id="unit3" width="OwnerWidth-10" height="135" newRow="" />
+		<Widget class="checkbox" id="unit4" width="OwnerWidth-10" height="135" newRow="" />
+		<Widget class="checkbox" id="unit5" width="OwnerWidth-10" height="135" newRow="" />
+		<Widget class="checkbox" id="unit6" width="OwnerWidth-10" height="135" newRow="" />
+		<Widget class="checkbox" id="unit7" width="OwnerWidth-10" height="135" newRow="" />
+		<Widget class="checkbox" id="unit8" width="OwnerWidth-10" height="135" newRow="" />
+		<Widget class="checkbox" id="unit9" width="OwnerWidth-10" height="135" newRow="" />
+	</Container>
+</GUI>

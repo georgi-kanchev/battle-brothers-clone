@@ -32,7 +32,7 @@ func New() *MenuScreen {
 func (m *MenuScreen) OnLoad() {
 	loading.Show("Loading:\nMain Menu GUI...")
 	m.hud = gui.NewFromXMLs(file.LoadText("data/gui/menu-hud.xml"), global.ThemesGUI)
-	m.options = gui.NewFromXMLs(global.PopupDimGUI, file.LoadText("data/gui/menu-options.xml"), global.ThemesGUI)
+	m.options = gui.NewFromXMLs(global.DimGUI, file.LoadText("data/gui/menu-options.xml"), global.ThemesGUI)
 	m.currentPopup = nil
 
 	loading.Show("Loading:\nMain Menu images...")

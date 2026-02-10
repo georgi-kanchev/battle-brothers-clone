@@ -1,6 +1,6 @@
 <GUI>
 	<Container id="popups-btns" x="CameraLeftX+5" y="CameraTopY+5" width="150" height="CameraHeight" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press" gapY="5">
-		<Widget class="button" id="inventory" height="40" text="Party" buttonHotkey="P" />
+		<Widget class="button" id="inventory" height="40" text="Inventory" buttonHotkey="I" />
 		<Widget class="button" id="notebook" height="40" text="Notebook" newRow="" />
 	</Container>
 	
@@ -8,7 +8,7 @@
 		<Widget class="visual" id="time-bgr" assetId="art/UI/Time/time_top.PNG" fillContainer="" color="255 255 255" />
 		<Widget class="visual" id="time-word" text="Morning" textColor="255 255 255" textAlignmentX="0.5" textLineHeight="22" />
 	</Container>
-
+	
 	<Container id="time-btns" x="TargetLeftX" y="TargetBottomY-1" width="150" height="40" targetId = "time">
 		<Widget class="visual" id="time-btns-bgr" assetId="art/UI/Buttons/btn.PNG" fillContainer="" color="255 255 255"/>
 		<Widget class="checkbox" id="x0" offsetY="4" assetId="art/UI/Buttons/btn_pause.PNG" themeId="time-btn-off" checkboxThemeId="time-btn" buttonHotkey="Space" />

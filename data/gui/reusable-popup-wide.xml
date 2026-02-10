@@ -1,0 +1,5 @@
+<GUI>
+	<Container id="popup" x="CameraCenterX-500" y="CameraCenterY-350" width="1000" height="700">
+		<Widget class="visual" id="popup-bgr" themeId="panel" fillContainer="" />
+	</Container>
+</GUI>

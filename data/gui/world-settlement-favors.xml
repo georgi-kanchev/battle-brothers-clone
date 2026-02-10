@@ -1,36 +1,18 @@
 <GUI>
-	<Container id="popup" x="CameraCenterX-300" y="CameraCenterY-350" width="600" height="700">
-		<Widget class="visual" id="popup-bgr" themeId="panel" fillContainer="" />
-	</Container>
-	
-	<Container id="favors" x="TargetLeftX+20" y="TargetTopY+40" width="560" height="TargetHeight-60" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
-		<Widget class="button" id="favor0-btn" width="50" height="50" text="+" textLineHeight="50" offsetY="75" />
-		<Widget class="visual" id="favor0" width="OwnerWidth-60" height="200" text="Someone asked such and such favor" />
-		<Widget class="button" id="favor1-btn" width="50" height="50" text="+" textLineHeight="50" offsetY="75" newRow="" />
-		<Widget class="visual" id="favor1" width="OwnerWidth-60" height="200" text="Someone asked such and such favor" />
-		<Widget class="button" id="favor2-btn" width="50" height="50" text="+" textLineHeight="50" offsetY="75" newRow="" />
-		<Widget class="visual" id="favor2" width="OwnerWidth-60" height="200" text="Someone asked such and such favor" />
-		<Widget class="button" id="favor3-btn" width="50" height="50" text="+" textLineHeight="50" offsetY="75" newRow="" />
-		<Widget class="visual" id="favor3" width="OwnerWidth-60" height="200" text="Someone asked such and such favor" />
-		<Widget class="button" id="favor4-btn" width="50" height="50" text="+" textLineHeight="50" offsetY="75" newRow="" />
-		<Widget class="visual" id="favor4" width="OwnerWidth-60" height="200" text="Someone asked such and such favor" />
-		<Widget class="button" id="favor5-btn" width="50" height="50" text="+" textLineHeight="50" offsetY="75" newRow="" />
-		<Widget class="visual" id="favor5" width="OwnerWidth-60" height="200" text="Someone asked such and such favor" />
-		<Widget class="button" id="favor6-btn" width="50" height="50" text="+" textLineHeight="50" offsetY="75" newRow="" />
-		<Widget class="visual" id="favor6" width="OwnerWidth-60" height="200" text="Someone asked such and such favor" />
-		<Widget class="button" id="favor7-btn" width="50" height="50" text="+" textLineHeight="50" offsetY="75" newRow="" />
-		<Widget class="visual" id="favor7" width="OwnerWidth-60" height="200" text="Someone asked such and such favor" />
-		<Widget class="button" id="favor8-btn" width="50" height="50" text="+" textLineHeight="50" offsetY="75" newRow="" />
-		<Widget class="visual" id="favor8" width="OwnerWidth-60" height="200" text="Someone asked such and such favor" />
-		<Widget class="button" id="favor9-btn" width="50" height="50" text="+" textLineHeight="50" offsetY="75" newRow="" />
-		<Widget class="visual" id="favor9" width="OwnerWidth-60" height="200" text="Someone asked such and such favor" />
+	<Container id="controls" x="TargetLeftX+20" y="TargetTopY+25" width="TargetWidth-40" height="40" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press" anchorX="0.5">
+		<Widget class="button" id="add" width="OwnerWidth/3" height="40" text="Add to Notebook" />
 	</Container>
 
-	<Container id="title" x="TargetCenterX-200" y="TargetTopY-15" width="400" height="35" targetId="popup">
-		<Widget class="visual" id="title-bgr" themeId="panel" fillContainer="" text="Favors for Locals" />
-	</Container>
-
-	<Container id="exit" x="TargetRightX-35" y="TargetTopY-15" width="50" height="50" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
-		<Widget class="button" id="exit-btn" text="X" buttonHotkey="Escape" />
+	<Container id="favors" x="TargetLeftX+20" y="TargetTopY+70" width="TargetWidth-40" height="TargetHeight-90" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press">
+		<Widget class="checkbox" id="favor0" width="OwnerWidth-10" height="135" text="Someone asked such and such favor" />
+		<Widget class="checkbox" id="favor1" width="OwnerWidth-10" height="135" text="Someone asked such and such favor" newRow="" />
+		<Widget class="checkbox" id="favor2" width="OwnerWidth-10" height="135" text="Someone asked such and such favor" newRow="" />
+		<Widget class="checkbox" id="favor3" width="OwnerWidth-10" height="135" text="Someone asked such and such favor" newRow="" />
+		<Widget class="checkbox" id="favor4" width="OwnerWidth-10" height="135" text="Someone asked such and such favor" newRow="" />
+		<Widget class="checkbox" id="favor5" width="OwnerWidth-10" height="135" text="Someone asked such and such favor" newRow="" />
+		<Widget class="checkbox" id="favor6" width="OwnerWidth-10" height="135" text="Someone asked such and such favor" newRow="" />
+		<Widget class="checkbox" id="favor7" width="OwnerWidth-10" height="135" text="Someone asked such and such favor" newRow="" />
+		<Widget class="checkbox" id="favor8" width="OwnerWidth-10" height="135" text="Someone asked such and such favor" newRow="" />
+		<Widget class="checkbox" id="favor9" width="OwnerWidth-10" height="135" text="Someone asked such and such favor" newRow="" />
 	</Container>
 </GUI>
