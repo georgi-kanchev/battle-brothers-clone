@@ -1,5 +1,5 @@
 <GUI>
 	<Container id="popup-dim" x="CameraLeftX" y="CameraTopY" width="CameraWidth" height="CameraHeight">
-		<Widget class="button" id="popup-dim-bgr" fillContainer="" color="0 0 0 200" />
+		<Widget class="button" id="popup-dim-bgr" fillContainer="" color="0 0 0 120" />
 	</Container>
 </GUI>

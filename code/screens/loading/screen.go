@@ -26,25 +26,25 @@ func Show(message string) {
 
 //=================================================================
 
-func (l *LoadingScreen) OnLoad() {
+func (ls *LoadingScreen) OnLoad() {
 	assets.LoadDefaultFont()
-	l.textMid = graphics.NewTextBox("", 0, 0, "")
-	l.textBot = graphics.NewTextBox("", 0, 0, random.Pick("Tip: placeholder #1", "Tip: placeholder #2", "Tip: placeholder #3", "Tip: placeholder #4"))
-	l.textMid.AlignmentX, l.textMid.AlignmentY = 0.5, 0.5
-	l.textBot.AlignmentX, l.textBot.AlignmentY = 0.5, 1
-	l.textMid.LineHeight = 60
-	l.textBot.LineHeight = 40
+	ls.textMid = graphics.NewTextBox("", 0, 0, "")
+	ls.textBot = graphics.NewTextBox("", 0, 0, random.Pick("Tip: placeholder #1", "Tip: placeholder #2", "Tip: placeholder #3", "Tip: placeholder #4"))
+	ls.textMid.AlignmentX, ls.textMid.AlignmentY = 0.5, 0.5
+	ls.textBot.AlignmentX, ls.textBot.AlignmentY = 0.5, 1
+	ls.textMid.LineHeight = 60
+	ls.textBot.LineHeight = 40
 }
-func (l *LoadingScreen) OnEnter() {
-	l.camera.SetScreenAreaToWindow()
-	l.textMid.Text = msg
-	l.textMid.Width, l.textMid.Height = l.camera.Size()
-	l.textBot.Width, l.textBot.Height = l.textMid.Width, l.textMid.Height
-	l.camera.DrawTextBoxes(l.textMid, l.textBot)
+func (ls *LoadingScreen) OnEnter() {
+	ls.camera.SetScreenAreaToWindow()
+	ls.textMid.Text = msg
+	ls.textMid.Width, ls.textMid.Height = ls.camera.Size()
+	ls.textBot.Width, ls.textBot.Height = ls.textMid.Width, ls.textMid.Height
+	ls.camera.DrawTextBoxes(ls.textMid, ls.textBot)
 	window.KeepOpen()
 }
-func (l *LoadingScreen) OnUpdate() {}
-func (l *LoadingScreen) OnExit()   {}
+func (ls *LoadingScreen) OnUpdate() {}
+func (ls *LoadingScreen) OnExit()   {}
 
 // =================================================================
 // private

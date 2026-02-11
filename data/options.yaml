@@ -1,7 +1,8 @@
-graphics-window-state: 4 #0=Floating 1=FloatingBorderless 2=Fullscreen 3=FullscreenBorderless 4=Maximized 5=Minimized
+#0=Floating 1=FloatingBorderless 2=Fullscreen 3=FullscreenBorderless 4=Maximized 5=Minimized
+graphics-window-state: 3
 graphics-monitor: 0
 graphics-vsync: false
-graphics-target-fps: 60
+graphics-limit-fps: 60
 ui-scale: 2
 ui-scale-menu-options: 1
 ui-scale-world-hud: 1
@@ -17,5 +18,3 @@ ui-scale-battle-loot: 1
 audio-volume: 1
 audio-volume-music: 0.5
 audio-volume-sound: 1
-controls: {}
-gameplay: {}

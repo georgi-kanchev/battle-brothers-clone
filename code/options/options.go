@@ -21,8 +21,4 @@ type Options struct {
 	AudioVolume      float32 `yaml:"audio-volume"`
 	AudioVolumeMusic float32 `yaml:"audio-volume-music"`
 	AudioVolumeSound float32 `yaml:"audio-volume-sound"`
-	// Controls     struct {
-	// } `yaml:"controls"`
-	// Gameplay struct {
-	// } `yaml:"gameplay"`
 }

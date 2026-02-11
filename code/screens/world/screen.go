@@ -67,7 +67,7 @@ func (ws *WorldScreen) OnLoad() {
 	var recruit = file.LoadText("data/gui/world-settlement-recruit.xml")
 	var tavern = file.LoadText("data/gui/world-settlement-tavern.xml")
 
-	ws.hud = gui.NewFromXMLs(hud, themes)
+	ws.hud = gui.NewFromXMLs(hud, dim, themes)
 	ws.events = gui.NewFromXMLs(events, themes)
 	ws.inventory = gui.NewFromXMLs(dim, wide, inventory, x, themes)
 	ws.settlement = gui.NewFromXMLs(dim, narrow, settlement, title, x, themes)
@@ -149,18 +149,16 @@ func (ws *WorldScreen) OnUpdate() {
 		party.Update()
 	}
 	ws.handleDayNightCycle()
+	ws.handleInput()
 
 	ws.hud.UpdateAndDraw(ws.camera)
-	ws.hud.SetField("popups-btns", field.Hidden, condition.If(ws.currentPopup != nil, "1", ""))
-	ws.hud.SetField("controls", field.Hidden, condition.If(ws.currentPopup != nil, "1", ""))
+	ws.hud.SetField("popup-dim-bgr", field.Hidden, condition.If(ws.currentPopup == nil, "1", ""))
 
 	if ws.currentPopup != nil {
 		ws.currentPopup.UpdateAndDraw(ws.camera)
 	} else if ws.resultingCursorNonGUI != -1 {
 		mouse.SetCursor(ws.resultingCursorNonGUI)
 	}
-
-	ws.handleInput()
 
 	switch ws.currentPopup {
 	case ws.inventory:

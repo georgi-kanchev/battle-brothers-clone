@@ -5,11 +5,11 @@ import (
 	"game/code/screens/loading"
 	"pure-game-kit/data/assets"
 	"pure-game-kit/data/file"
+	"pure-game-kit/execution/condition"
 	"pure-game-kit/execution/screens"
 	"pure-game-kit/graphics"
 	"pure-game-kit/gui"
-	"pure-game-kit/input/keyboard"
-	"pure-game-kit/input/keyboard/key"
+	"pure-game-kit/gui/field"
 	"pure-game-kit/utility/color"
 	"pure-game-kit/window"
 )
@@ -29,72 +29,87 @@ func New() *MenuScreen {
 
 //=================================================================
 
-func (m *MenuScreen) OnLoad() {
+func (ms *MenuScreen) OnLoad() {
 	loading.Show("Loading:\nMain Menu GUI...")
-	m.hud = gui.NewFromXMLs(file.LoadText("data/gui/menu-hud.xml"), global.ThemesGUI)
-	m.options = gui.NewFromXMLs(global.DimGUI, file.LoadText("data/gui/menu-options.xml"), global.ThemesGUI)
-	m.currentPopup = nil
+	var hud = file.LoadText("data/gui/menu-hud.xml")
+	var options = file.LoadText("data/gui/menu-options.xml")
+	var narrow = global.PopupNarrowGUI
+	ms.hud = gui.NewFromXMLs(hud, global.DimGUI, global.ThemesGUI)
+	ms.options = gui.NewFromXMLs(global.DimGUI, narrow, options, global.TitleGUI, global.XBtnGUI, global.ThemesGUI)
+	ms.currentPopup = nil
 
 	loading.Show("Loading:\nMain Menu images...")
 	var bgr = assets.LoadTexture("art/UI/Titlescreen/bgr.png")
 	var logo = assets.LoadTexture("art/UI/Titlescreen/logo.PNG")
-	m.bgr = graphics.NewSprite(bgr, 0, 0)
-	m.logo = graphics.NewSprite(logo, 0, 0)
+	ms.bgr = graphics.NewSprite(bgr, 0, 0)
+	ms.logo = graphics.NewSprite(logo, 0, 0)
 	assets.SetTextureSmoothness(bgr, true)
 	assets.SetTextureSmoothness(logo, true)
 
-	m.logo.ScaleX, m.logo.ScaleY = 0.8, 0.8
-	m.logo.PivotX, m.logo.PivotY = 1, 1
+	ms.logo.ScaleX, ms.logo.ScaleY = 0.8, 0.8
+	ms.logo.PivotX, ms.logo.PivotY = 1, 1
 
 	var sc = global.Options.ScaleUI
-	m.options.Scale = global.Options.ScaleMenuOptions * sc
+	ms.options.Scale = global.Options.ScaleMenuOptions * sc
 
 	for _, id := range assets.LoadedTextureIds() {
 		assets.SetTextureSmoothness(id, true)
 	}
 }
-func (m *MenuScreen) OnEnter() {
+func (ms *MenuScreen) OnEnter() {
+	ms.updateOptionsGUI()
 }
-func (m *MenuScreen) OnUpdate() {
-	m.camera.DrawColor(color.RGB(8, 3, 4))
-	m.camera.SetScreenAreaToWindow()
+func (ms *MenuScreen) OnUpdate() {
+	ms.camera.SetScreenAreaToWindow()
 
-	m.positionElements()
+	ms.makeBackground()
+	ms.handleInput()
 
-	m.hud.UpdateAndDraw(m.camera)
-	if m.currentPopup != nil {
-		m.currentPopup.UpdateAndDraw(m.camera)
+	ms.hud.SetField("popup-dim-bgr", field.Hidden, condition.If(ms.currentPopup == nil, "1", ""))
+
+	ms.hud.UpdateAndDraw(ms.camera)
+	if ms.currentPopup != nil {
+		ms.currentPopup.UpdateAndDraw(ms.camera)
 	}
 
-	m.handleInput()
+	switch ms.currentPopup {
+	case ms.options:
+		ms.handleOptionsPopup()
+	}
 }
 
-func (m *MenuScreen) OnExit() {
+func (ms *MenuScreen) OnExit() {
 }
 
 //=================================================================
 // private
 
-func (m *MenuScreen) positionElements() {
-	var rx, ry = m.camera.PointFromEdge(1, 0.5)
-	var sc = m.bgr.ScaleX
+func (ms *MenuScreen) makeBackground() {
+	var rx, ry = ms.camera.PointFromEdge(1, 0.5)
+	var sc = ms.bgr.ScaleX
 
-	m.bgr.CameraFit(m.camera)
-	m.bgr.X -= 100 * sc
-	m.bgr.ScaleX, m.bgr.ScaleY = m.bgr.ScaleX*1.1, m.bgr.ScaleY*1.1
-	m.logo.X, m.logo.Y = rx-80*sc, ry
-	m.logo.ScaleX, m.logo.ScaleY = sc, sc
-	m.hud.Scale = sc * 1.5
-	m.camera.DrawSprites(m.bgr, m.logo)
+	ms.bgr.CameraFit(ms.camera)
+	ms.bgr.X -= 100 * sc
+	ms.bgr.ScaleX, ms.bgr.ScaleY = ms.bgr.ScaleX*1.1, ms.bgr.ScaleY*1.1
+	ms.logo.X, ms.logo.Y = rx-80*sc, ry
+	ms.logo.ScaleX, ms.logo.ScaleY = sc, sc
+	ms.hud.Scale = sc * 1.5
+	ms.camera.DrawColor(color.RGB(8, 3, 4))
+	ms.camera.DrawSprites(ms.bgr, ms.logo)
 }
-func (m *MenuScreen) handleInput() {
-	if m.hud.IsButtonJustClicked("new", m.camera) {
+func (ms *MenuScreen) handleInput() {
+	if ms.hud.IsButtonJustClicked("new", ms.camera) {
 		screens.Enter(global.ScreenWorld, false)
-	} else if m.hud.IsButtonJustClicked("options", m.camera) {
-		m.currentPopup = m.options
-	} else if m.hud.IsButtonJustClicked("quit", m.camera) {
+	} else if ms.hud.IsButtonJustClicked("options", ms.camera) {
+		ms.currentPopup = ms.options
+	} else if ms.hud.IsButtonJustClicked("quit", ms.camera) {
 		window.Close()
-	} else if keyboard.IsKeyJustPressed(key.Escape) {
-		m.currentPopup = nil
+	}
+}
+
+func (ms *MenuScreen) tryExitPopup(from *gui.GUI, to *gui.GUI) {
+	if from.IsButtonJustClicked("exit-btn", ms.camera) ||
+		from.IsButtonJustClicked("popup-dim-bgr", ms.camera) {
+		ms.currentPopup = to
 	}
 }

@@ -38,96 +38,96 @@ func New(mapPath string) *BattleScreen {
 
 //=================================================================
 
-func (b *BattleScreen) Prepare(teamA, teamB []*unit.Unit, playerIsTeamA bool) {
-	b.unitManager = newUnitManager(teamA, teamB)
-	b.unitManager.spawnAll(b.tmap, teamA, "BattleSpawnsTeamA")
-	b.unitManager.spawnAll(b.tmap, teamB, "BattleSpawnsTeamB")
-	b.unitManager.turnManager.startBattle(teamA, teamB, playerIsTeamA)
+func (bs *BattleScreen) Prepare(teamA, teamB []*unit.Unit, playerIsTeamA bool) {
+	bs.unitManager = newUnitManager(teamA, teamB)
+	bs.unitManager.spawnAll(bs.tmap, teamA, "BattleSpawnsTeamA")
+	bs.unitManager.spawnAll(bs.tmap, teamB, "BattleSpawnsTeamB")
+	bs.unitManager.turnManager.startBattle(teamA, teamB, playerIsTeamA)
 }
 
-func (b *BattleScreen) OnLoad() {
+func (bs *BattleScreen) OnLoad() {
 	loading.Show("Loading:\nBattle Map...")
-	b.tmap = tiled.NewMap(assets.LoadTiledMap(b.path), global.Project)
+	bs.tmap = tiled.NewMap(assets.LoadTiledMap(bs.path), global.Project)
 	loading.Show("Loading:\nBattle GUI...")
-	b.hud = gui.NewFromXMLs(file.LoadText("data/gui/battle-hud.xml"), global.DimGUI, global.ThemesGUI)
-	b.loot = gui.NewFromXMLs(file.LoadText("data/gui/battle-loot.xml"), global.ThemesGUI)
-	b.currentPopup = nil
+	bs.hud = gui.NewFromXMLs(file.LoadText("data/gui/battle-hud.xml"), global.DimGUI, global.ThemesGUI)
+	bs.loot = gui.NewFromXMLs(file.LoadText("data/gui/battle-loot.xml"), global.ThemesGUI)
+	bs.currentPopup = nil
 
 	var sc = global.Options.ScaleUI
-	b.hud.Scale = global.Options.ScaleBattleHUD * sc
-	b.loot.Scale = global.Options.ScaleBattleLoot * sc
+	bs.hud.Scale = global.Options.ScaleBattleHUD * sc
+	bs.loot.Scale = global.Options.ScaleBattleLoot * sc
 
 	loading.Show("Processing:\nBattle data...")
-	var layers = b.tmap.FindLayersBy(property.LayerClass, "BattleMap")
-	layers = append(layers, b.tmap.FindLayersBy(property.LayerClass, "BattlePathMap")...)
+	var layers = bs.tmap.FindLayersBy(property.LayerClass, "BattleMap")
+	layers = append(layers, bs.tmap.FindLayersBy(property.LayerClass, "BattlePathMap")...)
 	for _, l := range layers {
-		b.tiles = append(b.tiles, l.ExtractSprites()...)
+		bs.tiles = append(bs.tiles, l.ExtractSprites()...)
 	}
 
-	var atlasId = b.tmap.Tilesets[0].Properties["atlasId"].(string)
+	var atlasId = bs.tmap.Tilesets[0].Properties["atlasId"].(string)
 	for i := range 31 {
 		var tileId = text.New(atlasId, "/", i)
 		assets.SetTextureAtlasTile(atlasId, tileId, float32(i), 1, 1, 1, 0, false)
 	}
 }
-func (b *BattleScreen) OnEnter() {
-	global.BattleTileWidth = float32(b.tmap.Properties[property.MapTileWidth].(int))
-	global.BattleTileHeight = float32(b.tmap.Properties[property.MapTileHeight].(int))
-	global.BattleTileColumns = float32(b.tmap.Properties[property.MapColumns].(int))
-	global.BattleTileRows = float32(b.tmap.Properties[property.MapRows].(int))
+func (bs *BattleScreen) OnEnter() {
+	global.BattleTileWidth = float32(bs.tmap.Properties[property.MapTileWidth].(int))
+	global.BattleTileHeight = float32(bs.tmap.Properties[property.MapTileHeight].(int))
+	global.BattleTileColumns = float32(bs.tmap.Properties[property.MapColumns].(int))
+	global.BattleTileRows = float32(bs.tmap.Properties[property.MapRows].(int))
 
-	b.camera.X = global.BattleTileColumns / 2 * global.BattleTileWidth
-	b.camera.Y = global.BattleTileRows / 2 * global.BattleTileHeight
-	b.camera.Zoom = 0.8
+	bs.camera.X = global.BattleTileColumns / 2 * global.BattleTileWidth
+	bs.camera.Y = global.BattleTileRows / 2 * global.BattleTileHeight
+	bs.camera.Zoom = 0.8
 
 	for _, id := range assets.LoadedTextureIds() { // probably shouldn't be here
 		assets.SetTextureSmoothness(id, true)
 	}
 }
-func (b *BattleScreen) OnUpdate() {
-	b.camera.SetScreenAreaToWindow()
+func (bs *BattleScreen) OnUpdate() {
+	bs.camera.SetScreenAreaToWindow()
 
-	if b.currentPopup == nil {
-		b.camera.MouseDragAndZoomSmoothly()
-		b.camera.Zoom = number.Limit(b.camera.Zoom, 0.5, 10)
+	if bs.currentPopup == nil {
+		bs.camera.MouseDragAndZoomSmoothly()
+		bs.camera.Zoom = number.Limit(bs.camera.Zoom, 0.5, 10)
 	}
 
-	b.camera.DrawSprites(b.tiles...)
+	bs.camera.DrawSprites(bs.tiles...)
 
-	b.unitManager.update()
+	bs.unitManager.update()
 
-	b.hud.UpdateAndDraw(b.camera)
-	if b.currentPopup != nil {
-		b.currentPopup.UpdateAndDraw(b.camera)
+	bs.hud.UpdateAndDraw(bs.camera)
+	if bs.currentPopup != nil {
+		bs.currentPopup.UpdateAndDraw(bs.camera)
 	}
 
-	b.handleInput()
+	bs.handleInput()
 }
 
-func (b *BattleScreen) OnExit() {
+func (bs *BattleScreen) OnExit() {
 }
 
 //=================================================================
 // private
 
-func (b *BattleScreen) handleInput() {
+func (bs *BattleScreen) handleInput() {
 	if keyboard.IsKeyJustPressed(key.Escape) {
 		screens.Enter(global.ScreenWorld, false)
 	} else if keyboard.IsKeyJustPressed(key.L) {
-		b.currentPopup = condition.If(b.currentPopup == b.loot, nil, b.loot)
+		bs.currentPopup = condition.If(bs.currentPopup == bs.loot, nil, bs.loot)
 	}
 }
-func (b *BattleScreen) recalculatePathMap() {
-	var pathMapLayers = b.tmap.FindLayersBy(property.LayerClass, "BattlePathMap")
+func (bs *BattleScreen) recalculatePathMap() {
+	var pathMapLayers = bs.tmap.FindLayersBy(property.LayerClass, "BattlePathMap")
 	if len(pathMapLayers) > 0 {
-		b.pathMap = pathMapLayers[0].ExtractShapeGrid()
+		bs.pathMap = pathMapLayers[0].ExtractShapeGrid()
 	}
 
 	var tw, th = global.BattleTileWidth, global.BattleTileHeight
-	for _, unit := range b.unitManager.units {
-		if unit != b.unitManager.turnManager.unitActing() {
+	for _, unit := range bs.unitManager.units {
+		if unit != bs.unitManager.turnManager.unitActing() {
 			var ux, uy = unit.Position()
-			b.pathMap.SetAtCell(int(ux/tw), int(uy/th), geometry.NewShapeQuad(tw/2, th/2, 0.5, 0.5))
+			bs.pathMap.SetAtCell(int(ux/tw), int(uy/th), geometry.NewShapeQuad(tw/2, th/2, 0.5, 0.5))
 		}
 	}
 }
