@@ -53,9 +53,9 @@ func (bs *BattleScreen) OnLoad() {
 	bs.loot = gui.NewFromXMLs(file.LoadText("data/gui/battle-loot.xml"), global.ThemesGUI)
 	bs.currentPopup = nil
 
-	var sc = global.Options.ScaleUI
-	bs.hud.Scale = global.Options.ScaleBattleHUD * sc
-	bs.loot.Scale = global.Options.ScaleBattleLoot * sc
+	var sc = global.Opts.ScaleUI
+	bs.hud.Scale = global.Opts.ScaleBattleHUD * sc
+	bs.loot.Scale = global.Opts.ScaleBattleLoot * sc
 
 	loading.Show("Processing:\nBattle data...")
 	var layers = bs.tmap.FindLayersBy(property.LayerClass, "BattleMap")

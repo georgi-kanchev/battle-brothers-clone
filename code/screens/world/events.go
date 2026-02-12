@@ -18,7 +18,7 @@ func (ws *WorldScreen) handleEventsPopup() {
 	ws.events.SetField("text", field.Height, text.New(textH))
 
 	for i := range 5 {
-		if ws.events.IsButtonJustClicked(text.New("choice", i+1), ws.camera) {
+		if ws.events.IsButtonJustClicked(text.New("choice", i+1)) {
 			if referencedPopups[i] != "" {
 				ws.loadEventFile(referencedPopups[i])
 				break

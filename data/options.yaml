@@ -1,6 +1,8 @@
 #0=Floating 1=FloatingBorderless 2=Fullscreen 3=FullscreenBorderless 4=Maximized 5=Minimized
 graphics-window-state: 3
 graphics-monitor: 0
+graphics-antialiasing: false
+graphics-texture-filter: true
 graphics-vsync: false
 graphics-limit-fps: 60
 ui-scale: 2

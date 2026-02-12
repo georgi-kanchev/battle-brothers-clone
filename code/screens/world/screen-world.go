@@ -77,15 +77,15 @@ func (ws *WorldScreen) OnLoad() {
 	ws.tavern = gui.NewFromXMLs(dim, narrow, tavern, title, x, themes)
 	ws.currentPopup = nil
 
-	var sc = global.Options.ScaleUI
-	ws.hud.Scale = global.Options.ScaleWorldHUD * sc
-	ws.inventory.Scale = global.Options.ScaleWorldInventory * sc
-	ws.events.Scale = global.Options.ScaleWorldEvents * sc
-	ws.settlement.Scale = global.Options.ScaleWorldSettlement * sc
-	ws.market.Scale = global.Options.ScaleWorldSettlementMarket * sc
-	ws.favors.Scale = global.Options.ScaleWorldSettlementMarket * sc
-	ws.recruit.Scale = global.Options.ScaleWorldSettlementRecruit * sc
-	ws.tavern.Scale = global.Options.ScaleWorldSettlementTavern * sc
+	var sc = global.Opts.ScaleUI
+	ws.hud.Scale = global.Opts.ScaleWorldHUD * sc
+	ws.inventory.Scale = global.Opts.ScaleWorldInventory * sc
+	ws.events.Scale = global.Opts.ScaleWorldEvents * sc
+	ws.settlement.Scale = global.Opts.ScaleWorldSettlement * sc
+	ws.market.Scale = global.Opts.ScaleWorldSettlementMarket * sc
+	ws.favors.Scale = global.Opts.ScaleWorldSettlementMarket * sc
+	ws.recruit.Scale = global.Opts.ScaleWorldSettlementRecruit * sc
+	ws.tavern.Scale = global.Opts.ScaleWorldSettlementTavern * sc
 
 	loading.Show("Loading:\nWorld images...")
 	var timeCircle = assets.LoadTexture("art/UI/Time/time_circle.PNG")
@@ -152,7 +152,7 @@ func (ws *WorldScreen) OnUpdate() {
 	ws.handleInput()
 
 	ws.hud.UpdateAndDraw(ws.camera)
-	ws.hud.SetField("popup-dim-bgr", field.Hidden, condition.If(ws.currentPopup == nil, "1", ""))
+	ws.hud.SetField("popup-dim", field.Hidden, condition.If(ws.currentPopup == nil, "1", ""))
 
 	if ws.currentPopup != nil {
 		ws.currentPopup.UpdateAndDraw(ws.camera)
@@ -192,7 +192,7 @@ func (ws *WorldScreen) handleInput() {
 		return
 	}
 
-	if ws.hud.IsButtonJustClicked("inventory", ws.camera) {
+	if ws.hud.IsButtonJustClicked("inventory") {
 		ws.currentPopup = ws.inventory
 	}
 
@@ -204,7 +204,7 @@ func (ws *WorldScreen) handleInput() {
 		ws.currentPopup = ws.events
 	}
 
-	if ws.hud.IsButtonJustClicked("main-menu", ws.camera) {
+	if ws.hud.IsButtonJustClicked("main-menu") {
 		var escape = keyboard.IsKeyJustPressed(key.Escape)
 		var resting = ws.playerParty.isResting
 
@@ -217,8 +217,7 @@ func (ws *WorldScreen) handleInput() {
 }
 
 func (ws *WorldScreen) tryExitPopup(from *gui.GUI, to *gui.GUI, andDo func()) {
-	if from.IsButtonJustClicked("exit-btn", ws.camera) ||
-		from.IsButtonJustClicked("popup-dim-bgr", ws.camera) {
+	if from.IsButtonJustClicked("exit-btn") || from.IsButtonJustClicked("popup-dim-bgr") {
 		ws.currentPopup = to
 
 		if andDo != nil {

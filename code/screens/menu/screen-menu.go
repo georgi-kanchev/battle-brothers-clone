@@ -49,8 +49,8 @@ func (ms *MenuScreen) OnLoad() {
 	ms.logo.ScaleX, ms.logo.ScaleY = 0.8, 0.8
 	ms.logo.PivotX, ms.logo.PivotY = 1, 1
 
-	var sc = global.Options.ScaleUI
-	ms.options.Scale = global.Options.ScaleMenuOptions * sc
+	var sc = global.Opts.ScaleUI
+	ms.options.Scale = global.Opts.ScaleMenuOptions * sc
 
 	for _, id := range assets.LoadedTextureIds() {
 		assets.SetTextureSmoothness(id, true)
@@ -98,18 +98,18 @@ func (ms *MenuScreen) makeBackground() {
 	ms.camera.DrawSprites(ms.bgr, ms.logo)
 }
 func (ms *MenuScreen) handleInput() {
-	if ms.hud.IsButtonJustClicked("new", ms.camera) {
+	if ms.hud.IsButtonJustClicked("new") {
 		screens.Enter(global.ScreenWorld, false)
-	} else if ms.hud.IsButtonJustClicked("options", ms.camera) {
+	} else if ms.hud.IsButtonJustClicked("options") {
 		ms.currentPopup = ms.options
-	} else if ms.hud.IsButtonJustClicked("quit", ms.camera) {
+	} else if ms.hud.IsButtonJustClicked("quit") {
 		window.Close()
 	}
 }
 
 func (ms *MenuScreen) tryExitPopup(from *gui.GUI, to *gui.GUI) {
-	if from.IsButtonJustClicked("exit-btn", ms.camera) ||
-		from.IsButtonJustClicked("popup-dim-bgr", ms.camera) {
+	if from.IsButtonJustClicked("exit-btn") ||
+		from.IsButtonJustClicked("popup-dim-bgr") {
 		ms.currentPopup = to
 	}
 }

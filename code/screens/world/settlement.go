@@ -11,16 +11,16 @@ func (ws *WorldScreen) handleSettlementPopup() {
 
 	ws.tryExitPopup(ws.settlement, nil, func() { ws.playerParty.goingToSettlement = nil })
 
-	if ws.settlement.IsButtonJustClicked("rest", ws.camera) {
+	if ws.settlement.IsButtonJustClicked("rest") {
 		ws.playerParty.isResting = true
 		ws.currentPopup = nil
-	} else if ws.settlement.IsButtonJustClicked("market", ws.camera) {
+	} else if ws.settlement.IsButtonJustClicked("market") {
 		ws.currentPopup = ws.market
-	} else if ws.settlement.IsButtonJustClicked("favors", ws.camera) {
+	} else if ws.settlement.IsButtonJustClicked("favors") {
 		ws.currentPopup = ws.favors
-	} else if ws.settlement.IsButtonJustClicked("recruit", ws.camera) {
+	} else if ws.settlement.IsButtonJustClicked("recruit") {
 		ws.currentPopup = ws.recruit
-	} else if ws.settlement.IsButtonJustClicked("tavern", ws.camera) {
+	} else if ws.settlement.IsButtonJustClicked("tavern") {
 		ws.currentPopup = ws.tavern
 	}
 }

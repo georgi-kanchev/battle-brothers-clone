@@ -45,7 +45,7 @@ func (ws *WorldScreen) handleInventoryPopup() {
 			ws.inventory.SetField(unitId, field.TextColor, text.New(r, " ", g, " ", b))
 		}
 
-		if ws.inventory.IsButtonJustClicked(unitId, ws.camera) {
+		if ws.inventory.IsButtonJustClicked(unitId) {
 			inventorySelectedUnitIndex = i
 		}
 	}

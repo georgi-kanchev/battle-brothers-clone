@@ -2,7 +2,6 @@ package loading
 
 import (
 	"game/code/global"
-	"pure-game-kit/data/assets"
 	"pure-game-kit/execution/screens"
 	"pure-game-kit/graphics"
 	"pure-game-kit/utility/random"
@@ -27,7 +26,6 @@ func Show(message string) {
 //=================================================================
 
 func (ls *LoadingScreen) OnLoad() {
-	assets.LoadDefaultFont()
 	ls.textMid = graphics.NewTextBox("", 0, 0, "")
 	ls.textBot = graphics.NewTextBox("", 0, 0, random.Pick("Tip: placeholder #1", "Tip: placeholder #2", "Tip: placeholder #3", "Tip: placeholder #4"))
 	ls.textMid.AlignmentX, ls.textMid.AlignmentY = 0.5, 0.5

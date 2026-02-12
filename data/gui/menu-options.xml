@@ -9,12 +9,31 @@
 	
 	<Container id="graphics" x="TargetLeftX+20" y="TargetTopY+100" width="TargetWidth-40" height="TargetHeight-120" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press" gapX="10" gapY="10" >
 		<Widget class="visual" id="graphics-bgr" themeId="panel" fillContainer="" />
-		<Widget class="visual" id="window-state-label" frameSize="" width="OwnerWidth*0.35-15" text="Window State:" textAlignmentX="1" gapX="5" />
-		<Widget class="menu" id="window-state" width="OwnerWidth*0.65-15" menuContainerId="states" />
-		<Widget class="visual" id="monitors-label" frameSize="" width="OwnerWidth*0.35-15" text="Monitor:"  textAlignmentX="1" gapX="5" newRow="" />
-		<Widget class="menu" id="monitors-menu" width="OwnerWidth*0.65-15" menuContainerId="monitors" />
-		<Widget class="visual" id="vsync-label" frameSize="" width="OwnerWidth*0.35-15" text="VSync:"  textAlignmentX="1" gapX="5" newRow="" />
-		<Widget class="checkbox" id="vsync" width="50" text="X"/>
+		<Widget class="visual" id="window-state-label" frameSize="" width="OwnerWidth*0.35-15" height="40" text="Window State:" textAlignmentX="1" gapX="5" />
+		<Widget class="menu" id="window-state" width="OwnerWidth*0.65-15" height="40" menuContainerId="states" />
+		<Widget class="visual" id="monitors-label" frameSize="" width="OwnerWidth*0.35-15" height="40" text="Target Monitor:"  textAlignmentX="1" gapX="5" newRow="" />
+		<Widget class="menu" id="monitors-menu" width="OwnerWidth*0.65-15" height="40" menuContainerId="monitors" />
+		<Widget class="visual" id="tex-filter-label" height="30" frameSize="" width="OwnerWidth*0.35-15" text="Texture Filter:" textAlignmentX="1" gapX="5" newRow="" />
+		<Widget class="checkbox" id="tex-filter" width="30" height="30" text="X"/>
+		<Widget class="visual" id="aa-label" height="30" frameSize="" width="OwnerWidth*0.35-15" text="Antialiasing:" textAlignmentX="1" gapX="5" newRow="" />
+		<Widget class="checkbox" id="aa" width="30" height="30"/>
+		<Widget class="visual" id="restart2" frameSize="" width="OwnerWidth*0.65-50" height="30" text="(requires restart)" gapX="5" textAlignmentX="0" />
+		<Widget class="visual" id="vsync-label" height="30" frameSize="" width="OwnerWidth*0.35-15" text="Vertical Sync:" textAlignmentX="1" gapX="5" newRow="" />
+		<Widget class="checkbox" id="vsync" width="30" height="30"/>
+		<Widget class="visual" id="restart1" frameSize="" width="OwnerWidth*0.65-50" height="30" text="(requires restart)" gapX="5" textAlignmentX="0" />
+		<Widget class="visual" id="limit-fps-label" frameSize="" width="OwnerWidth*0.35-15" height="30" text="Limit FPS:" textAlignmentX="1" gapX="5" newRow="" />
+		<Widget class="slider" id="limit-fps" width="OwnerWidth*0.65-15" height="30" sliderStep="0.04" />
+		<Widget class="visual" id="empty" frameSize="" width="OwnerWidth*0.35-15" height="30" gapX="5" newRow="" />
+		<Widget class="visual" id="fps" frameSize="" width="OwnerWidth*0.65-15" height="30" text="Max FPS:" gapX="5" textAlignmentX="0.5" />
+		<Widget class="visual" id="spacing" frameSize="" width="OwnerWidth*0.35-15" height="30" gapX="5" hidden="1" newRow="" />
+		<Widget class="visual" id="brightness-label" frameSize="" width="OwnerWidth*0.35-15" height="30" text="Brightness:" textAlignmentX="1" gapX="5" newRow="100" />
+		<Widget class="slider" id="brightness" width="OwnerWidth*0.65-15" height="30" text=" 50%" textAlignmentX="0" sliderStep="-0.05" />
+		<Widget class="visual" id="contrast-label" frameSize="" width="OwnerWidth*0.35-15" height="30" text="Contrast:" textAlignmentX="1" gapX="5" newRow="" />
+		<Widget class="slider" id="contrast" width="OwnerWidth*0.65-15" height="30" text=" 50%" textAlignmentX="0" sliderStep="-0.05" />
+		<Widget class="visual" id="gamma-label" frameSize="" width="OwnerWidth*0.35-15" height="30" text="Gamma:" textAlignmentX="1" gapX="5" newRow="" />
+		<Widget class="slider" id="gamma" width="OwnerWidth*0.65-15" height="30" text=" 50%" textAlignmentX="0" sliderStep="-0.05" />
+		<Widget class="visual" id="saturation-label" frameSize="" width="OwnerWidth*0.35-15" height="30" text="Saturation:" textAlignmentX="1" gapX="5" newRow="" />
+		<Widget class="slider" id="saturation" width="OwnerWidth*0.65-15" height="30" text=" 50%" textAlignmentX="0" sliderStep="-0.05" />
 	</Container>
 	
 	<Container id="states" width="340" height="160" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press" hidden="1" >
