@@ -1,0 +1,24 @@
+While travelling on the road, the party sees a group of 5 people walking along it. Each of the strangers is wearing a long white robe, covered in red embroidery, resembling a bird in flight, except for the one in the middle. What he’s wearing can hardly be described as clothes - more like dark, dirty rags that are trying their best to stay on him. 
+
+When their paths cross, the men in white stop to greet the party. 
+
+"The Forgiving smiles upon you, travelers!"
+
+The man in the middle mutters something, almost inaudible.
+
+"Oh, pay him no mind. He’s a bit confused. He used to be an honorable member of our church, but something evil has a hold of his heart now. To protect others and himself, we’re bringing him to the closest chapel, so he may seek forgiveness."
+
+"No... Please... No more."
+
+From up close, it’s easier to tell that the rags aren’t just dirty - they’re bloody. The man seems in distress, while the rest of the holy men are extremely calm.
+
+The group decides to...
+
+... Just let them go.
+((The priests say a blessing in your name, small buff))
+
+... Ask to take the man instead.
+((New recruit.))
+
+... Attack them.
+((Gain a holy item.))

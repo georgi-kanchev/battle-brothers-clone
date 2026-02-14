@@ -1,0 +1,31 @@
+The party is getting ready to leave a small village, when they see a few people passing them in a very serious rush. They’re heading to a barn with a large pen.
+
+The closer they get, the louder the voices are and they notice a crowd forming. The members start to make out different words:
+
+ bets!
+
+"... for Red!"
+
+"... 10 coins!"
+
+"... on Yellow for sure!"
+
+And then, they finally see what this is really about - the wooden pen has been separated in 4 long sections, forming a kind of a racing track. Inside, 4 pigs await the start of the challenge. Each of them has a colorful knitted scarf, and it seems people place bets by naming the color of their favorite.
+
+"Alright, fellas, which pig do you fancy and how much are you willing to spare to support it?"
+
+The pigs all look fat, healthy and somewhat happy. Some folk are touching them for luck.
+
+The group decides to bet on the...
+
+... Green pig.
+((Second place. Receive back the money that was bet.))
+
+... Red pig.
+((Third place. The pig is just happy to be there, filling you with some joy and a small buff.))
+
+... Yellow pig.
+((Loser. Stink debuff.))
+
+... Brown pig.
+((First place. Win back twice the amount of the bet.))

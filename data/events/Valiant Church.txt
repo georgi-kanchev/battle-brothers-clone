@@ -1,0 +1,21 @@
+While passing through a small village, the party is approached by 3 young men, dressed in white robes with a big yellow flower embroidery on their chests.
+
+“Welcome to our little town, kind strangers. We notice you’re brave soldiers, men of the sword. Have you already sought the protection of our Valiant Lord?”
+
+They humbly look at the church that’s nearby and offer the members a friendly smile.
+
+“We would appreciate even the smallest donation. The glory of His Valiance stretches all across the land, so your contribution won’t be forgotten!”
+
+The group decides to...
+
+... thank the disciplers, but decline to contribute. 
+((nothing happens)
+
+... make a small donation. 
+((receive a book that can be read at camp once a month or something for a small buff))
+
+... make a bigger donation. 
+((receive flower marks that, when worn on their clothes when passing through towns with a church of the Valiant, will allow them to spend the night for free. However, this may have effect on the way members of separate religious factions interact with the group))
+
+... decline with aggression and offend the church. 
+((passing through a town with a church of the Valiant may lead to negative interactions, such as sanctions or higher prices.))

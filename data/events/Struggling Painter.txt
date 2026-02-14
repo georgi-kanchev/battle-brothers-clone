@@ -1,0 +1,29 @@
+Upon leaving a town’s market, the party notices a little stand near a wall. There are many paintings, large and small, and a young man standing next to it, sketching something on a piece of paper.
+
+"Good day, good sirs! I see you have an eye for fine art, unlike most of the people here. If you’d let me introduce myself - my name is Matheo, I have spent the last 15 years of my life perfecting my skills, learning from some of the greatest in the Kingdom. You may humbly deny having any knowledge about the famous masters of our time, but I assure you - you would instantly recognize their works if they were in front of you."
+
+The man doesn’t look older than 25, but he also seems to be telling the truth, despite his flowery words. His paintings are indeed very pretty, it’s not something just anyone would be able to create.
+
+"Now, let me tell you about my most recent ones. I must say, I am very proud of them, but I still struggle to choose a favorite. First, this landscape of a lovely old Northern forest. I believe the contrast between the snow and the dark trees makes for a very effective sense of balance. But, if cold is not your thing…"
+
+He points to a second painting of a golden dune. Each line in the sand is sharp and precise, it’s almost as if each grain of sand was painted individually. The colors are warm and almost having a calming, hypnotizing effect.
+
+"From my latest trip to the South, this magnificent sand composition. I have no clue how something like this is made, but I’m happy I was able to recreate it. But enough about boring landscapes. I’m sure you’re aware of the extraordinary beauty that the women of the East possess?"
+
+His fingers gently trace the frame of his next artwork - a portrait of a stunning dark-haired woman, dressed in minimal colorful clothing. Her pale skin looks soft. Her subtle smile looks more mischievous than mysterious. Her eyes look like they’re glowing.
+
+"Mira, I believe her name was. A wonderful lady with a true appreciation for real art. And that’s about it. You may wonder why I don’t have anything from the West. If I can be painfully honest with you, it’s just a superstition some artists have - that we should never paint anything from our birthplace, it’s bad luck. I should’ve listened, maybe I would’ve had more paying clients now... And speaking of, what caught your attention?"
+
+The group studies each of the paintings and decides to... 
+
+... Buy the forest landscape.
+((The warrior spirit of the Northerners temporarily strengthens the party.))
+
+... Buy the desert landscape.
+((The calming golden colors are rejuvenating.))
+
+... Buy the portrait.
+((With a beautiful lady accompanying them everywhere, the party’s morale is boosted.))
+
+... Tell him he lacks the talent and has no eye for true beauty.
+((The artist breaks into tears. He will spend another evening hungry.))

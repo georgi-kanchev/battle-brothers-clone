@@ -1,0 +1,29 @@
+While entering a big town, the group is stopped by a guard. He’s old and limps, his face looks a bit grumpy.
+
+"Welcome to our town, men. Before you go further, I would like to ask you a few questions. You see, a lot of bandit activity around here, we need to be careful who we let roam inside the walls. I’m sure you understand."
+
+After asking them some basic questions about them and their intentions, the guard’s mood seems to improve.
+
+"Well how about that, you fellas seem like quite fine adventurers! You must be tired from your travels, how about I show you to the nearest tavern - my shift’s just ending. Bald Terry will take over for me, right Terry?"
+
+He waves to the other guard and starts walking. The group follows. The older man continues talking to them.
+
+"You know, I was just like you once. Young and mighty, full of ambition. I had my own gang of rascals, set on making a name for ourselves. But one day we were brutally ambushed, possibly even betrayed. Some of us escaped with our lives, and I even took an arrow to the knee. With our morale low and my health even worse, we went our separate ways."
+
+He stops before a big wooden door and knocks on it rhythmically.
+
+"Ay, Rosie, let me in. I’m bringing you paying customers!" He shouts, then turns to the group. "It’s a fancy place, invite only, but I’m sure we have much more to talk about, eh!"
+
+The group decides to …
+
+... Join the man, buy him a drink or two.
+((He gets so into it, that he tells you about some weapons he buried closeby.))
+
+... Join the man, but don’t treat him to anything.
+((You get to hear even more stories about his past, which are quite motivating, get a buff.))
+
+... Politely decline, you have better things to do in the afternoon than drinking.
+((You break an old man’s heart. Live with it.))
+
+... Tell the old fart you don’t give a damn about his stupid life.
+((Through his connections, he makes sure everything in town becomes more expensive.))

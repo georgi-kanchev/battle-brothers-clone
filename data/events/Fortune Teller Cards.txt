@@ -1,0 +1,20 @@
+Nearing the outskirts of a town, the party hears the soft ring of little bells. When they get closer, they see a woman, trying to get the attention of the passerbys. She is wearing a long green skirt, over which a red shorter one, and a yellow shirt. Her dark curly hair is following her every move, as she’s dancing to the sound of her little chimes.
+
+As she notices the approaching members, she finishes her performance and strikes a conversation.
+
+“Oh, what have the winds brought! Such strong and fearless warriors. But would you be brave enough to learn what Lady Fate has planned for you?”
+
+She takes a seat at the little table behind her and starts shuffling her deck of cards.
+
+"The first one is on me, boys!” She winks. “Now, pick a card..."
+
+The fortune teller draws 3 cards and puts them face down. The party chooses...
+
+... The one on the left. 
+(("The Sun" - bonus gold in addition to the next reward they get.))
+
+... The one in the middle. 
+(("The Moon" - a random unit gets a buff during the next combat.))
+
+... The one on the right. 
+(("The Reaper" - a random unit gets a debuff during the next combat.))

@@ -16,16 +16,17 @@ The party observes the way he shuffles the deck, deals the cards and inspects hi
 
 The cards the playing party member gets are very good. The chances of winning would be pretty high, under normal circumstances. But are those such?
 
-The stranger decides to raise the bet. The party decides to…
+The stranger decides to raise the bet. The party decides to...
 
-… Call.
+... Call.
+>>> event template
 ((Lose the starting amount of the bet. Get a pack of cards from the stranger as a consolation prize, which grants a small buff maybe?))
 
-… Raise.
+... Raise.
 ((Lose twice the money.))
 
-… Fold.
+... Fold.
 ((Lose just the starting amount of the bet.))
 
-… Accuse him of cheating.
+... Accuse him of cheating.
 ((Get the money back, but get banned from this tavern.))

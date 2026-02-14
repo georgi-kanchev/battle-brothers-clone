@@ -1,0 +1,22 @@
+While on the road, the party notices the broken down caravan. Upon getting closer, they notice an older well-dressed man gathering all kinds of goods and trinkets, scattered around the accident.
+
+The merchant steps away from the ruckus and greets them.
+
+"Good day, travelers! Oh, but is it really... A horrible group attacked me, just a few moments ago! They toppled my caravan over, scared my horses away and started stealing! I believe they heard you approaching, so they quickly continued down the road."
+
+The party takes a moment to look around and assess the situation. The damage to the caravan is severe - even if they helped to prop it up, it wouldn’t be able to move. Even if it could, there are no horses to pull it. 
+
+Among the various items on the ground, the members recognize some good equipment, weapons, and even jewelry. The old man, noticing that they’re eyeing the merchandise, comes up with an idea:
+
+"Say, young men, would you care to help a poor soul in distress? We could make a pretty good trade, if you’re interested!"
+
+After hearing his offer, the group decides to...
+
+... Trade a horse for equipment.
+
+... Only purchase a weapon.
+
+... Only purchase equipment.
+
+... Steal from the merchant. 
+((This will grant the party both items, but since the merchant is part of a guild, there’s a chance that other sellers will offer higher prices to them.))

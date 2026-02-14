@@ -1,0 +1,28 @@
+Another night at the tavern - this one is a bit fancier than usual. Live music, enough space for dancing, good ale. This town has a reputation for being somewhat posh.
+
+Suddenly, two men approach the group. They are well dressed, but carelessly carrying their pints. They don’t speak loudly, but there seems to be a pinch of irritation in their words.
+
+"Good evening, lads! You seem to be travellers, aye? Would you mind if these two old geezers picked your brain a bit?"
+
+"I wouldn’t call it an argument, no, we’re too good friends for this. It’s more of a... Little disagreement over fundamentals."
+
+"Yes, yes. So, you see, me and my friend meet here every other day, so we can have a drink and talk. Since we both work at different parts of town, we rarely arrive at the same time."
+
+"But one always arrives within half an hour of the other."
+
+"Except today I had an exceptionally good day at the market, so I got a bit carried away, and arrived a bit later. However, you see, after so many years of doing this, we had never agreed on a specific time for our meetings. They are just a matter of fact - they happen every other evening."
+
+"Here’s where I disagree - you’ve always been on time before, so I have an expectation that you won’t be late."
+
+"Kind strangers, can someone be late, if they’re not expected to arrive at a certain time?"
+
+The group thinks about it and decides that...
+
+... The man wasn’t late, as there was no specific arrangement.
+((Discount from the food market.))
+
+... The man was late, as his friend was expecting him.
+((Discount from the blacksmith.))
+
+... They have both had too much to drink and are overthinking it.
+((The men laugh and buy the members a round of drinks, boosting their morale.))
