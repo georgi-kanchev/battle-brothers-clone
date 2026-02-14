@@ -76,6 +76,8 @@ func (ms *MenuScreen) OnUpdate() {
 	case ms.options:
 		ms.handleOptionsPopup()
 	}
+
+	global.TryShowFPS(ms.camera)
 }
 
 func (ms *MenuScreen) OnExit() {

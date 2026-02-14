@@ -59,13 +59,21 @@
 	</Container>
 	
 	<Container id="ui" x="TargetLeftX+20" y="TargetTopY+100" width="TargetWidth-40" height="TargetHeight-120" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press" gapX="10" gapY="10">
-		<Widget class="visual" id="audio-bgr" themeId="panel" fillContainer="" />
-		<Widget class="button" id="test1" width="200" text="UI" gapX="5" />
+		<Widget class="visual" id="ui-bgr" themeId="panel" fillContainer="" />
+		<Widget class="visual" id="ui-scale-label" frameSize="" width="OwnerWidth*0.35-15" height="30" text="Scale:" textAlignmentX="1" gapX="5" />
+		<Widget class="slider" id="ui-scale" width="OwnerWidth*0.65-15" height="30" text=" 50%" textAlignmentX="0" sliderStep="-0.05" />
+		<Widget class="visual" id="show-fps-label" height="30" frameSize="" width="OwnerWidth*0.35-15" text="Show FPS:" textAlignmentX="1" gapX="5" newRow="" />
+		<Widget class="checkbox" id="show-fps" width="30" height="30"/>
 	</Container>
 
 	<Container id="audio" x="TargetLeftX+20" y="TargetTopY+100" width="TargetWidth-40" height="TargetHeight-120" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press" gapX="10" gapY="10">
 		<Widget class="visual" id="audio-bgr" themeId="panel" fillContainer="" />
-		<Widget class="button" id="test2" width="200" text="Audio" gapX="5" />
+		<Widget class="visual" id="audio-vol-label" frameSize="" width="OwnerWidth*0.35-15" height="30" text="Volume:" textAlignmentX="1" gapX="5" />
+		<Widget class="slider" id="audio-vol" width="OwnerWidth*0.65-15" height="30" text=" 50%" textAlignmentX="0" sliderStep="-0.05" />
+		<Widget class="visual" id="audio-vol-music-label" frameSize="" width="OwnerWidth*0.35-15" height="30" text="Music Volume:" textAlignmentX="1" gapX="5" newRow=""  />
+		<Widget class="slider" id="audio-vol-music" width="OwnerWidth*0.65-15" height="30" text=" 50%" textAlignmentX="0" sliderStep="-0.05" />	
+		<Widget class="visual" id="audio-vol-sound-label" frameSize="" width="OwnerWidth*0.35-15" height="30" text="Sound Volume:" textAlignmentX="1" gapX="5" newRow=""  />
+		<Widget class="slider" id="audio-vol-sound" width="OwnerWidth*0.65-15" height="30" text=" 50%" textAlignmentX="0" sliderStep="-0.05" />	
 	</Container>
 	
 	<Container id="controls" x="TargetLeftX+20" y="TargetTopY+100" width="TargetWidth-40" height="TargetHeight-120" targetId="popup" themeId="btn-normal" buttonThemeIdHover="btn-hover" buttonThemeIdPress="btn-press" gapX="10" gapY="10">

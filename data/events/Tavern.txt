@@ -1,0 +1,22 @@
+The party enters the smallest of 3 villages that are very close to one another. It's a bit quiet, but there are a few working people going about their day. They’re trying to find the market, but there are only a few empty stalls. The tavern is in sight, but the door is locked. After knocking on it a few times, a man answers.
+
+"Sorry, fellas. We’re closed for a while. Oooh, you must be travelers. I could offer you some water, but we’re all out of alcohol and there’s no food to spare."
+
+He lets them in, so they can catch their breath. The place’s size is appropriate for the small village, but it’s still masterfully decorated. Sturdy wooden tables with little chairs, a neat stone hearth and lots of mugs, cups and even drinking horns are sitting behind the counter. But lacking the life and atmosphere that everyone is used to. 
+
+"I apologize again. I’ve been working here since I was a child, this is what I love doing, and yet... Through no fault of our own, we’re in this situation. Maybe you haven’t heard, but a lot of our production was stolen. We’re a hard working community, so we’ve been blessed with a fruitful soil and great harvests. The surrounding villages would even come to trade with us, promising us protection in return. But when it actually came to - they just shrugged and told us there’s nothing they can do about it, the thieves were already far away."
+
+He sighs deeply and starts polishing an already clean cup - clearly out of habit. The group decides to... 
+
+... Ask what the thieves stole, when and where they might have gone.
+>>> event Tavern1
+
+... Ask if it’s possible that one of the neighboring villages stole from them.
+>>> event Tavern2
+
+... Tell him it is what it is and leave.
+((The calm water calmed the nerves of one member, buffing him; but another member wanted to learn what actually happened here - deep in thoughts, he’s distracted, debuff.))
+
+
+... Beat up the tavern keeper and steal whatever you can.
+((Some coins, a single bottle of ale that he was keeping for himself.))

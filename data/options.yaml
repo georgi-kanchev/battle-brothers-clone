@@ -5,6 +5,7 @@ graphics-antialiasing: false
 graphics-texture-filter: true
 graphics-vsync: false
 graphics-limit-fps: 60
+ui-show-fps: true
 ui-scale: 2
 ui-scale-menu-options: 1
 ui-scale-world-hud: 1
@@ -13,7 +14,7 @@ ui-scale-world-events: 1
 ui-scale-world-settlement: 1
 ui-scale-world-settlement-market: 1
 ui-scale-world-settlement-favors: 1
-ui-scale-world-settlement-recruit: 1
+ui-scale-world-settlement-recruits: 1
 ui-scale-world-settlement-tavern: 1
 ui-scale-battle-hud: 1
 ui-scale-battle-loot: 1

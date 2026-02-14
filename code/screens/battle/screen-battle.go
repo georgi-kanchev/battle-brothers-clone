@@ -49,7 +49,7 @@ func (bs *BattleScreen) OnLoad() {
 	loading.Show("Loading:\nBattle Map...")
 	bs.tmap = tiled.NewMap(assets.LoadTiledMap(bs.path), global.Project)
 	loading.Show("Loading:\nBattle GUI...")
-	bs.hud = gui.NewFromXMLs(file.LoadText("data/gui/battle-hud.xml"), global.DimGUI, global.ThemesGUI)
+	bs.hud = gui.NewFromXMLs(file.LoadText("data/gui/battle-hud.xml"), global.ThemesGUI)
 	bs.loot = gui.NewFromXMLs(file.LoadText("data/gui/battle-loot.xml"), global.ThemesGUI)
 	bs.currentPopup = nil
 
@@ -102,6 +102,8 @@ func (bs *BattleScreen) OnUpdate() {
 	}
 
 	bs.handleInput()
+
+	global.TryShowFPS(bs.camera)
 }
 
 func (bs *BattleScreen) OnExit() {

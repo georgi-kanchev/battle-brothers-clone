@@ -84,7 +84,7 @@ func (ws *WorldScreen) OnLoad() {
 	ws.settlement.Scale = global.Opts.ScaleWorldSettlement * sc
 	ws.market.Scale = global.Opts.ScaleWorldSettlementMarket * sc
 	ws.favors.Scale = global.Opts.ScaleWorldSettlementMarket * sc
-	ws.recruit.Scale = global.Opts.ScaleWorldSettlementRecruit * sc
+	ws.recruit.Scale = global.Opts.ScaleWorldSettlementRecruits * sc
 	ws.tavern.Scale = global.Opts.ScaleWorldSettlementTavern * sc
 
 	loading.Show("Loading:\nWorld images...")
@@ -176,6 +176,8 @@ func (ws *WorldScreen) OnUpdate() {
 	case ws.tavern:
 		ws.handleTavernPopup()
 	}
+
+	global.TryShowFPS(ws.camera)
 }
 
 func (ws *WorldScreen) OnExit() {
@@ -183,9 +185,6 @@ func (ws *WorldScreen) OnExit() {
 
 //=================================================================
 // private
-
-var teamA = []*unit.Unit{}
-var teamB = []*unit.Unit{}
 
 func (ws *WorldScreen) handleInput() {
 	if ws.currentPopup != nil {
@@ -199,6 +198,8 @@ func (ws *WorldScreen) handleInput() {
 	if keyboard.IsKeyJustPressed(key.B) {
 		screens.Enter(global.ScreenBattle, false)
 		var scr = screens.Current().(*battle.BattleScreen)
+		var teamA = []*unit.Unit{unit.New()}
+		var teamB = []*unit.Unit{unit.New()}
 		scr.Prepare(teamA, teamB, true)
 	} else if keyboard.IsKeyJustPressed(key.E) {
 		ws.currentPopup = ws.events

@@ -16,18 +16,19 @@ type Options struct {
 	VSync         bool `yaml:"graphics-vsync"`
 	LimitFPS      int  `yaml:"graphics-limit-fps"`
 
-	ScaleUI                     float32 `yaml:"ui-scale"`
-	ScaleMenuOptions            float32 `yaml:"ui-scale-menu-options"`
-	ScaleWorldHUD               float32 `yaml:"ui-scale-world-hud"`
-	ScaleWorldInventory         float32 `yaml:"ui-scale-world-inventory"`
-	ScaleWorldEvents            float32 `yaml:"ui-scale-world-events"`
-	ScaleWorldSettlement        float32 `yaml:"ui-scale-world-settlement"`
-	ScaleWorldSettlementMarket  float32 `yaml:"ui-scale-world-settlement-market"`
-	ScaleWorldSettlementFavors  float32 `yaml:"ui-scale-world-settlement-favors"`
-	ScaleWorldSettlementRecruit float32 `yaml:"ui-scale-world-settlement-recruit"`
-	ScaleWorldSettlementTavern  float32 `yaml:"ui-scale-world-settlement-tavern"`
-	ScaleBattleHUD              float32 `yaml:"ui-scale-battle-hud"`
-	ScaleBattleLoot             float32 `yaml:"ui-scale-battle-loot"`
+	ShowFPS                      bool    `yaml:"ui-show-fps"`
+	ScaleUI                      float32 `yaml:"ui-scale"`
+	ScaleMenuOptions             float32 `yaml:"ui-scale-menu-options"`
+	ScaleWorldHUD                float32 `yaml:"ui-scale-world-hud"`
+	ScaleWorldInventory          float32 `yaml:"ui-scale-world-inventory"`
+	ScaleWorldEvents             float32 `yaml:"ui-scale-world-events"`
+	ScaleWorldSettlement         float32 `yaml:"ui-scale-world-settlement"`
+	ScaleWorldSettlementMarket   float32 `yaml:"ui-scale-world-settlement-market"`
+	ScaleWorldSettlementFavors   float32 `yaml:"ui-scale-world-settlement-favors"`
+	ScaleWorldSettlementRecruits float32 `yaml:"ui-scale-world-settlement-recruits"`
+	ScaleWorldSettlementTavern   float32 `yaml:"ui-scale-world-settlement-tavern"`
+	ScaleBattleHUD               float32 `yaml:"ui-scale-battle-hud"`
+	ScaleBattleLoot              float32 `yaml:"ui-scale-battle-loot"`
 
 	AudioVolume      float32 `yaml:"audio-volume"`
 	AudioVolumeMusic float32 `yaml:"audio-volume-music"`

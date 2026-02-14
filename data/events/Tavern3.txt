@@ -1,0 +1,11 @@
+The party quickly makes their way to the village to the east. The villagers are easily intimidated, thinking their neighbours sent some dangerous people to beat them up for stealing. They quickly surrender almost everything that was stolen. It’s a lot.
+
+Now, with this rich bounty, the group decides to...
+... Return everything to the small village.
+((The thankful folks are generous, giving you food for your travels, some coins and the tavern keeper gives you his prettiest drinking horn.))
+
+... Keep some for themselves. Lie that the neighbours already ate half of the food.
+((The people are a bit disappointed, but thankful. The tavern keeper gives you his prettiest drinking horn.))
+
+... Keep everything and don’t return.
+((That really weighs a lot. It weighs on some members’ consciousness as well, debuff.))
