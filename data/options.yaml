@@ -6,7 +6,7 @@ graphics-texture-filter: true
 graphics-vsync: false
 graphics-limit-fps: 0
 ui-show-fps: true
-ui-scale: 1
+ui-scale: 2
 ui-scale-menu-options: 1
 ui-scale-world-hud: 1
 ui-scale-world-inventory: 1

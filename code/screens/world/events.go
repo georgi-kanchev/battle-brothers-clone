@@ -44,7 +44,7 @@ func (ws *WorldScreen) loadEventFile(fileName string) {
 	var content = text.Trim(file.LoadText(filePath))
 	var lines = text.SplitLines(content)
 	var choiceAmount = 0
-	var story = ""
+	var story text.Builder
 
 	referencedPopups = [5]string{}
 	ws.events.InputFieldStopTyping()
@@ -55,7 +55,8 @@ func (ws *WorldScreen) loadEventFile(fileName string) {
 	}
 
 	for _, line := range lines {
-		if choiceAmount < 5 && (text.StartsWith(line, "...") || text.StartsWith(line, "…")) {
+		line = text.Replace(line, "…", "...")
+		if choiceAmount < 5 && (text.StartsWith(line, "...")) {
 			choiceAmount++
 			var id = text.New("choice", choiceAmount)
 			ws.events.SetField(id, field.Text, line)
@@ -71,9 +72,9 @@ func (ws *WorldScreen) loadEventFile(fileName string) {
 		var quoteOrEmptyLine = firstSymbol == "\"" || firstSymbol == "“" || line == ""
 		var digitOrLetter = text.IsAllDigits(firstSymbol) || text.IsAllLetters(firstSymbol)
 		if quoteOrEmptyLine || digitOrLetter {
-			story += line + "\n"
+			story.WriteText(line + "\n")
 		}
 	}
-	ws.events.SetField("text", field.Text, text.Trim(story))
+	ws.events.SetField("text", field.Text, text.Trim(story.ToText()))
 	ws.events.SetField("event", field.Height, text.New(370+(5-choiceAmount)*55))
 }

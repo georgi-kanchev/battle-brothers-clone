@@ -39,10 +39,10 @@ type WorldScreen struct {
 	otherParties []*Party
 	settlements  *tiled.Layer
 
-	tmap      *tiled.Map
-	mapLayers []*tiled.Layer
-	solids    []*geometry.Shape
-	roads     [][2]float32
+	tmap            *tiled.Map
+	mapLayerSprites []*graphics.Sprite
+	solids          []*geometry.Shape
+	roads           [][2]float32
 }
 
 func New(path string) *WorldScreen {
@@ -116,7 +116,11 @@ func (ws *WorldScreen) OnLoad() {
 	var solidLayers = ws.tmap.FindLayersBy(property.LayerClass, "WorldSolids")
 	var roadLayers = ws.tmap.FindLayersBy(property.LayerClass, "WorldRoads")
 	var settlements = ws.tmap.FindLayersBy(property.LayerClass, "WorldSettlements")
-	ws.mapLayers = ws.tmap.FindLayersBy(property.LayerClass, "WorldMap")
+	var mapLayers = ws.tmap.FindLayersBy(property.LayerClass, "WorldMap")
+	for _, l := range mapLayers {
+		ws.mapLayerSprites = append(ws.mapLayerSprites, l.ExtractSprites()...)
+	}
+
 	for _, s := range solidLayers {
 		ws.solids = append(ws.solids, s.ExtractShapes()...)
 	}
@@ -139,9 +143,7 @@ func (ws *WorldScreen) OnUpdate() {
 	ws.camera.SetScreenAreaToWindow()
 
 	//world.tmap.Draw(world.camera)
-	for _, m := range ws.mapLayers {
-		m.Draw(ws.camera)
-	}
+	ws.camera.DrawSprites(ws.mapLayerSprites...)
 
 	ws.handleResting()
 	ws.playerParty.Update()
