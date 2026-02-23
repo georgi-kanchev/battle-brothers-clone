@@ -44,7 +44,7 @@ func (ws *WorldScreen) loadEventFile(fileName string) {
 	var content = text.Trim(file.LoadText(filePath))
 	var lines = text.SplitLines(content)
 	var choiceAmount = 0
-	var story text.Builder
+	var story = text.NewBuilder()
 
 	referencedPopups = [5]string{}
 	ws.events.InputFieldStopTyping()

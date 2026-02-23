@@ -32,6 +32,6 @@ func TryShowFPS(camera *graphics.Camera) {
 
 	var tlx, tly = camera.PointFromEdge(0, 0)
 	var height = 20 * Opts.ScaleUI / camera.Zoom
-	camera.DrawText("", fps, tlx, tly, height, 0.95, 0, palette.Black)
-	camera.DrawText("", fps, tlx, tly, height, 0.5, 0, palette.White)
+	camera.DrawTextAdvanced("", fps, tlx, tly, height, 0, palette.Black)
+	camera.DrawTextAdvanced("", fps, tlx, tly, height, 0, palette.White)
 }
