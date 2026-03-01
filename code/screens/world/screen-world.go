@@ -39,7 +39,7 @@ type WorldScreen struct {
 	otherParties []*Party
 	settlements  *tiled.Layer
 
-	tmap            *tiled.Map
+	scene           *tiled.Scene
 	mapLayerSprites []*graphics.Sprite
 	solids          []*geometry.Shape
 	roads           [][2]float32
@@ -53,7 +53,7 @@ func New(path string) *WorldScreen {
 
 func (ws *WorldScreen) OnLoad() {
 	loading.Show("Loading:\nWorld Map...")
-	ws.tmap = tiled.NewMap(assets.LoadTiledMap(ws.path), global.Project)
+	ws.scene = tiled.NewScene(assets.LoadTiledMap(ws.path), global.Project)
 	loading.Show("Loading:\nWorld GUI...")
 
 	var narrow, wide = global.PopupNarrowGUI, global.PopupWideGUI
@@ -113,10 +113,10 @@ func (ws *WorldScreen) OnLoad() {
 	unit.Nicknames = text.Split(file.LoadText("data/nicknames.txt"), " ")
 
 	loading.Show("Processing:\nWorld data...")
-	var solidLayers = ws.tmap.FindLayersBy(property.LayerClass, "WorldSolids")
-	var roadLayers = ws.tmap.FindLayersBy(property.LayerClass, "WorldRoads")
-	var settlements = ws.tmap.FindLayersBy(property.LayerClass, "WorldSettlements")
-	var mapLayers = ws.tmap.FindLayersBy(property.LayerClass, "WorldMap")
+	var solidLayers = ws.scene.FindLayersBy(property.LayerClass, "WorldSolids")
+	var roadLayers = ws.scene.FindLayersBy(property.LayerClass, "WorldRoads")
+	var settlements = ws.scene.FindLayersBy(property.LayerClass, "WorldSettlements")
+	var mapLayers = ws.scene.FindLayersBy(property.LayerClass, "WorldMap")
 	for _, l := range mapLayers {
 		ws.mapLayerSprites = append(ws.mapLayerSprites, l.ExtractSprites()...)
 	}

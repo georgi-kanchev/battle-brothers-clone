@@ -25,7 +25,7 @@ type BattleScreen struct {
 
 	hud, currentPopup, loot *gui.GUI
 
-	tmap    *tiled.Map
+	scene   *tiled.Scene
 	tiles   []*graphics.Sprite
 	pathMap *geometry.ShapeGrid
 
@@ -40,14 +40,14 @@ func New(mapPath string) *BattleScreen {
 
 func (bs *BattleScreen) Prepare(teamA, teamB []*unit.Unit, playerIsTeamA bool) {
 	bs.unitManager = newUnitManager(teamA, teamB)
-	bs.unitManager.spawnAll(bs.tmap, teamA, "BattleSpawnsTeamA")
-	bs.unitManager.spawnAll(bs.tmap, teamB, "BattleSpawnsTeamB")
+	bs.unitManager.spawnAll(bs.scene, teamA, "BattleSpawnsTeamA")
+	bs.unitManager.spawnAll(bs.scene, teamB, "BattleSpawnsTeamB")
 	bs.unitManager.turnManager.startBattle(teamA, teamB, playerIsTeamA)
 }
 
 func (bs *BattleScreen) OnLoad() {
 	loading.Show("Loading:\nBattle Map...")
-	bs.tmap = tiled.NewMap(assets.LoadTiledMap(bs.path), global.Project)
+	bs.scene = tiled.NewScene(assets.LoadTiledMap(bs.path), global.Project)
 	loading.Show("Loading:\nBattle GUI...")
 	bs.hud = gui.NewFromXMLs(file.LoadText("data/gui/battle-hud.xml"), global.ThemesGUI)
 	bs.loot = gui.NewFromXMLs(file.LoadText("data/gui/battle-loot.xml"), global.ThemesGUI)
@@ -58,23 +58,23 @@ func (bs *BattleScreen) OnLoad() {
 	bs.loot.Scale = global.Opts.ScaleBattleLoot * sc
 
 	loading.Show("Processing:\nBattle data...")
-	var layers = bs.tmap.FindLayersBy(property.LayerClass, "BattleMap")
-	layers = append(layers, bs.tmap.FindLayersBy(property.LayerClass, "BattlePathMap")...)
+	var layers = bs.scene.FindLayersBy(property.LayerClass, "BattleMap")
+	layers = append(layers, bs.scene.FindLayersBy(property.LayerClass, "BattlePathMap")...)
 	for _, l := range layers {
 		bs.tiles = append(bs.tiles, l.ExtractSprites()...)
 	}
 
-	var atlasId = bs.tmap.Tilesets[0].Properties["atlasId"].(string)
+	var atlasId = bs.scene.Tilesets[0].Properties["atlasId"].(string)
 	for i := range 31 {
 		var tileId = text.New(atlasId, "/", i)
 		assets.SetTextureAtlasTile(atlasId, tileId, float32(i), 1, 1, 1, 0, false)
 	}
 }
 func (bs *BattleScreen) OnEnter() {
-	global.BattleTileWidth = float32(bs.tmap.Properties[property.MapTileWidth].(int))
-	global.BattleTileHeight = float32(bs.tmap.Properties[property.MapTileHeight].(int))
-	global.BattleTileColumns = float32(bs.tmap.Properties[property.MapColumns].(int))
-	global.BattleTileRows = float32(bs.tmap.Properties[property.MapRows].(int))
+	global.BattleTileWidth = float32(bs.scene.Properties[property.MapTileWidth].(int))
+	global.BattleTileHeight = float32(bs.scene.Properties[property.MapTileHeight].(int))
+	global.BattleTileColumns = float32(bs.scene.Properties[property.MapColumns].(int))
+	global.BattleTileRows = float32(bs.scene.Properties[property.MapRows].(int))
 
 	bs.camera.X = global.BattleTileColumns / 2 * global.BattleTileWidth
 	bs.camera.Y = global.BattleTileRows / 2 * global.BattleTileHeight
@@ -120,7 +120,7 @@ func (bs *BattleScreen) handleInput() {
 	}
 }
 func (bs *BattleScreen) recalculatePathMap() {
-	var pathMapLayers = bs.tmap.FindLayersBy(property.LayerClass, "BattlePathMap")
+	var pathMapLayers = bs.scene.FindLayersBy(property.LayerClass, "BattlePathMap")
 	if len(pathMapLayers) > 0 {
 		bs.pathMap = pathMapLayers[0].ExtractShapeGrid()
 	}

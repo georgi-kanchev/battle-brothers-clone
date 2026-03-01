@@ -1,17 +1,17 @@
 {
-    "activeFile": "battlegrounds/test/map.tmx",
+    "activeFile": "battlegrounds/tiles.tsx",
     "expandedProjectPaths": [
-        "worlds",
-        "data",
+        "test",
         ".",
-        "battlegrounds",
         "data/battlegrounds/test",
         "data/battlegrounds",
-        "test",
-        "data/worlds",
+        "worlds",
+        "data",
+        "battlegrounds/test",
         "worlds/test",
-        "data/worlds/test",
-        "battlegrounds/test"
+        "battlegrounds",
+        "data/worlds",
+        "data/worlds/test"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -28,8 +28,8 @@
             "scale": 0.33,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1124.242424242424,
-                "y": 786.3636363636363
+                "x": 1560.6060606060607,
+                "y": 792.4242424242423
             }
         },
         "battlegrounds/tiles.tsx": {
@@ -90,8 +90,8 @@
             "scale": 0.33,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 2545.454545454545,
-                "y": 1698.4848484848485
+                "x": 2763.636363636364,
+                "y": 1701.5151515151515
             }
         },
         "worlds/test/tileset.tsx": {
@@ -110,9 +110,9 @@
     "project": "project.tiled-project",
     "recentFiles": [
         "worlds/test/map.tmx",
-        "battlegrounds/tiles.tsx",
-        "battlegrounds/battleground.tsx",
         "battlegrounds/test/map.tmx",
+        "battlegrounds/battleground.tsx",
+        "battlegrounds/tiles.tsx",
         "worlds/test/tileset.tsx",
         "data/worlds/test/map.tmx",
         "data/battlegrounds/battleground.tsx",
