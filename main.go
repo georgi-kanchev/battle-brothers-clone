@@ -11,7 +11,6 @@ import (
 	"pure-game-kit/execution/screens"
 	"pure-game-kit/input/keyboard"
 	"pure-game-kit/input/keyboard/key"
-	"pure-game-kit/tiled"
 	"pure-game-kit/window"
 )
 
@@ -32,9 +31,6 @@ func main() {
 	global.XBtnGUI = file.LoadText("data/gui/reusable-popup-x-button.xml")
 	global.TitleGUI = file.LoadText("data/gui/reusable-popup-title.xml")
 
-	loading.Show("Loading:\nTiled project...")
-	global.Project = tiled.NewProject(assets.LoadTiledProject("data/project.tiled-project"))
-
 	loading.Show("Loading:\nScreens...")
 	global.ScreenMainMenu = screens.Add(menu.New(), true)
 	global.ScreenWorld = screens.Add(world.New("data/worlds/test/map.tmx"), true)
@@ -47,7 +43,6 @@ func main() {
 			global.LoadOptions()
 			global.ApplyOptions()
 			assets.ReloadAll()
-			global.Project = tiled.NewProject(assets.LoadTiledProject("data/project.tiled-project"))
 			screens.Reload()
 			screens.Enter(prevScreen, false)
 		}

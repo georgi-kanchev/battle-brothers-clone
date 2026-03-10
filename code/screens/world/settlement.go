@@ -2,11 +2,10 @@ package world
 
 import (
 	"pure-game-kit/gui/field"
-	"pure-game-kit/tiled/property"
 )
 
 func (ws *WorldScreen) handleSettlementPopup() {
-	var name = ws.playerParty.goingToSettlement.Properties[property.ObjectName].(string)
+	var name = "Settlement Name"
 	ws.settlement.SetField("title-bgr", field.Text, "Town of \""+name+"\"")
 
 	ws.tryExitPopup(ws.settlement, nil, func() { ws.playerParty.goingToSettlement = nil })

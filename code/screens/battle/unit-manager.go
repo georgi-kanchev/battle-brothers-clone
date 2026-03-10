@@ -7,8 +7,6 @@ import (
 	"pure-game-kit/execution/screens"
 	"pure-game-kit/input/mouse"
 	"pure-game-kit/input/mouse/button"
-	"pure-game-kit/tiled"
-	"pure-game-kit/tiled/property"
 	"pure-game-kit/utility/collection"
 	col "pure-game-kit/utility/color"
 	"pure-game-kit/utility/color/palette"
@@ -29,8 +27,7 @@ func newUnitManager(teamA, teamB []*unit.Unit) *unitManager {
 
 //=================================================================
 
-func (um *unitManager) spawnAll(scene *tiled.Scene, units []*unit.Unit, layerClass string) {
-	var spawns = scene.FindLayersBy(property.LayerClass, layerClass)[0].ExtractPoints()
+func (um *unitManager) spawnAll(spawns [][2]float32, units []*unit.Unit) {
 	if len(units) > len(spawns) {
 		return
 	}
@@ -69,7 +66,7 @@ func (um *unitManager) update() {
 
 func (um *unitManager) drawIndicators() {
 	var battle = screens.Current().(*BattleScreen)
-	var bw, bh = global.BattleTileColumns, global.BattleTileRows
+	var bw, bh = global.BattleColumns, global.BattleRows
 	var tw, th = global.BattleTileWidth, global.BattleTileHeight
 	var unitActing = um.turnManager.unitActing()
 	var ux, uy = unitActing.Position()
@@ -132,7 +129,7 @@ func (um *unitManager) drawIndicators() {
 }
 func (um *unitManager) drawRange(cells [][2]int, frameSize float32, color uint) {
 	var battle = screens.Current().(*BattleScreen)
-	var bw, bh = global.BattleTileColumns, global.BattleTileRows
+	var bw, bh = global.BattleColumns, global.BattleRows
 	var tw, th = global.BattleTileWidth, global.BattleTileHeight
 	for _, cell := range cells {
 		var cx, cy = cell[0], cell[1]
