@@ -18,6 +18,7 @@ import (
 	"pure-game-kit/input/keyboard"
 	"pure-game-kit/input/keyboard/key"
 	"pure-game-kit/input/mouse"
+	"pure-game-kit/utility/color/palette"
 	"pure-game-kit/utility/text"
 )
 
@@ -35,11 +36,10 @@ type WorldScreen struct {
 
 	playerParty  *Party
 	otherParties []*Party
-	settlements  any
 
-	chunks []*graphics.Sprite
-	solids []*geometry.Shape
-	roads  [][2]float32
+	chunks              []*graphics.Sprite
+	solids, settlements []*geometry.Shape
+	roads               [][2]float32
 }
 
 func New(path string) *WorldScreen {
@@ -106,51 +106,49 @@ func (ws *WorldScreen) OnLoad() {
 		}
 	}
 
+	for _, id := range assets.LoadedTextureIds() {
+		assets.SetTextureSmoothness(id, true)
+	}
+
 	unit.Names = text.Split(file.LoadText("data/names.txt"), " ")
 	unit.Nicknames = text.Split(file.LoadText("data/nicknames.txt"), " ")
 
 	loading.Show("Processing:\nWorld Map...")
 	var chunks = folder.Content("data/worlds/01", true)
-	for _, png := range chunks {
-		var name = path.RemoveExtension(path.LastPart(png))
+	for _, file := range chunks {
+		if path.Extension(file) != ".jpg" {
+			continue
+		}
+		var name = path.RemoveExtension(path.LastPart(file))
 		var split = text.Split(name, " ")
-		var assetId = assets.LoadTexture(png)
+		var assetId = assets.LoadTexture(file)
 		var w, h = assets.Size(assetId)
 		var col, row = text.ToNumber[int](split[0]), text.ToNumber[int](split[1])
 		var spr = graphics.NewSprite(assetId, float32(col*w), float32(row*h))
+		spr.Width++
+		spr.Height++
 		spr.PivotX, spr.PivotY = 0, 0
 		ws.chunks = append(ws.chunks, spr)
 	}
-	// var solidLayers = ws.scene.FindLayersBy(property.LayerClass, "WorldSolids")
-	// var roadLayers = ws.scene.FindLayersBy(property.LayerClass, "WorldRoads")
-	// var settlements = ws.scene.FindLayersBy(property.LayerClass, "WorldSettlements")
-	// var mapLayers = ws.scene.FindLayersBy(property.LayerClass, "WorldMap")
-	// for _, l := range mapLayers {
-	// 	ws.mapLayerSprites = append(ws.mapLayerSprites, l.ExtractSprites()...)
-	// }
 
-	// for _, s := range solidLayers {
-	// 	ws.solids = append(ws.solids, s.ExtractShapes()...)
-	// }
-	// for _, r := range roadLayers {
-	// 	ws.roads = append(ws.roads, r.ExtractLines()...)
-	// }
-	// if len(settlements) > 0 {
-	// 	ws.settlements = settlements[0]
-	// }
-
-	for _, id := range assets.LoadedTextureIds() {
-		assets.SetTextureSmoothness(id, true)
-	}
+	loading.Show("Processing:\nWorld Map Shapes...")
+	ws.roads = assets.LoadTiledPoints("data/worlds/01/shapes.tmx", "Roads")
+	ws.settlements = geometry.NewShapes(assets.LoadTiledPoints("data/worlds/01/shapes.tmx", "Settlements")...)
+	ws.solids = geometry.NewShapes(assets.LoadTiledPoints("data/worlds/01/shapes.tmx", "Solids")...)
 }
 func (ws *WorldScreen) OnEnter() {
 	var units = []*unit.Unit{unit.New(), unit.New(), unit.New(), unit.New(), unit.New(), unit.New()}
-	ws.playerParty = NewParty(units, 2250, 1530, true)
+	ws.playerParty = NewParty(units, 1900, 1300, true)
+	assets.SetTextureSmoothness("art/UI/Time/time_circle.PNG", true) // force, despite setting
 }
 func (ws *WorldScreen) OnUpdate() {
 	ws.camera.SetScreenAreaToWindow()
 
 	ws.camera.DrawSprites(ws.chunks...)
+
+	for _, s := range ws.solids {
+		ws.camera.DrawShapes(palette.Red, s.CornerPoints()...)
+	}
 
 	ws.handleResting()
 	ws.playerParty.Update()

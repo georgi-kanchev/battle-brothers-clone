@@ -9,8 +9,10 @@ import (
 	"pure-game-kit/input/keyboard/key"
 	"pure-game-kit/input/mouse"
 	"pure-game-kit/input/mouse/button"
+	"pure-game-kit/input/mouse/cursor"
 	"pure-game-kit/utility/angle"
 	"pure-game-kit/utility/collection"
+	"pure-game-kit/utility/color"
 	"pure-game-kit/utility/color/palette"
 	"pure-game-kit/utility/number"
 	"pure-game-kit/utility/point"
@@ -21,7 +23,7 @@ type Party struct {
 	x, y, speed, moveTargetX, moveTargetY float32
 	isPlayer, isUsingRoads, isResting     bool
 
-	goingToSettlement any
+	goingToSettlement *geometry.Shape
 
 	units  []*unit.Unit
 	hitbox *geometry.Shape
@@ -100,14 +102,14 @@ func (p *Party) tryEnterSettlement() {
 		return
 	}
 
-	// for _, s := range world.settlements.Objects {
-	// 	if p.goingToSettlement == s && p.hitbox.IsOverlappingShapes(s.ExtractShapes()...) {
-	// 		p.moveTargetX, p.moveTargetY = p.x, p.y
-	// 		p.path = nil
-	// 		world.resultingCursorNonGUI = -1
-	// 		world.currentPopup = world.settlement
-	// 	}
-	// }
+	for _, s := range world.settlements {
+		if p.goingToSettlement == s && p.hitbox.IsOverlappingShapes(s) {
+			p.moveTargetX, p.moveTargetY = p.x, p.y
+			p.path = nil
+			world.resultingCursorNonGUI = -1
+			world.currentPopup = world.settlement
+		}
+	}
 }
 
 func (party *Party) handlePlayer() {
@@ -118,8 +120,8 @@ func (party *Party) handlePlayer() {
 		var col = palette.White
 		var p = party.path
 		if len(p) > 0 {
-			world.camera.DrawLine(party.x, party.y, p[0][0], p[0][1], 2, col)
-			world.camera.DrawLinesPath(2, col, p...)
+			world.camera.DrawLine(party.x, party.y, p[0][0], p[0][1], 1, col)
+			world.camera.DrawLinesPath(1, col, p...)
 		}
 		var mx, my = party.lastPathPoint()
 		world.camera.DrawPoints(4, col, [2]float32{mx, my})
@@ -143,25 +145,24 @@ func (party *Party) handlePlayer() {
 	world.resultingCursorNonGUI = -1
 
 	var mx, my = world.camera.MousePosition()
-	// var settlements = world.settlements.Objects
-	// for _, s := range settlements {
-	// 	var shape = s.ExtractShapes()[0]
-	// 	var hovering = shape.IsContainingPoint(mx, my)
-	// 	if hovering || shape.IsContainingPoint(party.moveTargetX, party.moveTargetY) {
-	// 		var pts = shape.CornerPoints()
-	// 		world.camera.DrawShapes(color.FadeOut(palette.White, 0.8), pts...)
-	// 		world.camera.DrawLinesPath(2, color.FadeOut(palette.White, 0.5), pts...)
-	// 	}
+	var settlements = world.settlements
+	for _, s := range settlements {
+		var hovering = s.IsContainingPoint(mx, my)
+		if hovering || s.IsContainingPoint(party.moveTargetX, party.moveTargetY) {
+			var pts = s.CornerPoints()
+			world.camera.DrawShapes(color.FadeOut(palette.White, 0.8), pts...)
+			world.camera.DrawLinesPath(2, color.FadeOut(palette.White, 0.5), pts...)
+		}
 
-	// 	if !hovering {
-	// 		continue
-	// 	}
+		if !hovering {
+			continue
+		}
 
-	// 	world.resultingCursorNonGUI = cursor.Hand
-	// 	if mouse.IsButtonJustPressed(button.Left) {
-	// 		party.goingToSettlement = s
-	// 	}
-	// }
+		world.resultingCursorNonGUI = cursor.Hand
+		if mouse.IsButtonJustPressed(button.Left) {
+			party.goingToSettlement = s
+		}
+	}
 
 	world.camera.Zoom *= 1 + 0.001*mouse.ScrollSmooth()
 	world.camera.Zoom = number.Limit(world.camera.Zoom, 0.1, 8)
