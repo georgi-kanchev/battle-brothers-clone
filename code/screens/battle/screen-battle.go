@@ -52,17 +52,17 @@ func (bs *BattleScreen) OnLoad() {
 	bs.loot.Scale = global.Opts.ScaleBattleLoot * sc
 
 	loading.Show("Loading:\nBattle Tiles...")
-	var tileSetId, tileDataIds = assets.LoadTiledData("data/battlegrounds/test/map.tmx")
-	var layers = make([]*graphics.TileMap, len(tileDataIds))
+	// var tileSetId, tileDataIds = assets.LoadTiledData("data/battlegrounds/test/map.tmx")
+	// var layers = make([]*graphics.TileMap, len(tileDataIds))
 
-	for i, tileDataId := range tileDataIds {
-		layers[i] = graphics.NewTileMap(tileSetId, tileDataId)
-	}
+	// for i, tileDataId := range tileDataIds {
+	// 	layers[i] = graphics.NewTileMap(tileSetId, tileDataId)
+	// }
 
-	var tileWidth, tileHeight = assets.Size(tileSetId)
-	var columns, rows = assets.Size(tileDataIds[0])
-	global.BattleTileWidth, global.BattleTileHeight = float32(tileWidth), float32(tileHeight)
-	global.BattleColumns, global.BattleRows = float32(columns), float32(rows)
+	// var tileWidth, tileHeight = assets.Size(tileSetId)
+	// var columns, rows = assets.Size(tileDataIds[0])
+	// global.BattleTileWidth, global.BattleTileHeight = float32(tileWidth), float32(tileHeight)
+	// global.BattleColumns, global.BattleRows = float32(columns), float32(rows)
 }
 func (bs *BattleScreen) OnEnter() {
 	bs.camera.X = global.BattleColumns / 2 * global.BattleTileWidth

@@ -72,7 +72,8 @@ func (u *Unit) UpdateAndDraw(x, y, scaleX, scaleY float32, camera *graphics.Came
 	for i := len(u.sprites) - 1; i >= 0; i-- {
 		u.sprites[i].X, u.sprites[i].Y = x, y
 		u.sprites[i].ScaleX, u.sprites[i].ScaleY = scaleX, scaleY
-		if u.sprites[i].AssetId != "" {
+		var id = u.sprites[i].AssetId
+		if id != "" && id != "none" {
 			camera.DrawSprites(u.sprites[i])
 		}
 	}
