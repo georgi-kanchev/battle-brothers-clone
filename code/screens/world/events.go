@@ -12,7 +12,7 @@ import (
 var referencedPopups [5]string
 
 func (ws *WorldScreen) handleEventsPopup() {
-	var _, textH = ws.events.AreaText("text", ws.camera)
+	var _, textH = ws.events.AreaText("text")
 	var enter = keyboard.IsKeyJustPressed(key.Enter) || keyboard.IsKeyJustPressed(key.NumpadEnter)
 
 	ws.events.SetField("text", field.Height, text.New(textH))
@@ -30,7 +30,7 @@ func (ws *WorldScreen) handleEventsPopup() {
 	}
 
 	if enter && ws.events.InputFieldTyping() == "file-name" {
-		var fileName = ws.events.Field("file-name", field.Text, ws.camera)
+		var fileName = ws.events.Field("file-name", field.Text)
 		ws.loadEventFile(fileName)
 	}
 }

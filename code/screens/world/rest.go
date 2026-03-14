@@ -13,7 +13,7 @@ func (ws *WorldScreen) handleResting() {
 		return
 	}
 
-	var moveCancel = mouse.IsAnyButtonJustPressed() && !ws.hud.IsAnyHovered(ws.camera)
+	var moveCancel = mouse.IsAnyButtonJustPressed() && !ws.hud.IsAnyHovered()
 	if moveCancel {
 		ws.stopResting(false)
 	}

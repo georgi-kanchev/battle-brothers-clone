@@ -64,14 +64,14 @@ func (ws *WorldScreen) OnLoad() {
 	var recruit = file.LoadText("data/gui/world-settlement-recruit.xml")
 	var tavern = file.LoadText("data/gui/world-settlement-tavern.xml")
 
-	ws.hud = gui.NewFromXMLs(hud, dim, themes)
-	ws.events = gui.NewFromXMLs(events, themes)
-	ws.inventory = gui.NewFromXMLs(dim, wide, inventory, x, themes)
-	ws.settlement = gui.NewFromXMLs(dim, narrow, settlement, title, x, themes)
-	ws.market = gui.NewFromXMLs(dim, wide, market, title, x, themes)
-	ws.favors = gui.NewFromXMLs(dim, narrow, favors, title, x, themes)
-	ws.recruit = gui.NewFromXMLs(dim, narrow, recruit, title, x, themes)
-	ws.tavern = gui.NewFromXMLs(dim, narrow, tavern, title, x, themes)
+	ws.hud = gui.NewFromXMLs(ws.camera, hud, dim, themes)
+	ws.events = gui.NewFromXMLs(ws.camera, events, themes)
+	ws.inventory = gui.NewFromXMLs(ws.camera, dim, wide, inventory, x, themes)
+	ws.settlement = gui.NewFromXMLs(ws.camera, dim, narrow, settlement, title, x, themes)
+	ws.market = gui.NewFromXMLs(ws.camera, dim, wide, market, title, x, themes)
+	ws.favors = gui.NewFromXMLs(ws.camera, dim, narrow, favors, title, x, themes)
+	ws.recruit = gui.NewFromXMLs(ws.camera, dim, narrow, recruit, title, x, themes)
+	ws.tavern = gui.NewFromXMLs(ws.camera, dim, narrow, tavern, title, x, themes)
 	ws.currentPopup = nil
 
 	var sc = global.Opts.ScaleUI
@@ -158,11 +158,11 @@ func (ws *WorldScreen) OnUpdate() {
 	ws.handleDayNightCycle()
 	ws.handleInput()
 
-	ws.hud.UpdateAndDraw(ws.camera)
+	ws.hud.UpdateAndDraw()
 	ws.hud.SetField("popup-dim", field.Hidden, condition.If(ws.currentPopup == nil, "1", ""))
 
 	if ws.currentPopup != nil {
-		ws.currentPopup.UpdateAndDraw(ws.camera)
+		ws.currentPopup.UpdateAndDraw()
 	} else if ws.resultingCursorNonGUI != -1 {
 		mouse.SetCursor(ws.resultingCursorNonGUI)
 	}

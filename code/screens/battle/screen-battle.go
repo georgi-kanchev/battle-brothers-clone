@@ -43,8 +43,8 @@ func (bs *BattleScreen) Prepare(teamA, teamB []*unit.Unit, playerIsTeamA bool) {
 
 func (bs *BattleScreen) OnLoad() {
 	loading.Show("Loading:\nBattle GUI...")
-	bs.hud = gui.NewFromXMLs(file.LoadText("data/gui/battle-hud.xml"), global.ThemesGUI)
-	bs.loot = gui.NewFromXMLs(file.LoadText("data/gui/battle-loot.xml"), global.ThemesGUI)
+	bs.hud = gui.NewFromXMLs(bs.camera, file.LoadText("data/gui/battle-hud.xml"), global.ThemesGUI)
+	bs.loot = gui.NewFromXMLs(bs.camera, file.LoadText("data/gui/battle-loot.xml"), global.ThemesGUI)
 	bs.currentPopup = nil
 
 	var sc = global.Opts.ScaleUI
@@ -85,9 +85,9 @@ func (bs *BattleScreen) OnUpdate() {
 
 	bs.unitManager.update()
 
-	bs.hud.UpdateAndDraw(bs.camera)
+	bs.hud.UpdateAndDraw()
 	if bs.currentPopup != nil {
-		bs.currentPopup.UpdateAndDraw(bs.camera)
+		bs.currentPopup.UpdateAndDraw()
 	}
 
 	bs.handleInput()

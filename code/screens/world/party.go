@@ -139,7 +139,7 @@ func (party *Party) handlePlayer() {
 		}
 	}
 
-	if world.hud.IsAnyHovered(world.camera) {
+	if world.hud.IsAnyHovered() {
 		return
 	}
 	world.resultingCursorNonGUI = -1

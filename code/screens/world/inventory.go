@@ -12,7 +12,7 @@ var inventorySelectedUnitIndex int
 func (ws *WorldScreen) handleInventoryPopup() {
 	ws.tryExitPopup(ws.inventory, nil, nil)
 
-	var x, y, _, _, _ = ws.inventory.Area("display", ws.camera)
+	var x, y, _, _, _ = ws.inventory.Area("display")
 	var sc = 1 / ws.camera.Zoom * ws.inventory.Scale
 	var cx, cy = x + 35*sc, y + 125*sc
 	var units = ws.playerParty.units
@@ -27,11 +27,11 @@ func (ws *WorldScreen) handleInventoryPopup() {
 	for i := range 20 {
 		var hidden = condition.If(i < len(units), "", "1")
 		var unitId = text.New("unit", i)
-		var ux, uy, _, _, _ = ws.inventory.Area(unitId, ws.camera)
+		var ux, uy, _, _, _ = ws.inventory.Area(unitId)
 		ws.inventory.SetField(unitId, field.Hidden, hidden)
 
 		if hidden == "" {
-			var cx, cy, cw, ch, _ = ws.inventory.Area("units", ws.camera)
+			var cx, cy, cw, ch, _ = ws.inventory.Area("units")
 			var tlx, tly = ws.camera.PointToScreen(cx, cy)
 			var brx, bry = ws.camera.PointToScreen(cx+cw, cy+ch)
 			ws.camera.Mask(tlx, tly, brx-tlx, bry-tly)

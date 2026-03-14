@@ -34,8 +34,9 @@ func (ms *MenuScreen) OnLoad() {
 	var hud = file.LoadText("data/gui/menu-hud.xml")
 	var options = file.LoadText("data/gui/menu-options.xml")
 	var narrow = global.PopupNarrowGUI
-	ms.hud = gui.NewFromXMLs(hud, global.DimGUI, global.ThemesGUI)
-	ms.options = gui.NewFromXMLs(global.DimGUI, narrow, options, global.TitleGUI, global.XBtnGUI, global.ThemesGUI)
+	ms.hud = gui.NewFromXMLs(ms.camera, hud, global.DimGUI, global.ThemesGUI)
+	ms.options = gui.NewFromXMLs(
+		ms.camera, global.DimGUI, narrow, options, global.TitleGUI, global.XBtnGUI, global.ThemesGUI)
 	ms.currentPopup = nil
 
 	loading.Show("Loading:\nMain Menu images...")
@@ -67,9 +68,9 @@ func (ms *MenuScreen) OnUpdate() {
 
 	ms.hud.SetField("popup-dim-bgr", field.Hidden, condition.If(ms.currentPopup == nil, "1", ""))
 
-	ms.hud.UpdateAndDraw(ms.camera)
+	ms.hud.UpdateAndDraw()
 	if ms.currentPopup != nil {
-		ms.currentPopup.UpdateAndDraw(ms.camera)
+		ms.currentPopup.UpdateAndDraw()
 	}
 
 	switch ms.currentPopup {

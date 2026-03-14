@@ -15,11 +15,11 @@ func (ms *MenuScreen) handleOptionsPopup() {
 	ms.tryExitPopup(ms.options, nil)
 	ms.options.SetField("title-bgr", field.Text, "Options")
 
-	var gfx = ms.options.Field("tab-graphics", field.Value, ms.camera)
-	var ui = ms.options.Field("tab-ui", field.Value, ms.camera)
-	var audio = ms.options.Field("tab-audio", field.Value, ms.camera)
-	var ctrls = ms.options.Field("tab-controls", field.Value, ms.camera)
-	var game = ms.options.Field("tab-gameplay", field.Value, ms.camera)
+	var gfx = ms.options.Field("tab-graphics", field.Value)
+	var ui = ms.options.Field("tab-ui", field.Value)
+	var audio = ms.options.Field("tab-audio", field.Value)
+	var ctrls = ms.options.Field("tab-controls", field.Value)
+	var game = ms.options.Field("tab-gameplay", field.Value)
 
 	ms.options.SetField("graphics", field.Hidden, condition.If(gfx == "", "1", ""))
 	ms.options.SetField("ui", field.Hidden, condition.If(ui == "", "1", ""))
@@ -38,7 +38,7 @@ func (ms *MenuScreen) handleOptionsPopup() {
 
 func (ms *MenuScreen) tryChangeWindowState(id string) {
 	if ms.options.IsButtonJustClicked(id) {
-		var state = int(ms.options.FieldNumber(id, "state", ms.camera))
+		var state = int(ms.options.FieldNumber(id, "state"))
 		var _, cur = window.Monitors()
 
 		global.Opts.WindowState = state
@@ -66,8 +66,8 @@ func (ms *MenuScreen) tryChangeVsyncOrLimitFPS() {
 		return
 	}
 
-	var vsync = ms.options.Field("vsync", field.Value, ms.camera)
-	var slider = ms.options.FieldNumber("limit-fps", field.Value, ms.camera)
+	var vsync = ms.options.Field("vsync", field.Value)
+	var slider = ms.options.FieldNumber("limit-fps", field.Value)
 	var maxFPS = number.Snap(number.Map(slider, 0, 1, 0, 250), 10)
 
 	global.Opts.VSync = vsync == "1"
@@ -82,11 +82,11 @@ func (ms *MenuScreen) tryChangeVsyncOrTexFilter() {
 	var clickTexFilter = ms.options.IsButtonJustClicked("tex-filter")
 
 	if clickAntialiasing {
-		var antialiasing = ms.options.Field("aa", field.Value, ms.camera)
+		var antialiasing = ms.options.Field("aa", field.Value)
 		global.Opts.Antialiasing = antialiasing == "1"
 	}
 	if clickTexFilter {
-		var textureFilter = ms.options.Field("tex-filter", field.Value, ms.camera)
+		var textureFilter = ms.options.Field("tex-filter", field.Value)
 		global.Opts.TextureFilter = textureFilter == "1"
 	}
 	if clickAntialiasing || clickTexFilter {
@@ -99,9 +99,9 @@ func (ms *MenuScreen) tryChangeVsyncOrTexFilter() {
 func (ms *MenuScreen) updateOptionsGUI() {
 	var widgetStates = ms.options.WidgetIdsOfContainer("states")
 	for _, widget := range widgetStates {
-		var state = ms.options.Field(widget, "state", ms.camera)
+		var state = ms.options.Field(widget, "state")
 		if state == text.New(global.Opts.WindowState) {
-			ms.options.SetField("window-state", field.Text, ms.options.Field(widget, field.Text, ms.camera))
+			ms.options.SetField("window-state", field.Text, ms.options.Field(widget, field.Text))
 			break
 		}
 	}

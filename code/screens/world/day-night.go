@@ -34,8 +34,8 @@ func (ws *WorldScreen) handleDayNightCycle() {
 	ws.camera.DrawSprites(ws.timeCircle)
 	ws.camera.SetScreenAreaToWindow()
 
-	var x0, x1 = ws.hud.Field("x0", field.Value, ws.camera), ws.hud.Field("x1", field.Value, ws.camera)
-	var x2, x3 = ws.hud.Field("x2", field.Value, ws.camera), ws.hud.Field("x3", field.Value, ws.camera)
+	var x0, x1 = ws.hud.Field("x0", field.Value), ws.hud.Field("x1", field.Value)
+	var x2, x3 = ws.hud.Field("x2", field.Value), ws.hud.Field("x3", field.Value)
 	if ws.currentPopup != nil || x0 != "" {
 		global.TimeScale = 0
 	} else if x1 != "" {
