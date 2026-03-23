@@ -34,7 +34,6 @@ func (ls *LoadingScreen) OnLoad() {
 	ls.textBot.LineHeight = 40
 }
 func (ls *LoadingScreen) OnEnter() {
-	ls.camera.SetScreenAreaToWindow()
 	ls.textMid.Text = msg
 	ls.textMid.Width, ls.textMid.Height = ls.camera.Size()
 	ls.textBot.Width, ls.textBot.Height = ls.textMid.Width, ls.textMid.Height

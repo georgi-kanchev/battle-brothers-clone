@@ -74,8 +74,6 @@ func (bs *BattleScreen) OnEnter() {
 	}
 }
 func (bs *BattleScreen) OnUpdate() {
-	bs.camera.SetScreenAreaToWindow()
-
 	if bs.currentPopup == nil {
 		bs.camera.MouseDragAndZoomSmoothly()
 		bs.camera.Zoom = number.Limit(bs.camera.Zoom, 0.5, 10)

@@ -14,6 +14,6 @@ var BattleTileWidth, BattleTileHeight, BattleColumns, BattleRows float32 = 0, 0,
 
 func TryShowFPS(camera *graphics.Camera) {
 	if Opts.ShowFPS {
-		camera.DrawTextFPS()
+		camera.DrawTextDebug(true, false, false, false)
 	}
 }

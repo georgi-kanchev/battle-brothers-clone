@@ -3,6 +3,7 @@ package world
 import (
 	"game/code/global"
 	"pure-game-kit/execution/condition"
+	"pure-game-kit/graphics"
 	"pure-game-kit/gui/field"
 	"pure-game-kit/utility/color"
 	"pure-game-kit/utility/number"
@@ -28,11 +29,10 @@ func (ws *WorldScreen) handleDayNightCycle() {
 
 	var scrX, scrY = ws.camera.PointToScreen(topX, topY)
 	var scrW, scrH = 100 * ws.hud.Scale, 140 * ws.hud.Scale
-	ws.camera.Mask(int(float32(scrX)-50*ws.hud.Scale), int(scrY), int(scrW), int(scrH))
+	ws.timeCircle.Mask = graphics.NewArea(scrX-50*ws.hud.Scale, scrY, scrW, scrH)
 	ws.timeCircle.Angle = number.Map(ws.time, 0, dayNightCycleDuration, 0, 360)
 
 	ws.camera.DrawSprites(ws.timeCircle)
-	ws.camera.SetScreenAreaToWindow()
 
 	var x0, x1 = ws.hud.Field("x0", field.Value), ws.hud.Field("x1", field.Value)
 	var x2, x3 = ws.hud.Field("x2", field.Value), ws.hud.Field("x3", field.Value)

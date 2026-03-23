@@ -142,8 +142,6 @@ func (ws *WorldScreen) OnEnter() {
 	assets.SetTextureSmoothness("art/UI/Time/time_circle.PNG", true) // force, despite setting
 }
 func (ws *WorldScreen) OnUpdate() {
-	ws.camera.SetScreenAreaToWindow()
-
 	ws.camera.DrawSprites(ws.chunks...)
 
 	for _, s := range ws.solids {

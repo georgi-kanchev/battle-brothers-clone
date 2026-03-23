@@ -61,8 +61,6 @@ func (ms *MenuScreen) OnEnter() {
 	ms.updateOptionsGUI()
 }
 func (ms *MenuScreen) OnUpdate() {
-	ms.camera.SetScreenAreaToWindow()
-
 	ms.makeBackground()
 	ms.handleInput()
 

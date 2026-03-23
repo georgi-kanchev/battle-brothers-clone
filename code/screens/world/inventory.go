@@ -2,6 +2,7 @@ package world
 
 import (
 	"pure-game-kit/execution/condition"
+	"pure-game-kit/graphics"
 	"pure-game-kit/gui/field"
 	"pure-game-kit/utility/color"
 	"pure-game-kit/utility/text"
@@ -34,9 +35,8 @@ func (ws *WorldScreen) handleInventoryPopup() {
 			var cx, cy, cw, ch, _ = ws.inventory.Area("units")
 			var tlx, tly = ws.camera.PointToScreen(cx, cy)
 			var brx, bry = ws.camera.PointToScreen(cx+cw, cy+ch)
-			ws.camera.Mask(tlx, tly, brx-tlx, bry-tly)
+			ws.camera.Mask = graphics.NewArea(tlx, tly, brx-tlx, bry-tly)
 			selectedUnit.UpdateAndDraw(ux+50*sc, uy+75*sc, sc*0.85, sc*0.85, ws.camera)
-			ws.camera.SetScreenAreaToWindow()
 		}
 
 		if i < len(units) {

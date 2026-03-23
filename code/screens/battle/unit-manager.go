@@ -116,15 +116,15 @@ func (um *unitManager) drawIndicators() {
 	if !outsideRange {
 		battle.camera.DrawQuad(tx, ty, tw, th, 0, palette.Azure)
 	}
-	battle.camera.DrawTextAdvanced("", tText, tx+2, ty, 20, 1, 0, palette.Black)
-	battle.camera.DrawTextAdvanced("", tText, tx+2, ty, 20, 1, 0, tColor)
+	battle.camera.DrawTextAdvanced("", tText, tx+2, ty, 20, 1, 0, 0, palette.Black)
+	battle.camera.DrawTextAdvanced("", tText, tx+2, ty, 20, 1, 0, 0, tColor)
 
 	if outsideRange {
 		var x, y = inRange[len(inRange)-1][0] - tw/2 + 2, inRange[len(inRange)-1][1] - th/2
 		var txt = text.New(pts, "/", unitActing.MovePoints)
 		battle.camera.DrawQuad(x, y, tw, th, 0, palette.Azure)
-		battle.camera.DrawTextAdvanced("", txt, x, y, 20, 1, 0, palette.Black)
-		battle.camera.DrawTextAdvanced("", txt, x, y, 20, 1, 0, palette.White)
+		battle.camera.DrawTextAdvanced("", txt, x, y, 20, 1, 0, 0, palette.Black)
+		battle.camera.DrawTextAdvanced("", txt, x, y, 20, 1, 0, 0, palette.White)
 	}
 }
 func (um *unitManager) drawRange(cells [][2]int, frameSize float32, color uint) {
@@ -153,8 +153,8 @@ func (um *unitManager) drawStats(description string, unit *unit.Unit) {
 	var lines = len(text.Split(txt, "\n"))
 	var blx, bly = battle.camera.PointFromEdge(0, 1)
 	var x, y = blx + 50/battle.camera.Zoom, bly - lineHeight*float32(lines)
-	battle.camera.DrawTextAdvanced("", txt, x, y, lineHeight, 0, 0, palette.Black)
-	battle.camera.DrawTextAdvanced("", txt, x, y, lineHeight, 0, 0, palette.White)
+	battle.camera.DrawTextAdvanced("", txt, x, y, lineHeight, 0, 0, 0, palette.Black)
+	battle.camera.DrawTextAdvanced("", txt, x, y, lineHeight, 0, 0, 0, palette.White)
 }
 
 //=================================================================
