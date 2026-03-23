@@ -27,9 +27,9 @@ func (ws *WorldScreen) handleDayNightCycle() {
 	ws.timeCircle.ScaleX = -1 / ws.camera.Zoom * 0.5 * ws.hud.Scale
 	ws.timeCircle.ScaleY = 1 / ws.camera.Zoom * 0.5 * ws.hud.Scale
 
-	var scrX, scrY = ws.camera.PointToScreen(topX, topY)
-	var scrW, scrH = 100 * ws.hud.Scale, 140 * ws.hud.Scale
-	ws.timeCircle.Mask = graphics.NewArea(scrX-50*ws.hud.Scale, scrY, scrW, scrH)
+	var scrX, scrY = topX, topY
+	var scrW, scrH = 100 * ws.hud.Scale / ws.camera.Zoom, 140 * ws.hud.Scale / ws.camera.Zoom
+	ws.timeCircle.Mask = graphics.NewArea(scrX-50*ws.hud.Scale/ws.camera.Zoom, scrY, scrW, scrH)
 	ws.timeCircle.Angle = number.Map(ws.time, 0, dayNightCycleDuration, 0, 360)
 
 	ws.camera.DrawSprites(ws.timeCircle)

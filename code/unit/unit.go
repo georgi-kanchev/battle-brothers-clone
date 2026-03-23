@@ -114,3 +114,10 @@ func (u *Unit) AttackRangeCells() [][2]int {
 func (u *Unit) NickAndName() string {
 	return u.Nickname + " " + u.Name
 }
+
+func (u *Unit) Mask(x, y, width, height float32) {
+	var mask = graphics.NewArea(x, y, width, height)
+	for _, s := range u.sprites {
+		s.Mask = mask
+	}
+}
