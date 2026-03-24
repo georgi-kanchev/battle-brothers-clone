@@ -9,7 +9,6 @@ import (
 	"pure-game-kit/data/file"
 	"pure-game-kit/data/folder"
 	"pure-game-kit/data/path"
-	"pure-game-kit/debug"
 	"pure-game-kit/execution/condition"
 	"pure-game-kit/execution/screens"
 	"pure-game-kit/geometry"
@@ -199,7 +198,6 @@ func (ws *WorldScreen) handleInput() {
 
 	if ws.hud.IsButtonJustClicked("inventory") {
 		ws.currentPopup = ws.inventory
-		debug.ProfileCPU(10)
 	}
 
 	if keyboard.IsKeyJustPressed(key.B) {
