@@ -12,7 +12,7 @@
 		<Widget class="visual" id="window-state-label" frameSize="" width="OwnerWidth*0.35-15" height="40" text="Window State:" textAlignmentX="1" gapX="5" />
 		<Widget class="menu" id="window-state" width="OwnerWidth*0.65-15" height="40" menuContainerId="states" />
 		<Widget class="visual" id="monitors-label" frameSize="" width="OwnerWidth*0.35-15" height="40" text="Target Monitor:"  textAlignmentX="1" gapX="5" newRow="" />
-		<Widget class="menu" id="monitors-menu" width="OwnerWidth*0.65-15" height="40" menuContainerId="monitors" />
+		<Widget class="menu" id="monitors-menu" width="OwnerWidth*0.65-15" height="40" menuContainerId="monitors" textLineGap="-1.2" />
 		<Widget class="visual" id="tex-filter-label" height="30" frameSize="" width="OwnerWidth*0.35-15" text="Texture Filter:" textAlignmentX="1" gapX="5" newRow="" />
 		<Widget class="checkbox" id="tex-filter" width="30" height="30" text="X"/>
 		<Widget class="visual" id="aa-label" height="30" frameSize="" width="OwnerWidth*0.35-15" text="Antialiasing:" textAlignmentX="1" gapX="5" newRow="" />
