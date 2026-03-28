@@ -120,7 +120,7 @@ func (um *unitManager) drawIndicators() {
 	battle.camera.DrawTextAdvanced("", tText, tx+2, ty, 20, 1, 0, 0, tColor)
 
 	if outsideRange {
-		var x, y = inRange[len(inRange)-1][0] - tw/2 + 2, inRange[len(inRange)-1][1] - th/2
+		var x, y = inRange[len(inRange)-2] - tw/2 + 2, inRange[len(inRange)-1] - th/2
 		var txt = text.New(pts, "/", unitActing.MovePoints)
 		battle.camera.DrawQuad(x, y, tw, th, 0, palette.Azure)
 		battle.camera.DrawTextAdvanced("", txt, x, y, 20, 1, 0, 0, palette.Black)

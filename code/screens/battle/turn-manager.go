@@ -24,7 +24,7 @@ type turnManager struct {
 	curTeam1 bool
 
 	curMoveRangeCells [][2]int
-	curMovePath       [][2]float32
+	curMovePath       []float32
 	curMoveIndex      int
 }
 
@@ -117,16 +117,16 @@ func (tm *turnManager) calculateRangeCells(cellX, cellY, distance float32) [][2]
 	var battle = screens.Current().(*BattleScreen)
 	return battle.pathMap.Range(int(cellX), int(cellY), distance, true)
 }
-func (tm *turnManager) calculateMovePoints(path [][2]float32) (possible, target int) {
+func (tm *turnManager) calculateMovePoints(path []float32) (possible, target int) {
 	if len(path) < 2 {
 		return 0, 0
 	}
 
 	var tw, th = global.BattleTileWidth, global.BattleTileHeight
 	var outOfRange = false
-	for i := 1; i < len(path); i++ {
-		var currX, currY = int(path[i][0] / tw), int(path[i][1] / th)
-		var prevX, prevY = int(path[i-1][0] / tw), int(path[i-1][1] / th)
+	for i := 2; i < len(path); i += 2 {
+		var prevX, prevY = int(path[i-2] / tw), int(path[i-1] / th)
+		var currX, currY = int(path[i] / tw), int(path[i+1] / th)
 		var dx, dy = number.Absolute(currX - prevX), number.Absolute(currY - prevY)
 		var diagonal = dx > 0 && dy > 0
 
@@ -142,7 +142,7 @@ func (tm *turnManager) calculateMovePoints(path [][2]float32) (possible, target 
 
 	return possible, target
 }
-func (tm *turnManager) calculateMovePath(targetX, targetY float32) (possiblePts, targetPts int, path [][2]float32) {
+func (tm *turnManager) calculateMovePath(targetX, targetY float32) (possiblePts, targetPts int, path []float32) {
 	var battle = screens.Current().(*BattleScreen)
 	var ux, uy = tm.unitActing().Position()
 	path = battle.pathMap.FindPathDiagonally(ux, uy, targetX, targetY, false)
@@ -168,12 +168,13 @@ func (tm *turnManager) calculateMovePath(targetX, targetY float32) (possiblePts,
 
 func (tm *turnManager) moveUnit() {
 	var unitActing = tm.unitActing()
-	var targetPos = tm.curMovePath[tm.curMoveIndex]
-	unitActing.MoveTo(targetPos[0], targetPos[1])
+	var targetX = tm.curMovePath[tm.curMoveIndex]
+	var targetY = tm.curMovePath[tm.curMoveIndex+1]
+	unitActing.MoveTo(targetX, targetY)
 	var ux, uy = unitActing.Position()
 
-	if ux == targetPos[0] && uy == targetPos[1] {
-		tm.curMoveIndex++
+	if ux == targetX && uy == targetY {
+		tm.curMoveIndex += 2
 	}
 	if tm.curMoveIndex >= len(tm.curMovePath) {
 		var battle = screens.Current().(*BattleScreen)

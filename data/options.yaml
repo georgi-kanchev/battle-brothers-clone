@@ -4,7 +4,7 @@ graphics-monitor: 0
 graphics-antialiasing: false
 graphics-texture-filter: false
 graphics-vsync: false
-graphics-limit-fps: 0
+graphics-limit-fps: 60
 ui-show-fps: true
 ui-scale: 2
 ui-scale-menu-options: 1

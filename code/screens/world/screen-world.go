@@ -39,7 +39,7 @@ type WorldScreen struct {
 
 	chunks              []*graphics.Sprite
 	solids, settlements []*geometry.Shape
-	roads               [][2]float32
+	roads               []float32
 }
 
 func New(path string) *WorldScreen {

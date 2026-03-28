@@ -28,7 +28,7 @@ type Party struct {
 	units  []*unit.Unit
 	hitbox *geometry.Shape
 
-	path [][2]float32
+	path []float32
 }
 
 func NewParty(units []*unit.Unit, x, y float32, isPlayer bool) *Party {
@@ -63,7 +63,7 @@ func (p *Party) handleMovement(isInRoadRange bool) {
 	}
 
 	if p.isUsingRoads && len(p.path) > 0 {
-		p.moveTargetX, p.moveTargetY = p.path[0][0], p.path[0][1]
+		p.moveTargetX, p.moveTargetY = p.path[0], p.path[1]
 	}
 
 	var px, py, tx, ty = p.x, p.y, p.moveTargetX, p.moveTargetY
@@ -85,6 +85,7 @@ func (p *Party) handleMovement(isInRoadRange bool) {
 		p.x, p.y = tx, ty
 
 		if p.isUsingRoads {
+			p.path = collection.RemoveAt(p.path, 0)
 			p.path = collection.RemoveAt(p.path, 0)
 		}
 	}
@@ -120,11 +121,11 @@ func (party *Party) handlePlayer() {
 		var col = palette.White
 		var p = party.path
 		if len(p) > 0 {
-			world.camera.DrawLine(party.x, party.y, p[0][0], p[0][1], 1, col)
+			world.camera.DrawLine(party.x, party.y, p[0], p[1], 1, col)
 			world.camera.DrawLinesPath(1, col, p...)
 		}
 		var mx, my = party.lastPathPoint()
-		world.camera.DrawPoints(4, col, [2]float32{mx, my})
+		world.camera.DrawPoints(4, col, mx, my)
 	}
 
 	if keyboard.IsKeyJustPressed(key.Enter) {
@@ -134,7 +135,7 @@ func (party *Party) handlePlayer() {
 		if party.isUsingRoads && !standingStill {
 			party.path = geometry.FollowPaths(party.x, party.y, party.moveTargetX, party.moveTargetY, world.roads...)
 		} else if !party.isUsingRoads && len(party.path) > 0 {
-			party.moveTargetX, party.moveTargetY = party.path[len(party.path)-1][0], party.path[len(party.path)-1][1]
+			party.moveTargetX, party.moveTargetY = party.path[len(party.path)-2], party.path[len(party.path)-1]
 			party.path = nil
 		}
 	}
@@ -179,9 +180,9 @@ func (party *Party) handlePlayer() {
 
 func (p *Party) isInRoadRange() bool {
 	var world = screens.Current().(*WorldScreen)
-	for i := 1; i < len(world.roads); i++ {
-		var ax, ay = world.roads[i-1][0], world.roads[i-1][1]
-		var bx, by = world.roads[i][0], world.roads[i][1]
+	for i := 2; i < len(world.roads); i += 2 {
+		var ax, ay = world.roads[i-2], world.roads[i-1]
+		var bx, by = world.roads[i], world.roads[i+1]
 		var line = geometry.NewLine(ax, ay, bx, by)
 		var closestX, closestY = line.ClosestToPoint(p.x, p.y)
 		var distance = point.DistanceToPoint(p.x, p.y, closestX, closestY)
@@ -193,7 +194,7 @@ func (p *Party) isInRoadRange() bool {
 }
 func (p *Party) lastPathPoint() (x, y float32) {
 	if len(p.path) > 0 {
-		return p.path[len(p.path)-1][0], p.path[len(p.path)-1][1]
+		return p.path[len(p.path)-2], p.path[len(p.path)-1]
 	}
 	return p.moveTargetX, p.moveTargetY
 }

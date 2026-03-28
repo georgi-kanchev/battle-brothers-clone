@@ -24,8 +24,8 @@ func (tm *turnManager) waitForAction() {
 
 		if pts > 0 && battle.unitManager.hoveredUnit == nil {
 			tm.unitActing().MovePoints -= pts
-			tm.curMovePath = curve.StraightenPath(path)
-			tm.curMovePath = curve.SmoothPath(path)
+			tm.curMovePath = curve.StraightenPath(path...)
+			tm.curMovePath = curve.SmoothPath(path...)
 			tm.curMoveIndex = 0
 			tm.curMoveRangeCells = nil
 			tm.states.GoToState(tm.moveUnit)
