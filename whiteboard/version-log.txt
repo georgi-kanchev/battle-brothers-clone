@@ -1,0 +1,13 @@
+0.0.1 project setup
+0.0.2 world hud outline, map, movement
+0.0.3 inventory outline
+0.0.4 battle map, hud outline
+0.0.5 settlement outline
+0.0.6 main menu outline
+
+0.1.1 world time, collisions, roads, settlement open
+0.1.2 battle units, movement, accounting stats
+0.1.3 inventory, unit list, names, selection, stats
+0.1.4 events, 25 loadable, system, button choices
+0.1.5 settlements resting outline, market outline, favors outline, tavern outline, hire units outline
+0.1.6 main menu options graphics working
