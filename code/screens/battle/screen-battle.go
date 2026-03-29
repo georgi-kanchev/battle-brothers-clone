@@ -25,6 +25,8 @@ type BattleScreen struct {
 	layers  []*graphics.TileMap
 	pathMap *geometry.ShapeGrid
 
+	spawnsA, spawnsB []float32
+
 	unitManager *unitManager
 }
 
@@ -33,13 +35,6 @@ func New(mapPath string) *BattleScreen {
 }
 
 //=================================================================
-
-func (bs *BattleScreen) Prepare(teamA, teamB []*unit.Unit, playerIsTeamA bool) {
-	bs.unitManager = newUnitManager(teamA, teamB)
-	bs.unitManager.spawnAll(nil, teamA)
-	bs.unitManager.spawnAll(nil, teamB)
-	bs.unitManager.turnManager.startBattle(teamA, teamB, playerIsTeamA)
-}
 
 func (bs *BattleScreen) OnLoad() {
 	loading.Show("Loading:\nBattle GUI...")
@@ -52,17 +47,19 @@ func (bs *BattleScreen) OnLoad() {
 	bs.loot.Scale = global.Opts.ScaleBattleLoot * sc
 
 	loading.Show("Loading:\nBattle Tiles...")
-	// var tileSetId, tileDataIds = assets.LoadTiledData("data/battlegrounds/test/map.tmx")
-	// var layers = make([]*graphics.TileMap, len(tileDataIds))
+	var tileSetId, tileDataIds = assets.LoadTiledData("data/battlegrounds/test/map.tmx")
+	bs.layers = make([]*graphics.TileMap, len(tileDataIds))
+	bs.spawnsA = assets.LoadTiledPoints("data/battlegrounds/test/map.tmx", "SpawnsA")
+	bs.spawnsB = assets.LoadTiledPoints("data/battlegrounds/test/map.tmx", "SpawnsB")
 
-	// for i, tileDataId := range tileDataIds {
-	// 	layers[i] = graphics.NewTileMap(tileSetId, tileDataId)
-	// }
+	for i, tileDataId := range tileDataIds {
+		bs.layers[i] = graphics.NewTileMap(tileSetId, tileDataId)
+		bs.layers[i].PivotX, bs.layers[i].PivotY = 0, 0
+	}
 
-	// var tileWidth, tileHeight = assets.Size(tileSetId)
-	// var columns, rows = assets.Size(tileDataIds[0])
-	// global.BattleTileWidth, global.BattleTileHeight = float32(tileWidth), float32(tileHeight)
-	// global.BattleColumns, global.BattleRows = float32(columns), float32(rows)
+	var w, h = bs.layers[0].Size()
+	global.BattleTileWidth, global.BattleTileHeight = bs.layers[0].SizeTile()
+	global.BattleColumns, global.BattleRows = float32(w), float32(h)
 }
 func (bs *BattleScreen) OnEnter() {
 	bs.camera.X = global.BattleColumns / 2 * global.BattleTileWidth
@@ -92,8 +89,14 @@ func (bs *BattleScreen) OnUpdate() {
 
 	global.TryShowFPS(bs.camera)
 }
-
 func (bs *BattleScreen) OnExit() {
+}
+
+func (bs *BattleScreen) Prepare(teamA, teamB []*unit.Unit, playerIsTeamA bool) {
+	bs.unitManager = newUnitManager(teamA, teamB)
+	bs.unitManager.spawnAll(bs.spawnsA, teamA)
+	bs.unitManager.spawnAll(bs.spawnsB, teamB)
+	bs.unitManager.turnManager.startBattle(teamA, teamB, playerIsTeamA)
 }
 
 //=================================================================
@@ -107,16 +110,16 @@ func (bs *BattleScreen) handleInput() {
 	}
 }
 func (bs *BattleScreen) recalculatePathMap() {
-	//var pathMapLayers = bs.layers.FindLayersBy(property.LayerClass, "BattlePathMap")
+	// var pathMapLayers = bs.pathMap.FindLayersBy(property.LayerClass, "BattlePathMap")
 	// if len(pathMapLayers) > 0 {
 	// 	bs.pathMap = pathMapLayers[0].ExtractShapeGrid()
 	// }
 
-	var tw, th = global.BattleTileWidth, global.BattleTileHeight
-	for _, unit := range bs.unitManager.units {
-		if unit != bs.unitManager.turnManager.unitActing() {
-			var ux, uy = unit.Position()
-			bs.pathMap.SetAtCell(int(ux/tw), int(uy/th), geometry.NewShapeQuad(tw/2, th/2, 0.5, 0.5))
-		}
-	}
+	// var tw, th = global.BattleTileWidth, global.BattleTileHeight
+	// for _, unit := range bs.unitManager.units {
+	// 	if unit != bs.unitManager.turnManager.unitActing() {
+	// 		var ux, uy = unit.Position()
+	// 		bs.pathMap.SetAtCell(int(ux/tw), int(uy/th), geometry.NewShapeQuad(tw/2, th/2, 0.5, 0.5))
+	// 	}
+	// }
 }

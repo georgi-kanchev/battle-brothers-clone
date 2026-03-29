@@ -10,6 +10,7 @@ import (
 	"pure-game-kit/utility/collection"
 	col "pure-game-kit/utility/color"
 	"pure-game-kit/utility/color/palette"
+	"pure-game-kit/utility/number"
 	"pure-game-kit/utility/point"
 	"pure-game-kit/utility/text"
 )
@@ -27,12 +28,17 @@ func newUnitManager(teamA, teamB []*unit.Unit) *unitManager {
 
 //=================================================================
 
-func (um *unitManager) spawnAll(spawns [][2]float32, units []*unit.Unit) {
+func (um *unitManager) spawnAll(spawns []float32, units []*unit.Unit) {
 	if len(units) > len(spawns) {
 		return
 	}
-	for i, u := range units {
-		u.Spawn(spawns[i][0], spawns[i][1])
+	var pointIndex = 0
+	for _, u := range units {
+		if number.IsNaN(spawns[pointIndex]) {
+			pointIndex += 2
+		}
+		u.Spawn(spawns[pointIndex], spawns[pointIndex+1])
+		pointIndex += 2
 	}
 }
 func (um *unitManager) update() {

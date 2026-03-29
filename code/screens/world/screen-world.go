@@ -203,8 +203,8 @@ func (ws *WorldScreen) handleInput() {
 	if keyboard.IsKeyJustPressed(key.B) {
 		screens.Enter(global.ScreenBattle, false)
 		var scr = screens.Current().(*battle.BattleScreen)
-		var teamA = []*unit.Unit{unit.New()}
-		var teamB = []*unit.Unit{unit.New()}
+		var teamA = []*unit.Unit{unit.New(), unit.New(), unit.New()}
+		var teamB = []*unit.Unit{unit.New(), unit.New()}
 		scr.Prepare(teamA, teamB, true)
 	} else if keyboard.IsKeyJustPressed(key.E) {
 		ws.currentPopup = ws.events
