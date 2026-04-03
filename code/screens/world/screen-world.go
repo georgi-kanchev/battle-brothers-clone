@@ -132,9 +132,9 @@ func (ws *WorldScreen) OnLoad() {
 	}
 
 	loading.Show("Processing:\nWorld Map Shapes...")
-	ws.roads = assets.LoadTiledPoints("data/worlds/01/points.tmx", "Roads")
-	ws.settlements = geometry.NewShapes(assets.LoadTiledPoints("data/worlds/01/points.tmx", "Settlements")...)
-	ws.solids = geometry.NewShapes(assets.LoadTiledPoints("data/worlds/01/points.tmx", "Solids")...)
+	// ws.roads = assets.LoadTiledPoints("data/worlds/01/points.tmx", "Roads")
+	// ws.settlements = geometry.NewShapes(assets.LoadTiledPoints("data/worlds/01/points.tmx", "Settlements")...)
+	// ws.solids = geometry.NewShapes(assets.LoadTiledPoints("data/worlds/01/points.tmx", "Solids")...)
 }
 func (ws *WorldScreen) OnEnter() {
 	var units = []*unit.Unit{unit.New(), unit.New(), unit.New(), unit.New(), unit.New(), unit.New()}

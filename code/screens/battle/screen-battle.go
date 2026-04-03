@@ -47,10 +47,10 @@ func (bs *BattleScreen) OnLoad() {
 	bs.loot.Scale = global.Opts.ScaleBattleLoot * sc
 
 	loading.Show("Loading:\nBattle Tiles...")
-	var tileSetId, tileDataIds = assets.LoadTiledData("data/battlegrounds/test/map.tmx")
+	var tileSetId, tileDataIds = assets.LoadTiledLayers("data/battlegrounds/test/map.tmx")
 	bs.layers = make([]*graphics.TileMap, len(tileDataIds))
-	bs.spawnsA = assets.LoadTiledPoints("data/battlegrounds/test/map.tmx", "SpawnsA")
-	bs.spawnsB = assets.LoadTiledPoints("data/battlegrounds/test/map.tmx", "SpawnsB")
+	// bs.spawnsA = assets.LoadTiledPoints("data/battlegrounds/test/map.tmx", "SpawnsA")
+	// bs.spawnsB = assets.LoadTiledPoints("data/battlegrounds/test/map.tmx", "SpawnsB")
 
 	for i, tileDataId := range tileDataIds {
 		bs.layers[i] = graphics.NewTileMap(tileSetId, tileDataId)
