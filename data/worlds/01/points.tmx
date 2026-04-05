@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="1" height="1" tilewidth="16" tileheight="16" infinite="1" nextlayerid="6" nextobjectid="9">
+<map version="1.10" tiledversion="1.12.1" orientation="orthogonal" renderorder="right-down" width="1" height="1" tilewidth="16" tileheight="16" infinite="1" nextlayerid="6" nextobjectid="9">
  <imagelayer id="2" name="Map">
   <image source="../../../wonderdraft-worlds/01/export.png" width="7680" height="4320"/>
  </imagelayer>
- <objectgroup id="3" name="Settlements">
+ <objectgroup color="#00ff00" id="3" name="Settlements">
   <object id="2" x="1648" y="1072">
    <polygon points="32,16 8,72 32,144 128,164 188,160 240,148 264,48 248,0 192,-32 204,-88 148,-224 92,-88 96,-32"/>
   </object>
@@ -11,12 +11,12 @@
    <polygon points="0,0 32,0 144,136 124,192 -112,196 -128,132 -48,20"/>
   </object>
  </objectgroup>
- <objectgroup id="4" name="Roads">
+ <objectgroup color="#00ffff" id="4" name="Roads">
   <object id="5" x="1796" y="1264">
    <polyline points="0,0 216,-8 268,-56 288,-156 276,-276 308,-328 400,-356 664,-340 796,-336 920,-288 1056,-148 1372,16 1452,20 1648,-52 1780,-24 1988,-80"/>
   </object>
  </objectgroup>
- <objectgroup id="5" name="Solids">
+ <objectgroup color="#ff0000" id="5" name="Solids">
   <object id="6" x="1608" y="616" width="43.9048" height="140" rotation="2.21369"/>
   <object id="7" x="1616.61" y="719.544" width="47.7529" height="140.759" rotation="53.0376"/>
   <object id="8" x="1492" y="804" width="70.9455" height="140" rotation="2.39179"/>

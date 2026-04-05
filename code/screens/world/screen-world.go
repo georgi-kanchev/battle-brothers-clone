@@ -113,7 +113,7 @@ func (ws *WorldScreen) OnLoad() {
 	unit.Names = text.Split(file.LoadText("data/names.txt"), " ")
 	unit.Nicknames = text.Split(file.LoadText("data/nicknames.txt"), " ")
 
-	loading.Show("Processing:\nWorld Map...")
+	loading.Show("Processing:\nWorld Map Graphics...")
 	var chunks = folder.Content("data/worlds/01", true)
 	for _, file := range chunks {
 		if path.Extension(file) != ".jpg" {
@@ -131,10 +131,13 @@ func (ws *WorldScreen) OnLoad() {
 		ws.chunks = append(ws.chunks, spr)
 	}
 
-	loading.Show("Processing:\nWorld Map Shapes...")
-	// ws.roads = assets.LoadTiledPoints("data/worlds/01/points.tmx", "Roads")
-	// ws.settlements = geometry.NewShapes(assets.LoadTiledPoints("data/worlds/01/points.tmx", "Settlements")...)
-	// ws.solids = geometry.NewShapes(assets.LoadTiledPoints("data/worlds/01/points.tmx", "Solids")...)
+	loading.Show("Processing:\nWorld Map Data...")
+
+	assets.LoadTiledLayers("data/worlds/01/points.tmx")
+
+	ws.roads = graphics.NewTileMap("", "data/worlds/01/points.tmx/Roads").Points()
+	ws.settlements = geometry.NewShapes(graphics.NewTileMap("", "data/worlds/01/points.tmx/Settlements").Points()...)
+	ws.solids = geometry.NewShapes(graphics.NewTileMap("", "data/worlds/01/points.tmx/Solids").Points()...)
 }
 func (ws *WorldScreen) OnEnter() {
 	var units = []*unit.Unit{unit.New(), unit.New(), unit.New(), unit.New(), unit.New(), unit.New()}
@@ -147,6 +150,8 @@ func (ws *WorldScreen) OnUpdate() {
 	for _, s := range ws.solids {
 		ws.camera.DrawShapes(palette.Red, s.CornerPoints()...)
 	}
+
+	ws.camera.DrawLinesPath(2, palette.Cyan, ws.roads...)
 
 	ws.handleResting()
 	ws.playerParty.Update()
@@ -221,7 +226,6 @@ func (ws *WorldScreen) handleInput() {
 		}
 	}
 }
-
 func (ws *WorldScreen) tryExitPopup(from *gui.GUI, to *gui.GUI, andDo func()) {
 	if from.IsButtonJustClicked("exit-btn") || from.IsButtonJustClicked("popup-dim-bgr") {
 		ws.currentPopup = to
