@@ -4,7 +4,7 @@ import (
 	"game/code/global"
 	"game/code/unit"
 	"pure-game-kit/execution/condition"
-	"pure-game-kit/execution/screens"
+	"pure-game-kit/graphics"
 	"pure-game-kit/input/mouse"
 	"pure-game-kit/input/mouse/button"
 	"pure-game-kit/utility/collection"
@@ -15,21 +15,8 @@ import (
 	"pure-game-kit/utility/text"
 )
 
-// Handles all units on the battle screen, taking care of their spawning, updating gameplay & drawing.
-type unitManager struct {
-	units       []*unit.Unit
-	hoveredUnit *unit.Unit
-	turnManager *turnManager
-}
-
-func newUnitManager(teamA, teamB []*unit.Unit) *unitManager {
-	return &unitManager{units: collection.Join(teamA, teamB), turnManager: newTurnManager()}
-}
-
-//=================================================================
-
-func (um *unitManager) spawnAll(spawns []float32, units []*unit.Unit) {
-	if len(units) > len(spawns)/2 {
+func (bs *BattleScreen) spawnUnits(spawns []float32, units []*unit.Unit) {
+	if len(units)*2 > len(spawns) {
 		return
 	}
 	var pointIndex = 0
@@ -41,136 +28,161 @@ func (um *unitManager) spawnAll(spawns []float32, units []*unit.Unit) {
 		pointIndex += 2
 	}
 }
-func (um *unitManager) update() {
-	var battle = screens.Current().(*BattleScreen)
-	var ySortedUnits = um.ySortAll()
-	var unitActing = um.turnManager.unitActing()
 
-	um.hoveredUnit = nil
-	for _, unit := range um.units {
-		if unit.IsHovered(battle.camera) {
-			um.hoveredUnit = unit
+func (bs *BattleScreen) updateUnits() {
+	var ySortedUnits = bs.unitsSortedByY()
+	var acting = bs.actingUnit()
+
+	bs.hoveredUnit = nil
+	for _, u := range bs.units {
+		if u.IsHovered(bs.camera) {
+			bs.hoveredUnit = u
 			break
 		}
 	}
 
-	um.turnManager.states.UpdateCurrentState()
-	um.drawIndicators()
+	bs.states.UpdateCurrentState()
+	bs.drawTurnIndicators()
 
-	for _, unit := range ySortedUnits {
-		var x, y = unit.Position()
-		var scX = condition.If[float32](um.turnManager.isBot(unit), -1, 1)
-		unit.UpdateAndDraw(x, y, scX, 1, battle.camera)
+	for _, u := range ySortedUnits {
+		var x, y = u.Position()
+		var scX = condition.If[float32](bs.isBotUnit(u), -1, 1)
+		u.UpdateAndDraw(x, y, scX, 1, bs.camera)
 	}
 
-	if um.hoveredUnit != nil {
-		um.drawStats("Hovered Unit", um.hoveredUnit)
+	if bs.hoveredUnit != nil {
+		bs.drawUnitStats("Hovered Unit", bs.hoveredUnit)
 	} else {
-		um.drawStats("Unit taking turn", unitActing)
+		bs.drawUnitStats("Unit taking turn", acting)
 	}
 }
 
-func (um *unitManager) drawIndicators() {
-	var battle = screens.Current().(*BattleScreen)
+func (bs *BattleScreen) drawTurnIndicators() {
 	var bw, bh = global.BattleColumns, global.BattleRows
 	var tw, th = global.BattleTileWidth, global.BattleTileHeight
-	var unitActing = um.turnManager.unitActing()
-	var ux, uy = unitActing.Position()
-	var mx, my = battle.camera.MousePosition()
+	var acting = bs.actingUnit()
+	var ux, uy = acting.Position()
+	var mx, my = bs.camera.MousePosition()
 
-	if um.hoveredUnit == nil {
-		um.drawRange(um.turnManager.curMoveRangeCells, -1, palette.Green)
+	// Range cells (fills then frames) + acting unit highlight — one batch
+	var quads []*graphics.Quad
+	if bs.hoveredUnit == nil {
+		quads = append(quads, bs.rangeCellQuads(bs.curMoveRangeCells, palette.Green)...)
 	}
-
-	battle.camera.DrawQuad(ux-tw/2, uy-th/2, tw, th, 0, palette.Azure)
+	quads = append(quads, indicatorQuad(ux-tw/2, uy-th/2, tw, th, palette.Azure))
+	if bs.hoveredUnit == nil {
+		quads = append(quads, bs.rangeCellFrameQuads(bs.curMoveRangeCells, -1, palette.Green)...)
+	}
+	bs.camera.DrawQuads(quads...)
 
 	if mx < 0 || mx > bw*tw || my < 0 || my > bh*th {
 		return
 	}
 
-	var moving = len(um.turnManager.curMovePath) > 0
-	var canMove = unitActing.MovePoints >= 10
+	var moving = len(bs.curMovePath) > 0
+	var canMove = acting.MovePoints >= 10
 	var cx, cy = float32(int(mx / tw)), float32(int(my / th))
-	battle.camera.DrawQuadFrame(cx*tw, cy*th, tw, th, 0, -2, palette.White)
-	if um.hoveredUnit != nil && !moving {
-		var ux, uy = um.hoveredUnit.Position()
-		battle.camera.DrawQuad(ux-tw/2, uy-th/2, 64, 64, 0, col.FadeOut(palette.White, 0.75))
+	bs.camera.DrawQuads(cellFrameQuads(cx*tw, cy*th, tw, th, -2, palette.White)...)
 
+	if bs.hoveredUnit != nil && !moving {
+		var hx, hy = bs.hoveredUnit.Position()
+		var hoverQuads = []*graphics.Quad{indicatorQuad(hx-tw/2, hy-th/2, 64, 64, col.FadeOut(palette.White, 0.75))}
 		if mouse.IsButtonPressed(button.Right) {
-			var moveRange = um.turnManager.calculateRangeCells(cx, cy, float32(um.hoveredUnit.BaseMovePoints/10))
-			um.drawRange(moveRange, -1, col.FadeOut(palette.Yellow, 0.5))
-			um.drawRange(um.hoveredUnit.AttackRangeCells(), -1, col.FadeOut(palette.Red, 0.5))
+			var moveRange = bs.calculateRangeCells(cx, cy, float32(bs.hoveredUnit.BaseMovePoints/10))
+			hoverQuads = append(hoverQuads, bs.rangeCellQuads(moveRange, col.FadeOut(palette.Yellow, 0.5))...)
+			hoverQuads = append(hoverQuads, bs.rangeCellQuads(bs.hoveredUnit.AttackRangeCells(), col.FadeOut(palette.Red, 0.5))...)
+			hoverQuads = append(hoverQuads, bs.rangeCellFrameQuads(moveRange, -1, col.FadeOut(palette.Yellow, 0.5))...)
+			hoverQuads = append(hoverQuads, bs.rangeCellFrameQuads(bs.hoveredUnit.AttackRangeCells(), -1, col.FadeOut(palette.Red, 0.5))...)
 		} else {
-			um.drawRange(unitActing.AttackRangeCells(), -1, palette.Red)
+			hoverQuads = append(hoverQuads, bs.rangeCellQuads(acting.AttackRangeCells(), palette.Red)...)
+			hoverQuads = append(hoverQuads, bs.rangeCellFrameQuads(acting.AttackRangeCells(), -1, palette.Red)...)
 		}
+		bs.camera.DrawQuads(hoverQuads...)
 	}
 
-	if um.hoveredUnit != nil || moving || !canMove {
+	if bs.hoveredUnit != nil || moving || !canMove {
 		return
 	}
 
-	var pts, tPts, inRange = um.turnManager.calculateMovePath(mx, my)
+	var pts, tPts, inRange = bs.calculateMovePath(mx, my)
 	if pts == 0 {
 		return
 	}
 
 	var tx, ty = point.Snap(mx, my, tw, th)
-	var tText = text.New(tPts, "/", unitActing.MovePoints)
-	var tColor = condition.If(tPts <= unitActing.MovePoints, palette.White, palette.Red)
-	var outsideRange = tPts > unitActing.MovePoints
+	var tText = text.New(tPts, "/", acting.MovePoints)
+	var tColor = condition.If(tPts <= acting.MovePoints, palette.White, palette.Red)
+	var outsideRange = tPts > acting.MovePoints
 
+	var pathQuads []*graphics.Quad
 	if !outsideRange {
-		battle.camera.DrawQuad(tx, ty, tw, th, 0, palette.Azure)
+		pathQuads = append(pathQuads, indicatorQuad(tx, ty, tw, th, palette.Azure))
 	}
-	battle.camera.DrawTextAdvanced("", tText, tx+2, ty, 20, 1, 0, 0, palette.Black)
-	battle.camera.DrawTextAdvanced("", tText, tx+2, ty, 20, 1, 0, 0, tColor)
-
 	if outsideRange {
-		var x, y = inRange[len(inRange)-2] - tw/2 + 2, inRange[len(inRange)-1] - th/2
-		var txt = text.New(pts, "/", unitActing.MovePoints)
-		battle.camera.DrawQuad(x, y, tw, th, 0, palette.Azure)
-		battle.camera.DrawTextAdvanced("", txt, x, y, 20, 1, 0, 0, palette.Black)
-		battle.camera.DrawTextAdvanced("", txt, x, y, 20, 1, 0, 0, palette.White)
+		var x, y = inRange[len(inRange)-2] - tw/2, inRange[len(inRange)-1] - th/2
+		pathQuads = append(pathQuads, indicatorQuad(x, y, tw, th, palette.Azure))
+	}
+	bs.camera.DrawQuads(pathQuads...)
+
+	bs.camera.DrawTextAdvanced("", tText, tx+2, ty, 20, 1, 0, 0, palette.Black)
+	bs.camera.DrawTextAdvanced("", tText, tx+2, ty, 20, 1, 0, 0, tColor)
+	if outsideRange {
+		var x, y = inRange[len(inRange)-2] - tw/2, inRange[len(inRange)-1] - th/2
+		var txt = text.New(pts, "/", acting.MovePoints)
+		bs.camera.DrawTextAdvanced("", txt, x+2, y, 20, 1, 0, 0, palette.Black)
+		bs.camera.DrawTextAdvanced("", txt, x+2, y, 20, 1, 0, 0, palette.White)
 	}
 }
-func (um *unitManager) drawRange(cells [][2]int, frameSize float32, color uint) {
-	var battle = screens.Current().(*BattleScreen)
-	var bw, bh = global.BattleColumns, global.BattleRows
+
+func (bs *BattleScreen) rangeCellQuads(cells [][2]int, color uint) []*graphics.Quad {
 	var tw, th = global.BattleTileWidth, global.BattleTileHeight
+	var bw, bh = global.BattleColumns, global.BattleRows
+	var quads = make([]*graphics.Quad, 0, len(cells))
 	for _, cell := range cells {
 		var cx, cy = cell[0], cell[1]
 		if cx < 0 || cx >= int(bw) || cy < 0 || cy >= int(bh) {
 			continue
 		}
-
-		var curCx, curCy = float32(cx) * tw, float32(cy) * th
-		battle.camera.DrawQuad(curCx, curCy, float32(tw), float32(th), 0, col.FadeOut(color, 0.8))
-		battle.camera.DrawQuadFrame(curCx, curCy, float32(tw), float32(th), 0, frameSize, color)
+		quads = append(quads, indicatorQuad(float32(cx)*tw, float32(cy)*th, tw, th, col.FadeOut(color, 0.8)))
 	}
+	return quads
 }
-func (um *unitManager) drawStats(description string, unit *unit.Unit) {
-	var battle = screens.Current().(*BattleScreen)
-	var lineHeight = 80 / battle.camera.Zoom
+func (bs *BattleScreen) rangeCellFrameQuads(cells [][2]int, frameSize float32, color uint) []*graphics.Quad {
+	var tw, th = global.BattleTileWidth, global.BattleTileHeight
+	var bw, bh = global.BattleColumns, global.BattleRows
+	var quads = make([]*graphics.Quad, 0, len(cells)*4)
+	for _, cell := range cells {
+		var cx, cy = cell[0], cell[1]
+		if cx < 0 || cx >= int(bw) || cy < 0 || cy >= int(bh) {
+			continue
+		}
+		quads = append(quads, cellFrameQuads(float32(cx)*tw, float32(cy)*th, tw, th, frameSize, color)...)
+	}
+	return quads
+}
+
+func (bs *BattleScreen) drawUnitStats(description string, u *unit.Unit) {
+	var lineHeight = 80 / bs.camera.Zoom
 	var txt = text.New(
 		description, "\n",
-		"Initiative: ", unit.Initiative, "\n",
-		"Movement: ", unit.MovePoints, "/", unit.BaseMovePoints, "\n",
+		"Initiative: ", u.Initiative, "\n",
+		"Movement: ", u.MovePoints, "/", u.BaseMovePoints, "\n",
 	)
 	var lines = len(text.Split(txt, "\n"))
-	var blx, bly = battle.camera.PointFromEdge(0, 1)
-	var x, y = blx + 50/battle.camera.Zoom, bly - lineHeight*float32(lines)
-	battle.camera.DrawTextAdvanced("", txt, x, y, lineHeight, 0, 0, 0, palette.Black)
-	battle.camera.DrawTextAdvanced("", txt, x, y, lineHeight, 0, 0, 0, palette.White)
+	var blx, bly = bs.camera.PointFromEdge(0, 1)
+	var x, y = blx + 50/bs.camera.Zoom, bly - lineHeight*float32(lines)
+	bs.camera.DrawTextAdvanced("", txt, x, y, lineHeight, 0, 0, 0, palette.Black)
+	bs.camera.DrawTextAdvanced("", txt, x, y, lineHeight, 0, 0, 0, palette.White)
 }
 
 //=================================================================
 
-func (um *unitManager) ySortAll() []*unit.Unit {
-	var ySorted = make(map[float32][]*unit.Unit, len(um.units))
+func (bs *BattleScreen) unitsSortedByY() []*unit.Unit {
+	var ySorted = make(map[float32][]*unit.Unit, len(bs.units))
 
-	for _, unit := range um.units {
-		var _, y = unit.Cell()
-		ySorted[y] = append(ySorted[y], unit)
+	for _, u := range bs.units {
+		var _, y = u.Cell()
+		ySorted[y] = append(ySorted[y], u)
 	}
 
 	var keys = collection.MapKeys(ySorted)
@@ -182,4 +194,28 @@ func (um *unitManager) ySortAll() []*unit.Unit {
 	}
 
 	return result
+}
+
+//=================================================================
+
+func indicatorQuad(x, y, w, h float32, tint uint) *graphics.Quad {
+	return &graphics.Quad{Area: graphics.Area{X: x, Y: y, Width: w, Height: h}, ScaleX: 1, ScaleY: 1, Tint: tint}
+}
+func cellFrameQuads(x, y, tw, th, frameSize float32, tint uint) []*graphics.Quad {
+	if frameSize < 0 {
+		var t = -frameSize
+		return []*graphics.Quad{
+			indicatorQuad(x, y, tw, t, tint),            // top    (covers corners)
+			indicatorQuad(x, y+th-t, tw, t, tint),       // bottom (covers corners)
+			indicatorQuad(x, y+t, t, th-2*t, tint),      // left   (inner height)
+			indicatorQuad(x+tw-t, y+t, t, th-2*t, tint), // right  (inner height)
+		}
+	}
+	var t = frameSize
+	return []*graphics.Quad{
+		indicatorQuad(x-t, y-t, tw+2*t, t, tint),  // top    (extended to cover corners)
+		indicatorQuad(x-t, y+th, tw+2*t, t, tint), // bottom (extended to cover corners)
+		indicatorQuad(x-t, y, t, th, tint),        // left
+		indicatorQuad(x+tw, y, t, th, tint),       // right
+	}
 }

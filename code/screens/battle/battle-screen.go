@@ -7,12 +7,14 @@ import (
 	"pure-game-kit/data/assets"
 	"pure-game-kit/data/file"
 	"pure-game-kit/execution/condition"
+	"pure-game-kit/execution/flow"
 	"pure-game-kit/execution/screens"
 	"pure-game-kit/geometry"
 	"pure-game-kit/graphics"
 	"pure-game-kit/gui"
 	"pure-game-kit/input/keyboard"
 	"pure-game-kit/input/keyboard/key"
+	"pure-game-kit/utility/collection"
 	"pure-game-kit/utility/number"
 )
 
@@ -27,7 +29,19 @@ type BattleScreen struct {
 
 	spawnsA, spawnsB []float32
 
-	unitManager *unitManager
+	units       []*unit.Unit
+	hoveredUnit *unit.Unit
+
+	team1, team2  []*unit.Unit
+	playerIsTeam1 bool
+	order         []*unit.Unit
+	states        *flow.StateMachine
+	curTurnIndex  int
+	curTurnIsTeam1 bool
+
+	curMoveRangeCells [][2]int
+	curMovePath       []float32
+	curMoveIndex      int
 }
 
 func New(mapPath string) *BattleScreen {
@@ -87,7 +101,7 @@ func (bs *BattleScreen) OnUpdate() {
 
 	bs.camera.DrawTileMaps(bs.ground, bs.above)
 
-	bs.unitManager.update()
+	bs.updateUnits()
 
 	bs.hud.UpdateAndDraw()
 	if bs.currentPopup != nil {
@@ -102,10 +116,13 @@ func (bs *BattleScreen) OnExit() {
 }
 
 func (bs *BattleScreen) Prepare(teamA, teamB []*unit.Unit, playerIsTeamA bool) {
-	bs.unitManager = newUnitManager(teamA, teamB)
-	bs.unitManager.spawnAll(bs.spawnsA, teamA)
-	bs.unitManager.spawnAll(bs.spawnsB, teamB)
-	bs.unitManager.turnManager.startBattle(teamA, teamB, playerIsTeamA)
+	bs.units = collection.Join(teamA, teamB)
+	bs.team1, bs.team2 = teamA, teamB
+	bs.playerIsTeam1 = playerIsTeamA
+	bs.states = flow.NewStateMachine()
+	bs.spawnUnits(bs.spawnsA, teamA)
+	bs.spawnUnits(bs.spawnsB, teamB)
+	bs.startBattle()
 }
 
 //=================================================================
@@ -116,25 +133,5 @@ func (bs *BattleScreen) handleInput() {
 		screens.Enter(global.ScreenWorld, false)
 	} else if keyboard.IsKeyJustPressed(key.L) {
 		bs.currentPopup = condition.If(bs.currentPopup == bs.loot, nil, bs.loot)
-	}
-}
-func (bs *BattleScreen) recalculatePathMap() {
-	var tw, th = global.BattleTileWidth, global.BattleTileHeight
-	var w, h = bs.above.Size()
-	bs.pathMap = geometry.NewShapeGrid(int(tw), int(th))
-	for i := range h {
-		for j := range w {
-			var pts = bs.above.PointsAtCell(j, i)
-			if len(pts) > 0 {
-				bs.pathMap.SetAtCell(j, i, geometry.NewShapeCorners(pts...))
-			}
-		}
-	}
-
-	for _, unit := range bs.unitManager.units {
-		if unit != bs.unitManager.turnManager.unitActing() {
-			var ux, uy = unit.Position()
-			bs.pathMap.SetAtCell(int(ux/tw), int(uy/th), geometry.NewShapeQuad(tw/2, th/2, 0.5, 0.5))
-		}
 	}
 }

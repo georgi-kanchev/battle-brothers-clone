@@ -2,7 +2,6 @@ package battle
 
 import (
 	"pure-game-kit/debug"
-	"pure-game-kit/execution/screens"
 	"pure-game-kit/input/keyboard"
 	"pure-game-kit/input/keyboard/key"
 	"pure-game-kit/input/mouse"
@@ -10,28 +9,27 @@ import (
 	"pure-game-kit/motion/curve"
 )
 
-// States for the Player, handled by the turn manager.
+// States for the Player, handled by the turn logic.
 
-func (tm *turnManager) playerTurn() {
-	debug.Print(tm.curIndex+1, ": player turn")
-	tm.states.GoToState(tm.waitForAction)
+func (bs *BattleScreen) playerTurn() {
+	debug.Print(bs.curTurnIndex+1, ": player turn")
+	bs.states.GoToState(bs.waitForAction)
 }
-func (tm *turnManager) waitForAction() {
+func (bs *BattleScreen) waitForAction() {
 	if mouse.IsButtonJustPressed(button.Left) {
-		var battle = screens.Current().(*BattleScreen)
-		var mx, my = battle.camera.MousePosition()
-		var pts, _, path = tm.calculateMovePath(mx, my)
+		var mx, my = bs.camera.MousePosition()
+		var pts, _, path = bs.calculateMovePath(mx, my)
 
-		if pts > 0 && battle.unitManager.hoveredUnit == nil {
-			tm.unitActing().MovePoints -= pts
-			tm.curMovePath = curve.StraightenPath(path...)
-			tm.curMovePath = curve.SmoothPath(path...)
-			tm.curMoveIndex = 0
-			tm.curMoveRangeCells = nil
-			tm.states.GoToState(tm.moveUnit)
+		if pts > 0 && bs.hoveredUnit == nil {
+			bs.actingUnit().MovePoints -= pts
+			bs.curMovePath = curve.StraightenPath(path...)
+			bs.curMovePath = curve.SmoothPath(path...)
+			bs.curMoveIndex = 0
+			bs.curMoveRangeCells = nil
+			bs.states.GoToState(bs.moveUnit)
 		}
 	}
 	if keyboard.IsKeyJustPressed(key.A) {
-		tm.states.GoToState(tm.nextTurn)
+		bs.states.GoToState(bs.nextTurn)
 	}
 }
