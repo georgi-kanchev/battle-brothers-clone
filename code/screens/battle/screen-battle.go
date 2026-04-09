@@ -22,8 +22,8 @@ type BattleScreen struct {
 
 	hud, currentPopup, loot *gui.GUI
 
-	layers  []*graphics.TileMap
-	pathMap *geometry.ShapeGrid
+	ground, above *graphics.TileMap
+	pathMap       *geometry.ShapeGrid
 
 	spawnsA, spawnsB []float32
 
@@ -47,19 +47,28 @@ func (bs *BattleScreen) OnLoad() {
 	bs.loot.Scale = global.Opts.ScaleBattleLoot * sc
 
 	loading.Show("Loading:\nBattle Tiles...")
-	var tileSetId, tileDataIds = assets.LoadTiledLayers("data/battlegrounds/test/map.tmx")
-	bs.layers = make([]*graphics.TileMap, len(tileDataIds))
-	// bs.spawnsA = assets.LoadTiledPoints("data/battlegrounds/test/map.tmx", "SpawnsA")
-	// bs.spawnsB = assets.LoadTiledPoints("data/battlegrounds/test/map.tmx", "SpawnsB")
+	var mapPath = "data/battlegrounds/test/map.tmx"
+	var tileSetId, _ = assets.LoadTiledLayers(mapPath)
 
-	for i, tileDataId := range tileDataIds {
-		bs.layers[i] = graphics.NewTileMap(tileSetId, tileDataId)
-		bs.layers[i].PivotX, bs.layers[i].PivotY = 0, 0
-	}
+	bs.ground = graphics.NewTileMap(tileSetId, mapPath+"/Ground")
+	bs.above = graphics.NewTileMap(tileSetId, mapPath+"/Above")
 
-	var w, h = bs.layers[0].Size()
-	global.BattleTileWidth, global.BattleTileHeight = bs.layers[0].SizeTile()
+	bs.ground.PivotX, bs.ground.PivotY = 0, 0
+	bs.above.PivotX, bs.above.PivotY = 0, 0
+
+	var spawnsA = graphics.NewTileMap(tileSetId, mapPath+"/SpawnsA")
+	spawnsA.PivotX, spawnsA.PivotY = 0, 0
+	bs.spawnsA = spawnsA.Points()
+
+	var spawnsB = graphics.NewTileMap(tileSetId, mapPath+"/SpawnsB")
+	spawnsB.PivotX, spawnsB.PivotY = 0, 0
+	bs.spawnsB = spawnsB.Points()
+
+	var w, h = bs.ground.Size()
+	global.BattleTileWidth, global.BattleTileHeight = bs.ground.SizeTile()
 	global.BattleColumns, global.BattleRows = float32(w), float32(h)
+
+	bs.pathMap = geometry.NewShapeGrid(int(global.BattleTileWidth), int(global.BattleTileHeight))
 }
 func (bs *BattleScreen) OnEnter() {
 	bs.camera.X = global.BattleColumns / 2 * global.BattleTileWidth
@@ -76,7 +85,7 @@ func (bs *BattleScreen) OnUpdate() {
 		bs.camera.Zoom = number.Limit(bs.camera.Zoom, 0.5, 10)
 	}
 
-	bs.camera.DrawTileMaps(bs.layers...)
+	bs.camera.DrawTileMaps(bs.ground, bs.above)
 
 	bs.unitManager.update()
 
@@ -110,16 +119,22 @@ func (bs *BattleScreen) handleInput() {
 	}
 }
 func (bs *BattleScreen) recalculatePathMap() {
-	// var pathMapLayers = bs.pathMap.FindLayersBy(property.LayerClass, "BattlePathMap")
-	// if len(pathMapLayers) > 0 {
-	// 	bs.pathMap = pathMapLayers[0].ExtractShapeGrid()
-	// }
+	var tw, th = global.BattleTileWidth, global.BattleTileHeight
+	var w, h = bs.above.Size()
+	bs.pathMap = geometry.NewShapeGrid(int(tw), int(th))
+	for i := range h {
+		for j := range w {
+			var pts = bs.above.PointsAtCell(j, i)
+			if len(pts) > 0 {
+				bs.pathMap.SetAtCell(j, i, geometry.NewShapeCorners(pts...))
+			}
+		}
+	}
 
-	// var tw, th = global.BattleTileWidth, global.BattleTileHeight
-	// for _, unit := range bs.unitManager.units {
-	// 	if unit != bs.unitManager.turnManager.unitActing() {
-	// 		var ux, uy = unit.Position()
-	// 		bs.pathMap.SetAtCell(int(ux/tw), int(uy/th), geometry.NewShapeQuad(tw/2, th/2, 0.5, 0.5))
-	// 	}
-	// }
+	for _, unit := range bs.unitManager.units {
+		if unit != bs.unitManager.turnManager.unitActing() {
+			var ux, uy = unit.Position()
+			bs.pathMap.SetAtCell(int(ux/tw), int(uy/th), geometry.NewShapeQuad(tw/2, th/2, 0.5, 0.5))
+		}
+	}
 }

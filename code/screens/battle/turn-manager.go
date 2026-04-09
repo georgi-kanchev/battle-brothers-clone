@@ -152,11 +152,11 @@ func (tm *turnManager) calculateMovePath(targetX, targetY float32) (possiblePts,
 	}
 
 	var inRange = path
-	for i := 1; i < len(path); i++ {
+	for i := 1; i < len(path); i += 2 {
 		var crop = path[:i+1]
 		possiblePts, targetPts = tm.calculateMovePoints(crop)
 		if targetPts > tm.unitActing().MovePoints {
-			inRange = path[:i]
+			inRange = path[:i-1]
 			break
 		}
 	}

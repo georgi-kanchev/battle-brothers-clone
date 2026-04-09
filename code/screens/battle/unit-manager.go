@@ -29,7 +29,7 @@ func newUnitManager(teamA, teamB []*unit.Unit) *unitManager {
 //=================================================================
 
 func (um *unitManager) spawnAll(spawns []float32, units []*unit.Unit) {
-	if len(units) > len(spawns) {
+	if len(units) > len(spawns)/2 {
 		return
 	}
 	var pointIndex = 0
