@@ -7,6 +7,7 @@ import (
 	"pure-game-kit/input/keyboard"
 	"pure-game-kit/input/keyboard/key"
 	"pure-game-kit/utility/text"
+	"strings"
 )
 
 var referencedPopups [5]string
@@ -44,7 +45,7 @@ func (ws *WorldScreen) loadEventFile(fileName string) {
 	var content = text.Trim(file.LoadText(filePath))
 	var lines = text.SplitLines(content)
 	var choiceAmount = 0
-	var story = text.NewBuilder()
+	var story strings.Builder
 
 	referencedPopups = [5]string{}
 	ws.events.InputFieldStopTyping()
@@ -72,9 +73,9 @@ func (ws *WorldScreen) loadEventFile(fileName string) {
 		var quoteOrEmptyLine = firstSymbol == "\"" || firstSymbol == "“" || line == ""
 		var digitOrLetter = text.IsAllDigits(firstSymbol) || text.IsAllLetters(firstSymbol)
 		if quoteOrEmptyLine || digitOrLetter {
-			story.WriteText(line + "\n")
+			story.WriteString(line + "\n")
 		}
 	}
-	ws.events.SetField("text", field.Text, text.Trim(story.ToText()))
+	ws.events.SetField("text", field.Text, text.Trim(story.String()))
 	ws.events.SetField("event", field.Height, text.New(370+(5-choiceAmount)*55))
 }
