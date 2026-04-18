@@ -1,6 +1,6 @@
 module game
 
-go 1.26.0
+go 1.26.2
 
 require pure-game-kit v0.0.0
 
